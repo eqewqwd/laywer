@@ -28,8 +28,8 @@ export default {
     return {
       calendarOptions: {
         locale:"he",
-        plugins: [listWeek],
-        initialView: 'listWeek',
+        plugins: [listWeek,dayGridPlugin],
+        initialView: 'dayGridPlugin',
         headerToolbar: {
           left:'title',
           center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
