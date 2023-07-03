@@ -39,9 +39,9 @@ export default {
         },
         // events: [],
         events: [
-        { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
-        { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'),},
-        { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'), color:'red'}
+        { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
+        { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'),},
+        { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'), color:'red'}
         ]
       },
     }
@@ -49,7 +49,8 @@ export default {
   components:{FullCalendar},
   mounted(){
     console.log(new Date())
-    console.log(this.calendarOptions)
+    console.log(this.calendarOptions.events)
+    console.log(Date.parse(this.test[0].start))
     this.getdata()
   },
   methods:{
