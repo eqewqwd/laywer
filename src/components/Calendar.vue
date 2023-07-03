@@ -20,7 +20,8 @@
 
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import listWeek from '@fullcalendar/list'
+import list from '@fullcalendar/list'
+import axios from 'axios'
 
 export default {
   name: 'Calendar',
@@ -28,24 +29,37 @@ export default {
     return {
       calendarOptions: {
         locale:"he",
-        plugins: [listWeek,dayGridPlugin],
-        initialView: 'dayGridPlugin',
+        plugins: [dayGridPlugin],
+        initialView: 'dayGridMonth',
         headerToolbar: {
           left:'title',
           center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
           right:'prev today next'
         },
-        events: [
-        { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
-        { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'),},
-        { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'), color:'red'}
-        ]
+        events: this.test
       }
+    }
+  },
+  data(){
+    return{
+      test:[]
     }
   },
   components:{FullCalendar},
   mounted(){
     console.log(new Date())
+    this.getdata()
+  },
+  methods:{
+    async getdata(){
+      await axios.get('/.netlify/functions/GetData').then(response => {
+        console.log("now its get bro")
+          console.log(response.data);
+          this.test = response.data
+      }).catch(error => {
+          console.log(error);
+      }); 
+    }
   },
   props: {
   }
