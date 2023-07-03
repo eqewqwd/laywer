@@ -29,14 +29,14 @@ export default {
     return {
       calendarOptions: {
         locale:"he",
-        plugins: [listweek],
-        initialView: 'listweek',
+        plugins: [dayGridPlugin],
+        initialView: 'dayGridMonth',
         headerToolbar: {
           left:'title',
           center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
           right:'prev today next'
         },
-        events: this.test
+        events: []
       }
     }
   },
@@ -56,6 +56,9 @@ export default {
         console.log("now its get bro")
           console.log(response.data);
           this.test = response.data
+          for(let i=0; i<this.test.length; i++){
+            this.events.push(this.test[i])
+          }
       }).catch(error => {
           console.log(error);
       }); 
