@@ -49,7 +49,7 @@ export default {
   components:{FullCalendar},
   mounted(){
     console.log(new Date())
-    console.log(this.calendarOptions.events)
+    console.log(this.calendarOptions)
     this.getdata()
   },
   methods:{
