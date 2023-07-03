@@ -20,7 +20,7 @@
 
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import list from '@fullcalendar/list'
+import listweek from '@fullcalendar/list'
 import axios from 'axios'
 
 export default {
@@ -29,8 +29,8 @@ export default {
     return {
       calendarOptions: {
         locale:"he",
-        plugins: [dayGridPlugin],
-        initialView: 'dayGridMonth',
+        plugins: [listweek],
+        initialView: 'listweek',
         headerToolbar: {
           left:'title',
           center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
