@@ -27,6 +27,7 @@ export default {
   name: 'Calendar',
   data: function() {
     return {
+      test:[],
       calendarOptions: {
         locale:"he",
         plugins: [dayGridPlugin],
@@ -38,7 +39,6 @@ export default {
         },
         events: this.test
       },
-      test:[]
     }
   },
   components:{FullCalendar},
@@ -51,6 +51,10 @@ export default {
       await axios.get('/.netlify/functions/GetData').then(response => {
           console.log(response.data);
           this.test = response.data
+          for(let i=0; i<this.test.length; i++){
+            this.test[i].start = Date.parse(this.test[i].start)
+            this.test[i].end = Date.parse(this.test[i].end)
+          }
       }).catch(error => {
           console.log(error);
       }); 
