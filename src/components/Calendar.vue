@@ -40,11 +40,6 @@ export default {
       }
     }
   },
-  data(){
-    return{
-      test:[]
-    }
-  },
   components:{FullCalendar},
   mounted(){
     console.log(new Date())
@@ -53,11 +48,10 @@ export default {
   methods:{
     async getdata(){
       await axios.get('/.netlify/functions/GetData').then(response => {
-        console.log("now its get bro")
           console.log(response.data);
-          this.test = response.data
-          for(let i=0; i<this.test.length; i++){
-            this.events.push(this.test)
+          let testTy = response.data
+          for(let i=0; i<testTy.length; i++){
+            this.events.push(testTy)
           }
       }).catch(error => {
           console.log(error);
