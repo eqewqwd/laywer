@@ -50,7 +50,6 @@ export default {
   mounted(){
     console.log(new Date())
     console.log(this.calendarOptions.events)
-    console.log(Date.parse(this.test[0].start))
     this.getdata()
   },
   methods:{
@@ -58,11 +57,12 @@ export default {
       await axios.get('/.netlify/functions/GetData').then(response => {
           console.log(response.data);
           this.test = response.data
-          // for(let i=0; i<this.test.length; i++){
-          //   this.test[i].start = Date.parse(this.test[i].start)
-          //   this.test[i].end = Date.parse(this.test[i].end)
-          //   this.calendarOptions.events.push(this.test[i])
-          // }
+          for(let i=0; i<this.test.length; i++){
+            this.test[i].start = Date.parse(this.test[i].start)
+            this.test[i].end = Date.parse(this.test[i].end)
+            // this.calendarOptions.events.push(this.test[i])
+          }
+          console.log(this.test)
       }).catch(error => {
           console.log(error);
       }); 
