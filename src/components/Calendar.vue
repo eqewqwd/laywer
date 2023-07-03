@@ -28,7 +28,7 @@ export default {
   data: function() {
     return {
       test:[],
-      calendarOptions: {
+       calendarOptions: {
         locale:"he",
         plugins: [dayGridPlugin],
         initialView: 'dayGridMonth',
@@ -37,7 +37,7 @@ export default {
           center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
           right:'prev today next'
         },
-        events: this.test,
+        events: [],
         // events: [
         // { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
         // { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'),},
@@ -49,7 +49,7 @@ export default {
   components:{FullCalendar},
   mounted(){
     console.log(new Date())
-    console.log(this.calendarOptions)
+    console.log(this.calendarOptions.events)
     this.getdata()
   },
   methods:{
@@ -60,6 +60,7 @@ export default {
           for(let i=0; i<this.test.length; i++){
             this.test[i].start = Date.parse(this.test[i].start)
             this.test[i].end = Date.parse(this.test[i].end)
+            this.calendarOptions.events.push(this.test[i])
           }
       }).catch(error => {
           console.log(error);
