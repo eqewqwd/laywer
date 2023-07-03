@@ -37,13 +37,19 @@ export default {
           center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
           right:'prev today next'
         },
-        events: this.test
+        events: this.test,
+        // events: [
+        // { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
+        // { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'),},
+        // { title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'), color:'red'}
+        // ]
       },
     }
   },
   components:{FullCalendar},
   mounted(){
     console.log(new Date())
+    console.log(this.calendarOptions)
     this.getdata()
   },
   methods:{
