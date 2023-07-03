@@ -36,7 +36,7 @@ export default {
           center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
           right:'prev today next'
         },
-        events: this.test
+        events: []
       }
     }
   },
