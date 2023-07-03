@@ -36,8 +36,9 @@ export default {
           center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
           right:'prev today next'
         },
-        events: []
-      }
+        events: this.test
+      },
+      test:[]
     }
   },
   components:{FullCalendar},
@@ -49,10 +50,7 @@ export default {
     async getdata(){
       await axios.get('/.netlify/functions/GetData').then(response => {
           console.log(response.data);
-          let testTy = response.data
-          for(let i=0; i<testTy.length; i++){
-            this.events.push(testTy)
-          }
+          this.test = response.data
       }).catch(error => {
           console.log(error);
       }); 
