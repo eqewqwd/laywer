@@ -37,12 +37,12 @@ export default {
           center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
           right:'prev today next'
         },
-        // events: [],
-        events: [
-        { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
-        { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'),},
-        { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'), color:'red'}
-        ]
+        events: [],
+        // events: [
+        // { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
+        // { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'),},
+        // { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27'), color:'red'}
+        // ]
       },
     }
   },
@@ -60,7 +60,7 @@ export default {
           for(let i=0; i<this.test.length; i++){
             this.test[i].start = Date.parse(this.test[i].start)
             this.test[i].end = Date.parse(this.test[i].end)
-            // this.calendarOptions.events.push(this.test[i])
+            this.calendarOptions.events.push(this.test[i])
           }
           console.log(this.test)
       }).catch(error => {
