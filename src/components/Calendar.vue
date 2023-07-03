@@ -29,8 +29,8 @@ export default {
     return {
       calendarOptions: {
         locale:"he",
-        plugins: [dayGridPlugin],
-        initialView: 'dayGridMonth',
+        plugins: [listweek],
+        initialView: 'listweek',
         headerToolbar: {
           left:'title',
           center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
@@ -38,11 +38,6 @@ export default {
         },
         events: []
       }
-    }
-  },
-  data(){
-    return{
-      test:[]
     }
   },
   components:{FullCalendar},
