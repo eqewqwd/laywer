@@ -48,6 +48,7 @@ export default {
             duration: { weeks: 12 },
           }
         },
+        initialView: "resourceTimelineThreeMonths",
         events: [],
         // events: [
         // { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
