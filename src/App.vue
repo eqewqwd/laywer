@@ -1,6 +1,8 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
+  <div class="containerCalendarvue">
     <Calendar/>
+  </div>
 </template>
 
 <script>
@@ -22,6 +24,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.containerCalendarvue{
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  height: 500px;
 }
 
 </style>
