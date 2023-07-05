@@ -20,6 +20,8 @@
 
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import listweek from '@fullcalendar/list'
 import axios from 'axios'
 
@@ -30,13 +32,18 @@ export default {
       test:[],
        calendarOptions: {
         locale:"he",
-        plugins: [dayGridPlugin],
-        initialView: 'dayGridMonth',
+        plugins: [
+          dayGridPlugin,
+          timeGridPlugin,
+          interactionPlugin, // needed for dateClick
+        ],
         headerToolbar: {
-          left:'title',
-          center:'dayGridMonth,timeGridWeek, timeGridDay, listWeek',
-          right:'prev today next'
+          right: 'prev,next today',
+          center: 'title',
+          left: 'dayGridMonth,timeGridWeek,timeGridDay',
         },
+        initialView: 'dayGridMonth',
+        initialEvents: INITIAL_EVENTS,
         events: [],
         // events: [
         // { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
