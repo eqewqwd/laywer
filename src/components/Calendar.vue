@@ -43,7 +43,6 @@ export default {
           left: 'dayGridMonth,timeGridWeek,timeGridDay',
         },
         initialView: 'dayGridMonth',
-        initialEvents: INITIAL_EVENTS,
         events: [],
         // events: [
         // { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
