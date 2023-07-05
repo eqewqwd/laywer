@@ -42,7 +42,12 @@ export default {
           center: 'title',
           left: 'dayGridMonth,timeGridWeek,timeGridDay',
         },
-        initialView: 'dayGridMonth',
+        views: {
+          resourceTimelineThreeMonths: {
+            type: "resourceTimeline",
+            duration: { weeks: 12 },
+          }
+        },
         events: [],
         // events: [
         // { _id:'dsad', title: 'Meeting', start: Date.parse('07 02 2023 22:27'), end:Date.parse('08 02 2023 22:27')},
