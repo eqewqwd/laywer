@@ -8,9 +8,11 @@
     </a>
     <div class="navbar-links">
       <ul>
-        <router-link style="text-decoration: none;" to="/"><li><a>עמוד הבית</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/"><li><a>תיקי עבודה</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/"><li><a>אודות</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/"><li><a>תחומי התמחות</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/"><li><a>פסקי דין</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/"><li><a>צור קשר</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/"><li><a>טפסים להורדה</a></li></router-link>
       </ul>
     </div>
   </nav>
@@ -72,15 +74,13 @@ export default {
 
 .navbar{
   top: 0 !important;
+  border: 1px solid none;
   position: fixed;
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  height: 23vh;
   align-items: center;
-  /* background-color: rgb(111, 20, 111); */
-  /* background-color: #588fb3; */
-  background-color: rgb(24,44,79);
-  color: white;
+  background-color: transparent;
   z-index: 999999;
   transition: 0s ease-out;
 }
@@ -92,9 +92,11 @@ export default {
 }
 
 .brand-title{
-  font-size: 2.5rem;
-  margin-left: 3%;
-  margin-top: 0.4%;
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translate(-50%);
+  border: 1px solid none;
 }
 
 .brand-title img{
@@ -103,8 +105,13 @@ export default {
 }
 
 .navbar-links{
-  margin-right: 2%;
-  
+  /* border: 1px solid green; */
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);  
+  width: 65%;
+  border-bottom: 1px solid black;
 }
 
 .navbar-links ul{
@@ -112,24 +119,28 @@ export default {
   padding: 0;
   display: flex;
   flex-direction: row-reverse ;
+  justify-content: center;
 }
 
 .navbar-links li{
   list-style: none;
+  color: black;
+  border: 1px solid none;
+  padding: 0px 10px 0px 10px;
 }
 
 .navbar-links li a{
   text-decoration: none;
-  color: white;
+  border: 1px solid none;
+  color: black;
   padding: 1rem;
   display: block;
   font-size: 1.3rem;
-  transition: 0.2s ease-out;
-
 }
 
-.navbar-links li a:hover{
-  color: #ff80c3;
+.navbar-links li:hover{
+  background-color: rgb(173, 148, 7);
+  color: white;
   transition: 0.2s ease-in;
 
 }
@@ -148,7 +159,7 @@ export default {
 .toggle-button .bar{
   height: 3px;
   width: 100%;
-  background-color: white;
+  background-color: black;
   border-radius: 10px;
   transition:  0.2s ease-out;
 }
@@ -176,6 +187,9 @@ export default {
   }
 
   .navbar-links {
+    background-color: rgb(209, 212, 215);
+    position: relative;
+    top: 120px;
     display: none;
     width: 100%;
   }
@@ -183,6 +197,7 @@ export default {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    background-color: rgb(209, 212, 215);
   }
 
   .navbar-links ul{
@@ -203,7 +218,7 @@ export default {
   }
 
   .toggle-button.rotate #first{
-    background-color: #333;
+    background-color: transparent;
   }
 
   .toggle-button.rotate #two{
