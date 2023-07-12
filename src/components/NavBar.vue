@@ -75,7 +75,7 @@ export default {
 .navbar{
   top: 0 !important;
   border: 1px solid none;
-  position: fixed;
+  position: relative;
   display: flex;
   width: 100%;
   height: 23vh;
