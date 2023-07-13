@@ -2,9 +2,6 @@
 <NavBar/>
 
 <div class="PosterHome">
-  <div class="imgContainer">
-    <img src="@/assets/photo/laywerWomen.png">
-  </div>
   <div class="TitleContainer">
     <h1>עו"ד שרון נתח תמרי</h1>
     <br>
@@ -12,13 +9,16 @@
     <br>
     <img src="@/assets/Logo/agreement.png">
   </div>
+  <div class="imgContainer">
+    <img src="@/assets/photo/laywerWomen2.png">
+  </div>
 </div>
 
 <div class="aboutContainer">
   <h1>אודות המשרד</h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
-    עורכת דין רחל שחר, עוסקת מזה שנים רבות בתחום דיני משפחה ועומדת בראש משרד עו"ד רחל שחר הנחשב לאחד ממשרדי הבוטיק בצמרת משרדי עורכי הדין בדיני משפחה.
+    עורכת דין שרון נתח תמרי, עוסקת מזה שנים רבות בתחום דיני משפחה ועומדת בראש משרד עו"ד שרון נתח תמרי הנחשב לאחד ממשרדי הבוטיק בצמרת משרדי עורכי הדין בדיני משפחה.
     <br>
     <br>
       משרד שנוסד על ידה בשנת 2004 ומאז צמח והתפתח וכיום מעניק מגוון שירותים ומעסיק עורכי דין לענייני משפחה לצורך מתן ייעוץ מקיף ומעמיק. עורכת דין רחל שחר, העוסקת מזה שנים בתחום דיני המשפחה צברה הסמכות כמגשרת מוסמכת וכמוסמכת ייפוי כוח מתמשך וזאת בנוסף לשירותי נוטריון המוענקים במשרד.
@@ -40,12 +40,15 @@
 <div class="empty">
 </div>
 
+<Footer/>
+
   
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
 import OptionsContainer from '@/components/OptionsContainer.vue'
+import Footer from '@/components/Footer.vue'
 
 
 // import axios from 'axios'
@@ -55,7 +58,8 @@ export default {
   name: 'Home',
   components: {
     NavBar,
-    OptionsContainer
+    OptionsContainer,
+    Footer
 },
   data(){
       return{
@@ -91,7 +95,7 @@ export default {
 
 /* -------------------- empty ------------------- */
 .empty{
-  height: 2000px;
+  height: 500px;
 }
 
 /* ---------------- PosterHome --------------- */
@@ -99,12 +103,14 @@ export default {
 .PosterHome{
   position: relative;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   top: 20px;
   width: 100%;
   height: 465px;
   background-color: rgb(231,231,231);
   border:1px solid none;
-  direction: rtl;
+  direction: ltr;
 }
 
 .imgContainer{
@@ -113,20 +119,22 @@ export default {
   height: 100%;
   width: 35%;
   padding-right: 200px;
+  /* overflow: hidden; */
 }
 
 .imgContainer img{
   position: absolute;
   left: 0;
+  bottom: 0;
   height: auto;
-  max-width: 311px;
+  max-width: 250px;
 }
 
 .TitleContainer{
   border: 1px solid none;
   text-align: center;
   width: 65%;
-  position: absolute;
+  position: relative;
   left: 0;
   padding: 3% 0% 0% 17%;
   height: 100%;
@@ -221,6 +229,66 @@ background-repeat: no-repeat;
     height: 750px;
   }
 }
+
+@media (max-width: 750px) {
+
+  .PosterHome{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 0;
+    height: 940px;
+  }
+  .TitleContainer{
+    border: 1px solid none;
+    width: 100%;
+    height: 33%;
+    padding: 12% 0% 0% 3%;
+  }
+
+  .TitleContainer h1{
+    font-size: 10vw;
+    font-weight: bold;
+  }
+
+  .TitleContainer h3{
+    font-size: 7vw;
+    font-weight: bold;
+    color: #666;
+  }
+  .TitleContainer img{
+    padding-top: 2%;
+    width: 70px;
+  }
+
+  .imgContainer{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    border: 1px solid none;
+    height: 68.35%;
+    width: 310px;
+  }
+  .imgContainer img{
+    bottom: 2%;
+    max-width: 100%;
+  }
+
+}
+
+@media (max-width: 560px) {
+  .aboutContainer .lineGold{
+    padding: 30px;
+    width: 100%;
+    position: relative;
+    right: 50%;
+    transform: translate(50%);
+  }
+  .imgContainer{
+    width: 335px;
+  }
+}
+
 </style>
 
 

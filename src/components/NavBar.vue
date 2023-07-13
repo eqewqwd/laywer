@@ -1,11 +1,11 @@
 <template>
   <nav class="navbar">
-    <div class="brand-title"><img src="@/assets/Logo/logo.png" alt="" width="300px"></div>
-    <a @click="OpenMenu" class="toggle-button">
+    <img src="@/assets/Logo/logo.png" alt="">
+    <!-- <a @click="OpenMenu" class="toggle-button">
       <span class="bar" id="first"></span>
       <span class="bar" id="two"></span>
       <span class="bar" id="three"></span>
-    </a>
+    </a> -->
     <div class="navbar-links">
       <ul>
         <router-link style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
@@ -16,6 +16,23 @@
       </ul>
     </div>
   </nav>
+  <div class="threebarnav">
+    <a @click="OpenMenu" class="toggle-button">
+      <span class="bar" id="first"></span>
+      <span class="bar" id="two"></span>
+      <span class="bar" id="three"></span>
+  </a>
+  <div class="brand-title"><img src="@/assets/Logo/logo.png" alt="" width="300px"></div>
+  <div class="navbar-links">
+      <ul>
+        <router-link style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/"><li><a>תחומי התמחות</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/"><li><a>פסקי דין</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/"><li><a>צור קשר</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/"><li><a>טפסים להורדה</a></li></router-link>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -37,25 +54,27 @@ export default {
   props:{
   },
   created () {
-    window.addEventListener('scroll', this.handleScroll);
+    // window.addEventListener('scroll', this.handleScroll);
     // window.addEventListener('click', this.toggleButton);
     // console.log(document.getElementById("itemNum").ariaValueText)
     
   },
   destroyed () {
-    window.removeEventListener('scroll', this.handleScroll);
+    // window.removeEventListener('scroll', this.handleScroll);
     // window.removeEventListener('click', this.OpenMenu);
   },
   methods: {
-    handleScroll (event) {
-      var navbar = document.getElementsByClassName('navbar')[0]
-      navbar.classList.toggle("sticky",window.scrollY > 0)
-    },
+    // handleScroll (event) {
+    //   var navbar = document.getElementsByClassName('navbar')[0]
+    //   navbar.classList.toggle("sticky",window.scrollY > 0)
+    // },
     OpenMenu(event) {
     const toggleButton = document.getElementsByClassName('toggle-button')[0]
-    const navbarLinks = document.getElementsByClassName('navbar-links')[0]
+    const navbarLinks = document.getElementsByClassName('navbar-links')[1]
+    const LogoResponsive = document.getElementsByClassName('brand-title')[0]
       
       navbarLinks.classList.toggle('active')
+      LogoResponsive.classList.toggle('active')
       toggleButton.classList.toggle('rotate')
     },
   }
@@ -78,11 +97,37 @@ export default {
   position: relative;
   display: flex;
   width: 100%;
-  height: 20vh;
+  height: 23vh;
   align-items: center;
   background-color: transparent;
   z-index: 999999;
   transition: 0s ease-out;
+}
+
+.threebarnav{
+    display: hidden;
+  }
+
+.threebarnav .navbar-links{
+  display: none;
+}
+
+.threebarnav .brand-title{
+  display: none;
+}
+
+
+.brand-title{
+  width: 150px;
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translate(-50%);
+  /* border: 1px solid red; */
+}
+
+.brand-title img{
+  width: 100%
 }
 
 .sticky{
@@ -91,26 +136,22 @@ export default {
   transition: 0.4s ease-in;
 }
 
-.brand-title{
+img{
+  width: 250px;
   position: absolute;
   top: 3%;
   left: 50%;
   transform: translate(-50%);
-  border: 1px solid none;
-}
-
-.brand-title img{
-  width: 100%;
-  height: 80px;
+  /* border: 1px solid red; */
 }
 
 .navbar-links{
-  /* border: 1px solid green; */
+  border: 1px solid none;
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translate(-50%);  
-  width: 65%;
+  width: 726px;
   border-bottom: 1px solid black;
 }
 
@@ -154,6 +195,8 @@ export default {
   justify-content: space-between;
   width: 30px;
   height: 21px;
+  cursor: pointer;
+  z-index: 3213213;
 }
 
 .toggle-button .bar{
@@ -178,7 +221,7 @@ export default {
   padding-bottom: 23px;
 }
 
-@media (max-width: 725px) {
+@media (max-width: 750px) {
 
   .toggle-button {
     display: flex;
@@ -186,21 +229,38 @@ export default {
     transition:  0.2s ease-out;
   }
 
+
   .navbar-links {
     background-color: rgb(209, 212, 215);
-    position: relative;
-    top: 120px;
+    position: absolute;
+    top: 0;
+    height: 390px;
     display: none;
     width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-bottom: none;
+    border: 1px solid none;
+    z-index: 3212321;
   }
 
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-    background-color: rgb(209, 212, 215);
+    display: none;
+  }
+
+  .threebarnav{
+    display: block;
+  }
+
+  .threebarnav .brand-title.active{
+    display: block;
+    z-index: 212313123;
   }
 
   .navbar-links ul{
+    position: absolute;
+    bottom: 0;
     width: 100%;
     flex-direction: column;
   }
@@ -234,17 +294,6 @@ export default {
     top: -4.5px;
     transition:  0.2s ease-in;
   }
-
-  #itemNum{
-  position: relative;
-  left: 52%;
-  bottom: 24%;
-  
-}
-
-  
-  
-
 
 }
 

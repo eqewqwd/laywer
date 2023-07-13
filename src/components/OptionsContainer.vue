@@ -1,6 +1,6 @@
 <template>
   <div class="OptionsContainerComponent">
-    <i class="bi bi-bookmark-check"></i>
+    <img class="iconScale" src="@/assets/photo/scaleIcon.png">
     <h5>{{ name  }}</h5>
   </div>
 </template>
@@ -37,9 +37,9 @@ export default {
   text-align: center;
 }
 
-.OptionsContainerComponent i{
-  color: white;
-  font-size: 30px;
+
+.iconScale{
+  width: 50px;
 }
 
 .OptionsContainerComponent h5{
@@ -50,7 +50,8 @@ export default {
 
 @media (max-width: 800px) {
   .OptionsContainerComponent{
-    width: 45%;
+    border: 1px solid none;
+    width: 50%;
     padding: 20px;
   }
 }

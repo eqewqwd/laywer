@@ -1,5 +1,5 @@
 <template>
-  <div class="ContactContainer Homereveal">
+  <div class="ContactContainer">
     <div class="TitleContainer">
       <h1>לייעוץ ראשוני ללא התחייבות​</h1>
       <h5>לקבלת שיחת ייעוץ באפשרותך להשאיר פרטים בטופס המצורף, או לחייג אלינו למספר 03-7949755</h5>
