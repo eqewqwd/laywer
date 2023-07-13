@@ -78,7 +78,7 @@ export default {
   position: relative;
   display: flex;
   width: 100%;
-  height: 23vh;
+  height: 20vh;
   align-items: center;
   background-color: transparent;
   z-index: 999999;
