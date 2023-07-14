@@ -1,5 +1,6 @@
 import { createWebHashHistory, createRouter } from 'vue-router';
 import Home from '@/view/Home.vue';
+import DownloadPage from '@/view/DownloadPage.vue';
 
 const routes = [
 	{
@@ -8,6 +9,14 @@ const routes = [
 		component: Home,
 		meta:{
 			title:"עמוד הבית",
+		},
+	},	
+	{
+		path: '/DownloadPage',
+		name: 'DownloadPage',
+		component: DownloadPage,
+		meta:{
+			title:"טפסים להורדה",
 		},
 	},	
 ];

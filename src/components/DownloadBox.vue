@@ -1,0 +1,99 @@
+<template>
+  <div class="BoxDownload">
+    <div class="imgDiv"><img :src="ImgDownload"></div>
+    <div class="TitleDiv">
+      {{ name }}
+    </div>
+    <div class="ButtonDiv"><a href="https://ggh-law.co.il/download/1462/?tmstv=1689323950"><i class="bi bi-download"></i></a></div>
+    <div class="DateDiv">עודכן בתאריך : {{ date }}</div>
+  </div>
+</template>
+
+<script>
+
+
+export default {
+    name: "DownloadBox",
+    props:['name','date','ImgDownload'],
+    data() {
+        return {
+        }
+    },
+    created () {
+  },
+    mounted(){
+    }, 
+    methods:{
+
+    }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+/* -------------- BoxDownload -------------- */
+
+.BoxDownload{
+  border: 1px solid none;
+  position: relative;
+  height: 350px;
+  width: 450px;
+  margin-top: 50px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 15px 15px 25px 25px;
+}
+.BoxDownload .imgDiv{
+  border: 1px solid none;
+  position: absolute;
+  height: 55%;
+  width: 100%;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.BoxDownload .imgDiv img{
+  border-radius: 15px 15px 0px 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.BoxDownload .TitleDiv{
+  border: 1px solid none;
+  position: absolute;
+  padding: 15px;
+  top: 55%;
+  font-size: 20px;
+}
+
+.BoxDownload .ButtonDiv{
+  border: 1px solid none;
+  position: absolute;
+  width: fit-content;
+  left: 0;
+  bottom: 0;
+  padding: 0px 18px 6px 18px;
+  border-radius: 0px 0px 0px 25px;
+}
+
+.BoxDownload .ButtonDiv i{
+  color: black;
+  font-size: 26px;
+  transition: ease 0.2s;
+  cursor: pointer;
+}
+
+.BoxDownload .ButtonDiv i:hover{
+  color: rgb(15, 15, 172);
+}
+
+.BoxDownload .DateDiv{
+  border: 1px solid none;
+  position: absolute;
+  width: fit-content;
+  right: 0;
+  bottom: 0;
+  padding: 0px 18px 6px 18px;
+  border-radius: 0px 0px 25px 0px;
+}
+
+</style>
