@@ -40,8 +40,9 @@ export default {
   height: 350px;
   width: 450px;
   margin-top: 50px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 15px 15px 25px 25px;
+  background-color: #F3F3F1;
 }
 .BoxDownload .imgDiv{
   border: 1px solid none;

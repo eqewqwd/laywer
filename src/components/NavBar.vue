@@ -9,10 +9,10 @@
     <div class="navbar-links">
       <ul>
         <router-link style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/"><li><a>צוואות</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/"><li><a>ייפוי כוח מתמשך</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/tzavaha"><li><a>צוואות</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/yipuy-Koach"><li><a>ייפוי כוח מתמשך</a></li></router-link>
         <router-link style="text-decoration: none;" to="/"><li><a>צור קשר</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/DownloadPage"><li><a>טפסים להורדה</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
       </ul>
     </div>
   </nav>
@@ -26,10 +26,10 @@
   <div class="navbar-links">
       <ul>
         <router-link style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/"><li><a>צוואות</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/"><li><a>ייפוי כוח מתמשך</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/tzavaha"><li><a>צוואות</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/yipuy-Koach"><li><a>ייפוי כוח מתמשך</a></li></router-link>
         <router-link style="text-decoration: none;" to="/"><li><a>צור קשר</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/DownloadPage"><li><a>טפסים להורדה</a></li></router-link>
+        <router-link style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
       </ul>
     </div>
   </div>

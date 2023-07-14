@@ -9,12 +9,15 @@
 
 <div class="searchDiv">
   <label>חיפוש : </label>
-    <input type="text" v-model="search" placeholder="חיפוש על ידי שם.."/>
+    <input type="text" @input="this.checkIfNot()" v-model="search" placeholder="חיפוש על ידי שם.."/>
   </div>
 
 <div class="BoxContainerDownload">
   <DownloadBox v-for="download in filteredList" :key="download" :name="download.name" :date="download.date"
   :ImgDownload="download.ImgDownload"/>
+  <div class="notFound" v-show="this.allowNotFind == true">
+    <h1> לא נמצא טופס בשם : "{{ this.search }}"</h1>
+  </div>
 </div>
 
 
@@ -46,8 +49,15 @@ export default {
   data(){
       return{
         search:'',
+        allowNotFind:false,
         downloadData:
         [
+        {name:'טופס למתן טיפול רפואי ראשוני לעובד עצמאי שנפגע בתאונת עבודה - 283',date:'22/7/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg'},
+          {name:'טופס תביעה להכרה במחלת מקצוע או ליקוי רפואי כתוצאה מתנאי עבודה - 202',date:'10/7/2020',ImgDownload:'https://www.cisme.it/scrl/wp-content/uploads/2020/06/coronavirus-3d-vettoriale-realistico-in-sfondo-blu-scuro-cellula-virus-corona-malattia-del-virus-wuhan_8306-489.jpg'},
+          {name:'טופס תביעה לתשלום דמי פגיעה והודעה על פגיעה בעבודה - 211',date:'14/10/2022',ImgDownload:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg'},
+          {name:'כתב ויתור סודיות רפואית מי שנפגע בעבודה או במסגרת פעולת התנדבות - 7101',date:'4/5/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg'},
+          {name:'שאלון למעסיק על אירוע הדבקה בקורונה - 257',date:'5/1/2022',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg'},
+          {name:'שאלון לעובד שכיר על אירוע הדבקה בקורונה - 258',date:'6/2/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg'},
           {name:'טופס למתן טיפול רפואי ראשוני לעובד עצמאי שנפגע בתאונת עבודה - 283',date:'22/7/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg'},
           {name:'טופס תביעה להכרה במחלת מקצוע או ליקוי רפואי כתוצאה מתנאי עבודה - 202',date:'10/7/2020',ImgDownload:'https://www.cisme.it/scrl/wp-content/uploads/2020/06/coronavirus-3d-vettoriale-realistico-in-sfondo-blu-scuro-cellula-virus-corona-malattia-del-virus-wuhan_8306-489.jpg'},
           {name:'טופס תביעה לתשלום דמי פגיעה והודעה על פגיעה בעבודה - 211',date:'14/10/2022',ImgDownload:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg'},
@@ -72,6 +82,15 @@ export default {
   },
   methods: {
 
+    checkIfNot(){
+      if(this.filteredList.length == 0){
+        this.allowNotFind = true
+      }else{
+        this.allowNotFind = false
+
+      }
+    }
+
   } 
 }
 </script>
@@ -85,7 +104,7 @@ export default {
 
 /* -------------------- empty ------------------- */
 .empty{
-  height: 500px;
+  height: 200px;
 }
 
 /* ---------------- PosterHome --------------- */
@@ -106,7 +125,7 @@ export default {
   border: 1px solid none;
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 31vw;
 }
 
 .PosterHome .TitleDivPoster h1{
@@ -169,6 +188,14 @@ export default {
   border: 1px solid none;
   width: 80%;
   height: auto;
+}
+
+/* ------------------- notFound -------------- */
+
+.notFound{
+  border: 1px solid none;
+  width: 100%;
+  text-align: center;
 }
 
 </style>
