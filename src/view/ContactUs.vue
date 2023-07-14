@@ -10,13 +10,13 @@
       <iframe class="mapsGoogle" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53659.51697219783!2d35.057975529346166!3d32.79968780329649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba4c750de845%3A0xc35d23982a81529a!2z15fXmdek15Q!5e0!3m2!1siw!2sil!4v1689283619707!5m2!1siw!2sil" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <div class="ContactContainer">
-      <h4>המייסדים 56, זכרון יעקב</h4>
+      <h4>שדרות מוריה 8, חיפה</h4>
       <hr>
-      <h4>טלפון: 074-7019771</h4>
+      <h4>טלפון: 052-635-3423</h4>
       <hr>
-      <h4>אימייל: Office@ggh-law.co.il</h4>
+      <h4>אימייל: sharon@snt-law.co.il</h4>
       <hr>
-      <h4>פקס : 077-3279255</h4>
+      <h4>מיקוד : 346160</h4>
 
     </div>
   </div>
@@ -71,20 +71,21 @@ export default {
 
 .formDiv{
   border: 1px solid none;
-  width: 60%;
+  width: 55%;
 }
 .MapDiv{
-  border: 1px solid none;
+  border-right: 1px solid #999;
   position: relative;
-  width: 40%;
+  width: 55%;
 }
 
 .mapContainer{
   border: 1px solid none;
   position: absolute;
-  top: 30%;
-  width: 80%;
-  height: 30%;
+  right: 10%;
+  top: 20%;
+  width: 60%;
+  height: 300px;
 }
 
 iframe{
@@ -95,10 +96,20 @@ iframe{
 .ContactContainer{
   border: 1px solid none;
   position: absolute;
-  bottom: 0;
+  bottom: 7%;
   width: 80%;
   height: 30%;
   text-align: center;
+}
+
+h4{
+  padding: 10px;
+}
+hr{
+  position: absolute;
+  width: 50%;
+  right: 50%;
+  transform: translate(50%);
 }
 
 
