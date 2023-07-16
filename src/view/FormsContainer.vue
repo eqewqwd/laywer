@@ -23,6 +23,23 @@
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
 
+<div class="CaruselCardsDiv">
+  <h1>עוד מאמרים</h1>
+  <div class="CaruselContainer">
+    <Carousel v-bind="settings" :breakpoints="breakpoints">
+    <Slide v-for="test in test2" :key="test">
+      <MoreOptions 
+      :name="test.name" :imgForm="test.imgForm" :subTitle="test.subTitle" :PostDate="test.PostDate" :key="test"
+      />
+    </Slide>
+
+    <template #addons>
+      <Navigation />
+    </template>
+  </Carousel>
+  </div>
+</div>
+
 
 
 <div class="empty">
@@ -36,6 +53,11 @@
 <script>
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import MoreOptions from '@/components/MoreOptions.vue'
+import { Carousel, Navigation, Slide } from 'vue3-carousel'
+
+import 'vue3-carousel/dist/carousel.css'
+
 
 // import axios from 'axios'
 
@@ -44,11 +66,16 @@ export default {
   name: 'FormsContainer',
   components: {
     NavBar,
-    Footer
+    Footer,
+    Carousel,
+    Slide,
+    Navigation,
+    MoreOptions
 },
   data(){
       return{
         name:this.$route.params.name,
+        test2:[],
         test:
         [
         {id:1,name:"yipuy-Koach",imgForm:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',
@@ -63,17 +90,38 @@ export default {
 אנו לא יודעים מתי יכולה להילקח מאיתנו – עקב מגבלה פיזית או קוגניטיבית – היכולת לקבל החלטות עצמאיות הקשורות לעתידנו. זה יכול לקרות לכל אחד ואחת מאיתנו, בכל זמן. זו הסיבה שייפוי כוח מתמשך מתאים לכל בגיר מעל גיל 18, ולא רק למי שצופה שכשרותו הפיזית או הקוגניטיבית תיפגע בעתיד הלא רחוק.
 
 על מנת שבבוא העת הממונה (מיופה הכוח) יוכל לפעול בהתאם לציפיות הממנה, על הממנה לרשום הנחיות פרטניות הן בנושא הרכושי והן בנושא הרפואי.`},
-        {id:2,name:"tzavahot",imgForm:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg',
+{id:2,name:"tzavahot",imgForm:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg',
         title:"צוואות",PostDate:'14/7/2022',subTitle:"מהי צוואה ?",info:`
         "צוואה", במובן הכללי, היא כל אמרה, אמירה, ציווי, אשר מבקש ומצפה אדם שיעשה למענו או בענייניו לאחר מותו. במובן המשפטי, 
 
          "צוואה" היא מסמך משפטי בו מורה אדם מה ייעשה ברכושו לאחר מותו, אשר יהא בר-תוקף - אם נעשה באחת הדרכים הקבועות בדין, ולא נפל בו פגם שלא ניתן לתיקון.
-        `}       
-        ]
+        `},  
+
+        ],
+        settings: {
+          itemsToShow: 1,
+          snapAlign: 'center',
+          dir:'rtl'
+        },
+        // breakpoints are mobile first
+        // any settings not specified will fallback to the carousel settings
+        breakpoints: {
+          // 700px and up
+          700: {
+            itemsToShow: 3.5,
+            snapAlign: 'center',
+          },
+          // 1024 and up
+          1024: {
+            itemsToShow: 5,
+            snapAlign: 'start',
+          },
+        },
       }
       
   },
   created(){  
+    this.AddToCarusel()
   },
   mounted(){
   },
@@ -83,6 +131,13 @@ export default {
     }
   },
   methods: {
+    AddToCarusel(){
+      for(let i=0; i<this.test.length; i++){
+        if(this.test[i].name != this.name){
+          this.test2.push(this.test[i])
+        }
+      }
+    }
   } 
 }
 </script>
@@ -190,6 +245,31 @@ export default {
   width: 100%;
   font-size: 22px;
   white-space: pre-line;
+}
+
+/* -------------- CaruselCardsDiv ------------- */
+
+.CaruselCardsDiv{
+  position: relative;
+  width: 100%;
+  border: 1px solid none;
+  height: 400px;
+  background-color: rgb(231,231,231);
+}
+
+.CaruselCardsDiv h1{
+  border: 1px solid none;
+  width: fit-content;
+  position: absolute;
+  right: 5%;
+  top: 10%;
+}
+
+.CaruselCardsDiv .CaruselContainer{
+  border: 1px solid none;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 
 

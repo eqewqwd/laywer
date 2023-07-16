@@ -285,7 +285,7 @@ img{
 
   .threebarnav .brand-title.active{
     display: block;
-    z-index: 321321321323221;
+    z-index: 321321321321221213221;
   }
 
   .navbar-links ul{

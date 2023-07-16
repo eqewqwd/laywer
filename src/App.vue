@@ -37,7 +37,7 @@ export default {
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(242, 131, 194); 
+  background: rgb(28, 25, 90); 
   border-radius: 10px;
   transition: 0.4s ease-in;
 
@@ -45,7 +45,14 @@ export default {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(229, 67, 159);
+  background: rgb(47, 41, 169);
+}
+
+.carousel__icon{
+  color: white;
+  background-color: #2e2c2c;
+  border: 1px solid none;
+  border-radius: 25px;
 }
 
 body{

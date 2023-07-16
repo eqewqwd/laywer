@@ -167,7 +167,7 @@ export default {
 .searchDiv label{
   border: 1px solid none;
   position: relative;
-  font-size: 30px;
+  font-size: 28px;
   width: 20%;
 }
 
@@ -225,7 +225,7 @@ export default {
 .searchDiv label{
   border: 1px solid none;
   position: relative;
-  font-size: 25px;
+  font-size: 20px;
   width: 20%;
 }
 }
