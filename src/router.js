@@ -1,8 +1,7 @@
 import { createWebHashHistory, createRouter } from 'vue-router';
 import Home from '@/view/Home.vue';
 import DownloadPage from '@/view/DownloadPage.vue';
-import yipuyKoach from '@/view/yipuyKoach.vue';
-import tzavaha from '@/view/tzavaha.vue'
+import FormsContainer from '@/view/FormsContainer.vue';
 import ContactUs from '@/view/ContactUs.vue'
 
 const routes = [
@@ -23,21 +22,13 @@ const routes = [
 		},
 	},	
 	{
-		path: '/yipuy-Koach',
-		name: 'yipuyKoach',
-		component: yipuyKoach,
+		path: '/Forms/:name',
+		name: 'FormsContainer',
+		component: FormsContainer,
 		meta:{
-			title:"ייפוי כוח מתמשך",
+			title:"FormsContainer",
 		},
-	},	
-	{
-		path: '/tzavaha',
-		name: 'tzavaha',
-		component: tzavaha,
-		meta:{
-			title:"צוואות",
-		},
-	},	
+	},
 	{
 		path: '/ContactUs',
 		name: 'ContactUs',
@@ -58,11 +49,12 @@ const router = createRouter({
 
 router.beforeEach((to, from, next)=>{
 	document.title = `${to.meta.title}`;
-	next();
+	next()
+
+	
 });
 
 
 
 export default router;
-
 

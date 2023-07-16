@@ -7,7 +7,19 @@
       <img src="@/assets/Logo/logo2.png" alt="">
     </div>
     <div class="navbarbottom">
-      <iframe class="mapsGoogle" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53659.51697219783!2d35.057975529346166!3d32.79968780329649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba4c750de845%3A0xc35d23982a81529a!2z15fXmdek15Q!5e0!3m2!1siw!2sil!4v1689283619707!5m2!1siw!2sil" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="ContactUsContainer">
+      <h4>שדרות מוריה 8, חיפה</h4>
+      <hr>
+      <h4>מיקוד : 346160</h4>
+      <hr>
+      <h4>טלפון: 052-635-3423</h4>
+      <hr>
+      <h4>אימייל: sharon@snt-law.co.il</h4>
+
+    </div>
+      <div class="mapsSection">
+        <iframe class="mapsGoogle" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53659.51697219783!2d35.057975529346166!3d32.79968780329649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba4c750de845%3A0xc35d23982a81529a!2z15fXmdek15Q!5e0!3m2!1siw!2sil!4v1689283619707!5m2!1siw!2sil" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
     </div>
 
   </div>
@@ -63,6 +75,7 @@ export default {
 
 .mapsGoogle{
   float: left;
+  width: 100%;
 }
 
 .LogoContainer img{
@@ -113,10 +126,35 @@ footer{
 }
 
 .navbarbottom{
+  display: flex;
+  flex-wrap: wrap;
   padding: 25px;
   width: 65%;
   height: 100%;
   border: 1px solid none;
+}
+
+
+.mapsSection{
+  border: 1px solid none;
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+.ContactUsContainer{
+  border:1px solid none;
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+.ContactUsContainer h4{
+  padding: 10px;
+}
+.ContactUsContainer hr{
+  width: 40%;
+  color: black;
 }
 
 

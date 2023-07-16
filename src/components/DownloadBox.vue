@@ -2,7 +2,11 @@
   <div class="BoxDownload">
     <div class="imgDiv"><img :src="ImgDownload"></div>
     <div class="TitleDiv">
-      {{ name }}
+      <h3>טופס מס'  {{ numberFile }}</h3>
+      <p>
+        {{ name }}
+      </p>
+      
     </div>
     <div class="ButtonDiv"><a href="https://ggh-law.co.il/download/1462/?tmstv=1689323950"><i class="bi bi-download"></i></a></div>
     <div class="DateDiv">עודכן בתאריך : {{ date }}</div>
@@ -14,7 +18,7 @@
 
 export default {
     name: "DownloadBox",
-    props:['name','date','ImgDownload'],
+    props:['name','date','ImgDownload','numberFile'],
     data() {
         return {
         }
@@ -37,7 +41,7 @@ export default {
 .BoxDownload{
   border: 1px solid none;
   position: relative;
-  height: 350px;
+  height: 400px;
   width: 450px;
   margin-top: 50px;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
@@ -64,6 +68,15 @@ export default {
   padding: 15px;
   top: 55%;
   font-size: 20px;
+}
+
+
+.BoxDownload .TitleDiv p{
+  position: relative;
+  border: 1px solid none;
+  width: 90%;
+  font-size: 18px;
+  white-space: pre-line;
 }
 
 .BoxDownload .ButtonDiv{

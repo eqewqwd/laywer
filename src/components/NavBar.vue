@@ -9,8 +9,8 @@
     <div class="navbar-links">
       <ul>
         <router-link style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/tzavaha"><li><a>צוואות</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/yipuy-Koach"><li><a>ייפוי כוח מתמשך</a></li></router-link>
+        <router-link style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a>צוואות</a></li></router-link>
+        <router-link style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li><a>ייפוי כוח מתמשך</a></li></router-link>
         <router-link style="text-decoration: none;" to="/ContactUs"><li><a>צור קשר</a></li></router-link>
         <router-link style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
       </ul>
@@ -21,17 +21,18 @@
       <span class="bar" id="first"></span>
       <span class="bar" id="two"></span>
       <span class="bar" id="three"></span>
-  </a>
-  <div class="brand-title"><img src="@/assets/Logo/logo.png" alt="" width="300px"></div>
-  <div class="navbar-links">
-      <ul>
-        <router-link style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/tzavaha"><li><a>צוואות</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/yipuy-Koach"><li><a>ייפוי כוח מתמשך</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/ContactUs"><li><a>צור קשר</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
-      </ul>
-    </div>
+    </a>
+    <img class="ResposiveImg " src="@/assets/Logo/logo.png" alt="">
+    <div class="brand-title"><img src="@/assets/Logo/logo.png" alt="" width="300px"></div>
+    <div class="navbar-links">
+        <ul>
+          <router-link style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
+          <router-link style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a>צוואות</a></li></router-link>
+          <router-link style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li><a>ייפוי כוח מתמשך</a></li></router-link>
+          <router-link style="text-decoration: none;" to="/ContactUs"><li><a>צור קשר</a></li></router-link>
+          <router-link style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
+        </ul>
+      </div>
   </div>
 </template>
 
@@ -46,9 +47,11 @@ export default {
   name: 'Navbar',
   mounted() {
     // addEventListener.this.OpenMenu()
+    this.changeNavByRoute()
   },
   data(){
     return{
+      test:'tzavahot'
     }
   },
   props:{
@@ -77,6 +80,21 @@ export default {
       LogoResponsive.classList.toggle('active')
       toggleButton.classList.toggle('rotate')
     },
+    changeNavByRoute(){
+      console.log(this.$route.fullPath == '/')
+      let checkRoute = this.$route.fullPath == '/'
+
+      const navtwo = document.getElementsByClassName('threebarnav')[0]
+      const imgClass = document.getElementsByClassName('ResposiveImg')[0]
+
+      if(checkRoute == false){
+        imgClass.classList.toggle('setByRoute')
+        navtwo.classList.toggle('addHeight')
+      }else{
+
+      }
+    }
+
   }
 
 
@@ -107,12 +125,19 @@ export default {
 .threebarnav{
     display: hidden;
   }
+  .threebarnav img.ResposiveImg{
+    display: none;
+  }
 
 .threebarnav .navbar-links{
   display: none;
 }
 
 .threebarnav .brand-title{
+  display: none;
+}
+
+.addHeight,.setByRoute{
   display: none;
 }
 
@@ -196,7 +221,7 @@ img{
   width: 30px;
   height: 21px;
   cursor: pointer;
-  z-index: 3213213;
+  z-index: 3212133213;
 }
 
 .toggle-button .bar{
@@ -229,6 +254,9 @@ img{
     transition:  0.2s ease-out;
   }
 
+  .threebarnav .ResposiveImg.setByRoute{
+    display: block;
+  }
 
   .navbar-links {
     background-color: rgb(209, 212, 215);
@@ -240,7 +268,7 @@ img{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-bottom: none;
     border: 1px solid none;
-    z-index: 3212321;
+    z-index: 32132121;
   }
 
   .navbar {
@@ -249,13 +277,15 @@ img{
     display: none;
   }
 
-  .threebarnav{
+  .threebarnav.addHeight{
     display: block;
+    width: 100%;
+    height: 180px;
   }
 
   .threebarnav .brand-title.active{
     display: block;
-    z-index: 212313123;
+    z-index: 321321321323221;
   }
 
   .navbar-links ul{
