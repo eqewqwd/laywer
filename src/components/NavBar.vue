@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <img src="@/assets/Logo/logo.png" alt="">
+    <img class="imgAll" src="@/assets/Logo/logo.png" alt="">
     <!-- <a @click="OpenMenu" class="toggle-button">
       <span class="bar" id="first"></span>
       <span class="bar" id="two"></span>
@@ -22,7 +22,6 @@
       <span class="bar" id="two"></span>
       <span class="bar" id="three"></span>
     </a>
-    <img class="ResposiveImg " src="@/assets/Logo/logo.png" alt="">
     <div class="brand-title"><img src="@/assets/Logo/logo.png" alt="" width="300px"></div>
     <div class="navbar-links">
         <ul>
@@ -47,6 +46,7 @@ export default {
   name: 'Navbar',
   mounted() {
     // addEventListener.this.OpenMenu()
+    this.changeNavByRoute()
   },
   data(){
     return{
@@ -59,7 +59,7 @@ export default {
     // window.addEventListener('scroll', this.handleScroll);
     // window.addEventListener('click', this.toggleButton);
     // console.log(document.getElementById("itemNum").ariaValueText)
-    this.changeNavByRoute()
+  
   },
   destroyed () {
     // window.removeEventListener('scroll', this.handleScroll);
@@ -86,10 +86,9 @@ export default {
       let checkRoute = this.$route.fullPath == '/'
 
       const navtwo = document.getElementsByClassName('threebarnav')[0]
-      const imgClass = document.getElementsByClassName('ResposiveImg')[0]
+      console.log(imgClass)
 
       if(checkRoute == false){
-        imgClass.classList.toggle('setByRoute')
         navtwo.classList.toggle('addHeight')
       }else{
 
@@ -126,21 +125,14 @@ export default {
 .threebarnav{
     display: hidden;
   }
-  .threebarnav img.ResposiveImg{
-    display: none;
-  }
 
 .threebarnav .navbar-links{
   display: none;
 }
 
-.addHeight,.setByRoute{
-  display: none;
-}
 
-
-.brand-title{
-  display: none;
+.threebarnav .brand-title{
+  display: none !important;
   width: 150px;
   position: absolute;
   top: 3%;
@@ -252,8 +244,9 @@ img{
     transition:  0.2s ease-out;
   }
 
-  .threebarnav .ResposiveImg .setByRoute{
+  .imgAll{
     display: block;
+    z-index: 2312321321321;
   }
 
   .navbar-links {
@@ -269,9 +262,9 @@ img{
     z-index: 32132121;
   }
 
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+  .navbar  .navbar-links {
+    /* flex-direction: column;
+    align-items: flex-start; */
     display: none;
   }
 
@@ -281,9 +274,6 @@ img{
     height: 180px;
   }
 
-  .threebarnav .brand-title{
-    display: none;
-  }
 
   .threebarnav ,  .threebarnav .brand-title.active{
     display: block;
