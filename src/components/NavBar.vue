@@ -135,6 +135,7 @@ export default {
 
 .threebarnav .brand-title{
   display: none;
+  z-index: 321321321321221213221;
 }
 
 .addHeight,.setByRoute{
@@ -289,7 +290,6 @@ img{
 
   .threebarnav ,  .threebarnav .brand-title.active{
     display: block;
-    z-index: 321321321321221213221;
   }
 
   .navbar-links ul{
