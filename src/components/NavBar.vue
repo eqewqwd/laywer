@@ -283,6 +283,10 @@ img{
     height: 180px;
   }
 
+  .threebarnav .brand-title{
+    display: none;
+  }
+
   .threebarnav ,  .threebarnav .brand-title.active{
     display: block;
     z-index: 321321321321221213221;
