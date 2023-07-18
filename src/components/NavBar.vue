@@ -8,11 +8,11 @@
     </a> -->
     <div class="navbar-links">
       <ul>
-        <router-link style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
-        <router-link style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a>צוואות</a></li></router-link>
-        <router-link style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li><a>ייפוי כוח מתמשך</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/ContactUs"><li><a>צור קשר</a></li></router-link>
-        <router-link style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a>צוואות</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li><a>ייפוי כוח מתמשך</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li><a>צור קשר</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
       </ul>
     </div>
   </nav>
@@ -26,11 +26,11 @@
     <div class="brand-title"><img src="@/assets/Logo/logo.png" alt="" width="300px"></div>
     <div class="navbar-links">
         <ul>
-          <router-link style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
-          <router-link style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a>צוואות</a></li></router-link>
-          <router-link style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li><a>ייפוי כוח מתמשך</a></li></router-link>
-          <router-link style="text-decoration: none;" to="/ContactUs"><li><a>צור קשר</a></li></router-link>
-          <router-link style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
+          <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
+          <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a>צוואות</a></li></router-link>
+          <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li><a>ייפוי כוח מתמשך</a></li></router-link>
+          <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li><a>צור קשר</a></li></router-link>
+          <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
         </ul>
       </div>
   </div>
@@ -80,7 +80,7 @@ export default {
       LogoResponsive.classList.toggle('active')
       toggleButton.classList.toggle('rotate')
 
-      this.changeNavByRoute()
+
     },
     changeNavByRoute(){
       console.log(this.$route.fullPath == '/')
