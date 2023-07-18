@@ -79,6 +79,8 @@ export default {
       navbarLinks.classList.toggle('active')
       LogoResponsive.classList.toggle('active')
       toggleButton.classList.toggle('rotate')
+
+      this.changeNavByRoute()
     },
     changeNavByRoute(){
       console.log(this.$route.fullPath == '/')
