@@ -47,7 +47,6 @@ export default {
   name: 'Navbar',
   mounted() {
     // addEventListener.this.OpenMenu()
-    this.changeNavByRoute()
   },
   data(){
     return{
@@ -60,7 +59,7 @@ export default {
     // window.addEventListener('scroll', this.handleScroll);
     // window.addEventListener('click', this.toggleButton);
     // console.log(document.getElementById("itemNum").ariaValueText)
-    
+    this.changeNavByRoute()
   },
   destroyed () {
     // window.removeEventListener('scroll', this.handleScroll);
