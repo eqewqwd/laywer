@@ -252,7 +252,7 @@ img{
     transition:  0.2s ease-out;
   }
 
-  .threebarnav .ResposiveImg.setByRoute{
+  .threebarnav .ResposiveImg .setByRoute{
     display: block;
   }
 
