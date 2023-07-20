@@ -74,6 +74,7 @@ export default {
     const toggleButton = document.getElementsByClassName('toggle-button')[0]
     const navbarLinks = document.getElementsByClassName('navbar-links')[1]
     const LogoResponsive = document.getElementsByClassName('brand-title')[0]
+    console.log(LogoResponsive)
       
       navbarLinks.classList.toggle('active')
       LogoResponsive.classList.toggle('active')
@@ -84,14 +85,12 @@ export default {
     changeNavByRoute(){
       console.log(this.$route.fullPath == '/')
       let checkRoute = this.$route.fullPath == '/'
+      const LogoResponsive = document.querySelector('.navbar')
 
-      const navtwo = document.getElementsByClassName('threebarnav')[0]
-      console.log(imgClass)
 
-      if(checkRoute == false){
-        navtwo.classList.toggle('addHeight')
+      if(checkRoute == true){
+        LogoResponsive.style.display = 'none'
       }else{
-
       }
     }
 
@@ -132,7 +131,7 @@ export default {
 
 
 .threebarnav .brand-title{
-  display: none !important;
+  display: none ;
   width: 150px;
   position: absolute;
   top: 3%;
@@ -184,9 +183,6 @@ img{
   border: 1px solid none;
   padding: 0px 10px 0px 10px;
 }
-.threebarnav ,  .threebarnav .brand-title.active{
-    display: none;
-  }
 
 .navbar-links li a{
   text-decoration: none;
