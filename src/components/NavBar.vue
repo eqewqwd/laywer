@@ -184,6 +184,9 @@ img{
   border: 1px solid none;
   padding: 0px 10px 0px 10px;
 }
+.threebarnav ,  .threebarnav .brand-title.active{
+    display: none;
+  }
 
 .navbar-links li a{
   text-decoration: none;
