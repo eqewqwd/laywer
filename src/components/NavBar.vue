@@ -22,8 +22,8 @@
       <span class="bar" id="two"></span>
       <span class="bar" id="three"></span>
     </a>
-    <div class="brand-title"><img src="@/assets/Logo/logo.png" alt="" width="300px"></div>
     <div class="navbar-links">
+      <div class="brand-title"><img src="@/assets/Logo/logo.png" alt="" width="300px"></div>
         <ul>
           <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
           <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a>צוואות</a></li></router-link>
@@ -73,11 +73,8 @@ export default {
     OpenMenu(event) {
     const toggleButton = document.getElementsByClassName('toggle-button')[0]
     const navbarLinks = document.getElementsByClassName('navbar-links')[1]
-    const LogoResponsive = document.getElementsByClassName('brand-title')[0]
-    console.log(LogoResponsive)
       
       navbarLinks.classList.toggle('active')
-      LogoResponsive.classList.toggle('active')
       toggleButton.classList.toggle('rotate')
 
 
@@ -131,7 +128,7 @@ export default {
 
 
 .threebarnav .brand-title{
-  display: none ;
+  display: block ;
   width: 150px;
   position: absolute;
   top: 3%;
@@ -272,13 +269,6 @@ img{
     width: 100%;
     height: 180px;
   }
-
-
-  .threebarnav ,  .threebarnav .brand-title.active{
-    display: block;
-    z-index: 321321321321221213221;
-  }
-
   .navbar-links ul{
     position: absolute;
     bottom: 0;
