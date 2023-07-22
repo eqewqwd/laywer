@@ -45,7 +45,7 @@ import OptionsContainer from '@/components/OptionsContainer.vue'
 import Footer from '@/components/Footer.vue'
 
 
-// import axios from 'axios'
+import axios from 'axios'
 
 
 export default {
@@ -78,8 +78,16 @@ export default {
 
   },
   mounted(){
+    this.GetData()
   },
   methods: {
+    GetData(){
+      axios.get('/.netlify/functions/GetData').then(response => {
+        console.log(response.data);
+      }).catch(error => {
+          console.log(error);
+      }); 
+    }
 
   } 
 }

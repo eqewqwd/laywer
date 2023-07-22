@@ -1,11 +1,11 @@
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://admin:davidbenzohar3@sweetcake.gadahcn.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 exports.handler = async (event, context) => {
     try {
         await client.connect();
-        const collection = client.db("CakesDB").collection("CartList");
+        const collection = client.db("lawyerWeb").collection("Forms");
         const result = await collection.find().toArray();
         return {
             statusCode: 200,

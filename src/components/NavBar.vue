@@ -84,8 +84,7 @@ export default {
       let checkRoute = this.$route.fullPath == '/'
       const LogoResponsive = document.querySelector('.navbar')
 
-
-      if(checkRoute == true){
+      if(checkRoute == true & innerWidth <= 750){
         LogoResponsive.style.display = 'none'
       }else{
       }
@@ -231,6 +230,8 @@ img{
   font-weight: 500;
   padding-bottom: 23px;
 }
+
+
 
 @media (max-width: 750px) {
 

@@ -76,6 +76,7 @@ export default {
       return{
         name:this.$route.params.name,
         test2:[],
+        FormsData:[],
         test:
         [
         {id:1,name:"yipuy-Koach",imgForm:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',
@@ -127,7 +128,7 @@ export default {
   },
   computed: {
     post(){
-      return this.test.find((test) => test.name == this.name)
+      return this.FormsData.find((form) => form.name == this.name)
     }
   },
   methods: {
@@ -137,7 +138,16 @@ export default {
           this.test2.push(this.test[i])
         }
       }
+    },
+    GetData(){
+      axios.get('/.netlify/functions/GetData').then(response => {
+        console.log(response.data);
+        this.FormsData = response.data
+      }).catch(error => {
+          console.log(error);
+      }); 
     }
+
   } 
 }
 </script>
