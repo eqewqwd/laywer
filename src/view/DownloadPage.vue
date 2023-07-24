@@ -155,7 +155,7 @@ export default {
 .searchDiv input{
   position: absolute;
   outline: none;
-  border:1px solid  none;
+  border:1px solid black;
   /* border-bottom: 1px solid black; */
   width: 78%;
   height: 100%;
