@@ -228,7 +228,7 @@ footer{
   }
 
   .mapsSection{
-    width: 50%;
+    width: 100%;
     height: 100%;
   }
 
@@ -239,13 +239,7 @@ footer{
   bottom: 0;
 }
   .ContactUsContainer{
-    border: 1px solid none;
-    flex-direction: column;
-    width: 50% !important;
-    
-  }
-  .ContactUsContainer h4{
-    font-size: 18px;
+    display: none;
   }
 }
 
