@@ -17,7 +17,7 @@
   <label>תיאור:</label>
   <textarea type="text" v-model="PostInfo" required></textarea>
   <br>
-  <button type="submit" @click="PostForm()">Submit</button>
+  <button type="submit" @click="PostForm()">הוספת מאמר</button>
 </form>
 
 
@@ -100,14 +100,38 @@ export default {
 
 .FormDiv{
   position: relative;
-  border: 1px solid red;
+  border: 1px solid none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 50%;
   right: 50%;
   transform: translate(50%);
-  margin-top: 5%;
+  margin-top: 3%;
+}
+
+.FormDiv input{
+  height: 35px;
+  width: 100%;
+}
+
+.FormDiv textarea{
+  height: 150px;
+  width: 100%;
+}
+
+.FormDiv button{
+  border: none;
+  border-radius: 25px;
+  height: 50px;
+  width: 100%;
+  background-color: rgb(210, 183, 30);
+  transition: ease 0.2s;
+}
+
+.FormDiv button:hover{
+  color: white;
+  background-color: rgb(243, 213, 45);
 }
 
 
