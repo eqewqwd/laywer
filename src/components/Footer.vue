@@ -18,7 +18,7 @@
 
     </div>
       <div class="mapsSection">
-        <iframe class="mapsGoogle" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53659.51697219783!2d35.057975529346166!3d32.79968780329649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba4c750de845%3A0xc35d23982a81529a!2z15fXmdek15Q!5e0!3m2!1siw!2sil!4v1689283619707!5m2!1siw!2sil" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe class="mapsGoogle" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53659.51697219783!2d35.057975529346166!3d32.79968780329649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba4c750de845%3A0xc35d23982a81529a!2z15fXmdek15Q!5e0!3m2!1siw!2sil!4v1689283619707!5m2!1siw!2sil" height="100%" width="100%" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
 
@@ -144,6 +144,10 @@ footer{
 
 .ContactUsContainer{
   border:1px solid none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
   position: relative;
   width: 50%;
   height: 100%;
@@ -153,6 +157,9 @@ footer{
   padding: 10px;
 }
 .ContactUsContainer hr{
+  position: relative;
+  right: 50%;
+  transform: translate(50%);
   width: 40%;
   color: black;
 }
@@ -211,7 +218,7 @@ footer{
 
   
   .footer-Container{
-    height: 600px;
+    height: 700px;
   }
 
 
@@ -220,8 +227,25 @@ footer{
     padding-left: 1.6vw;
   }
 
+  .mapsSection{
+    width: 50%;
+    height: 100%;
+  }
+
   .navbarbottom{
-    display: none;
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+}
+  .ContactUsContainer{
+    border: 1px solid none;
+    flex-direction: column;
+    width: 50% !important;
+    
+  }
+  .ContactUsContainer h4{
+    font-size: 18px;
   }
 }
 
