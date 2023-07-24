@@ -1,13 +1,13 @@
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://admin:davidbenzohar3@sweetcake.gadahcn.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
 
 
 exports.handler = async function(event, context) {
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
   await client.connect();
 
-  const db = client.db("CakesDB");
-  const collection = db.collection("CakesList");
+  const db = client.db("lawyerWeb");
+  const collection = db.collection("Forms");
 
   const data = JSON.parse(event.body);
 

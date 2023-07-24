@@ -1,6 +1,7 @@
 import { createWebHashHistory, createRouter } from 'vue-router';
 import Home from '@/view/Home.vue';
 import DownloadPage from '@/view/DownloadPage.vue';
+import PostForms from '@/view/PostForms.vue';
 import FormsContainer from '@/view/FormsContainer.vue';
 import ContactUs from '@/view/ContactUs.vue'
 
@@ -21,6 +22,14 @@ const routes = [
 			title:"טפסים להורדה",
 		},
 	},	
+	{
+		path: '/Admin/PostForms',
+		name: 'PostForms',
+		component: PostForms,
+		meta:{
+			title:"הוספת פורומים",
+		},
+	},
 	{
 		path: '/Forms/:name',
 		name: 'FormsContainer',

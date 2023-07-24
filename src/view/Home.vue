@@ -57,6 +57,8 @@ export default {
 },
   data(){
       return{
+        Forms:[],
+        FormsLength:null,
         OptionsWork:
         [
           {name:'גירושין'},
@@ -81,13 +83,51 @@ export default {
     this.GetData()
   },
   methods: {
-    GetData(){
-      axios.get('/.netlify/functions/GetData').then(response => {
-        console.log(response.data);
-      }).catch(error => {
-          console.log(error);
-      }); 
-    }
+    async GetData(){
+      const storedItems =  sessionStorage.getItem('FormsItems');
+      if(storedItems){
+        console.log("Forms already loaded")
+      }else{
+        await axios.get('/.netlify/functions/GetData').then(response => {
+          console.log(response.data);
+          this.Forms = response.data
+
+          for (let i = 0; i<this.Forms.length; i++){
+            this.setItemsSession(this.Forms[i],i)
+          }
+          sessionStorage.setItem("LoadingCheck", false);
+        }).catch(error => {
+            console.log(error);
+        }); 
+      }
+    },
+    newGetData(){
+      const storedItems =  sessionStorage.getItem('FormsItems');
+      let FormsRes = JSON.parse(storedItems)
+
+      for (let i = 0; i<Object.keys(FormsRes).length; i++){
+        this.setItemsSession(FormsRes[i],i)
+      }
+    },
+    setItemsSession(product,index) {
+      let cartItems = sessionStorage.getItem('FormsItems');
+      cartItems = JSON.parse(cartItems)
+
+      if (cartItems != null) {
+              
+          if(cartItems[index] == undefined){
+              cartItems = {
+                  ...cartItems,
+                  [index]: product
+              }
+          }      
+      } else {
+          cartItems = {
+              [index]: product
+          }
+      }
+      sessionStorage.setItem("FormsItems", JSON.stringify(cartItems));
+    },
 
   } 
 }

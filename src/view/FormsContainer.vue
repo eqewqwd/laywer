@@ -1,7 +1,8 @@
 <template>
+  <FormsContainerSkeleton v-if="this.LoadingCheck == true "/>
 <NavBar/>
 
-<div class="PosterHome">
+<div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">
     <img :src=post.imgForm>
   </div>
@@ -9,12 +10,12 @@
     <h1>{{ post.title }}</h1>
     <div class="SmallText">
       <h4>מאת : שרון נתח תמרי</h4>
-      <h4>פורסם : {{ post.PostDate }}</h4>
+      <h4>פורסם : {{ post.postDate }}</h4>
     </div>
   </div>
 </div>
 
-<div class="aboutContainer">
+<div class="aboutContainer" v-if="this.LoadingCheck == false">
   <h1>{{ post.subTitle }}</h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
@@ -23,13 +24,13 @@
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
 
-<div class="CaruselCardsDiv">
+<div class="CaruselCardsDiv" v-if="this.LoadingCheck == false">
   <h1>עוד מאמרים</h1>
   <div class="CaruselContainer">
     <Carousel v-bind="settings" :breakpoints="breakpoints">
     <Slide v-for="test in test2" :key="test">
       <MoreOptions 
-      :name="test.name" :imgForm="test.imgForm" :subTitle="test.subTitle" :PostDate="test.PostDate" :key="test"
+      :name="test.name" :imgForm="test.imgForm" :subTitle="test.subTitle" :PostDate="test.postDate" :key="test"
       />
     </Slide>
 
@@ -52,6 +53,7 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue'
+import FormsContainerSkeleton from '@/components/FormsContainerSkeleton.vue'
 import Footer from '@/components/Footer.vue'
 import MoreOptions from '@/components/MoreOptions.vue'
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
@@ -59,13 +61,14 @@ import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 
 
-// import axios from 'axios'
+import axios from 'axios'
 
 
 export default {
   name: 'FormsContainer',
   components: {
     NavBar,
+    FormsContainerSkeleton,
     Footer,
     Carousel,
     Slide,
@@ -77,28 +80,9 @@ export default {
         name:this.$route.params.name,
         test2:[],
         FormsData:[],
-        test:
-        [
-        {id:1,name:"yipuy-Koach",imgForm:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',
-        title:"ייפוי כוח",PostDate:'2/4/2020',subTitle:"מהו ייפוי כוח מתמשך?",info:`    ייפוי כוח מתמשך הוא ייפוי כוח אשר נכנס לתוקף כאשר אדם מאבד את צלילות דעתו ואינו מסוגל להחליט עבור עצמו בנושאים רפואיים ו/או רכושיים.
-
-מייפה כוח מתמשך נקרא בחוק:"הממנה" והאדם שהוא בוחר ידאג לענייניו הרפואיים ו/או הרכושיים נקרא בחוק: "הממונה".
-
-ייפוי כוח מתמשך שם במרכז את זכותו של האדם לחיות את חייו בהתאם לבחירותיו ורצונותיו, גם אם יכולותיו או כשרותו המשפטית הוגבלה מסיבה כזו או אחרת, באופן זמני או קבוע.
-
-ייפוי כוח מתמשך הינו הסדר משפטי אשר הוסף במסגרת תיקון לחוק הכשרות המשפטית והאפוטרופסות.
-
-אנו לא יודעים מתי יכולה להילקח מאיתנו – עקב מגבלה פיזית או קוגניטיבית – היכולת לקבל החלטות עצמאיות הקשורות לעתידנו. זה יכול לקרות לכל אחד ואחת מאיתנו, בכל זמן. זו הסיבה שייפוי כוח מתמשך מתאים לכל בגיר מעל גיל 18, ולא רק למי שצופה שכשרותו הפיזית או הקוגניטיבית תיפגע בעתיד הלא רחוק.
-
-על מנת שבבוא העת הממונה (מיופה הכוח) יוכל לפעול בהתאם לציפיות הממנה, על הממנה לרשום הנחיות פרטניות הן בנושא הרכושי והן בנושא הרפואי.`},
-{id:2,name:"tzavahot",imgForm:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg',
-        title:"צוואות",PostDate:'14/7/2022',subTitle:"מהי צוואה ?",info:`
-        "צוואה", במובן הכללי, היא כל אמרה, אמירה, ציווי, אשר מבקש ומצפה אדם שיעשה למענו או בענייניו לאחר מותו. במובן המשפטי, 
-
-         "צוואה" היא מסמך משפטי בו מורה אדם מה ייעשה ברכושו לאחר מותו, אשר יהא בר-תוקף - אם נעשה באחת הדרכים הקבועות בדין, ולא נפל בו פגם שלא ניתן לתיקון.
-        `},  
-
-        ],
+        FormsDataTest:[],
+        FormsDatatest2:[],
+        LoadingCheck:true,
         settings: {
           itemsToShow: 1,
           snapAlign: 'center',
@@ -122,10 +106,16 @@ export default {
       
   },
   created(){  
-    this.AddToCarusel()
+    
   },
   mounted(){
+    
   },
+  beforeMount(){
+    this.GetData()
+  },
+  beforeUnmount(){
+    this.GetData()  },
   computed: {
     post(){
       return this.FormsData.find((form) => form.name == this.name)
@@ -133,20 +123,62 @@ export default {
   },
   methods: {
     AddToCarusel(){
-      for(let i=0; i<this.test.length; i++){
-        if(this.test[i].name != this.name){
-          this.test2.push(this.test[i])
+      
+      for(let i=0; i<this.FormsData.length; i++){
+        if(this.FormsData[i].name != this.name){
+          this.test2.push(this.FormsData[i])
         }
       }
     },
     GetData(){
-      axios.get('/.netlify/functions/GetData').then(response => {
-        console.log(response.data);
-        this.FormsData = response.data
-      }).catch(error => {
-          console.log(error);
-      }); 
-    }
+      const storedItems =  sessionStorage.getItem('FormsItems');
+      if(storedItems){
+        console.log("Forms already loaded")
+        this.newGetData()
+      }else{
+        axios.get('/.netlify/functions/GetData').then(response => {
+          console.log(response.data);
+          this.FormsData = response.data
+
+          for (let i = 0; i<this.FormsData.length; i++){
+            this.setItemsSession(this.FormsData[i],i)
+          }
+          sessionStorage.setItem("LoadingCheck", false);
+          window.location.reload()
+        }).catch(error => {
+            console.log(error);
+        }); 
+      }
+    },
+    newGetData(){
+      let FormItems = JSON.parse(sessionStorage.getItem('FormsItems'))
+      let loadingCheckres = JSON.parse(sessionStorage.getItem('LoadingCheck'))
+      this.LoadingCheck = loadingCheckres
+      for (let i = 0; i<Object.keys(FormItems).length; i++){
+        this.FormsData.push(FormItems[i])
+      }
+      this.AddToCarusel()
+    },
+    setItemsSession(product,index) {
+      let cartItems = sessionStorage.getItem('FormsItems');
+      cartItems = JSON.parse(cartItems)
+
+      if (cartItems != null) {
+              
+          if(cartItems[index] == undefined){
+              cartItems = {
+                  ...cartItems,
+                  [index]: product
+              }
+          }      
+      } else {
+          cartItems = {
+              [index]: product
+          }
+      }
+      sessionStorage.setItem("FormsItems", JSON.stringify(cartItems));
+      console.warn('addes session')
+    },
 
   } 
 }
