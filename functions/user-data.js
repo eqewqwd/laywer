@@ -30,7 +30,7 @@ exports.handler = async (event, context) => {
     await client.close();
         return {
             statusCode: 200,
-            body: JSON.stringify(decodedToken)
+            body: JSON.stringify(decodedToken.userId)
         };
     // if (!userData) {
     //   return {
