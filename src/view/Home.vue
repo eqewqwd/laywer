@@ -85,7 +85,7 @@ export default {
     
     var token = localStorage.getItem("token"); // Replace this with the actual token
 
-    axios
+    await axios
       .get('/.netlify/functions/user-data', {
         headers: {
           Authorization: `Bearer ${token}`
