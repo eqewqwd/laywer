@@ -1,73 +1,49 @@
-// netlify-functions/user/user.js
+const jwt = require('jsonwebtoken');
+const { MongoClient } = require('mongodb');
 
-const mongoose = require('mongoose');
-const verifyToken = require('./verify');
-
-const userSchema = new mongoose.Schema({
-  username: String,
-  email: String,
-  // Add any other user-related fields you need
-});
-
-const User = mongoose.model('User', userSchema);
+const MONGODB_URI = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority"; // Replace this with your MongoDB connection string
+const JWT_SECRET =  process.env.JWT_SECRET_KEY; // Replace this with your JWT secret key
 
 exports.handler = async (event, context) => {
-  if (event.httpMethod !== 'GET') {
+  if (!event.headers.authorization) {
     return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' }),
+      statusCode: 401,
+      body: JSON.stringify({ error: 'Authorization token not provided.' })
     };
   }
-
-  // Connect to MongoDB (replace YOUR_MONGODB_CONNECTION_STRING with your actual connection string)
-  await mongoose.connect("mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/administrator?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-
+  
+  const token = event.headers.authorization.split(' ')[1];
   try {
-    const token = event.headers.authorization;
-    if (!token) {
+    // Verify and decode the token
+    const decodedToken = jwt.verify(token, JWT_SECRET);
+
+    // Connect to MongoDB
+    const client = new MongoClient(MONGODB_URI, { useUnifiedTopology: true });
+    await client.connect();
+    const db = client.db("administrator");
+
+    // Fetch user data based on the decoded token (e.g., user ID or email)
+    const userData = await db.collection('users').findOne({ _id: decodedToken.userId });
+
+    // Close the MongoDB connection
+    await client.close();
+
+    if (!userData) {
       return {
-        statusCode: 401,
-        body: JSON.stringify({ error: 'Unauthorized' }),
+        statusCode: 404,
+        body: JSON.stringify({ error: 'User not found.' })
       };
     }
 
-    // Implement the logic to get user data from the token
-    // You will need to verify the token and then find the user based on its data.
-    // For brevity, we'll assume you have a function to verify the token called `verifyToken`.
-
-    try {
-      // Verify the token and extract user data
-      const userData = verifyToken(token);
-      // Assuming you are using email as the identifier
-      const user = await User.findOne({ email: userData.email });
-
-      if (!user) {
-        return {
-          statusCode: 404,
-          body: JSON.stringify(userData),
-        };
-      }
-
-      // Return the user data
-      return {
-        statusCode: 200,
-        body: JSON.stringify(user),
-      };
-    } catch (err) {
-      console.error('Error getting user data:', err + userData);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal server error' }),
-      };
-    }
+    return {
+      statusCode: 200,
+      body: JSON.stringify(userData)
+    };
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
+    console.error('Error fetching user data:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' }),
+      body: JSON.stringify({ error: 'Internal server error.' })
     };
   }
 };

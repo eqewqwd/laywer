@@ -60,7 +60,6 @@ export default {
       return{
         Forms:[],
         FormsLength:null,
-        token:null,
         OptionsWork:
         [
           {name:'גירושין'},
@@ -83,18 +82,19 @@ export default {
   },
   async mounted(){
     this.GetData()
-    this.token = localStorage.getItem("token"); // Replace this with the actual token
 
-    try {
-      const response = await axios.get('/.netlify/functions/user-data', {
+    await axios
+      .get('/.netlify/functions/user-data', {
         headers: {
-          Authorization: this.token,
-        },
+          Authorization: 'Bearer' + localStorage.getItem('token')
+        }
+      })
+      .then(response => {
+        console.log(response.data) 
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
       });
-      console.log(response.data)
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
   },
   methods: {
     async GetData(){
