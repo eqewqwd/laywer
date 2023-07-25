@@ -41,7 +41,7 @@ exports.handler = async function (event, context) {
     if (!user) {
       return {
         statusCode: 401,
-        body: JSON.stringify({ message: 'Invalid credentials' }),
+        body: JSON.stringify({ message: 'Invalid credentials not found' + email + ',' + password }),
       };
     }
 
@@ -50,7 +50,7 @@ exports.handler = async function (event, context) {
     if (!isPasswordValid) {
       return {
         statusCode: 401,
-        body: JSON.stringify({ message: 'Invalid credentials' }),
+        body: JSON.stringify({ message: 'Invalid credentials' + email + ',' + password  }),
       };
     }
 
