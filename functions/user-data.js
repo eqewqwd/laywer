@@ -28,18 +28,21 @@ exports.handler = async (event, context) => {
 
     // Close the MongoDB connection
     await client.close();
+        return {
+            statusCode: 200,
+            body: JSON.stringify(decodedToken)
+        };
+    // if (!userData) {
+    //   return {
+    //     statusCode: 404,
+    //     body: JSON.stringify({ error: 'User not found.' })
+    //   };
+    // }
 
-    if (!userData) {
-      return {
-        statusCode: 404,
-        body: JSON.stringify({ error: 'User not found.' })
-      };
-    }
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify(userData)
-    };
+    // return {
+    //   statusCode: 200,
+    //   body: JSON.stringify(userData)
+    // };
   } catch (error) {
     console.error('Error fetching user data:', error);
     return {
