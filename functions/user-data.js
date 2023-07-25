@@ -17,6 +17,7 @@ exports.handler = async (event, context) => {
   try {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
+    console.log(decodedToken)
 
     // Connect to MongoDB
     const client = new MongoClient(MONGODB_URI, { useUnifiedTopology: true });
@@ -24,7 +25,7 @@ exports.handler = async (event, context) => {
     const db = client.db("administrator");
 
     // Fetch user data based on the decoded token (e.g., user ID or email)
-    const userData = await db.collection('users').findOne({ _id: decodedToken.userId });
+    const userData = await db.collection('users').findOne({ email: decodedToken.email });
 
     // Close the MongoDB connection
     await client.close();

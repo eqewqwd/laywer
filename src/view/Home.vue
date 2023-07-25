@@ -85,14 +85,14 @@ export default {
     console.log(localStorage.getItem("token"))
     const token = localStorage.getItem("token"); // Replace this with the actual token
 
-    axios
+    await axios
       .get('/.netlify/functions/user-data', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       .then(response => {
-        this.user = response.data;
+        console.log(response.data) 
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
