@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 
-const MONGODB_URI = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/administrator?retryWrites=true&w=majority"; // Replace this with your MongoDB connection string
+const MONGODB_URI = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority"; // Replace this with your MongoDB connection string
 const JWT_SECRET =  process.env.JWT_SECRET_KEY; // Replace this with your JWT secret key
 
 exports.handler = async (event, context) => {
