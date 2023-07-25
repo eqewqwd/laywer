@@ -60,6 +60,7 @@ export default {
       return{
         Forms:[],
         FormsLength:null,
+        token:null,
         OptionsWork:
         [
           {name:'גירושין'},
@@ -83,12 +84,12 @@ export default {
   async mounted(){
     this.GetData()
     console.log(localStorage.getItem("token"))
-    const token = localStorage.getItem("token"); // Replace this with the actual token
+    this.token = localStorage.getItem("token"); // Replace this with the actual token
 
     await axios
       .get('/.netlify/functions/user-data', {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${this.token}`
         }
       })
       .then(response => {

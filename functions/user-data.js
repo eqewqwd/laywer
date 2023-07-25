@@ -5,14 +5,14 @@ const MONGODB_URI = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsy
 const JWT_SECRET =  process.env.JWT_SECRET_KEY; // Replace this with your JWT secret key
 
 exports.handler = async (event, context) => {
-  if (!event.headers.Authorization) {
+  if (!event.headers.authorization) {
     return {
       statusCode: 401,
       body: JSON.stringify({ error: 'Authorization token not provided.' })
     };
   }
   
-  const token = event.headers.Authorization.split(' ')[1];
+  const token = event.headers.authorization.split(' ')[1];
   try {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
