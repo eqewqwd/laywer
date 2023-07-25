@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // MongoDB connection setup\
-const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/administrator?retryWrites=true&w=majority";
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
 });
 
-const User = mongoose.model('users', userSchema);
+const UserModel = mongoose.model('User', userSchema);
 
 exports.handler = async function (event, context) {
   if (event.httpMethod !== 'POST') {
