@@ -18,6 +18,13 @@ exports.handler = async (event, context) => {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
 
+    if (decodedToken) {
+        return {
+          statusCode: 407,
+          body: JSON.parse(decodedToken)
+        };
+      }
+
     // Connect to MongoDB
     const client = new MongoClient(MONGODB_URI, { useUnifiedTopology: true });
     await client.connect();
