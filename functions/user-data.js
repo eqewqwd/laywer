@@ -11,9 +11,9 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ error: 'Authorization token not provided.' })
     };
   }
-
+  
   const token = event.headers.authorization.split(' ')[1];
-
+  return token
   try {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
