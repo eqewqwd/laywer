@@ -5,41 +5,41 @@ const MONGODB_URI = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsy
 const JWT_SECRET =  process.env.JWT_SECRET_KEY; // Replace this with your JWT secret key
 
 exports.handler = async (event, context) => {
-  if (!event.headers.authorization) {
+  if (!event.headers.Authorization) {
     return {
       statusCode: 401,
       body: JSON.stringify({ error: 'Authorization token not provided.' })
     };
   }
   
-  const token = event.headers.authorization.split(' ')[1];
+  const token = event.headers.Authorization.split(' ')[1];
   try {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
     console.log(decodedToken)
 
-    // // Connect to MongoDB
-    // const client = new MongoClient(MONGODB_URI, { useUnifiedTopology: true });
-    // await client.connect();
-    // const db = client.db("administrator");
+    // Connect to MongoDB
+    const client = new MongoClient(MONGODB_URI, { useUnifiedTopology: true });
+    await client.connect();
+    const db = client.db("administrator");
 
-    // // Fetch user data based on the decoded token (e.g., user ID or email)
-    // const userData = await db.collection('users').findOne({ _id: decodedToken.userId });
+    // Fetch user data based on the decoded token (e.g., user ID or email)
+    const userData = await db.collection('users').findOne({ _id: decodedToken.userId });
 
-    // // Close the MongoDB connection
-    // await client.close();
+    // Close the MongoDB connection
+    await client.close();
 
-    // if (!userData) {
-    //   return {
-    //     statusCode: 404,
-    //     body: JSON.stringify({ error: 'User not found.' })
-    //   };
-    // }
+    if (!userData) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({ error: 'User not found.' })
+      };
+    }
 
-    // return {
-    //   statusCode: 200,
-    //   body: JSON.stringify(userData)
-    // };
+    return {
+      statusCode: 200,
+      body: JSON.stringify(userData)
+    };
   } catch (error) {
     console.error('Error fetching user data:', error);
     return {
