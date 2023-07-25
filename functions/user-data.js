@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 
-const MONGODB_URI = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority"; // Replace this with your MongoDB connection string
+const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const JWT_SECRET =  process.env.JWT_SECRET_KEY; // Replace this with your JWT secret key
 
 exports.handler = async (event, context) => {
@@ -17,35 +18,32 @@ exports.handler = async (event, context) => {
   try {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
+    var idtest = decodedToken.userId
 
     // Connect to MongoDB
-    const client = new MongoClient(MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
     await client.connect();
-    const db = client.db('administrator');
+    const collection = client.db("administrator").collection("users");
 
     // Fetch user data based on the decoded token (e.g., user ID or email)
-    const userData = await db.collection('users').findOne({ _id: decodedToken.userId });
+    const userData = await collection.findOne({ _id: idtest });
 
     // Close the MongoDB connection
     await client.close();
-        return {
-            statusCode: 200,
-            body: JSON.stringify(db.collection('users'))
-        };
-    // if (!userData) {
-    //   return {
-    //     statusCode: 404,
-    //     body: JSON.stringify({ error: 'User not found.' })
-    //   };
-    // }
+        // return {
+        //     statusCode: 200,
+        //     body: JSON.stringify(decodedToken.userId)
+        // };
+    if (!userData) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({ error: 'User not found.' })
+      };
+    }
 
-    // return {
-    //   statusCode: 200,
-    //   body: JSON.stringify(userData)
-    // };
+    return {
+      statusCode: 200,
+      body: JSON.stringify(userData)
+    };
   } catch (error) {
     console.error('Error fetching user data:', error);
     return {
