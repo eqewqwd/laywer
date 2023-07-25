@@ -47,7 +47,7 @@ exports.handler = async (event, context) => {
       if (!user) {
         return {
           statusCode: 404,
-          body: JSON.stringify({ error: 'User not found' }),
+          body: JSON.stringify({ error: 'User not found' + userData }),
         };
       }
 
@@ -57,7 +57,7 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(user),
       };
     } catch (err) {
-      console.error('Error getting user data:', err);
+      console.error('Error getting user data:', err + userData);
       return {
         statusCode: 500,
         body: JSON.stringify({ error: 'Internal server error' }),
