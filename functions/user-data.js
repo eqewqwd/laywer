@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
     // Connect to MongoDB
     const client = new MongoClient(MONGODB_URI, { useUnifiedTopology: true });
     await client.connect();
-    const db = client.db();
+    const db = client.db('administrator');
 
     // Fetch user data based on the decoded token (e.g., user ID or email)
     const userData = await db.collection('users').findOne({ _id: decodedToken.userId });
