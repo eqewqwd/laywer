@@ -47,7 +47,7 @@ exports.handler = async (event, context) => {
       if (!user) {
         return {
           statusCode: 404,
-          body: JSON.stringify({ error: 'User not found' + userData }),
+          body: JSON.stringify(userData),
         };
       }
 
