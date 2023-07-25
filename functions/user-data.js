@@ -11,8 +11,9 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ error: 'Authorization token not provided.' })
     };
   }
-  
+
   const token = event.headers.authorization.split(' ')[1];
+
   try {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
@@ -20,7 +21,7 @@ exports.handler = async (event, context) => {
     // Connect to MongoDB
     const client = new MongoClient(MONGODB_URI, { useUnifiedTopology: true });
     await client.connect();
-    const db = client.db("administrator");
+    const db = client.db();
 
     // Fetch user data based on the decoded token (e.g., user ID or email)
     const userData = await db.collection('users').findOne({ _id: decodedToken.userId });
