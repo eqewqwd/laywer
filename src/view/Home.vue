@@ -83,21 +83,18 @@ export default {
   },
   async mounted(){
     this.GetData()
-    console.log(localStorage.getItem("token"))
     this.token = localStorage.getItem("token"); // Replace this with the actual token
 
-    await axios
-      .get('/.netlify/functions/user-data', {
+    try {
+      const response = await axios.get('/.netlify/functions/user-data', {
         headers: {
-          Authorization: `Bearer ${this.token}`
-        }
-      })
-      .then(response => {
-        console.log(response.data) 
-      })
-      .catch(error => {
-        console.error('Error fetching user data:', error);
+          Authorization: this.token,
+        },
       });
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
   },
   methods: {
     async GetData(){
