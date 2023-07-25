@@ -83,7 +83,7 @@ export default {
   async mounted(){
     this.GetData()
     
-    const token = localStorage.getItem("token"); // Replace this with the actual token
+    const token = JSON.stringify(localStorage.getItem("token")); // Replace this with the actual token
 
     axios
       .get('/.netlify/functions/user-data', {
