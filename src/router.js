@@ -2,6 +2,7 @@ import { createWebHashHistory, createRouter } from 'vue-router';
 import Home from '@/view/Home.vue';
 import DownloadPage from '@/view/DownloadPage.vue';
 import PostForms from '@/view/PostForms.vue';
+import login from '@/view/login.vue';
 import FormsContainer from '@/view/FormsContainer.vue';
 import ContactUs from '@/view/ContactUs.vue'
 
@@ -46,6 +47,14 @@ const routes = [
 			title:"צרו קשר",
 		},
 	},	
+	{
+		path: '/login',
+		name: 'login',
+		component: login,
+		meta:{
+			title:"כניסה",
+		},
+	},
 ];
 
 const router = createRouter({
