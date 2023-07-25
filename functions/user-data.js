@@ -1,7 +1,7 @@
 // netlify-functions/user/user.js
 
 const mongoose = require('mongoose');
-const verifyToken = require('verify');
+const verifyToken = require('./verify');
 
 const userSchema = new mongoose.Schema({
   username: String,
