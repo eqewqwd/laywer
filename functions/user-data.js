@@ -12,8 +12,7 @@ exports.handler = async (event, context) => {
     };
   }
   
-  const token = event.headers.authorization.split(' ')[1];
-  return token
+  const token = event
   try {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
@@ -25,7 +24,7 @@ exports.handler = async (event, context) => {
     const db = client.db("administrator");
 
     // Fetch user data based on the decoded token (e.g., user ID or email)
-    const userData = await db.collection('users').findOne({ email: decodedToken.email });
+    const userData = await db.collection('users').findOne({ _id: decodedToken.userId });
 
     // Close the MongoDB connection
     await client.close();
