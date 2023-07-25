@@ -32,7 +32,7 @@ exports.handler = async (event, context) => {
     if (!userData) {
       return {
         statusCode: 404,
-        body: JSON.parse(userData)
+        body: JSON.parse(decodedToken)
       };
     }
 
