@@ -19,7 +19,10 @@ exports.handler = async (event, context) => {
     const decodedToken = jwt.verify(token, JWT_SECRET);
 
     // Connect to MongoDB
-    const client = new MongoClient(MONGODB_URI, { useUnifiedTopology: true });
+    const client = new MongoClient(MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
     await client.connect();
     const db = client.db('administrator');
 
@@ -28,21 +31,21 @@ exports.handler = async (event, context) => {
 
     // Close the MongoDB connection
     await client.close();
-        return {
-            statusCode: 200,
-            body: JSON.stringify(decodedToken.userId)
-        };
-    // if (!userData) {
-    //   return {
-    //     statusCode: 404,
-    //     body: JSON.stringify({ error: 'User not found.' })
-    //   };
-    // }
+        // return {
+        //     statusCode: 200,
+        //     body: JSON.stringify(decodedToken.userId)
+        // };
+    if (!userData) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({ error: 'User not found.' })
+      };
+    }
 
-    // return {
-    //   statusCode: 200,
-    //   body: JSON.stringify(userData)
-    // };
+    return {
+      statusCode: 200,
+      body: JSON.stringify(userData)
+    };
   } catch (error) {
     console.error('Error fetching user data:', error);
     return {
