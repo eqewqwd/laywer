@@ -1,7 +1,7 @@
 <template>
 <NavBar/>
 
-<form class="FormDiv" id="my-form">
+<form @submit.prevent="PostForm()" class="FormDiv" id="my-form">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
   <br>
@@ -17,7 +17,7 @@
   <label>תיאור:</label>
   <textarea type="text" v-model="PostInfo" required></textarea>
   <br>
-  <button type="submit" @click="PostForm()">הוספת מאמר</button>
+  <button type="submit">הוספת מאמר</button>
 </form>
 
 
@@ -74,8 +74,14 @@ export default {
       let postDate = day + "/" + month + "/" + year
 
 
-      await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate }).then(response => {
-          console.log("work post");
+      // await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate }).then(response => {
+      //     console.log("work post");
+      // }).catch(error => {
+      //     console.log(error);
+      // });
+
+      await axios.post('http://localhost:8000/#/login',{ imgForm,name,title,subTitle,info,postDate }).then(response => {
+          console.log(response);
       }).catch(error => {
           console.log(error);
       });

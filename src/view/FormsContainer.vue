@@ -193,7 +193,7 @@ export default {
 
 /* -------------------- empty ------------------- */
 .empty{
-  height: 1000px;
+  height: 150px;
 }
 
 /* ---------------- PosterHome --------------- */

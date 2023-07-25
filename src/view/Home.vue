@@ -46,6 +46,7 @@ import Footer from '@/components/Footer.vue'
 
 
 import axios from 'axios'
+import bcrypt from 'bcryptjs';
 
 
 export default {
@@ -79,7 +80,7 @@ export default {
   created(){
 
   },
-  mounted(){
+  async mounted(){
     this.GetData()
   },
   methods: {
