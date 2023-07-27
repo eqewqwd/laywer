@@ -113,7 +113,8 @@ await axios
 },
 exitUser(){
       localStorage.clear()
-      window.location.reload
+      alert('חשבון התנתק מהמערכת')
+      window.location.reload()
     }
 
   }
