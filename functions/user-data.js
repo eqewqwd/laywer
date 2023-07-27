@@ -20,7 +20,7 @@ exports.handler = async (event, context) => {
     const decodedToken = jwt.verify(token, JWT_SECRET);
     var idtest = decodedToken.userId
 
-    // Connect to MongoDB
+    /// Connect to MongoDB
     await client.connect();
     const collection = client.db("administrator").collection("users");
 
