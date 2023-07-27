@@ -21,7 +21,8 @@ exports.handler = async (event, context) => {
   try {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
-    var idtest = decodedToken.userId
+    var idtest = ObjectId(decodedToken.userId)
+    return idtest
 
     // Connect to MongoDB
     const client = await MongoClient.connect(dbURL);
