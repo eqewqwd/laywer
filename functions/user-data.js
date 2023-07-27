@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
     const collection = client.db("administrator").collection("users");
 
     // Fetch user data based on the decoded token (e.g., user ID or email)
-    const userData = await collection.findOne({ _id: idtest });
+    const userData = await collection.findOne({ _id: ObjectId(idtest) });
 
     // Close the MongoDB connection
     await client.close();
