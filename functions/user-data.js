@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient, ObjectId } = require('mongodb').MongoClient;
 
 const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
     const collection = client.db("administrator").collection("users");
 
     // Fetch user data based on the decoded token (e.g., user ID or email)
-    const userData = await collection.findOne({ _id: idtest });
+    const userData = await collection.findOne({ _id: ObjectId(idtest) });
 
     // Close the MongoDB connection
     await client.close();
