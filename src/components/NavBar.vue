@@ -45,14 +45,15 @@ export default {
   
 
   name: 'Navbar',
-  props:['user'],
   mounted() {
     // addEventListener.this.OpenMenu()
     this.changeNavByRoute()
+    this.userData()
   },
   data(){
     return{
       test:'tzavahot',
+      user:null,
     }
   },
   props:{
@@ -92,9 +93,27 @@ export default {
       }else{
       }
     },
-    exitUser(){
+    async userData(){
+
+       
+var token = localStorage.getItem("token"); // Replace this with the actual token
+
+await axios
+  .get('/.netlify/functions/user-data', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  .then(response => {
+    this.user = response.data
+  })
+  .catch(error => {
+    console.error('Error fetching user data:', error);
+  });
+},
+exitUser(){
       localStorage.clear()
-      window.location.reload()
+      window.location.reload
     }
 
   }
