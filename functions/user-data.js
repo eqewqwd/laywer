@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
   try {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
-    var idtest = decodedToken.userId
+    var idtest = ObjectId(decodedToken.userId)
 
     // Connect to MongoDB
     const client = await MongoClient.connect(dbURL);
@@ -29,7 +29,7 @@ exports.handler = async (event, context) => {
     const collection = db.collection(collectionName);
 
     // Fetch user data based on the decoded token (e.g., user ID or email)
-    const userData = await collection.findOne({ _id: ObjectId(idtest) });
+    const userData = await collection.findOne({ _id: idtest});
 
     // Close the MongoDB connection
     await client.close();
