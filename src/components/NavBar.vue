@@ -49,7 +49,6 @@ export default {
   mounted() {
     // addEventListener.this.OpenMenu()
     this.changeNavByRoute()
-    this.userData()
   },
   data(){
     return{
