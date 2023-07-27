@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const { ObjectId } = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
 
 const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
