@@ -2,7 +2,7 @@
 <NavBar/>
 
 <div class="PosterHome">
-  <div class="TitleContainer">
+  <div class="TitleContainer" v-if="user">
     <h1>עו"ד שרון נתח תמרי</h1>
     <br>
     <h3>משרד עורכי דין וגישור</h3>
@@ -60,6 +60,7 @@ export default {
       return{
         Forms:[],
         FormsLength:null,
+        user:null,
         OptionsWork:
         [
           {name:'גירושין'},
@@ -82,21 +83,8 @@ export default {
   },
   async mounted(){
     this.GetData()
-    
-    var token = localStorage.getItem("token"); // Replace this with the actual token
-
-    await axios
-      .get('/.netlify/functions/user-data', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(response => {
-        console.log(response.data)
-      })
-      .catch(error => {
-        console.error('Error fetching user data:', error);
-      });
+    this.userData()
+   
   },
   methods: {
     async GetData(){
@@ -116,6 +104,25 @@ export default {
             console.log(error);
         }); 
       }
+    },
+    async userData(){
+
+       
+    var token = localStorage.getItem("token"); // Replace this with the actual token
+
+    await axios
+      .get('/.netlify/functions/user-data', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        console.log(response.data)
+        this.user = response.data
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
     },
     newGetData(){
       const storedItems =  sessionStorage.getItem('FormsItems');
