@@ -8,7 +8,7 @@
   <label>סיסמא :</label>
   <input type="password" v-model="password" required>
   <br>
-  <button type="submit">הוספת מאמר</button>
+  <button type="submit">כניסה</button>
 </form>
 
 

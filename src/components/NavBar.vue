@@ -1,5 +1,6 @@
 <template>
   <nav class="navbar">
+    <span class="loginuser" v-if="user"><h1>ברוכה הבאה {{ user.name }} </h1><i class="bi bi-person-circle"></i></span>
     <img class="imgAll" src="@/assets/Logo/logo.png" alt="">
     <!-- <a @click="OpenMenu" class="toggle-button">
       <span class="bar" id="first"></span>
@@ -50,7 +51,8 @@ export default {
   },
   data(){
     return{
-      test:'tzavahot'
+      test:'tzavahot',
+      user:null,
     }
   },
   props:{
@@ -88,7 +90,26 @@ export default {
         LogoResponsive.style.display = 'none'
       }else{
       }
+    },
+    async userData(){
+
+       
+var token = localStorage.getItem("token"); // Replace this with the actual token
+
+await axios
+  .get('/.netlify/functions/user-data', {
+    headers: {
+      Authorization: `Bearer ${token}`
     }
+  })
+  .then(response => {
+    console.log(response.data)
+    this.user = response.data
+  })
+  .catch(error => {
+    console.error('Error fetching user data:', error);
+  });
+},
 
   }
 
@@ -115,6 +136,26 @@ export default {
   background-color: transparent;
   z-index: 999999;
   transition: 0s ease-out;
+}
+.navbar span.loginuser{
+  border: 1px solid none;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 5%;
+  right: 2%;
+  display: flex;
+
+}
+
+.navbar span.loginuser h1{
+  position: relative;
+  right: 3%;
+  margin-top: 4%;
+  font-size: 1.3vw;
+}
+.navbar span.loginuser i{
+  font-size: 2vw;
 }
 
 .threebarnav{

@@ -1,8 +1,8 @@
 <template>
-<NavBar/>
+<NavBar :user="this.user"/>
 
 <div class="PosterHome">
-  <div class="TitleContainer" v-if="user">
+  <div class="TitleContainer">
     <h1>עו"ד שרון נתח תמרי</h1>
     <br>
     <h3>משרד עורכי דין וגישור</h3>
