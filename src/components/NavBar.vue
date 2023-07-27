@@ -105,7 +105,6 @@ await axios
     }
   })
   .then(response => {
-    console.log(response.data)
     this.user = response.data
   })
   .catch(error => {

@@ -60,7 +60,7 @@ export default {
         // Decode the token to extract user data (optional)
         const userData = jwt_decode(token);
         console.log('User Data:', userData);
-        this.$router.push({ path: '/' })
+        this.$router.push('/')
         
       } catch (error) {
         console.error(error.response.data);
