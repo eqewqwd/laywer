@@ -1,8 +1,11 @@
 const jwt = require('jsonwebtoken');
 const { MongoClient, ObjectId } = require('mongodb');
 
-const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// MongoDB Connection URL
+const dbURL = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
+const dbName = 'administrator';
+const collectionName = 'users';
+
 const JWT_SECRET =  process.env.JWT_SECRET_KEY; // Replace this with your JWT secret key
 
 exports.handler = async (event, context) => {
@@ -20,9 +23,10 @@ exports.handler = async (event, context) => {
     const decodedToken = jwt.verify(token, JWT_SECRET);
     var idtest = decodedToken.userId
 
-    /// Connect to MongoDB
-    await client.connect();
-    const collection = client.db("administrator").collection("users");
+    // Connect to MongoDB
+    const client = await MongoClient.connect(dbURL);
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
 
     // Fetch user data based on the decoded token (e.g., user ID or email)
     const userData = await collection.findOne({ _id: ObjectId(idtest) });
