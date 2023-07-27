@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { MongoClient, ObjectId } = require('mongodb').MongoClient;
+const { MongoClient, ObjectId } = require('mongodb');
 
 const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
