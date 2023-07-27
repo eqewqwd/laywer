@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { MongoClient , ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
 // MongoDB Connection URL
 const dbURL = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
   try {
     // Verify and decode the token
     const decodedToken = jwt.verify(token, JWT_SECRET);
-    var idtest = ObjectId(decodedToken.userId)
+    var idtest = decodedToken.userId
     return idtest
 
     // Connect to MongoDB
