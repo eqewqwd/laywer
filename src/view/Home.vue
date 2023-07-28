@@ -101,9 +101,10 @@ export default {
       const updatedData = {
         InfoHome: this.InfoHomePost,
       };
+      console.log(updatedData)
 
       try {
-        const response = await axios.post('/.netlify/functions/update-Item', {
+        const response = await axios.post('/.netlify/functions/UpdateItem', {
           id,
           updatedData,
         });

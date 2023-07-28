@@ -25,7 +25,7 @@
   </div>
   <div class="footer-copyRight">
     <i class="bi bi-c-circle copyright"></i>
-    <span class="copyRightText">אתר זה עוצב ונבנה על ידי דוד דבח</span>
+    <span class="copyRightText"><a href="techlinx.co.il">אתר זה עוצב ונבנה על ידי דוד דבח</a></span>
     <a href="https://www.instagram.com/david_dabach/"><i class="bi bi-instagram icons-footer insta"></i></a>
     <a href="https://www.facebook.com/david.benzohar"><i class="bi bi-facebook icons-footer"></i></a>
     <a href="https://wa.link/t0lyzc"><i class="bi bi-whatsapp icons-footer"></i></a>

@@ -6,12 +6,7 @@ var ObjectId = require('mongodb').ObjectId;
 exports.handler = async (event) => {
   try {
     const { id, updatedData } = JSON.parse(event.body);
-    var newId = ObjectId(id)
-
-     return {
-            statusCode: 200,
-            body: JSON.stringify(newId)
-        };
+    var newId = new ObjectId(id)
 
     const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
