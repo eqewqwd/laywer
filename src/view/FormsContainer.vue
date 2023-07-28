@@ -168,7 +168,7 @@ export default {
         });
 
         // Handle the response, display success message, etc.
-        localStorage.clear()
+        sessionStorage.clear()
         this.GetData()
         alert(this.name + " עודכנה בהצלחה")
       } catch (error) {
