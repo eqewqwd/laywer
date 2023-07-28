@@ -9,7 +9,7 @@
   </div>
   <div class="TitleDivPoster">
     <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
-    <h1><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true & user">
+    <h1><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true">
       <input :value="post.title" @input="TitlePost = $event.target.value"/></span></h1>
     <div class="SmallText">
       <h4>מאת : שרון נתח תמרי</h4>
@@ -19,12 +19,12 @@
 </div>
 
 <div class="aboutContainer" v-if="this.LoadingCheck == false">
-  <h1><span v-if="editMode == false">{{ post.subTitle }}</span><span v-if="editMode == true & user">
+  <h1><span v-if="editMode == false">{{ post.subTitle }}</span><span v-if="editMode == true">
   <input :value="post.subTitle" @input="subTitlePost = $event.target.value"/></span></h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
     <span v-if="editMode == false">{{ post.info }}</span>
-  <span v-if="editMode == true & user">
+  <span v-if="editMode == true">
   <textarea :value="post.info" @input="infoPost = $event.target.value" cols="30" rows="10"></textarea></span>
   </p>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
