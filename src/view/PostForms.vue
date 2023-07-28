@@ -54,7 +54,8 @@ export default {
   created(){
 
   },
-  mounted(){
+  async mounted(){
+    await this.userData()
   },
   methods: {
     async userData(){
