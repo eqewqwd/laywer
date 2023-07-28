@@ -168,8 +168,9 @@ export default {
         });
 
         // Handle the response, display success message, etc.
+        localStorage.clear()
+        this.GetData()
         alert(this.name + " עודכנה בהצלחה")
-        window.location.reload()
       } catch (error) {
         console.error('Error:', error);
         // Handle error
