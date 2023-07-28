@@ -15,7 +15,7 @@
 </div>
 
 <div class="aboutContainer">
-  <h1>אודות המשרד <button @click="StartEdit('InfoOffice')" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button></h1>
+  <h1>אודות המשרד <button @click="StartEdit('InfoOffice')" class="editButton" v-if="!user"><i class="bi bi-pencil-square"></i></button></h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
     <span v-if="editModeHomeInfo == false">{{ this.InfoHome }}</span>
@@ -103,7 +103,7 @@ export default {
       };
 
       try {
-        const response = await axios.post('/.netlify/functions/updateItem', {
+        const response = await axios.post('/.netlify/functions/update-Item', {
           id,
           updatedData,
         });
@@ -126,7 +126,6 @@ export default {
             this.Infoid = this.HomeData[i]._id
             this.InfoHome = this.HomeData[i].InfoHome
             this.InfoHomePost = this.HomeData[i].InfoHome
-            console.log(this.Infoid)
           }
           if(this.HomeData[i].name == 'OptionsWork'){
             this.OptionsWork = this.HomeData[i].OptionsWork

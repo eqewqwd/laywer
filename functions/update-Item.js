@@ -6,22 +6,23 @@ var ObjectId = require('mongodb').ObjectId;
 exports.handler = async (event) => {
   try {
     const { id, updatedData } = JSON.parse(event.body);
-
+    var newId = ObjectId(id)
+    
     const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-    // Connect to MongoDB
     await client.connect();
-    const collection = client.db("lawyerWeb").collection("HomePage");
+
+    const db = client.db('lawyerWeb');
+    const collection = db.collection('HomePage');
 
     // Update the item in MongoDB
-    const userData = await collection.findOne({ _id: ObjectId(id) });
+    const result = await collection.updateOne({ _id: newId  }, { $set: updatedData });
 
     client.close();
 
     return {
       statusCode: 200,
-      body: JSON.stringify( userData ),
+      body: JSON.stringify({ message: 'Item updated successfully' }),
     };
   } catch (error) {
     console.error('Error:', error);
