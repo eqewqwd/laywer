@@ -18,7 +18,7 @@
   <h1>אודות המשרד</h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
-    {{ this.titleOffice }}
+    {{ this.TitleHome }}
   </p>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
@@ -58,6 +58,8 @@ export default {
 },
   data(){
       return{
+        HomeData:[],
+        TitleHome:null,
         Forms:[],
         FormsLength:null,
         user:null,
@@ -70,11 +72,6 @@ export default {
           {name:'הסכמי ממון'},
           {name:'יפויי כוח מתמשך'},
         ],
-        titleOffice:`עורכת דין שרון נתח תמרי, עוסקת מזה שנים רבות בתחום דיני משפחה ועומדת בראש משרד עו"ד שרון נתח תמרי הנחשב לאחד ממשרדי הבוטיק בצמרת משרדי עורכי הדין בדיני משפחה.
-
-משרד שנוסד על ידה בשנת 2004 ומאז צמח והתפתח וכיום מעניק מגוון שירותים ומעסיק עורכי דין לענייני משפחה לצורך מתן ייעוץ מקיף ומעמיק. עורכת דין רחל שחר, העוסקת מזה שנים בתחום דיני המשפחה צברה הסמכות כמגשרת מוסמכת וכמוסמכת ייפוי כוח מתמשך וזאת בנוסף לשירותי נוטריון המוענקים במשרד.
-
-מאז הסמכתה ייצגה עורכת הדין שחר מאות תיקים סבוכים בתחום דיני המשפחה על כל היבטיו לרבות חלוקת רכוש, ביטול הסכמי ממון, סרבנות גט ועוד… המשרד חרט על דגלו יחס אישי מקצועיות ומסירות ללקוח וזאת באיכות ללא פשרות.`
       }
       
   },
@@ -82,12 +79,30 @@ export default {
 
   },
   async mounted(){
-    this.GetData()
+    this.GetDataHome()
+    this.GetForms()
     this.userData()
    
   },
   methods: {
-    async GetData(){
+    async GetDataHome(){
+
+      await axios.get('/.netlify/functions/GetDataHome').then(response => {
+        console.log(response.data);
+        this.HomeData = response.data
+
+        for (let i = 0; i<this.HomeData.length; i++){
+          if(this.HomeData[i].name == 'TitleHome'){
+            this.TitleHome = this.HomeData[i].titleOffice
+          }
+        }
+
+      }).catch(error => {
+          console.log(error);
+      }); 
+
+    },
+    async GetForms(){
       const storedItems =  sessionStorage.getItem('FormsItems');
       if(storedItems){
         console.log("Forms already loaded")

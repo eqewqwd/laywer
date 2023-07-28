@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <span class="loginuser" v-if="user"><h1>ברוכה הבאה {{ user.name }} </h1><i class="bi bi-person-circle"></i><i @click="exitUser()" class="bi bi-box-arrow-right"></i></span>
+    <span class="loginuser" v-if="user"><h1>ברוכה הבאה {{ user.name }} </h1><i class="bi bi-person-circle"></i><i @click="exitUser()" class="bi bi-box-arrow-right signOut"></i></span>
     <img class="imgAll" src="@/assets/Logo/logo.png" alt="">
     <!-- <a @click="OpenMenu" class="toggle-button">
       <span class="bar" id="first"></span>
@@ -130,6 +130,9 @@ exitUser(){
   box-sizing: border-box;
 }
 
+.signOut{
+  cursor: pointer;
+}
 
 .navbar{
   top: 0 !important;
