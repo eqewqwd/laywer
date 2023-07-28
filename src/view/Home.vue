@@ -63,15 +63,7 @@ export default {
         Forms:[],
         FormsLength:null,
         user:null,
-        OptionsWork:
-        [
-          {name:'גירושין'},
-          {name:'ידועים בציבור'},
-          {name:'צוואות וירושות'},
-          {name:'אפוטרופסות'},
-          {name:'הסכמי ממון'},
-          {name:'יפויי כוח מתמשך'},
-        ],
+        OptionsWork:[]
       }
       
   },
@@ -94,6 +86,9 @@ export default {
         for (let i = 0; i<this.HomeData.length; i++){
           if(this.HomeData[i].name == 'TitleHome'){
             this.TitleHome = this.HomeData[i].titleOffice
+          }
+          if(this.HomeData[i].name == 'OptionsWork'){
+            this.OptionsWork = this.HomeData[i].OptionsWork
           }
         }
 
