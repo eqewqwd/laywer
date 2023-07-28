@@ -1,6 +1,4 @@
 <template>
-<NavBar/>
-
 <!-- <form @submit.prevent="handleLogin()" class="FormDiv" id="my-form">
   <label>אימייל :</label>
   <input type="email" v-model="email" required>
@@ -11,7 +9,9 @@
   <button type="submit">כניסה</button>
 </form> -->
 
-<div class="wrapper fadeInDown">
+<div class="backgroundImg">
+
+  <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
 
@@ -35,17 +35,15 @@
   </div>
 </div>
 
+</div>
 
 
-<Footer/>
+
 
   
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
-import Footer from '@/components/Footer.vue'
-
 
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
@@ -54,8 +52,6 @@ import jwt_decode from 'jwt-decode';
 export default {
   name: 'PostForms',
   components: {
-    NavBar,
-    Footer
 },
   data(){
       return{
@@ -105,6 +101,18 @@ export default {
 /* -------------------- empty ------------------- */
 .empty{
   height: 500px;
+}
+
+/* backgroundimg */
+
+
+.backgroundImg{
+  width: 100%;
+  height: 100vh;
+  background-image: url('https://wallpaperaccess.com/full/1998368.jpg');
+  background-size: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 /* ------------- FormDiv ------------- */
@@ -169,8 +177,6 @@ h2 {
 /* STRUCTURE */
 
 .wrapper {
-  position: relative;
-  top: 50px;
   display: flex;
   align-items: center;
   flex-direction: column; 
@@ -184,6 +190,7 @@ h2 {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
+  opacity: 0.9;
   padding: 30px;
   width: 90%;
   max-width: 450px;
