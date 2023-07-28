@@ -26,6 +26,7 @@
   <span v-if="editMode == true">
   <textarea class="infoUpdate" :value="post.info" @input="infoPost = $event.target.value" cols="30" rows="10"></textarea></span>
   </p>
+  <span v-if="editMode == true" class="ButtonEdit"><i class="bi bi-x-square"></i><i @click="updateItemInMongoDB()" class="bi bi-check-square"></i></span>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
 
@@ -90,6 +91,7 @@ export default {
         // post
 
         name:this.$route.params.name,
+        id:null,
         user:null,
         test2:[],
         FormsData:[],
@@ -150,6 +152,29 @@ export default {
         this.editMode = false
       }
     },
+    async updateItemInMongoDB() {
+      const id = this.id; 
+      const updatedData = {
+        title : this.TitlePost,
+        subTitle : this.subTitlePost,
+        info : this.infoPost
+      };
+      console.log(updatedData)
+
+      try {
+        const response = await axios.post('/.netlify/functions/UpdateItemForms', {
+          id,
+          updatedData,
+        });
+
+        // Handle the response, display success message, etc.
+        alert(this.name + " עודכנה בהצלחה")
+        window.location.reload()
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle error
+      }
+    },
     async userData(){
 
        
@@ -207,6 +232,7 @@ await axios
           this.TitlePost = FormItems[i].title
           this.subTitlePost = FormItems[i].subTitle
           this.infoPost = FormItems[i].info
+          this.id = FormItems[i]._id
         }
       }
       this.AddToCarusel()
@@ -250,6 +276,23 @@ await axios
 
 /* ---------------- PosterHome --------------- */
 
+.ButtonEdit{
+  position: relative;
+  cursor: pointer;
+  float: left;
+}
+.ButtonEdit i{
+  font-size: 30px;
+  transition: ease 0.2s;
+}
+
+.ButtonEdit i:first-child:hover{
+  color: rgb(240, 41, 41);
+}
+
+.ButtonEdit i:last-child:hover{
+  color: rgb(65, 226, 65);
+}
 .PosterHome{
   border: 1px solid none;
   position: relative;
