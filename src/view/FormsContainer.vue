@@ -9,7 +9,7 @@
   </div>
   <div class="TitleDivPoster">
     <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
-    <h1><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true">
+    <h1><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true & user">
       <input :value="post.title" @input="TitlePost = $event.target.value"/></span></h1>
     <div class="SmallText">
       <h4>מאת : שרון נתח תמרי</h4>
@@ -19,10 +19,13 @@
 </div>
 
 <div class="aboutContainer" v-if="this.LoadingCheck == false">
-  <h1>{{ post.subTitle }}</h1>
+  <h1><span v-if="editMode == false">{{ post.subTitle }}</span><span v-if="editMode == true & user">
+  <input :value="post.subTitle" @input="subTitlePost = $event.target.value"/></span></h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
-    {{ post.info }}
+    <span v-if="editMode == false">{{ post.info }}</span>
+  <span v-if="editMode == true & user">
+  <textarea :value="post.info" @input="infoPost = $event.target.value" cols="30" rows="10"></textarea></span>
   </p>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
@@ -83,6 +86,8 @@ export default {
 
         // post
         TitlePost:'',
+        subTitlePost:'',
+        infoPost:'',
         // post
 
         name:this.$route.params.name,
@@ -194,7 +199,8 @@ await axios
         this.FormsData.push(FormItems[i])
         if(FormItems[i].name == this.name){
           this.TitlePost = FormItems[i].title
-          console.log(this.TitlePost)
+          this.subTitlePost = FormItems[i].subTitle
+          this.infoPost = FormItems[i].info
         }
       }
       this.AddToCarusel()
