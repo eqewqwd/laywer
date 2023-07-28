@@ -2,8 +2,7 @@
   <FormsContainerSkeleton v-if="this.LoadingCheck == true"/>
 <NavBar/>
 
-<!-- <div class="PosterHome" v-if="this.LoadingCheck == false"> -->
-  <div class="PosterHome">
+<div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">
     <img :src=post.imgForm>
   </div>
@@ -96,6 +95,8 @@ export default {
         FormsData:[],
         editMode:false,
         LoadingCheck:true,
+
+        // carusel
         settings: {
           itemsToShow: 1,
           snapAlign: 'center',

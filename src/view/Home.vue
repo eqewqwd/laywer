@@ -3,7 +3,6 @@
 
 <div class="PosterHome">
   <div class="TitleContainer">
-    <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
     <h1>עו"ד שרון נתח תמרי</h1>
     <br>
     <h3>משרד עורכי דין וגישור</h3>
@@ -16,13 +15,14 @@
 </div>
 
 <div class="aboutContainer">
-  <h1>אודות המשרד</h1>
+  <h1>אודות המשרד <button @click="StartEdit('InfoOffice')" class="editButton" v-if="!user"><i class="bi bi-pencil-square"></i></button></h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
-    <span v-if="editMode == false">{{ this.InfoHome }}</span>
-    <span v-if="editMode == true">
+    <span v-if="editModeHomeInfo == false">{{ this.InfoHome }}</span>
+    <span v-if="editModeHomeInfo == true">
      <textarea class="infoUpdate" :value="this.InfoHome" @input="InfoHomePost = $event.target.value" cols="30" rows="10"></textarea></span>
   </p>
+  <span v-if="editModeHomeInfo == true" class="ButtonEdit"><i class="bi bi-x-square"></i><i @click="updateItemInMongoDB()" class="bi bi-check-square"></i></span>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
 
@@ -63,11 +63,12 @@ export default {
       return{
 
         //post
+        Infoid:null,
         InfoHomePost:'',
         //post
         HomeData:[],
         InfoHome:'',
-        editMode:false,
+        editModeHomeInfo:false,
         Forms:[],
         FormsLength:null,
         user:null,
@@ -85,11 +86,33 @@ export default {
    
   },
   methods: {
-    StartEdit(){
-      if(this.editMode == false){
-        this.editMode = true
-      }else{
-        this.editMode = false
+    StartEdit(res){
+      if(res == 'InfoOffice'){
+        if(this.editModeHomeInfo == false){
+          this.editModeHomeInfo = true
+        }else{
+          this.editModeHomeInfo = false
+        }
+      }
+      
+    },
+    async updateItemInMongoDB() {
+      const id = this.Infoid; 
+      const updatedData = {
+        InfoHome: this.InfoHomePost,
+      };
+
+      try {
+        const response = await axios.post('/.netlify/functions/update-Item', {
+          id,
+          updatedData,
+        });
+
+        // Handle the response, display success message, etc.
+        console.log('Response:', response.data);
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle error
       }
     },
     async GetDataHome(){
@@ -100,6 +123,7 @@ export default {
 
         for (let i = 0; i<this.HomeData.length; i++){
           if(this.HomeData[i].name == 'InfoHome'){
+            this.Infoid = this.HomeData[i]._id
             this.InfoHome = this.HomeData[i].InfoHome
             this.InfoHomePost = this.HomeData[i].InfoHome
           }
@@ -253,9 +277,8 @@ export default {
 }
 
 .editButton{
-  position:absolute;
+  position:relative;
   right: 2%;
-  top: 2%;
   border: none;
   background: none;
 }
@@ -273,6 +296,24 @@ export default {
   text-align: right;
   width: 100%;
   height: 100%;
+}
+
+.ButtonEdit{
+  position: relative;
+  cursor: pointer;
+  float: left;
+}
+.ButtonEdit i{
+  font-size: 30px;
+  transition: ease 0.2s;
+}
+
+.ButtonEdit i:first-child:hover{
+  color: rgb(240, 41, 41);
+}
+
+.ButtonEdit i:last-child:hover{
+  color: rgb(65, 226, 65);
 }
 /* ---------------- aboutContainer --------------- */
 
