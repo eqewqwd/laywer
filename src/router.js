@@ -48,7 +48,7 @@ const routes = [
 		},
 	},	
 	{
-		path: '/login',
+		path: '/auth/login',
 		name: 'login',
 		component: login,
 		meta:{

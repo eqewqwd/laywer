@@ -9,10 +9,10 @@ exports.handler = async (event) => {
 
     const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    await client.connect();
 
-    const db = client.db('lawyerWeb');
-    const collection = db.collection('HomePage');
+    // Connect to MongoDB
+    await client.connect();
+    const collection = client.db("lawyerWeb").collection("HomePage");
 
     // Update the item in MongoDB
     const result = await collection.updateOne({ _id: ObjectId(id) }, { $set: updatedData });
