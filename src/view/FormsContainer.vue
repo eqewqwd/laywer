@@ -25,7 +25,7 @@
   <p>
     <span v-if="editMode == false">{{ post.info }}</span>
   <span v-if="editMode == true">
-  <textarea :value="post.info" @input="infoPost = $event.target.value" cols="30" rows="10"></textarea></span>
+  <textarea class="infoUpdate" :value="post.info" @input="infoPost = $event.target.value" cols="30" rows="10"></textarea></span>
   </p>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
@@ -130,6 +130,11 @@ export default {
   },
   beforeUnmount(){
     this.GetData()  
+  },
+  beforeDestroy(){
+    if(this.editMode == true){
+      this.editMode = false
+    }
   },
   computed: {
     post(){
@@ -320,6 +325,16 @@ await axios
 
 .editButton i:hover{
   color: rgb(61, 61, 233);
+}
+
+input{
+  text-align: right;
+}
+.infoUpdate{
+  border: 1px solid none;
+  text-align: right;
+  width: 100%;
+  height: 100%;
 }
 
 /* ---------------- aboutContainer --------------- */
