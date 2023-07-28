@@ -126,6 +126,7 @@ export default {
             this.Infoid = this.HomeData[i]._id
             this.InfoHome = this.HomeData[i].InfoHome
             this.InfoHomePost = this.HomeData[i].InfoHome
+            console.log(this.Infoid)
           }
           if(this.HomeData[i].name == 'OptionsWork'){
             this.OptionsWork = this.HomeData[i].OptionsWork
