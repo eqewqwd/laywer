@@ -15,13 +15,13 @@ exports.handler = async (event) => {
     const collection = client.db("lawyerWeb").collection("HomePage");
 
     // Update the item in MongoDB
-    const result = await collection.updateOne({ _id: ObjectId(id) }, { $set: updatedData });
+    const userData = await collection.findOne({ _id: ObjectId(id) });
 
     client.close();
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Item updated successfully' }),
+      body: JSON.stringify( userData ),
     };
   } catch (error) {
     console.error('Error:', error);

@@ -103,7 +103,7 @@ export default {
       };
 
       try {
-        const response = await axios.post('/.netlify/functions/update-Item', {
+        const response = await axios.post('/.netlify/functions/updateItem', {
           id,
           updatedData,
         });
