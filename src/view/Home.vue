@@ -110,7 +110,8 @@ export default {
         });
 
         // Handle the response, display success message, etc.
-        console.log('Response:', response.data);
+        alert('תיאור אודות משרד עודכן')
+        window.location.reload()
       } catch (error) {
         console.error('Error:', error);
         // Handle error
