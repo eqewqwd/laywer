@@ -3,6 +3,7 @@
 
 <div class="PosterHome">
   <div class="TitleContainer">
+    <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
     <h1>עו"ד שרון נתח תמרי</h1>
     <br>
     <h3>משרד עורכי דין וגישור</h3>
@@ -18,7 +19,9 @@
   <h1>אודות המשרד</h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
-    {{ this.TitleHome }}
+    <span v-if="editMode == false">{{ this.InfoHome }}</span>
+    <span v-if="editMode == true">
+     <textarea class="infoUpdate" :value="this.InfoHome" @input="InfoHomePost = $event.target.value" cols="30" rows="10"></textarea></span>
   </p>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
@@ -58,8 +61,13 @@ export default {
 },
   data(){
       return{
+
+        //post
+        InfoHomePost:'',
+        //post
         HomeData:[],
-        TitleHome:null,
+        InfoHome:'',
+        editMode:false,
         Forms:[],
         FormsLength:null,
         user:null,
@@ -77,6 +85,13 @@ export default {
    
   },
   methods: {
+    StartEdit(){
+      if(this.editMode == false){
+        this.editMode = true
+      }else{
+        this.editMode = false
+      }
+    },
     async GetDataHome(){
 
       await axios.get('/.netlify/functions/GetDataHome').then(response => {
@@ -84,8 +99,9 @@ export default {
         this.HomeData = response.data
 
         for (let i = 0; i<this.HomeData.length; i++){
-          if(this.HomeData[i].name == 'TitleHome'){
-            this.TitleHome = this.HomeData[i].titleOffice
+          if(this.HomeData[i].name == 'InfoHome'){
+            this.InfoHome = this.HomeData[i].InfoHome
+            this.InfoHomePost = this.HomeData[i].InfoHome
           }
           if(this.HomeData[i].name == 'OptionsWork'){
             this.OptionsWork = this.HomeData[i].OptionsWork
@@ -236,6 +252,28 @@ export default {
   color: #666;
 }
 
+.editButton{
+  position:absolute;
+  right: 2%;
+  top: 2%;
+  border: none;
+  background: none;
+}
+
+.editButton i{
+  font-size: 35px;
+  transition: ease 0.2s;
+}
+
+.editButton i:hover{
+  color: rgb(61, 61, 233);
+}
+
+.infoUpdate{
+  text-align: right;
+  width: 100%;
+  height: 100%;
+}
 /* ---------------- aboutContainer --------------- */
 
 .aboutContainer{
