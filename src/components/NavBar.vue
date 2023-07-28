@@ -53,7 +53,7 @@ export default {
   data(){
     return{
       test:'tzavahot',
-      user:null,
+      user:{name:'david'},
     }
   },
   props:{

@@ -1,13 +1,16 @@
 <template>
-  <FormsContainerSkeleton v-if="this.LoadingCheck == true "/>
+  <FormsContainerSkeleton v-if="this.LoadingCheck == true"/>
 <NavBar/>
 
-<div class="PosterHome" v-if="this.LoadingCheck == false">
+<!-- <div class="PosterHome" v-if="this.LoadingCheck == false"> -->
+  <div class="PosterHome">
   <div class="ImgDivPoster">
     <img :src=post.imgForm>
   </div>
   <div class="TitleDivPoster">
-    <h1>{{ post.title }}</h1>
+    <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
+    <h1><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true">
+      <input :value="post.title" @input="TitlePost = $event.target.value"/></span></h1>
     <div class="SmallText">
       <h4>מאת : שרון נתח תמרי</h4>
       <h4>פורסם : {{ post.postDate }}</h4>
@@ -77,11 +80,16 @@ export default {
 },
   data(){
       return{
+
+        // post
+        TitlePost:'',
+        // post
+
         name:this.$route.params.name,
+        user:null,
         test2:[],
         FormsData:[],
-        FormsDataTest:[],
-        FormsDatatest2:[],
+        editMode:false,
         LoadingCheck:true,
         settings: {
           itemsToShow: 1,
@@ -108,20 +116,48 @@ export default {
   created(){  
     
   },
-  mounted(){
-    
+  async mounted(){
+   await this.userData()
   },
   beforeMount(){
     this.GetData()
+    
   },
   beforeUnmount(){
-    this.GetData()  },
+    this.GetData()  
+  },
   computed: {
     post(){
       return this.FormsData.find((form) => form.name == this.name)
     }
   },
   methods: {
+    StartEdit(){
+      if(this.editMode == false){
+        this.editMode = true
+      }else{
+        this.editMode = false
+      }
+    },
+    async userData(){
+
+       
+var token = localStorage.getItem("token"); // Replace this with the actual token
+
+await axios
+  .get('/.netlify/functions/user-data', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  .then(response => {
+    console.log(response.data)
+    this.user = response.data
+  })
+  .catch(error => {
+    console.error('Error fetching user data:', error);
+  });
+},
     AddToCarusel(){
       
       for(let i=0; i<this.FormsData.length; i++){
@@ -156,6 +192,10 @@ export default {
       this.LoadingCheck = loadingCheckres
       for (let i = 0; i<Object.keys(FormItems).length; i++){
         this.FormsData.push(FormItems[i])
+        if(FormItems[i].name == this.name){
+          this.TitlePost = FormItems[i].title
+          console.log(this.TitlePost)
+        }
       }
       this.AddToCarusel()
     },
@@ -257,6 +297,23 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.editButton{
+  position:absolute;
+  right: 2%;
+  top: 2%;
+  border: none;
+  background: none;
+}
+
+.editButton i{
+  font-size: 35px;
+  transition: ease 0.2s;
+}
+
+.editButton i:hover{
+  color: rgb(61, 61, 233);
 }
 
 /* ---------------- aboutContainer --------------- */
