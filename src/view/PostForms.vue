@@ -1,7 +1,7 @@
 <template>
 <NavBar/>
 
-<form @submit.prevent="PostForm()" class="FormDiv" id="my-form">
+<form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
   <br>
@@ -48,6 +48,7 @@ export default {
         PostTitle:'',
         PostSubTitle:'',
         PostInfo:'',
+        user:null,
       }
   },
   created(){
@@ -56,6 +57,25 @@ export default {
   mounted(){
   },
   methods: {
+    async userData(){
+
+       
+    var token = localStorage.getItem("token"); // Replace this with the actual token
+
+    await axios
+      .get('/.netlify/functions/user-data', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        console.log(response.data)
+        this.user = response.data
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
+    },
     async PostForm(){
 
       sessionStorage.clear()
