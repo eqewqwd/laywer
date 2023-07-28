@@ -170,6 +170,7 @@ export default {
         // Handle the response, display success message, etc.
         sessionStorage.clear()
         this.GetData()
+        this.editMode = false
         alert(this.name + " עודכנה בהצלחה")
       } catch (error) {
         console.error('Error:', error);
