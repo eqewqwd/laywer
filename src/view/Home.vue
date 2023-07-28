@@ -15,7 +15,7 @@
 </div>
 
 <div class="aboutContainer">
-  <h1>אודות המשרד <button @click="StartEdit('InfoOffice')" class="editButton" v-if="!user"><i class="bi bi-pencil-square"></i></button></h1>
+  <h1>אודות המשרד <button @click="StartEdit('InfoOffice')" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button></h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
     <span v-if="editModeHomeInfo == false">{{ this.InfoHome }}</span>
