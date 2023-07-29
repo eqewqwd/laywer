@@ -180,6 +180,10 @@ footer{
   right: 1%;
   top: 21%;
 }
+.copyRightText a{
+  color: white;
+  text-decoration: none;
+}
 
 .copyright{
   right: 0.5%;

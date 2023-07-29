@@ -26,7 +26,7 @@
   <span v-if="editMode == true">
   <textarea class="infoUpdate" :value="post.info" @input="infoPost = $event.target.value" cols="30" rows="10"></textarea></span>
   </p>
-  <span v-if="editMode == true" class="ButtonEdit"><i class="bi bi-x-square"></i><i @click="updateItemInMongoDB()" class="bi bi-check-square"></i></span>
+  <EditTool v-if="editMode == true" @PostMongo="updateItemInMongoDB()" @EditEnd="StartEdit()"/>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
 
@@ -60,6 +60,7 @@
 <script>
 import NavBar from '@/components/NavBar.vue'
 import FormsContainerSkeleton from '@/components/FormsContainerSkeleton.vue'
+import EditTool from '@/components/EditTool.vue'
 import Footer from '@/components/Footer.vue'
 import MoreOptions from '@/components/MoreOptions.vue'
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
@@ -79,6 +80,7 @@ export default {
     Carousel,
     Slide,
     Navigation,
+    EditTool,
     MoreOptions
 },
   data(){
@@ -277,24 +279,6 @@ await axios
 }
 
 /* ---------------- PosterHome --------------- */
-
-.ButtonEdit{
-  position: relative;
-  cursor: pointer;
-  float: left;
-}
-.ButtonEdit i{
-  font-size: 30px;
-  transition: ease 0.2s;
-}
-
-.ButtonEdit i:first-child:hover{
-  color: rgb(240, 41, 41);
-}
-
-.ButtonEdit i:last-child:hover{
-  color: rgb(65, 226, 65);
-}
 .PosterHome{
   border: 1px solid none;
   position: relative;

@@ -15,14 +15,14 @@
 </div>
 
 <div class="aboutContainer">
-  <h1>אודות המשרד <button @click="StartEdit('InfoOffice')" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button></h1>
+  <h1>אודות המשרד <button @click="StartEdit('InfoOffice')" class="editButton" v-if="!user"><i class="bi bi-pencil-square"></i></button></h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
     <span v-if="editModeHomeInfo == false">{{ this.InfoHome }}</span>
     <span v-if="editModeHomeInfo == true">
      <textarea class="infoUpdate" :value="this.InfoHome" @input="InfoHomePost = $event.target.value" cols="30" rows="10"></textarea></span>
   </p>
-  <span v-if="editModeHomeInfo == true" class="ButtonEdit"><i class="bi bi-x-square"></i><i @click="updateItemInMongoDB()" class="bi bi-check-square"></i></span>
+  <EditTool v-if="editModeHomeInfo == true" @PostMongo="updateItemInMongoDB()" @EditEnd="StartEdit('InfoOffice')"/>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
 
@@ -46,6 +46,8 @@
 import NavBar from '@/components/NavBar.vue'
 import OptionsContainer from '@/components/OptionsContainer.vue'
 import Footer from '@/components/Footer.vue'
+import EditTool from '@/components/EditTool.vue'
+
 
 
 import axios from 'axios'
@@ -57,7 +59,8 @@ export default {
   components: {
     NavBar,
     OptionsContainer,
-    Footer
+    Footer,
+    EditTool
 },
   data(){
       return{
@@ -298,24 +301,6 @@ export default {
   text-align: right;
   width: 100%;
   height: 100%;
-}
-
-.ButtonEdit{
-  position: relative;
-  cursor: pointer;
-  float: left;
-}
-.ButtonEdit i{
-  font-size: 30px;
-  transition: ease 0.2s;
-}
-
-.ButtonEdit i:first-child:hover{
-  color: rgb(240, 41, 41);
-}
-
-.ButtonEdit i:last-child:hover{
-  color: rgb(65, 226, 65);
 }
 /* ---------------- aboutContainer --------------- */
 
