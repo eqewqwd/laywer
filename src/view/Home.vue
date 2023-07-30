@@ -31,7 +31,22 @@
   <div class="OptionsContainer">
     <OptionsContainer v-for="Option in OptionsWork" :key="Option" :name='Option.name'/>
   </div>
+</div>
 
+<div class="OurReccomended">
+  <div class="TextCenter">
+    <h2><i class="bi bi-stars"></i> מאמרים </h2>
+  </div>
+  <div class="carousel">
+    <div class="carousel-wrapper">
+      <div class="card-container">
+          <OptionsContainer v-for="(cake, index) in visibleCards" :key="index" class="card"
+          :name='cake.name' @localAddProduct="addToCartLocal($event)"/> 
+      </div>
+    </div>
+    <button class="carousel-button prev" @click="goToPrevSlide" :disabled="currentSlide === 0">&#10094;</button>
+    <button class="carousel-button next" @click="goToNextSlide" :disabled="currentSlide >= this.cakesLength - slidesToShow">&#10095;</button>
+  </div>
 </div>
 
 <div class="empty">
@@ -75,17 +90,30 @@ export default {
         Forms:[],
         FormsLength:null,
         user:null,
-        OptionsWork:[]
+        OptionsWork:[],
+        currentSlide: 0,
+        slidesToShow: 3,
+        slideWidth: 0,
       }
       
   },
   created(){
 
   },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.updateSlideWidth);
+  },
+  computed: {
+    visibleCards() {
+      return this.OptionsWork.slice(this.currentSlide, this.currentSlide + this.slidesToShow);
+    }
+  },
   async mounted(){
     this.GetDataHome()
     this.GetForms()
     this.userData()
+    this.slideWidth = this.$el.offsetWidth / this.slidesToShow;
+    window.addEventListener('resize', this.updateSlideWidth);
    
   },
   methods: {
@@ -98,6 +126,19 @@ export default {
         }
       }
       
+    },
+    goToPrevSlide() {
+      if (this.currentSlide > 0) {
+        this.currentSlide--;
+      }
+    },
+    goToNextSlide() {
+      if (this.currentSlide < this.cakesLength - this.slidesToShow) {
+        this.currentSlide++;
+      }
+    },
+    updateSlideWidth() {
+      this.slideWidth = this.$el.offsetWidth / this.slidesToShow;
     },
     async updateItemInMongoDB() {
       const id = this.Infoid; 
@@ -365,6 +406,102 @@ background-repeat: no-repeat;
   left: 50%;
   transform: translate(-50%);
 }
+
+
+  /* ------------ OurReccomended ---------------- */
+.OurReccomended{
+  position: relative;
+  top: 10vh;
+  width: 100%;
+  height: 85vh;
+  background-color: rgb(229, 224, 225);
+}
+.TextCenter{
+  border: 1px solid none;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 7%;
+  z-index: 23123213321321;
+}
+.TextCenter h2{
+  font-size: 45px;
+}
+
+.TextCenter h2 i{
+  color: rgb(210, 178, 2);
+}
+
+.carousel {
+  border: 1px solid none;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-wrapper {
+  border: 1px solid none;
+  display: flex;
+  transition: transform 0.9s;
+}
+
+.card-container {
+  border: 1px solid none;
+  width: 100%;
+  position: absolute;
+  padding-left: 20px;
+  top: 50%; right: 50%;
+  transform: translate(50%,-50%);
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  flex: 0 0 auto;
+  margin-right: 20px;
+  height: auto;
+  width: calc(70%/3);
+  box-sizing: border-box;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #777;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 30px;
+  color: #777;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.carousel-button.next {
+  left: 80px;
+}
+
+.carousel-button.prev {
+  right: 80px;
+}
+
 
 
 @media (max-width: 800px) {
