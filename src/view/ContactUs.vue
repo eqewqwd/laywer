@@ -1,35 +1,41 @@
 <template>
 <NavBar/>
 
-<section class="get-in-touch">
-   <h1 class="title">צרו קשר</h1>
-   <form class="contact-form row">
-      <div class="form-field col-lg-6">
-         <input id="name" class="input-text js-input" type="text" v-model="namePost" required>
-         <label class="label" for="name">שם מלא</label>
+<div class="allContainer fadeInDown">
+    <div class="FormContainer">
+    <h1>צור איתנו קשר</h1>
+    <div class="FormDiv">
+      <form @submit.prevent="SendEmail()">
+        <input type="text" v-model="NamePost" name="name" placeholder="שם מלא">
+        <input type="email" v-model="EmailPost" name="email" placeholder="אימייל">
+        <input type="text" v-model="SubjectPost" name="subject" placeholder="subject">
+        <textarea type="text" v-model="MessagePost" name="message" placeholder="הודעה" cols="30" rows="10"></textarea>
+        <button type="submit">שליחה <i style="margin-right: 5px;" class="bi bi-send"></i></button>
+      </form>
+    </div>
+  </div>
+  <div class="InfoContainer">
+    <h1>יצירת קשר</h1>
+    <div class="InfoDiv">
+      <div class="flexContact">
+        <span class="infoSpan"><i class="bi bi-geo-alt"></i><span>מיקום:</span></span>
+        <span class="InfoData">שדרות מוריה 8, חיפה</span>
       </div>
-      <div class="form-field col-lg-6 ">
-         <input id="email" class="input-text js-input" type="email" v-model="emailPost" required>
-         <label class="label" for="email">אימייל</label>
+      <div class="flexContact">
+        <span class="infoSpan"><i class="bi bi-telephone"></i><span>טלפון:</span></span>
+        <span class="InfoData" >052-635-3423</span>
       </div>
-      <div class="form-field col-lg-6 ">
-         <input id="company" class="input-text js-input" type="text" v-model="optionPost" required>
-         <label class="label" for="company">תחום</label>
+      <div class="flexContact">
+        <span class="infoSpan"><i class="bi bi-envelope"></i><span>אימייל:</span></span>
+        <span class="InfoData">sharon@snt-law.co.il</span>
       </div>
-       <div class="form-field col-lg-6 ">
-         <input id="phone" class="input-text js-input" type="text" v-model="phonePost" required>
-         <label class="label" for="phone">מספר טלפון</label>
-      </div>
-      <div class="form-field col-lg-12">
-         <input id="message" class="input-text js-input" type="text" v-model="messagePost" required>
-         <label class="label" for="message">הודעה</label>
-      </div>
-      <div class="form-field col-lg-12">
-         <input class="submit-btn" type="submit" value="שליחה">
-      </div>
-   </form>
-</section>
-  <Footer/>
+    </div>
+  </div>
+
+</div>
+
+
+<Footer/>
 
 </template>
 
@@ -46,7 +52,14 @@ export default {
 },
   data(){
       return{
+        // email post data 
 
+        NamePost:'',
+        EmailPost:'',
+        SubjectPost:'',
+        MessagePost:'',
+
+        // ---------- end -------------
       }
       
   },
@@ -56,6 +69,15 @@ export default {
   mounted(){
   },
   methods: {
+    SendEmail(){
+      const data = {
+        name: this.NamePost,
+        email: this.EmailPost,
+        subject: this.SubjectPost,
+        message: this.MessagePost
+      }
+      console.log(data)
+    }
 
   } 
 }
@@ -73,149 +95,263 @@ export default {
   height: 500px;
 }
 
-/* ---------------- PosterHome --------------- */
-
-
-.formDiv{
+.allContainer{
+  direction: ltr;
   position: relative;
-  border: 1px solid none;
-  height: 75%;
-  width: 1000px;
-  border-left: 1px solid #999;
-}
-.MapDiv{
-  border: 1px solid none;
-  position: relative;
-  height: 70%;
-  width: 500px;
-}
-
-.mapContainer{
-  border: 1px solid none;
-  position: absolute;
-  right: 10%;
-  width: 60%;
-  height: 300px;
-}
-
-iframe{
-  width: 100%;
-  height: 100%;
-}
-
-
-/* ------------------ from ---------------- */
-
-.get-in-touch {
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-right: auto;
+  margin-left: auto;
   top: 70px;
-  max-width: 800px;
-  margin: 50px auto;
-
-}
-form.contact-form{
-  width: 100%;
-}
-.get-in-touch .title {
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  font-size: 3.2em;
-  line-height: 48px;
-  padding-bottom: 48px;
-     color: #5543ca;
-    background: #5543ca;
-    background: -moz-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
-    background: -webkit-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
-    background: linear-gradient(to right,#f4524d  0%,#5543ca  100%) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
+  width: 70%;
+  height: 68vh;
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.contact-form .form-field {
+/* ------------- InfoContainer ------------------ */
+
+.InfoContainer{
+  background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+  direction: rtl;
+  width: 40%;
+  border-radius: 0px 25px 25px 0px;
+}
+
+.InfoContainer h1{
   position: relative;
-  margin: 32px 0;
-  
+  top: 10%;
+  font-size: 2.5vw;
+  text-align: center;
+  color: #f1f1f1;
 }
-.contact-form .input-text {
-  display: block;
+
+.InfoContainer .InfoDiv{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  top: 20%;
+  right: 50%;
+  transform: translate(50%);
+  color: #f1f1f1;
+  text-align: right;
+  width: 70%;
+  border: 1px solid none;
+}
+
+.InfoContainer .InfoDiv .flexContact{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+}
+
+.InfoContainer .InfoDiv span.infoSpan{
+  font-size: 1.3vw;
+}
+
+.InfoContainer .InfoDiv span.infoSpan i{
+  border: 1px solid none;
+  background-color: rgb(84, 102, 162);
+  border-radius: 100%;
+  padding: 10px 15px 10px 15px;
+}
+
+.InfoContainer .InfoDiv span.infoSpan span{
+  margin-right: 15px;
+}
+
+span.InfoData{
+  position: relative;
+  right: 3%;
+  margin-top: 1%;
+  border: 1px solid none;
+  font-size: 1vw;
+}
+
+/* ------------- FormContainer ------------------ */
+
+
+.FormContainer{
+  border: 1px solid none;
+  direction: rtl;
+  width: 60%;
+  border-radius: 25px 0px 0px 25px;
+}
+
+.FormContainer h1{
+  position: relative;
+  top: 5%;
+  text-align: center;
+}
+
+.FormDiv{
+  border: 1px solid none;
+  position: relative;
+  top: 7%;
+  right: 50%;
+  transform: translate(50%);
+  width: 80%;
+
+}
+.FormDiv form{
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 36px;
-  border-width: 0 0 2px 0;
-  border-color: #5543ca;
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 400;
 }
-.contact-form .input-text:focus {
-  outline: none;
-}
-.contact-form .input-text:focus + .label,
-.contact-form .input-text.not-empty + .label {
-  -webkit-transform: translateY(-30px);
-          transform: translateY(-30px);
-          
-}
-.contact-form .label {
-  position: absolute;
-  right: 20px;
-  bottom: 11px;
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 400;
-  color: #5543ca;
-  cursor: text;
-  transition: -webkit-transform .2s ease-in-out;
-  transition: transform .2s ease-in-out;
-  transition: transform .2s ease-in-out, 
-  -webkit-transform .2s ease-in-out;
-          transform: translateY(-20px);
-}
-.contact-form .submit-btn {
-  display: inline-block;
-  background-color: #000;
-   background-image: linear-gradient(125deg,#a72879,#064497);
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 16px;
-  padding: 8px 16px;
+.FormDiv form input[type="text"],.FormDiv form input[type="email"],.FormDiv form textarea[type="text"]{
+  background: #e6e6e6;
+  position: relative;
+  right: 50%;
+  transform: translate(50%);
+  padding: 10px;
+  border-radius: 20px;
   border: none;
-  width:200px;
-  float: left;
-  cursor: pointer;
+  width: 80%;
+  margin-top: 20px;
 }
 
-@media (max-width: 900px) {
-  .contact-form .input-text {
+.FormDiv form input:focus ,.FormDiv form textarea:focus{
+  transition: ease 0.1s;
+  outline: rgb(63, 76, 119);;
+  outline-style: inset;
+}
+
+.FormDiv form button[type="submit"]{
+  background: rgb(63, 76, 119);
+  position: relative;
+  right: 50%;
+  transform: translate(50%);
+  padding: 7px;
+  border-radius: 20px;
+  border: none;
+  width: 30%;
+  margin-top: 15px;
+  color: white;
+  transition: ease 0.2s;
+}
+
+.FormDiv form button[type="submit"]:hover{
+  background: rgb(95, 116, 183);
+}
+
+
+
+
+
+
+
+/* Simple CSS3 Fade-in-down Animation */
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, -100%);
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+
+@media (max-width: 1050px) {
+
+  .allContainer{
+    flex-direction: column;
+    width: 90%;
+    height: 75vh;
+  }
+  .InfoContainer h1{
+    font-size: 20px;
+  }
+
+  .InfoContainer{
+    width: 100%;
+    height: 25%;
+    border-radius: 0px 0px 25px 25px;
+  }
+
+  .FormContainer{
+    border: 1px solid none;
+    height: 75%;
+    width: 100%;
+  }
+
+  .FormContainer form textarea{
+    height: 100px;
+  }
+
+  .InfoContainer .InfoDiv{
     position: relative;
-    right: 50%;
+    display: flex;
+    flex-direction: row;
+    top: 20%;
     transform: translate(50%);
-    width: 70%;
-    
-  }
+    color: #f1f1f1;
+    text-align: right;
+    width: 100%;
+    justify-content: space-evenly;
 
-  .contact-form .label {
+  }
+  .InfoContainer .InfoDiv .flexContact{
     position: relative;
-    right: 17%;
-    font-size: 18px;
-    transform: translateY(-100%);
+    display: flex;
+    flex-direction: row;
   }
 
-  .contact-form .submit-btn {
+  .FormDiv form input[type="text"],.FormDiv form input[type="email"],.FormDiv form textarea[type="text"]{
     position: relative;
-    left: 16%;
-    float: left;
+    padding: 5px;
+    border: none;
+    width: 80%;
+    margin-top: 10px;
   }
-  .get-in-touch {
-    max-width: 730px;
-  }
-  .contact-form{
 
+  .InfoContainer .InfoDiv span.infoSpan i{
+    border: 1px solid none;
+    background-color: rgb(84, 102, 162);
+    font-size: 2.9vw;
+    padding: 5px 10px 5px 10px;
   }
+
+  .InfoContainer .InfoDiv span.infoSpan span{
+    display: none;
+  }
+
+  span.InfoData{
+    position: relative;
+    right: 3%;
+    border: 1px solid none;
+    font-size: 2vw;
+  }
+
+
 }
-
-
 
 
 </style>
