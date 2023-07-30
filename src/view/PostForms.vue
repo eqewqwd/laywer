@@ -99,17 +99,12 @@ export default {
       let postDate = day + "/" + month + "/" + year
 
 
-      // await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate }).then(response => {
-      //     console.log("work post");
-      // }).catch(error => {
-      //     console.log(error);
-      // });
-
-      await axios.post('http://localhost:8000/#/login',{ imgForm,name,title,subTitle,info,postDate,imgFormUpload }).then(response => {
-          console.log(response);
+      await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate,imgFormUpload }).then(response => {
+          console.log("work post");
       }).catch(error => {
           console.log(error);
       });
+
     },
     onFileChange(event) {
       this.file = event.target.files[0];
