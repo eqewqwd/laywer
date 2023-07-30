@@ -324,14 +324,20 @@ span.InfoData{
     position: relative;
     display: flex;
     flex-direction: row;
-  }
+  }y
+
+
 
   .FormDiv form input[type="text"],.FormDiv form input[type="email"],.FormDiv form textarea[type="text"]{
     position: relative;
     padding: 5px;
     border: none;
     width: 80%;
-    margin-top: 10px;
+    margin-top: 5%;
+  }
+
+  .FormDiv form input[type="email"]{
+    padding: 10px;
   }
 
   .InfoContainer .InfoDiv span.infoSpan i{
