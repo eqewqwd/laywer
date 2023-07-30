@@ -33,21 +33,6 @@
   </div>
 </div>
 
-<div class="OurReccomended">
-  <div class="TextCenter">
-    <h2><i class="bi bi-stars"></i> מאמרים </h2>
-  </div>
-  <div class="carousel">
-    <div class="carousel-wrapper">
-      <div class="card-container">
-          <OptionsContainer v-for="(cake, index) in visibleCards" :key="index" class="card"
-          :name='cake.name' @localAddProduct="addToCartLocal($event)"/> 
-      </div>
-    </div>
-    <button class="carousel-button prev" @click="goToPrevSlide" :disabled="currentSlide === 0">&#10094;</button>
-    <button class="carousel-button next" @click="goToNextSlide" :disabled="currentSlide >= this.cakesLength - slidesToShow">&#10095;</button>
-  </div>
-</div>
 
 <div class="empty">
 </div>
@@ -65,6 +50,7 @@ import EditTool from '@/components/EditTool.vue'
 
 
 
+
 import axios from 'axios'
 import bcrypt from 'bcryptjs';
 
@@ -75,7 +61,7 @@ export default {
     NavBar,
     OptionsContainer,
     Footer,
-    EditTool
+    EditTool,
 },
   data(){
       return{
@@ -91,30 +77,31 @@ export default {
         FormsLength:null,
         user:null,
         OptionsWork:[],
-        currentSlide: 0,
-        slidesToShow: 3,
-        slideWidth: 0,
+        downloadData:
+        [
+        {name:'טופס למתן טיפול רפואי ראשוני לעובד עצמאי שנפגע בתאונת עבודה',date:'22/7/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'283'},
+          {name:'טופס תביעה להכרה במחלת מקצוע או ליקוי רפואי כתוצאה מתנאי עבודה',date:'10/7/2020',ImgDownload:'https://www.cisme.it/scrl/wp-content/uploads/2020/06/coronavirus-3d-vettoriale-realistico-in-sfondo-blu-scuro-cellula-virus-corona-malattia-del-virus-wuhan_8306-489.jpg',numberFile:'202'},
+          {name:'טופס תביעה לתשלום דמי פגיעה והודעה על פגיעה בעבודה',date:'14/10/2022',ImgDownload:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg',numberFile:'211'},
+          {name:'כתב ויתור סודיות רפואית מי שנפגע בעבודה או במסגרת פעולת התנדבות',date:'4/5/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'7101'},
+          {name:'שאלון למעסיק על אירוע הדבקה בקורונה',date:'5/1/2022',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'257'},
+          {name:'שאלון לעובד שכיר על אירוע הדבקה בקורונה',date:'6/2/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'258'},
+          {name:'טופס למתן טיפול רפואי ראשוני לעובד עצמאי שנפגע בתאונת עבודה',date:'22/7/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'283'},
+          {name:'טופס תביעה להכרה במחלת מקצוע או ליקוי רפואי כתוצאה מתנאי עבודה',date:'10/7/2020',ImgDownload:'https://www.cisme.it/scrl/wp-content/uploads/2020/06/coronavirus-3d-vettoriale-realistico-in-sfondo-blu-scuro-cellula-virus-corona-malattia-del-virus-wuhan_8306-489.jpg',numberFile:'202'},
+          {name:'טופס תביעה לתשלום דמי פגיעה והודעה על פגיעה בעבודה',date:'14/10/2022',ImgDownload:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg',numberFile:'211'},
+          {name:'כתב ויתור סודיות רפואית מי שנפגע בעבודה או במסגרת פעולת התנדבות',date:'4/5/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'7101'},
+          {name:'שאלון למעסיק על אירוע הדבקה בקורונה',date:'5/1/2022',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'257'},
+          {name:'שאלון לעובד שכיר על אירוע הדבקה בקורונה',date:'6/2/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'258'},
+        ]
       }
       
   },
   created(){
 
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.updateSlideWidth);
-  },
-  computed: {
-    visibleCards() {
-      return this.OptionsWork.slice(this.currentSlide, this.currentSlide + this.slidesToShow);
-    }
-  },
   async mounted(){
     this.GetDataHome()
     this.GetForms()
     this.userData()
-    this.slideWidth = this.$el.offsetWidth / this.slidesToShow;
-    window.addEventListener('resize', this.updateSlideWidth);
-   
   },
   methods: {
     StartEdit(res){
@@ -126,19 +113,6 @@ export default {
         }
       }
       
-    },
-    goToPrevSlide() {
-      if (this.currentSlide > 0) {
-        this.currentSlide--;
-      }
-    },
-    goToNextSlide() {
-      if (this.currentSlide < this.cakesLength - this.slidesToShow) {
-        this.currentSlide++;
-      }
-    },
-    updateSlideWidth() {
-      this.slideWidth = this.$el.offsetWidth / this.slidesToShow;
     },
     async updateItemInMongoDB() {
       const id = this.Infoid; 
@@ -184,9 +158,13 @@ export default {
 
     },
     async GetForms(){
-      const storedItems =  sessionStorage.getItem('FormsItems');
+      const storedItems =  JSON.parse(sessionStorage.getItem('FormsItems'));
       if(storedItems){
         console.log("Forms already loaded")
+        for(let i=0; i< Object.keys(storedItems).length; i++){
+          this.Forms.push(Object.keys(storedItems)[i])
+        }
+        console.log(this.Forms)
       }else{
         await axios.get('/.netlify/functions/GetData').then(response => {
           console.log(response.data);
@@ -431,77 +409,6 @@ background-repeat: no-repeat;
 .TextCenter h2 i{
   color: rgb(210, 178, 2);
 }
-
-.carousel {
-  border: 1px solid none;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.carousel-wrapper {
-  border: 1px solid none;
-  display: flex;
-  transition: transform 0.9s;
-}
-
-.card-container {
-  border: 1px solid none;
-  width: 100%;
-  position: absolute;
-  padding-left: 20px;
-  top: 50%; right: 50%;
-  transform: translate(50%,-50%);
-  display: flex;
-  justify-content: center;
-}
-
-.card {
-  flex: 0 0 auto;
-  margin-right: 20px;
-  height: auto;
-  width: calc(70%/3);
-  box-sizing: border-box;
-}
-
-.card-image {
-  width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.card-title {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.card-description {
-  font-size: 14px;
-  color: #777;
-}
-
-.carousel-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: transparent;
-  border: none;
-  outline: none;
-  font-size: 30px;
-  color: #777;
-  cursor: pointer;
-  padding: 10px;
-}
-
-.carousel-button.next {
-  left: 80px;
-}
-
-.carousel-button.prev {
-  right: 80px;
-}
-
 
 
 @media (max-width: 800px) {
