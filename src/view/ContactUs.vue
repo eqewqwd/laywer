@@ -286,7 +286,7 @@ span.InfoData{
   .allContainer{
     flex-direction: column;
     width: 90%;
-    height: 75vh;
+    height: 85vh;
   }
   .InfoContainer h1{
     font-size: 20px;
@@ -356,6 +356,10 @@ span.InfoData{
     right: 3%;
     border: 1px solid none;
     font-size: 2vw;
+  }
+
+  .FormDiv form button[type="submit"]{
+    width: 40%;
   }
 
 
