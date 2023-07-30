@@ -77,7 +77,9 @@ export default {
         message: this.MessagePost
       }
       console.log(data)
-    }
+      alert('האימייל נשלח בהצלחה!')
+      window.location.reload()
+    },
 
   } 
 }
