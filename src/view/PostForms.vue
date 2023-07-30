@@ -4,7 +4,6 @@
 <form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="!user">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
-  <input type="file" @change="onFileChange" />
   <br>
   <label>שם URL :</label>
   <input type="text" v-model="PostName" required>
@@ -50,7 +49,6 @@ export default {
         PostSubTitle:'',
         PostInfo:'',
         user:null,
-        file: null,
       }
   },
   created(){
@@ -81,10 +79,8 @@ export default {
     },
     async PostForm(){
 
-      var imgurl = await this.uploadImage()
       sessionStorage.clear()
       
-      let imgFormUpload = imgurl
       let imgForm = this.PostImg
       let name = this.PostName
       let title = this.PostTitle
@@ -99,21 +95,13 @@ export default {
       let postDate = day + "/" + month + "/" + year
 
 
-      await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate,imgFormUpload }).then(response => {
-          console.log("work post");
+      await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate }).then(response => {
+          console.log(name);
+
       }).catch(error => {
           console.log(error);
       });
 
-    },
-    onFileChange(event) {
-      this.file = event.target.files[0];
-    },
-    async uploadImage() {
-      const formData = new FormData();
-      formData.append('file', this.file);
-
-      return formData
     },
   }
 }

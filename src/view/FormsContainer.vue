@@ -4,7 +4,7 @@
 
 <div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">
-    <img :src=post.imgFormUpload>
+    <img :src=post.imgForm>
   </div>
   <div class="TitleDivPoster">
     <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
