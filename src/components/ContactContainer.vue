@@ -46,11 +46,11 @@ export default {
   /* background-color: rgb(128, 0, 128); */
   background-color: rgb(24,44,79);
   /* background-color: #588fb3; */
-  height: 250px;
-  width: 1100px;
-  top: -50px;
-  margin-right: auto;
-  margin-left: auto;
+  height: auto;
+  width: 90%;
+  top: 20%;
+  right: 50%;
+  transform: translate(50%);
   padding: 25px;
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -77,14 +77,14 @@ export default {
  border: 1px solid white !important;
  color: white;
  font-weight: 600;
- font-size: 20px;
+ font-size: 0.8vw;
  text-shadow: 1px 1px 2px pink; /* text-shadow: 30px 40px 50px rgba(0,0,0,0.3); */
  transition: ease 0.2s;
 }
 
 .formContainer form button[type="submit"]:hover{
   border: none;
-  font-size: 22px;
+  font-size: 1vw;
   color: black;
 }
 
@@ -95,54 +95,6 @@ export default {
   border-radius: 10px;
   border: none;
   outline: none;
-}
-
-/* ----------- animation revael -------------- */
-
-.Homereveal{
-  position: relative;
-  transform: translateY(150px);
-  opacity: 0;
-  transition: all 1s ease;
-}
-
-.Homereveal.active{
-  transform: translateY(0px);
-  opacity: 1;
-}
-
-@media (max-width: 1112px) {
-  .ContactContainer{
-    width: 100% !important;
-  }
-}
-
-@media (max-width: 800px) {
-  .ContactContainer{
-    position: relative;
-    margin-top:25%;
-  }
-}
-
-@media (max-width: 730px) {
-
-  .formContainer form{
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-  }
-
-  .formContainer form input[type="text"],.formContainer form button[type="submit"]{
-    margin-top: 8px;
-    width: 100%;
-  }
-
-  .ContactContainer{
-    text-align: center;
-    height: 460px;
-    
-  }
-
 
 }
 

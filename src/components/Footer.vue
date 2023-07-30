@@ -1,36 +1,46 @@
 <template>
-  <div class="empty">
-
-  </div>
-  <div class="footer-Container">
-    <div class="LogoContainer">
-      <img src="@/assets/Logo/logo2.png" alt="">
-    </div>
-    <div class="navbarbottom">
-      <div class="ContactUsContainer">
-      <h4>שדרות מוריה 8, חיפה</h4>
-      <hr>
-      <h4>מיקוד : 346160</h4>
-      <hr>
-      <h4>טלפון: 052-635-3423</h4>
-      <hr>
-      <h4>אימייל: sharon@snt-law.co.il</h4>
+    <div class="empty">
 
     </div>
-      <div class="mapsSection">
-        <iframe class="mapsGoogle" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53659.51697219783!2d35.057975529346166!3d32.79968780329649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba4c750de845%3A0xc35d23982a81529a!2z15fXmdek15Q!5e0!3m2!1siw!2sil!4v1689283619707!5m2!1siw!2sil" height="100%" width="100%" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="AllContainer">
+      <div class="MapAndLogoDiv">
+        <div class="LogoDiv">
+          <img class="LogoImg" src="@/assets/Logo/logo.png" alt="">
+        </div>
+        <div class="MapDiv">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53659.51697219341!2d34.975576465502016!3d32.79968780330382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba4c750de845%3A0xc35d23982a81529a!2sHaifa!5e0!3m2!1sen!2sil!4v1690692363562!5m2!1sen!2sil" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="LocationDiv">
+          <h5><i style="color: orangered;" class="bi bi-geo-alt-fill"></i>  שדרות מוריה 8, חיפה</h5>
+        </div>
+      </div>
+      <div class="NavBottomDiv">
+        <h2>ניווט מהיר</h2>
+        <div class="NavListDiv">
+          <ul>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a>צוואות</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li><a>ייפוי כוח מתמשך</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li><a>צור קשר</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
+          </ul>
+        </div>
+      </div>
+      <div class="ContactDiv">
+        <ContactComponent/>
+
       </div>
     </div>
 
-  </div>
+
   <div class="footer-copyRight">
     <i class="bi bi-c-circle copyright"></i>
     <span class="copyRightText"><a href="https://techlinx.co.il/">אתר זה עוצב ונבנה על ידי דוד דבח</a></span>
-    <a href="https://www.instagram.com/david_dabach/"><i class="bi bi-instagram icons-footer insta"></i></a>
-    <a href="https://www.facebook.com/david.benzohar"><i class="bi bi-facebook icons-footer"></i></a>
-    <a href="https://wa.link/t0lyzc"><i class="bi bi-whatsapp icons-footer"></i></a>
-    <a href="https://www.instagram.com/david_dabach/"><i class="bi bi-twitter icons-footer"></i></a>
-    <a href="https://www.instagram.com/david_dabach/"><i class="bi bi-snapchat icons-footer"></i></a>
+    <a href="/"><i class="bi bi-instagram icons-footer insta"></i></a>
+    <a href="/"><i class="bi bi-facebook icons-footer"></i></a>
+    <a href="/"><i class="bi bi-whatsapp icons-footer"></i></a>
+    <a href="/"><i class="bi bi-twitter icons-footer"></i></a>
+    <a href="/"><i class="bi bi-snapchat icons-footer"></i></a>
 
   </div>
   <footer>
@@ -47,6 +57,22 @@ export default {
   name: 'Footer',
   components:{
     ContactComponent
+  },
+  methods:{
+    changeNavByRoute(){
+      console.log(this.$route.fullPath == '/')
+      let checkRoute = this.$route.fullPath == '/'
+      const LogoResponsive = document.querySelector('.navbar')
+
+      if(checkRoute == true & innerWidth <= 750){
+        LogoResponsive.style.display = 'none'
+      }else{
+      }
+      this.scrollUp()
+    },
+    scrollUp(){
+      window.scrollTo(0,0)
+    }
   }
 }
 </script>
@@ -58,41 +84,107 @@ export default {
 }
 
 .empty{
-  display: flex;
-  direction: rtl !important;
-  align-items: center;
-  background-color: transparent;
   height: 300px;
-  width: 100%;
 }
 
-.LogoContainer{
-  width: 35%;
-  height: 100%;
-  border: 1px solid none;
-  position: relative;
-}
-
-.mapsGoogle{
-  float: left;
-  width: 100%;
-}
-
-.LogoContainer img{
-  position: absolute;
-  top: 10%;
-  transform: translateX(-20%);
-  width: 28vw;
-}
-.footer-Container{
-  position: relative;
-  display: flex;
-  direction: rtl !important;
-  align-items: center;
+.AllContainer{
+  height: 60vh;
   background-color: rgb(231,231,231);
-  height: 500px;
+  display: flex;
   width: 100%;
+  flex-direction: row;
 }
+
+/* ----------------- MapAndLogoDiv --------------- */
+
+.AllContainer .MapAndLogoDiv{
+  border: 1px solid none;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+.AllContainer .MapAndLogoDiv .LogoDiv{
+  position: relative;
+  border: 1px solid none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 35%;
+}
+
+.AllContainer .MapAndLogoDiv .LogoDiv img{
+  position: absolute;
+  bottom: 0;
+  widows: 100%;
+  height: 85%;
+}
+
+.AllContainer .MapAndLogoDiv .MapDiv{
+  position: relative;
+  border: 1px solid none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+}
+.AllContainer .MapAndLogoDiv .MapDiv iframe{
+  position: absolute;
+  bottom: 5%;
+  width: 60%;
+  height: 90%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;}
+
+.AllContainer .MapAndLogoDiv .LocationDiv{
+  text-align: center;
+  width: 100%;
+  height: 15%;
+}
+
+/* ------------------- end MapAndLogoDiv -------------------- */
+
+/* ----------------- NavBottomDiv --------------- */
+
+
+.NavBottomDiv{
+  border: 1px solid none;
+  width: 20%;
+  height: 100%;
+}
+.NavBottomDiv h2{
+  position: relative;
+  top: 20%;
+  text-align: center;
+}
+
+.NavListDiv{
+  position: relative;
+  text-align: right;
+  width: fit-content;
+  right: 50%;
+  transform: translate(50%);
+  top: 30%;
+  border: 1px solid none;
+}
+
+.NavListDiv ul li{
+  color: black;
+}
+
+.NavListDiv ul li:hover{
+  font-weight: bold;
+}
+
+/* ------------------- end NavBottomDiv -------------------- */
+
+/* ----------------- ContactDiv --------------- */
+
+.ContactDiv{
+  border: 1px solid none;
+  width: 40%;
+  height: 100%;
+}
+
 
 .insta:hover {
   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
@@ -124,46 +216,6 @@ footer{
   height: 2vh;
   background-image: linear-gradient(139deg, rgb(194, 171, 43), gray);
 }
-
-.navbarbottom{
-  display: flex;
-  flex-wrap: wrap;
-  padding: 25px;
-  width: 65%;
-  height: 100%;
-  border: 1px solid none;
-}
-
-
-.mapsSection{
-  border: 1px solid none;
-  position: relative;
-  width: 50%;
-  height: 100%;
-}
-
-.ContactUsContainer{
-  border:1px solid none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  width: 50%;
-  height: 100%;
-}
-
-.ContactUsContainer h4{
-  padding: 10px;
-}
-.ContactUsContainer hr{
-  position: relative;
-  right: 50%;
-  transform: translate(50%);
-  width: 40%;
-  color: black;
-}
-
 
 .footer-copyRight{
   direction: ltr;
@@ -198,52 +250,35 @@ footer{
   color: whitesmoke;
 }
 
+@media (max-width: 1100px) {
+  .NavBottomDiv{
+    display: none;
+  }
+  .ContactDiv{
+    width: 60%;
+  }
+}
+
 
 @media (max-width: 725px) {
-
-  .LogoContainer{
-    position: absolute;
-    top: 0;
-    transform: translateX(0,50%);
-    width: 100%;
-    height: 100%;
-  }
-
-  .LogoContainer img{
-    position: absolute;
-    top: 5%;
-    right: 5%;
-    width: 60vw;
-  }
 
   .copyRightText,.copyright{
     font-size: 13px;
   }
-
-  
-  .footer-Container{
-    height: 700px;
-  }
-
-
   .icons-footer{
     font-size: 20px;
     padding-left: 1.6vw;
   }
-
-  .mapsSection{
-    width: 100%;
-    height: 100%;
+  .ContactDiv{
+    display: none;
   }
 
-  .navbarbottom{
-  width: 100%;
-  height: 50%;
-  position: absolute;
-  bottom: 0;
-}
-  .ContactUsContainer{
-    display: none;
+  .AllContainer .MapAndLogoDiv{
+    border: 1px solid none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 }
 

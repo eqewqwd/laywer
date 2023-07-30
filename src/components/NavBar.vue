@@ -92,6 +92,7 @@ export default {
         LogoResponsive.style.display = 'none'
       }else{
       }
+
     },
     async userData(){
 
