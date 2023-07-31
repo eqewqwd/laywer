@@ -356,7 +356,7 @@ export default {
   font-size: 45px;
 }
 
-.aboutContainer .lineGold{
+.lineGold{
   padding: 30px;
   width: 550px;
   position: relative;
@@ -498,7 +498,7 @@ background-repeat: no-repeat;
 }
 
 @media (max-width: 560px) {
-  .aboutContainer .lineGold{
+  .lineGold{
     padding: 30px;
     width: 100%;
     position: relative;
