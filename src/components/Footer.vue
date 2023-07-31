@@ -11,7 +11,7 @@
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53659.51697219341!2d34.975576465502016!3d32.79968780330382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba4c750de845%3A0xc35d23982a81529a!2sHaifa!5e0!3m2!1sen!2sil!4v1690692363562!5m2!1sen!2sil" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="LocationDiv">
-          <h5><i style="color: orangered;" class="bi bi-geo-alt-fill"></i>  שדרות מוריה 8, חיפה</h5>
+          <h5><i style="color: orangered;" class="bi bi-geo-alt-fill"></i>  שדרות מוריה 80, חיפה</h5>
         </div>
       </div>
       <div class="NavBottomDiv">
