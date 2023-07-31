@@ -35,6 +35,7 @@
 
 <div class="OurRecommend">
   <h1>מאמרים</h1>
+  <img class="lineGold" src="@/assets/photo/line-gold.png">
   <div class="FormDivHome">
       <FormsHome v-for="(form, index) in FormsCards" :title="form.title" :info="form.info" :img="form.imgForm"  :key="index" />
   </div>
@@ -187,6 +188,9 @@ export default {
 
           for (let i = 0; i<this.Forms.length; i++){
             this.setItemsSession(this.Forms[i],i)
+          }
+          for(let i=0; i< 4; i++){
+            this.FormsCards.push(this.Forms[i])
           }
           sessionStorage.setItem("LoadingCheck", false);
         }).catch(error => {
