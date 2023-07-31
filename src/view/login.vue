@@ -1,7 +1,7 @@
 <template>
 <!-- <form @submit.prevent="handleLogin()" class="FormDiv" id="my-form">
   <label>אימייל :</label>
-  <input type="email" v-model="email" required>
+  <input type="username" v-model="username" required>
   <br>
   <label>סיסמא :</label>
   <input type="password" v-model="password" required>
@@ -22,7 +22,7 @@
 
     <!-- Login Form -->
     <form @submit.prevent="handleLogin()">
-      <input type="email" v-model="email" id="login" class="fadeIn second" name="login" placeholder="אימייל">
+      <input type="text" v-model="username" id="login" class="fadeIn second" name="login" placeholder="אימייל">
       <input type="password" v-model="password" class="fadeIn third" name="login" placeholder="סיסמא">
       <input type="submit" class="fadeIn fourth" value="כניסה">
     </form>
@@ -55,7 +55,7 @@ export default {
 },
   data(){
       return{
-        email:'',
+        username:'',
         password:'',
       }
   },
@@ -68,7 +68,7 @@ export default {
     async handleLogin() {
       try {
         const response = await axios.post('/.netlify/functions/login', {
-          email: this.email,
+          username: this.username,
           password: this.password,
         });
 
@@ -261,7 +261,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=email],input[type=password] {
+input[type=text],input[type=password] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;

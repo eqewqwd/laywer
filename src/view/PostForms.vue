@@ -4,6 +4,7 @@
 <form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="!user">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
+  <input type="file" @change="handleFileChange" />
   <br>
   <label>שם URL :</label>
   <input type="text" v-model="PostName" required>
@@ -19,6 +20,10 @@
   <br>
   <button type="submit">הוספת מאמר</button>
 </form>
+
+<div v-if="imageURL">
+      <img :src="imageURL" alt="Uploaded Image" />
+    </div>
 
 
 
@@ -49,6 +54,9 @@ export default {
         PostSubTitle:'',
         PostInfo:'',
         user:null,
+
+        selectedFile: null,
+        imageURL: null,
       }
   },
   created(){
@@ -58,6 +66,30 @@ export default {
     await this.userData()
   },
   methods: {
+
+    handleFileChange(event) {
+      this.selectedFile = event.target.files[0];
+    },
+    async uploadImage() {
+      const formData = new FormData();
+      formData.append('image', this.selectedFile);
+
+      try {
+        const response = await axios.post('/.netlify/functions/uploadImage', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        console.log(response.data.message);
+
+        // Display the uploaded image by fetching it from the server
+        const imageResponse = await axios.get('/.netlify/functions/GetImg');
+        this.imageURL = 'data:' + imageResponse.headers['content-type'] + ';base64,' + imageResponse.data;
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+    },
     async userData(){
 
        
@@ -78,6 +110,8 @@ export default {
       });
     },
     async PostForm(){
+
+      await this.uploadImage()
 
       sessionStorage.clear()
       

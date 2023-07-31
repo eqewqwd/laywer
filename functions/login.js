@@ -19,7 +19,7 @@ db.once('open', () => {
 
 // Define the user schema and model
 const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
+  username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 });
 
@@ -33,15 +33,15 @@ exports.handler = async function (event, context) {
     };
   }
 
-  const { email, password } = JSON.parse(event.body);
+  const { username, password } = JSON.parse(event.body);
 
   try {
     // Check if the user exists in the database
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
     if (!user) {
       return {
         statusCode: 401,
-        body: JSON.stringify({ message: 'Invalid credentials not found' + email + ',' + password }),
+        body: JSON.stringify({ message: 'Invalid credentials not found' + username + ',' + password }),
       };
     }
 
@@ -50,7 +50,7 @@ exports.handler = async function (event, context) {
     if (!isPasswordValid) {
       return {
         statusCode: 401,
-        body: JSON.stringify({ message: 'Invalid credentials' + email + ',' + password  }),
+        body: JSON.stringify({ message: 'Invalid credentials' + username + ',' + password  }),
       };
     }
 
@@ -67,7 +67,7 @@ exports.handler = async function (event, context) {
     console.error(err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: 'Internal server error ' + email + ',' + password }),
+      body: JSON.stringify({ message: 'Internal server error ' + username + ',' + password }),
     };
   }
 };
