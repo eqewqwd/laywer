@@ -356,7 +356,7 @@ export default {
   font-size: 45px;
 }
 
-.lineGold{
+.aboutContainer .lineGold{
   padding: 30px;
   width: 550px;
   position: relative;
@@ -418,6 +418,14 @@ background-repeat: no-repeat;
   width: 100%;
   height: auto;
   padding-bottom: 200px;
+}
+
+.OurRecommend .lineGold{
+  padding: 30px;
+  width: 550px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .OurRecommend h1{
@@ -498,7 +506,7 @@ background-repeat: no-repeat;
 }
 
 @media (max-width: 560px) {
-  .lineGold{
+  .aboutContainer .lineGold{
     padding: 30px;
     width: 100%;
     position: relative;
