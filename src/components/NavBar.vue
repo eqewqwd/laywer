@@ -28,7 +28,7 @@
     <div class="navbar-links">
       <div class="brand-title"><img src="@/assets/Logo/logo.png" alt="" width="300px"></div>
         <ul>
-          <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'mekarkein' } })"><li><a>מקרקעין</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'nezikin' } })"><li><a>נזיקין</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a>צוואות</a></li></router-link>
@@ -216,7 +216,7 @@ img{
   bottom: 0;
   left: 50%;
   transform: translate(-50%);  
-  width: 726px;
+  width: 60%;
   border-bottom: 1px solid black;
 }
 
@@ -305,7 +305,7 @@ img{
     background-color: rgb(209, 212, 215);
     position: absolute;
     top: 0;
-    height: 390px;
+    height: 500px;
     display: none;
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

@@ -1,7 +1,7 @@
 <template>
 <NavBar/>
 
-<form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="!user">
+<form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
   <input type="file" @change="handleFileChange" />
