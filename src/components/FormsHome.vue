@@ -2,7 +2,7 @@
   <div class="FormContainerHome">
     <!-- <img :src=post.imgForm> -->
     <div class="imgDiv">
-      <img src="@/assets/photo/corona.jpg">
+      <img :src=img>
     </div>
     <!-- <h1>{{ title }}</h1> -->
     <h1>{{ title }}</h1>
@@ -18,7 +18,7 @@
 
 export default {
     name: "OptionsContainer",
-    props:['title','info'],
+    props:['title','info','img'],
     data() {
         return {
         }
@@ -41,9 +41,10 @@ export default {
 .FormContainerHome{
   position: relative;
   margin-left: 20px;
+  margin-top: 60px;
   border:1px solid none;
-  width: 300px;
-  height: 350px;
+  width: 330px;
+  height: 600px;
   text-align: center;
   background-color: whitesmoke;
   border-radius: 5px 5px 12px 12px;
@@ -101,10 +102,10 @@ export default {
   left: 50%;
   transform: translate(-50%);
   width: 70%;
-  height: 25%;
+  height: 27%;
   color: black;
   display: -webkit-box;
-   -webkit-line-clamp: 4;
+   -webkit-line-clamp: 7;
    -webkit-box-orient: vertical;
    overflow: hidden;
    text-overflow: ellipsis;

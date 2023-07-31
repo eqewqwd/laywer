@@ -35,14 +35,8 @@
 
 <div class="OurRecommend">
   <h1>מאמרים</h1>
-  <div class="carousel">
-    <div class="carousel-items" :style="{transform: 'translateX(' + translateValue + 'px)'}">
-      <FormsHome v-for="(item, index) in FormsCards" :title="item.title" :info="item.info"  :key="index" />
-    </div>
-  </div>
-  <div class="navigation">
-    <i @click="prev" @mouseover="addClassFill('left')" @mouseleave="addClassFill('remove')" class="bi bi-arrow-left-circle"></i>
-    <i @click="next" @mouseover="addClassFill('right')" @mouseleave="addClassFill('remove')" class="bi bi-arrow-right-circle"></i>
+  <div class="FormDivHome">
+      <FormsHome v-for="(form, index) in FormsCards" :title="form.title" :info="form.info" :img="form.imgForm"  :key="index" />
   </div>
 
 </div>
@@ -81,18 +75,6 @@ export default {
 },
   data(){
       return{
-        carouselItems: 
-        [
-        {title:'ייפוי כוח',info:'דגשדגשד גשדג שדגשדגש דגש דגשדג שדגשד גשדג שדגשד גשדגשד גשדגש דגשדג שדגשד גשדגש דגשדג שדגשד גשדג שדגשד גשדג שגד שדגש דגש דג'},
-        {title:'צוואות',info:' שדגשד גשדגשדג שדגשדגשד גשדגשדג שדגשדגש דגשדגד שגדשגדשגד שגשדגשדג שדגשדגשדג שד'},
-        {title:'נזיקין',info:'גשדג שדגשדג שדגשדגשדג שדגשדג שדגשדגשד גדשגשדג שדגשדג שדגשדג שדגשד '},
-        {title:'מקרקעין',info:'ג שדגש גשדג שדגש דגשדג שדגש דגשד גשדגש דגשדג שדגש דגש דג'},
-        {title:'חובות',info:' דגשד גשד גשדג שד גשד גשד גשדגשדג שש גדשגד שגדשג דשגדשג דשגש גשג'},
-        {title:'רכב',info:'שגשד גשגש דגשדג שגש דגש גד שךצ שך גךש גךשל גךשל גשךלד גש'}
-
-        //{title:'',info:''},
-        ],
-        currentIndex: 0,
         //post
         Infoid:null,
         InfoHomePost:'',
@@ -131,61 +113,7 @@ export default {
     this.GetForms()
     this.userData()
   },
-  computed: {
-    translateValue() {
-      return this.currentIndex * -100;
-    }
-  },
   methods: {
-    addClassFill(option){
-      const arrowleft = document.getElementsByTagName('i')[0]
-      const arrowright = document.getElementsByTagName('i')[1]
-      console.log(arrowright.classList[1])
-      
-      if(arrowleft.classList[1] == 'bi-arrow-left-circle-fill' & option == 'remove'){
-        arrowleft.classList.replace('bi-arrow-left-circle-fill' , 'bi-arrow-left-circle')
-      }else if(arrowright.classList[1] == 'bi-arrow-right-circle-fill' & option == 'remove'){
-        arrowright.classList.replace('bi-arrow-right-circle-fill' , 'bi-arrow-right-circle')
-      }
-
-      if(option == "left"){
-        arrowleft.classList.replace('bi-arrow-left-circle' , 'bi-arrow-left-circle-fill')
-      }else if(option == "right"){
-        arrowright.classList.replace('bi-arrow-right-circle' , 'bi-arrow-right-circle-fill')
-      }
-    },
-    prev() {
-      const arrowleft = document.getElementsByTagName('i')[0]
-      const arrowright = document.getElementsByTagName('i')[1]
-
-      if(this.currentIndex > 0){
-        this.currentIndex -= 3.2;
-        arrowright.style.color="black";
-        arrowright.style.userSelect="auto";
-      }
-      if(this.currentIndex == 0 ||this.currentIndex == 8.881784197001252e-16){
-        arrowleft.style.userSelect="none";
-        arrowleft.style.color="#777";
-      }
-      console.log(this.currentIndex)
-    },
-    next() {
-      const arrowleft = document.getElementsByTagName('i')[0]
-      const arrowright = document.getElementsByTagName('i')[1]
-
-      if(parseInt(this.currentIndex) != parseInt(2 * 3.2)){
-        this.currentIndex += 3.2;
-        arrowleft.style.color="black";
-        arrowleft.style.userSelect="auto";
-      }
-      if(parseInt(this.currentIndex) == parseInt(2 * 3.2)){
-        arrowright.style.userSelect="none";
-        arrowright.style.color="#777";
-
-      }
-      console.log(parseInt(this.currentIndex))
-      console.log(parseInt(3.2 * this.carouselItems.length))
-    },
     StartEdit(res){
       if(res == 'InfoOffice'){
         if(this.editModeHomeInfo == false){
@@ -247,7 +175,7 @@ export default {
         for(let i=0; i< Object.keys(storedItems).length; i++){
           this.Forms.push((storedItems)[i])
         }
-        for(let i=0; i< 6; i++){
+        for(let i=0; i< 4; i++){
           this.FormsCards.push((storedItems)[i])
         }
         console.log(this.Forms)
@@ -484,7 +412,8 @@ background-repeat: no-repeat;
   top: 200px;
   border: 1px solid none;
   width: 100%;
-  height: 60vh;
+  height: auto;
+  padding-bottom: 200px;
 }
 
 .OurRecommend h1{
@@ -494,67 +423,24 @@ background-repeat: no-repeat;
   font-size: 45px;
 }
 
-.carousel {
+.OurRecommend .FormDivHome{
   position: relative;
+  border: 1px solid none;
+  padding-left: 60px;
   left: 50%;
   transform: translate(-50%);
-  border: 1px solid none;
-  width: 1300px;
-  overflow: hidden;
-  
-}
-
-.carousel-items {
+  width: 80%;
   display: flex;
-  width: 23123131321px;
-  transition: transform 0.3s ease;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
-
-.item {
-  flex: 0 0 100px;
-  height: 100px;
-  margin: 10px;
-  background-color: #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.navigation {
-  border: 1px solid none;
-  position: absolute;
-  top: 45%;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.navigation i:first-child{
-  margin-left: 4%;
-  user-select: none;
-  color: #777;
-}
-
-.navigation i:last-child{
-  margin-right: 4%;
-}
-
-i {
- font-size: 35px;
- color: black;
-}
-
-i:hover{
-  cursor: pointer;
-}
-
 
 
 @media (max-width: 800px) {
   .aboutContainer{
     width: 80%;
   }
+
 
   .WorkOptions{
     height: 750px;
