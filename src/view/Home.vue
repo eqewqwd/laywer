@@ -33,6 +33,20 @@
   </div>
 </div>
 
+<div class="OurRecommend">
+  <h1>עיסוקי המשרד</h1>
+  <div class="carousel">
+    <div class="carousel-items" :style="{transform: 'translateX(' + translateValue + '%)'}">
+      <div class="item" v-for="(item, index) in carouselItems" :key="index">{{ item }}</div>
+    </div>
+  </div>
+  <div class="navigation">
+    <button @click="prev">Previous</button>
+    <button @click="next">Next</button>
+  </div>
+
+</div>
+
 
 <div class="empty">
 </div>
@@ -65,7 +79,8 @@ export default {
 },
   data(){
       return{
-
+        carouselItems: ['Item 1', 'Item 2', 'Item 3'],
+        currentIndex: 0,
         //post
         Infoid:null,
         InfoHomePost:'',
@@ -103,7 +118,18 @@ export default {
     this.GetForms()
     this.userData()
   },
+  computed: {
+    translateValue() {
+      return this.currentIndex * -100;
+    }
+  },
   methods: {
+    prev() {
+      this.currentIndex = (this.currentIndex - 1 + this.carouselItems.length) % this.carouselItems.length;
+    },
+    next() {
+      this.currentIndex = (this.currentIndex + 1) % this.carouselItems.length;
+    },
     StartEdit(res){
       if(res == 'InfoOffice'){
         if(this.editModeHomeInfo == false){
@@ -386,29 +412,55 @@ background-repeat: no-repeat;
 }
 
 
-  /* ------------ OurReccomended ---------------- */
-.OurReccomended{
+/* ------------------ OurRecommend -------------------- */
+
+.OurRecommend{
   position: relative;
-  top: 10vh;
-  width: 100%;
-  height: 85vh;
-  background-color: rgb(229, 224, 225);
-}
-.TextCenter{
+  direction: ltr !important;
+  background-image: linear-gradient(to bottom, white, gray);
+background-position: center;
+background-repeat: no-repeat;
+  top: 200px;
   border: 1px solid none;
-  text-align: center;
-  position: absolute;
   width: 100%;
-  top: 7%;
-  z-index: 23123213321321;
+  height: 60vh;
 }
-.TextCenter h2{
+
+.OurRecommend h1{
+  color: black;
+  text-align: center;
+  padding: 30px;
   font-size: 45px;
 }
 
-.TextCenter h2 i{
-  color: rgb(210, 178, 2);
+.carousel {
+  width: 300px;
+  overflow: hidden;
 }
+
+.carousel-items {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.item {
+  flex: 0 0 100px;
+  height: 100px;
+  margin: 10px;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation {
+  margin-top: 10px;
+}
+
+button {
+  margin: 5px;
+}
+
 
 
 @media (max-width: 800px) {
