@@ -35,7 +35,7 @@ exports.handler = async function (event, context) {
       const photos = await collection.find().toArray();
       const photoList = photos.map((photo) => {
         return {
-          image:"data:" + photo.type + ";base64," + photo.image.toString("base64"),
+          image:`data:${photo.type};base64,` + photo.image.toString("base64"),
         };
       });
       return {
