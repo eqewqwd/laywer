@@ -1,5 +1,5 @@
 // netlify-functions/uploadPhoto.js
-const { MongoClient } = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 
 exports.handler = async (event, context) => {
   try {
