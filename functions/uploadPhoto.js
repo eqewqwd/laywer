@@ -10,7 +10,7 @@ exports.handler = async function(event, context) {
     const db = client.db('lawyerWeb');
     const collection = db.collection('images');
     try {
-    if (event.httpMethod == 'POST') {
+    if (event.httpMethod === 'POST') {
       const { name, image } = JSON.parse(event.body);
 
       // Save photo details to the database
