@@ -22,7 +22,7 @@
 </form>
 
 <div v-for="photo in photos" :key="photo._id">
-    <img :src="photo.url" alt="Uploaded photo" style="max-width: 200px;" />
+    <img :src="photo.image" alt="Uploaded photo" style="max-width: 200px;" />
   </div>
 
 
@@ -56,6 +56,7 @@ export default {
 
         selectedFile: null,
         photos: [],
+
       }
   },
   created(){
@@ -71,20 +72,24 @@ export default {
     },
     async uploadPhoto() {
       try {
-        const formData = new FormData();
-        formData.append("photo", this.selectedFile);
+        const reader = new FileReader();
+        reader.readAsDataURL(this.selectedFile);
+        reader.onload = async () => {
+          const base64String = reader.result.replace("data:image/jpeg;base64,", "");
+          const response = await axios.post(
+            "/.netlify/functions/uploadPhoto",
+            base64String,
+            {
+              headers: {
+                "Content-Type": "text/plain",
+              },
+            }
+          );
 
-        console.log(this.selectedFile)
-
-        const response = await axios.post("/.netlify/functions/uploadPhoto", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-
-        console.log(response.data.message);
-        this.selectedFile = null;
-        this.fetchPhotos();
+          console.log(response.data.message);
+          this.selectedFile = null;
+          this.fetchPhotos();
+        };
       } catch (error) {
         console.error("Error:", error);
       }

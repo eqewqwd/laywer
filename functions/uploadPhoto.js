@@ -17,9 +17,10 @@ exports.handler = async function (event, context) {
     const collection = db.collection(collectionName);
 
     if (event.httpMethod === "POST") {
-      const photo = JSON.parse(event.body);
+      const base64String = event.body;
+      const binaryData = Buffer.from(base64String, "base64");
 
-      const result = await collection.insertOne(photo);
+      const result = await collection.insertOne({ image: binaryData });
       return {
         statusCode: 200,
         body: JSON.stringify({ message: "Photo uploaded successfully" }),
@@ -28,9 +29,14 @@ exports.handler = async function (event, context) {
 
     if (event.httpMethod === "GET") {
       const photos = await collection.find().toArray();
+      const photoList = photos.map((photo) => {
+        return {
+          image: photo.image.toString("base64"),
+        };
+      });
       return {
         statusCode: 200,
-        body: JSON.stringify(photos),
+        body: JSON.stringify(photoList),
       };
     }
   } catch (error) {
@@ -40,6 +46,6 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({ message: "An error occurred" }),
     };
   } finally {
-    client.close();
+    await client.close();
   }
 };
