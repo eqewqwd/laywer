@@ -72,6 +72,7 @@ export default {
     },
     async uploadPhoto() {
       try {
+        console.log(this.selectedFile)
         const reader = new FileReader();
         reader.readAsDataURL(this.selectedFile);
         reader.onload = async () => {
