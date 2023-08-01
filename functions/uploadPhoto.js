@@ -8,6 +8,11 @@ exports.handler = async (event, context) => {
     const client = new MongoClient(uri);
     await client.connect();
 
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ event }),
+      };
+
     const db = client.db("lawyerWeb");
     const collection = db.collection("images");
 
@@ -20,10 +25,10 @@ exports.handler = async (event, context) => {
 
     client.close();
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'Photo uploaded successfully' }),
-    };
+    // return {
+    //   statusCode: 200,
+    //   body: JSON.stringify({ message: 'Photo uploaded successfully' }),
+    // };
   } catch (error) {
     return {
       statusCode: 500,
