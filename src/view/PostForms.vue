@@ -4,7 +4,7 @@
 <form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
-  <input type="file" @change="handleFileChange" />
+  <input type="file" ref="file" @change="handleFileChange" />
   <br>
   <label>שם URL :</label>
   <input type="text" v-model="PostName" required>
@@ -66,8 +66,8 @@ export default {
     this.fetchPhotos();
   },
   methods: {
-    handleFileChange(event) {
-      this.selectedFile = event.target.files[0];
+    handleFileChange() {
+      this.selectedFile = this.$refs.file.files[0];
     },
     async uploadPhoto() {
       try {
