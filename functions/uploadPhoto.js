@@ -2,14 +2,14 @@
 const { MongoClient } = require('mongodb');
 
 exports.handler = async function(event, context) {
-  try {
+
     const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
 
     const db = client.db('lawyerWeb');
     const collection = db.collection('images');
-
+    try {
     if (event.httpMethod == 'POST') {
       const { name, image } = JSON.parse(event.body);
 
@@ -35,6 +35,6 @@ exports.handler = async function(event, context) {
       body: JSON.stringify({ error: 'Error uploading photo' })
     };
   } finally {
-    client.close();
+    await client.close();
   }
 };
