@@ -15,7 +15,7 @@ exports.handler = async function (event, context) {
   try {
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
-    const { base64String, type } = JSON.parse(event.body);
+    const { base64String, type } = event.body;
 
     if (event.httpMethod === "POST") {
       const binaryData = Buffer.from(base64String, "base64");
