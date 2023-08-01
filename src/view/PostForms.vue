@@ -63,6 +63,7 @@ export default {
   },
   async mounted(){
     await this.userData()
+    this.fetchPhotos();
   },
   methods: {
     handleFileChange(event) {
