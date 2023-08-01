@@ -79,10 +79,8 @@ export default {
           const base64String = reader.result.replace("data:image/jpeg;base64,", "");
           const typeProp = this.selectedFile.type
           const response = await axios.post(
-            "/.netlify/functions/uploadPhoto",{
+            "/.netlify/functions/uploadPhoto",
             base64String,
-            typeProp,
-            },
             {
               headers: {
                 "Content-Type": "text/plain",
