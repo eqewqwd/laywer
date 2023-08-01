@@ -1,10 +1,10 @@
 // netlify-functions/uploadPhoto.js
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
 
-exports.handler = async (event, context) => {
-  try {
-    const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
-    const client = new MongoClient(uri);
+exports.handler = async function(event, context) {
+  
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
 
     const db = client.db('lawyerWeb');
@@ -13,7 +13,7 @@ exports.handler = async (event, context) => {
     // Parse the incoming base64 image data
     const imageData = JSON.parse(event.body).image;
     const buffer = Buffer.from(imageData, 'base64');
-
+    try {
     // Insert the image into MongoDB
     const result = await collection.insertOne({ image: buffer });
 
