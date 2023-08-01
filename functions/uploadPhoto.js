@@ -20,7 +20,7 @@ exports.handler = async function (event, context) {
     if (event.httpMethod === "POST") {
       const binaryData = Buffer.from(base64String, "base64");
 
-      const result = await collection.insertOne({ image: binaryData });
+      const result = await collection.insertOne({ image: binaryData , type:type });
       return {
         statusCode: 200,
         body: JSON.stringify({ message: "Photo uploaded successfully" }),
@@ -31,7 +31,7 @@ exports.handler = async function (event, context) {
       const photos = await collection.find().toArray();
       const photoList = photos.map((photo) => {
         return {
-          image:type + photo.image.toString("base64"),
+          image:photo.type + photo.image.toString("base64"),
         };
       });
       return {
