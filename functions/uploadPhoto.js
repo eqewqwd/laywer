@@ -19,7 +19,7 @@ exports.handler = async function (event, context) {
 
     return {
         statusCode: 200,
-        body: JSON.parse(event.body),
+        body: JSON.stringify(event.body),
       };
     try {
     if (event.httpMethod === "POST") {
