@@ -53,7 +53,8 @@ export default {
   mounted() {
     // addEventListener.this.OpenMenu()
     this.changeNavByRoute()
-    this.userData()
+    // this.userData()
+    console.log(this.user)
   },
   data(){
     return{
