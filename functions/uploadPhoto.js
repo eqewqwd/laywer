@@ -12,20 +12,19 @@ exports.handler = async function (event, context) {
     useUnifiedTopology: true,
   });
 
-
+  try {
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
-    const { base64String, type } = event.body;
+    const { base64String, typeProp } = JSON.parse(event.body);
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(event.body),
-      };
-    try {
     if (event.httpMethod === "POST") {
       const binaryData = Buffer.from(base64String, "base64");
+      datafix = {
+        image: binaryData,
+        type: typeProp,
+      }
 
-      const result = await collection.insertOne({ image: binaryData });
+      const result = await collection.insertOne({ datafix });
       return {
         statusCode: 200,
         body: JSON.stringify({ message: "Photo uploaded successfully" }),
