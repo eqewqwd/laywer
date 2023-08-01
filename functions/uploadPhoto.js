@@ -17,6 +17,11 @@ exports.handler = async function (event, context) {
     const collection = db.collection(collectionName);
     const { base64String, type } = event.body;
 
+    return {
+        statusCode: 200,
+        body: JSON.parse(event.body),
+      };
+
     if (event.httpMethod === "POST") {
       const binaryData = Buffer.from(base64String, "base64");
 
