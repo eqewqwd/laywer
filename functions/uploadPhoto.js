@@ -5,7 +5,7 @@ const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mong
 
 exports.handler = async function(event, context) {
 
-    const client = new MongoClient(uri);
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
 
     const db = client.db("lawyerWeb");
