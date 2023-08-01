@@ -4,7 +4,7 @@
 <form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
-  <input type="file" @change="this.onFileChange($event)" />
+  <input type="file" @change="handleFileChange" />
   <br>
   <label>שם URL :</label>
   <input type="text" v-model="PostName" required>
@@ -21,7 +21,9 @@
   <button type="submit">הוספת מאמר</button>
 </form>
 
-<img :src="photoUrl" v-if="photoUrl" alt="Uploaded Photo" />
+<div v-for="photo in photos" :key="photo._id">
+    <img :src="photo.url" alt="Uploaded photo" style="max-width: 200px;" />
+  </div>
 
 
 <Footer/>
@@ -52,8 +54,8 @@ export default {
         PostInfo:'',
         user:null,
 
-        photoName: 'test',
-        file: null
+        selectedFile: null,
+        photos: [],
       }
   },
   created(){
@@ -63,36 +65,33 @@ export default {
     await this.userData()
   },
   methods: {
-
-    onFileChange(event) {
-      this.file = event.target.files[0];
+    handleFileChange(event) {
+      this.selectedFile = event.target.files[0];
     },
     async uploadPhoto() {
       try {
         const formData = new FormData();
-        formData.append('name', this.photoName);
-        formData.append('image', this.file);
+        formData.append("photo", this.selectedFile);
 
-        await axios.post('/.netlify/functions/uploadPhoto', formData, {
+        const response = await axios.post("/.netlify/functions/uploadPhoto", formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            "Content-Type": "multipart/form-data",
+          },
         });
 
+        console.log(response.data.message);
+        this.selectedFile = null;
+        this.fetchPhotos();
       } catch (error) {
-        console.error(error);
+        console.error("Error:", error);
       }
     },
-    async retrievePhoto() {
+    async fetchPhotos() {
       try {
-        const photoId = 'YOUR_PHOTO_ID_FROM_BACKEND';
-        const response = await axios.get('/.netlify/functions/getPhoto', {
-          params: { id: photoId },
-        });
-
-        this.photoUrl = `data:image/png;base64,${response.data.photo}`;
+        const response = await axios.get("/.netlify/functions/uploadPhoto");
+        this.photos = response.data;
       } catch (error) {
-        console.error('Error retrieving photo:', error);
+        console.error("Error:", error);
       }
     },
    
@@ -120,28 +119,28 @@ export default {
 
       await this.uploadPhoto()
 
-      sessionStorage.clear()
+      // sessionStorage.clear()
       
-      let imgForm = this.PostImg
-      let name = this.PostName
-      let title = this.PostTitle
-      let subTitle = this.PostSubTitle
-      let info = this.PostInfo
+      // let imgForm = this.PostImg
+      // let name = this.PostName
+      // let title = this.PostTitle
+      // let subTitle = this.PostSubTitle
+      // let info = this.PostInfo
       
-      const d = new Date();
-      let day = d.getDate()
-      let month = d.getMonth() + 1
-      let year = d.getFullYear()
+      // const d = new Date();
+      // let day = d.getDate()
+      // let month = d.getMonth() + 1
+      // let year = d.getFullYear()
 
-      let postDate = day + "/" + month + "/" + year
+      // let postDate = day + "/" + month + "/" + year
 
 
-      await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate }).then(response => {
-          console.log(name);
+      // await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate }).then(response => {
+      //     console.log(name);
 
-      }).catch(error => {
-          console.log(error);
-      });
+      // }).catch(error => {
+      //     console.log(error);
+      // });
 
     },
   }
