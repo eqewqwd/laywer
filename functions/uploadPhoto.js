@@ -2,7 +2,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
 
-exports.handler = async function(event, context) {
+exports.handler = async (event, context) =>{
     const imageData = JSON.parse(event.body).image;
     return {
         statusCode: 200,
