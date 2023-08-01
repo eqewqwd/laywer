@@ -36,7 +36,7 @@ exports.handler = async function (event, context) {
       const photoList = photos.map((photo) => {
         return {
             
-          image:'data:' + String(photo.type) + ';base64,' + photo.image.toString("base64"),
+          image:'data:image/jpeg;base64,' + photo.image.toString("base64"),
         };
       });
       return {
