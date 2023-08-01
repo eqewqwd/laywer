@@ -11,15 +11,15 @@ exports.handler = async (event, context) => {
     const db = client.db("lawyerWeb");
     const collection = db.collection("images");
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify( event.body ),
-      };
+    
 
     // Parse the incoming base64 image data
     const imageData = JSON.parse(event.body).image;
     const buffer = Buffer.from(imageData, 'base64');
-
+    return {
+        statusCode: 200,
+        body: JSON.parse( event.body ),
+      };
     // Insert the image into MongoDB
     const result = await collection.insertOne({ image: buffer });
 
