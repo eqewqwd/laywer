@@ -15,11 +15,12 @@ exports.handler = async (event, context) => {
 
     // Parse the incoming base64 image data
     const imageData = JSON.parse(event.body);
-    const buffer = Buffer.from(imageData, 'base64');
     return {
         statusCode: 200,
         body: JSON.parse( event.body ),
       };
+    const buffer = Buffer.from(imageData, 'base64');
+   
     // Insert the image into MongoDB
     const result = await collection.insertOne({ image: buffer });
 
