@@ -1,4 +1,5 @@
 <template>
+    <router-link @click="scrollUp()" style="text-decoration: none;color: black;" :to="({ name: 'FormsContainer', params: { name: this.name } })">
   <div class="FormContainerHome">
     <!-- <img :src=post.imgForm> -->
     <div class="imgDiv">
@@ -11,6 +12,8 @@
       {{ info }}
     </p>
   </div>
+</router-link>
+
 </template>
 
 <script>
@@ -18,7 +21,7 @@
 
 export default {
     name: "OptionsContainer",
-    props:['title','info','img'],
+    props:['name','title','info','img'],
     data() {
         return {
         }
@@ -28,7 +31,9 @@ export default {
     mounted(){
     }, 
     methods:{
-
+      scrollUp(){
+        window.scrollTo(0,0)
+      }
     }
 }
 </script>
@@ -40,8 +45,8 @@ export default {
 
 .FormContainerHome{
   position: relative;
-  margin-left: 20px;
-  margin-top: 60px;
+  /* margin-left: 20px;*/
+  margin-top: 60px; 
   border:1px solid none;
   width: 330px;
   height: 600px;

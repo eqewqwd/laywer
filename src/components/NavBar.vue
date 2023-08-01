@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <span class="loginuser" v-if="user"><h1>ברוכה הבאה {{ user.name }} </h1><i class="bi bi-person-circle"></i><i @click="exitUser()" class="bi bi-box-arrow-right signOut"></i></span>
+    <span class="loginuser" v-if="this.user"><h1>ברוכה הבאה {{ this.user.name }} </h1><i class="bi bi-person-circle"></i><i @click="exitUser()" class="bi bi-box-arrow-right signOut"></i></span>
     <img class="imgAll" src="@/assets/Logo/logo.png" alt="">
     <!-- <a @click="OpenMenu" class="toggle-button">
       <span class="bar" id="first"></span>
@@ -49,6 +49,7 @@ export default {
   
 
   name: 'Navbar',
+  props:['user'],
   mounted() {
     // addEventListener.this.OpenMenu()
     this.changeNavByRoute()
@@ -98,24 +99,24 @@ export default {
       }
 
     },
-    async userData(){
+//     async userData(){
 
        
-var token = localStorage.getItem("token"); // Replace this with the actual token
+// var token = localStorage.getItem("token"); // Replace this with the actual token
 
-await axios
-  .get('/.netlify/functions/user-data', {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-  .then(response => {
-    this.user = response.data
-  })
-  .catch(error => {
-    console.error('Error fetching user data:', error);
-  });
-},
+// await axios
+//   .get('/.netlify/functions/user-data', {
+//     headers: {
+//       Authorization: `Bearer ${token}`
+//     }
+//   })
+//   .then(response => {
+//     this.user = response.data
+//   })
+//   .catch(error => {
+//     console.error('Error fetching user data:', error);
+//   });
+// },
 exitUser(){
       localStorage.clear()
       alert('חשבון התנתק מהמערכת')

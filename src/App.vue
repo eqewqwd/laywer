@@ -16,7 +16,8 @@ export default {
 <style>
 #app {
   /* margin-top: 100px; */
-  font-family: system-ui;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  /* font-family: system-ui; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50 !important;

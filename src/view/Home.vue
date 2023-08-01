@@ -8,10 +8,15 @@
     <h3>משרד עורכי דין וגישור</h3>
     <br>
     <img src="@/assets/Logo/agreement.png">
+    <br>
+    <br>
+    <br>
+    <h3 class="h1two" style="color: #2c3e50;-webkit-font-smoothing: antialiased;">" אל תתפללו לחיים קלים יותר, וודאו שאתם נעשים חזקים יותר "</h3>
   </div>
   <div class="imgContainer">
     <img src="@/assets/photo/laywerWomen2.png">
   </div>
+ 
 </div>
 
 <div class="aboutContainer">
@@ -37,7 +42,7 @@
   <h1>מאמרים</h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <div class="FormDivHome">
-      <FormsHome v-for="(form, index) in FormsCards" :title="form.title" :info="form.info" :img="form.imgForm"  :key="index" />
+      <FormsHome v-for="(form, index) in FormsCards" :name="form.name" :title="form.title" :info="form.info" :img="form.imgForm"  :key="index" />
   </div>
 
 </div>
@@ -422,35 +427,53 @@ background-repeat: no-repeat;
 
 .OurRecommend .lineGold{
   padding: 30px;
-  width: 550px;
+  width: 40%;
   position: relative;
   left: 50%;
   transform: translate(-50%);
 }
 
 .OurRecommend h1{
+  border: 1px solid none;
+  position: relative;
   color: black;
-  text-align: center;
+  width: fit-content;
+  left: 50%;
+  transform: translate(-50%);
   padding: 30px;
-  font-size: 45px;
+  font-size: 55px;
 }
 
 .OurRecommend .FormDivHome{
   position: relative;
   border: 1px solid none;
-  padding-left: 60px;
   left: 50%;
   transform: translate(-50%);
-  width: 80%;
+  width: 75%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
+}
+
+
+@media (max-width: 1200px) {
+  .TitleContainer h3.h1two{
+    font-size: 3vw;
+  }
+
+  .OurRecommend .lineGold{
+    width: 70%;
+  }
 }
 
 
 @media (max-width: 800px) {
   .aboutContainer{
     width: 80%;
+  }
+
+  .h1two{
+    display: none;
   }
 
 
