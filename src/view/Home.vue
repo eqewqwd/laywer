@@ -1,5 +1,5 @@
 <template>
-<NavBar :user="this.user"/>
+<NavBar/>
 
 <div class="PosterHome">
   <div class="TitleContainer">
