@@ -1,33 +1,40 @@
-// netlify-functions/uploadPhoto.js
+// functions/uploadPhoto.js
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
-
 
 exports.handler = async function(event, context) {
-
+  try {
+    const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
 
-    const db = client.db("lawyerWeb");
-    const collection = db.collection("images");
+    const db = client.db('lawyerWeb');
+    const collection = db.collection('images');
 
-    // Parse the incoming base64 image data
-    const imageData = JSON.parse(event.body).image;
-    const buffer = Buffer.from(imageData, 'base64');
-    try {
-    // Insert the image into MongoDB
-    const result = await collection.insertOne({ image: buffer });
+    if (event.httpMethod === 'POST') {
+      const { name, image } = JSON.parse(event.body);
 
-    client.close();
+      // Save photo details to the database
+      await collection.insertOne({
+        name: name,
+        image: image // You can store the image URL or file path here
+      });
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'Photo uploaded successfully' }),
-    };
+      return {
+        statusCode: 201,
+        body: JSON.stringify({ message: 'Photo uploaded successfully' })
+      };
+    } else {
+      return {
+        statusCode: 405,
+        body: JSON.stringify({ error: 'Method not allowed' })
+      };
+    }
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Something went wrong' }),
+      body: JSON.stringify({ error: 'Error uploading photo' })
     };
+  } finally {
+    client.close();
   }
 };

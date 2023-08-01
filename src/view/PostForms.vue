@@ -4,7 +4,7 @@
 <form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
-  <input type="file" @change="this.handleFileUpload($event)" />
+  <input type="file" @change="onFileChange($event)" />
   <br>
   <label>שם URL :</label>
   <input type="text" v-model="PostName" required>
@@ -52,8 +52,8 @@ export default {
         PostInfo:'',
         user:null,
 
-        selectedFile: null,
-        photoUrl: '',
+        photoName: '',
+        file: null
       }
   },
   created(){
@@ -61,21 +61,26 @@ export default {
   },
   async mounted(){
     await this.userData()
-    this.retrievePhoto();
   },
   methods: {
 
-    handleFileUpload(event) {
-      this.selectedFile = event.target.files[0];
+    onFileChange(event) {
+      this.file = event.target.files[0];
     },
     async uploadPhoto() {
-      const formData = new FormData();
-      formData.append('image', this.selectedFile);
       try {
-        await axios.post('/.netlify/functions/uploadPhoto', formData);
-        alert('Photo uploaded successfully');
+        const formData = new FormData();
+        formData.append('name', this.photoName);
+        formData.append('image', this.file);
+
+        await axios.post('/.netlify/functions/uploadPhoto', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+
       } catch (error) {
-        console.error('Error uploading photo:', error);
+        console.error(error);
       }
     },
     async retrievePhoto() {
