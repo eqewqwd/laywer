@@ -1,8 +1,13 @@
 // netlify-functions/uploadPhoto.js
-const { MongoClient } = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/?retryWrites=true&w=majority";
 
 exports.handler = async function(event, context) {
+    const imageData = JSON.parse(event.body).image;
+    return {
+        statusCode: 200,
+        body: JSON.stringify(imageData),
+    };
     try {
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
