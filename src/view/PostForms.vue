@@ -72,7 +72,7 @@ export default {
       const formData = new FormData();
       formData.append('image', this.selectedFile);
       console.log(formData)
-      console.log(formData.image)
+      console.log(formData)
 
       try {
         await axios.post('/.netlify/functions/uploadPhoto', formData);

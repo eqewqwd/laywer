@@ -14,7 +14,7 @@ exports.handler = async (event, context) => {
     
 
     // Parse the incoming base64 image data
-    const imageData = JSON.parse(event.body).image;
+    const imageData = JSON.parse(event.body);
     const buffer = Buffer.from(imageData, 'base64');
     return {
         statusCode: 200,
