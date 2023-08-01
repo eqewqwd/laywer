@@ -72,7 +72,7 @@ export default {
     },
     async uploadPhoto() {
       try {
-        console.log(this.selectedFile)
+        const type = this.selectedFile.type;
         const reader = new FileReader();
         reader.readAsDataURL(this.selectedFile);
         reader.onload = async () => {
@@ -80,6 +80,7 @@ export default {
           const response = await axios.post(
             "/.netlify/functions/uploadPhoto",
             base64String,
+            type,
             {
               headers: {
                 "Content-Type": "text/plain",
