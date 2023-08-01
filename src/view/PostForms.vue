@@ -97,8 +97,7 @@ export default {
     async fetchPhotos() {
       try {
         const response = await axios.get("/.netlify/functions/uploadPhoto");
-        // this.photos = 'data:image/jpeg;base64,' + response.data;
-        console.log(response.data)
+        this.photos = response.data;
       } catch (error) {
         console.error("Error:", error);
       }
