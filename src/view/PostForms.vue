@@ -1,7 +1,7 @@
 <template>
 <NavBar/>
 
-<form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
+<form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="!user">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
   <input type="file" ref="file" @change="handleFileChange" />
@@ -72,7 +72,7 @@ export default {
     },
     async uploadPhoto() {
       try {
-        console.log(this.selectedFile.type)
+        console.log(typeof this.selectedFile.type)
         const reader = new FileReader();
         reader.readAsDataURL(this.selectedFile);
         reader.onload = async () => {
