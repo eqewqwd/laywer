@@ -8,13 +8,13 @@ exports.handler = async (event, context) => {
     const client = new MongoClient(uri);
     await client.connect();
 
+    const db = client.db("lawyerWeb");
+    const collection = db.collection("images");
+
     return {
         statusCode: 200,
         body: JSON.stringify( event.body ),
       };
-
-    const db = client.db("lawyerWeb");
-    const collection = db.collection("images");
 
     // Parse the incoming base64 image data
     const imageData = JSON.parse(event.body).image;
