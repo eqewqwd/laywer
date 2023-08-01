@@ -12,7 +12,7 @@ exports.handler = async function (event, context) {
     useUnifiedTopology: true,
   });
 
-  try {
+
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
     const { base64String, type } = event.body;
@@ -21,7 +21,7 @@ exports.handler = async function (event, context) {
         statusCode: 200,
         body: JSON.parse(event.body),
       };
-
+    try {
     if (event.httpMethod === "POST") {
       const binaryData = Buffer.from(base64String, "base64");
 
