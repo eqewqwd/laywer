@@ -44,7 +44,7 @@ exports.handler = async function (event, context) {
         }
         return {
             
-          image:fixUrl + photo.image.toString("base64"),
+          image:"data:image/png;base64," + photo.image.toString("base64"),
         };
       });
       return {
