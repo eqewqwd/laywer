@@ -52,7 +52,7 @@ export default {
         PostInfo:'',
         user:null,
 
-        photoName: '',
+        photoName: 'test',
         file: null
       }
   },

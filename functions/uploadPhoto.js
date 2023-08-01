@@ -15,8 +15,8 @@ exports.handler = async function(event, context) {
 
       // Save photo details to the database
       await collection.insertOne({
-        name: `${name}`,
-        image:`${image}` // You can store the image URL or file path here
+        name: name,
+        image: image // You can store the image URL or file path here
       });
 
       return {
