@@ -4,7 +4,7 @@
 <form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
-  <input type="file" @change="handleFileChange" />
+  <input type="file" @change="handleFileUpload" />
   <br>
   <label>שם URL :</label>
   <input type="text" v-model="PostName" required>
@@ -21,10 +21,7 @@
   <button type="submit">הוספת מאמר</button>
 </form>
 
-<div v-if="imageURL">
-      <img :src="imageURL" alt="Uploaded Image" />
-    </div>
-
+<img :src="photoUrl" v-if="photoUrl" alt="Uploaded Photo" />
 
 
 <Footer/>
@@ -56,7 +53,7 @@ export default {
         user:null,
 
         selectedFile: null,
-        imageURL: null,
+        photoUrl: '',
       }
   },
   created(){
@@ -64,32 +61,38 @@ export default {
   },
   async mounted(){
     await this.userData()
+    this.retrievePhoto();
   },
   methods: {
 
-    handleFileChange(event) {
+    handleFileUpload(event) {
       this.selectedFile = event.target.files[0];
     },
-    async uploadImage() {
+    async uploadPhoto() {
       const formData = new FormData();
       formData.append('image', this.selectedFile);
 
       try {
-        const response = await axios.post('/.netlify/functions/uploadImage', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-
-        console.log(response.data.message);
-
-        // Display the uploaded image by fetching it from the server
-        const imageResponse = await axios.get('/.netlify/functions/GetImg');
-        this.imageURL = 'data:' + imageResponse.headers['content-type'] + ';base64,' + imageResponse.data;
+        await axios.post('/.netlify/functions/uploadPhoto', formData);
+        alert('Photo uploaded successfully');
       } catch (error) {
-        console.error('Error uploading image:', error);
+        console.error('Error uploading photo:', error);
       }
     },
+    async retrievePhoto() {
+      try {
+        const photoId = 'YOUR_PHOTO_ID_FROM_BACKEND';
+        const response = await axios.get('/.netlify/functions/getPhoto', {
+          params: { id: photoId },
+        });
+
+        this.photoUrl = `data:image/png;base64,${response.data.photo}`;
+      } catch (error) {
+        console.error('Error retrieving photo:', error);
+      }
+    },
+   
+   
     async userData(){
 
        
@@ -111,7 +114,7 @@ export default {
     },
     async PostForm(){
 
-      await this.uploadImage()
+      await this.uploadPhoto()
 
       sessionStorage.clear()
       
