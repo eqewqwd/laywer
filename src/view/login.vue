@@ -22,7 +22,7 @@
 
     <!-- Login Form -->
     <form @submit.prevent="handleLogin()">
-      <input type="text" v-model="username" id="login" class="fadeIn second" name="login" placeholder="אימייל">
+      <input type="text" v-model="username" id="login" class="fadeIn second" name="login" placeholder="שם משתמש">
       <input type="password" v-model="password" class="fadeIn third" name="login" placeholder="סיסמא">
       <input type="submit" class="fadeIn fourth" value="כניסה">
     </form>
