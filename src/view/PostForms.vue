@@ -74,6 +74,8 @@ export default {
         const formData = new FormData();
         formData.append("photo", this.selectedFile);
 
+        console.log(this.selectedFile)
+
         const response = await axios.post("/.netlify/functions/uploadPhoto", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
