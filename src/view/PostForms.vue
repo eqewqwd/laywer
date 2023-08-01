@@ -71,9 +71,6 @@ export default {
     async uploadPhoto() {
       const formData = new FormData();
       formData.append('image', this.selectedFile);
-      console.log(formData)
-      console.log(formData)
-
       try {
         await axios.post('/.netlify/functions/uploadPhoto', formData);
         alert('Photo uploaded successfully');
