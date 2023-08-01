@@ -72,11 +72,13 @@ export default {
     },
     async uploadPhoto() {
       try {
-        const type = this.selectedFile.type;
+        console.log(this.selectedFile.type)
         const reader = new FileReader();
         reader.readAsDataURL(this.selectedFile);
         reader.onload = async () => {
           const base64String = reader.result.replace("data:image/jpeg;base64,", "");
+          const type = this.selectedFile.type
+          console.log(type)
           const response = await axios.post(
             "/.netlify/functions/uploadPhoto",
             base64String,
