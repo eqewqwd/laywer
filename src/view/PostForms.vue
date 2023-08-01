@@ -4,7 +4,7 @@
 <form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
   <label>תמונה:</label>
   <input type="text" v-model="PostImg" required>
-  <input type="file" @change="(e)=>handleFileUpload(e)" />
+  <input type="file" @change="this.handleFileUpload($event)" />
   <br>
   <label>שם URL :</label>
   <input type="text" v-model="PostName" required>
