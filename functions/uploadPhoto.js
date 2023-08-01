@@ -24,7 +24,7 @@ exports.handler = async function (event, context) {
         type: typeProp,
       }
 
-      const result = await collection.insertOne({ datafix });
+      const result = await collection.insertOne( datafix );
       return {
         statusCode: 200,
         body: JSON.stringify({ message: "Photo uploaded successfully" }),
