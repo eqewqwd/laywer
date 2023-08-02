@@ -76,20 +76,21 @@ export default {
         const reader = new FileReader();
         reader.readAsDataURL(this.selectedFile);
         reader.onload = async () => {
+          const redear = reader.result.split(',');
           const base64String = null;
-          if(reader.result == "data:image/png;base64,"){
+          if(redear[0] == "data:image/png;base64,"){
             base64String = reader.result.replace("data:image/png;base64,", "");
-          }else if(reader.result == "data:image/jpg;base64,"){
+          }else if(redear[0] == "data:image/jpg;base64,"){
             base64String = reader.result.replace("data:image/jpg;base64,", "");
-          }else if(reader.result == "data:image/jpeg;base64,"){
+          }else if(redear[0] == "data:image/jpeg;base64,"){
             base64String = reader.result.replace("data:image/jpeg;base64,", "");
-          }else if(reader.result == "data:image/JPG;base64,"){
+          }else if(redear[0] == "data:image/JPG;base64,"){
             base64String = reader.result.replace("data:image/JPG;base64,", "");
-          }else if(reader.result == "data:image/JPEG;base64,"){
+          }else if(redear[0] == "data:image/JPEG;base64,"){
             base64String = reader.result.replace("data:image/JPEG;base64,", "");
           }
           const typeProp = this.selectedFile.type
-          console.log(reader.result)
+          console.log(redear[0])
           console.log(base64String)
           console.log(typeProp)
           const response = await axios.post(
