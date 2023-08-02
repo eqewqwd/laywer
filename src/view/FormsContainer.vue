@@ -128,21 +128,17 @@ export default {
       
   },
   created(){  
-    
-  },
-  async mounted(){
-   await this.userData()
-   this.imgForm = this.post.binaryData
-   this.typeProp = this.post.typeProp
-
-   this.postImg = `data:${this.typeProp};base64,${this.imgForm}`
-  },
-  beforeMount(){
-    this.GetData()
     this.imgForm = this.post.binaryData
    this.typeProp = this.post.typeProp
 
    this.postImg = `data:${this.typeProp};base64,${this.imgForm}`
+  },
+  async mounted(){
+   await this.userData()
+
+  },
+  beforeMount(){
+    this.GetData()
     
   },
   beforeUnmount(){
