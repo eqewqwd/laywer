@@ -77,17 +77,16 @@ export default {
         reader.readAsDataURL(this.selectedFile);
         reader.onload = async () => {
           const redear = reader.result.split(',');
-          const base64String = null;
           if(redear[0] == "data:image/png;base64,"){
-            base64String = reader.result.replace("data:image/png;base64,", "");
+            var base64String = reader.result.replace("data:image/png;base64,", "");
           }else if(redear[0] == "data:image/jpg;base64,"){
-            base64String = reader.result.replace("data:image/jpg;base64,", "");
+            var base64String = reader.result.replace("data:image/jpg;base64,", "");
           }else if(redear[0] == "data:image/jpeg;base64,"){
-            base64String = reader.result.replace("data:image/jpeg;base64,", "");
+            var base64String = reader.result.replace("data:image/jpeg;base64,", "");
           }else if(redear[0] == "data:image/JPG;base64,"){
-            base64String = reader.result.replace("data:image/JPG;base64,", "");
+            var base64String = reader.result.replace("data:image/JPG;base64,", "");
           }else if(redear[0] == "data:image/JPEG;base64,"){
-            base64String = reader.result.replace("data:image/JPEG;base64,", "");
+            var base64String = reader.result.replace("data:image/JPEG;base64,", "");
           }
           const typeProp = this.selectedFile.type
           console.log(redear[0])
