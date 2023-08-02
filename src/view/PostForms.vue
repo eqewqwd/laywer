@@ -100,9 +100,9 @@ export default {
             }
           );
 
-          console.log(response.data.message);
+          console.log(response.data);
           this.selectedFile = null;
-          return (response.data.message);
+          return (response.data);
         };
       } catch (error) {
         console.error("Error:", error);
