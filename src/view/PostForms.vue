@@ -141,7 +141,7 @@ export default {
 
       const imgProp = await this.uploadPhoto()
 
-      dataImg = JSON.parse(imgProp)
+      dataImg = imgProp
 
       sessionStorage.clear()
       
