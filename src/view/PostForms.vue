@@ -102,7 +102,7 @@ export default {
 
           console.log(response.data);
           this.selectedFile = null;
-          return (response.data);
+          return response.data;
         };
       } catch (error) {
         console.error("Error:", error);
@@ -138,8 +138,9 @@ export default {
       });
     },
     async PostForm(){
-
+      console.log("start")
       const imgProp = await this.uploadPhoto()
+      console.log("end")
 
       dataImg = imgProp
 
