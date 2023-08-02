@@ -76,7 +76,13 @@ export default {
         const reader = new FileReader();
         reader.readAsDataURL(this.selectedFile);
         reader.onload = async () => {
-          const base64String = reader.result.replace("data:image/jpeg;base64,", "");
+          if(reader.result == "data:image/png;base64,"){
+            var base64String = reader.result.replace("data:image/png;base64,", "");
+          }else if(reader.result == "data:image/jpg;base64,"){
+            var base64String = reader.result.replace("data:image/jpg;base64,", "");
+          }else if(reader.result == "data:image/jpeg;base64,"){
+            var base64String = reader.result.replace("data:image/jpeg;base64,", "");
+          }
           const typeProp = this.selectedFile.type
           const response = await axios.post(
             "/.netlify/functions/uploadPhoto",
