@@ -4,7 +4,7 @@
 
 <div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">
-    <img :src=post.imgForm>
+    <img :src=this.postImg >
   </div>
   <div class="TitleDivPoster">
     <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
@@ -91,6 +91,8 @@ export default {
         subTitlePost:'',
         infoPost:'',
         // post
+
+        postImg: `data:${this.post.typeProp};base64,${this.post.imgForm}`,
 
         name:this.$route.params.name,
         id:null,

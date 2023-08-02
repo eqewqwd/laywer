@@ -21,14 +21,13 @@ exports.handler = async function (event, context) {
       const binaryData = Buffer.from(base64String, "base64");
 
       datafix = {
-        image: binaryData,
-        typeImg: typeProp
+        binaryData,
+        typeProp
       }
 
-      const result = await collection.insertOne(datafix);
       return {
         statusCode: 200,
-        body: datafix,
+        body: JSON.stringify(datafix),
       };
     }
 

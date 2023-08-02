@@ -102,7 +102,7 @@ export default {
 
           console.log(response.data.message);
           this.selectedFile = null;
-          this.fetchPhotos();
+          return (response.data.message);
         };
       } catch (error) {
         console.error("Error:", error);
@@ -139,30 +139,33 @@ export default {
     },
     async PostForm(){
 
-      await this.uploadPhoto()
+      const imgProp = await this.uploadPhoto()
 
-      // sessionStorage.clear()
+      dataImg = JSON.parse(imgProp)
+
+      sessionStorage.clear()
       
-      // let imgForm = this.PostImg
-      // let name = this.PostName
-      // let title = this.PostTitle
-      // let subTitle = this.PostSubTitle
-      // let info = this.PostInfo
+      let imgForm = dataImg[0]
+      let typeProp = dataImg[1]
+      let name = this.PostName
+      let title = this.PostTitle
+      let subTitle = this.PostSubTitle
+      let info = this.PostInfo
       
-      // const d = new Date();
-      // let day = d.getDate()
-      // let month = d.getMonth() + 1
-      // let year = d.getFullYear()
+      const d = new Date();
+      let day = d.getDate()
+      let month = d.getMonth() + 1
+      let year = d.getFullYear()
 
-      // let postDate = day + "/" + month + "/" + year
+      let postDate = day + "/" + month + "/" + year
 
 
-      // await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate }).then(response => {
-      //     console.log(name);
+      await axios.post('/.netlify/functions/PostForm',{ imgForm,typeProp,name,title,subTitle,info,postDate }).then(response => {
+          console.log(name);
 
-      // }).catch(error => {
-      //     console.log(error);
-      // });
+      }).catch(error => {
+          console.log(error);
+      });
 
     },
   }
