@@ -19,6 +19,7 @@ exports.handler = async function (event, context) {
     if (event.httpMethod === "POST") {
       const {base64String,TypeProp} = JSON.parse(event.body);
       const binaryData = Buffer.from(base64String, "base64");
+      
       datafix = {
         image: binaryData,
         typeImg: TypeProp
