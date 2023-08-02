@@ -17,12 +17,12 @@ exports.handler = async function (event, context) {
     const collection = db.collection(collectionName);
 
     if (event.httpMethod === "POST") {
-      const {base64String,TypeProp} = JSON.parse(event.body);
+      const { base64String , typeProp } = JSON.parse(event.body);
       const binaryData = Buffer.from(base64String, "base64");
-      
+
       datafix = {
         image: binaryData,
-        typeImg: TypeProp
+        typeImg: typeProp
       }
 
       const result = await collection.insertOne(datafix);
