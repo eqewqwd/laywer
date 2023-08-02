@@ -82,11 +82,17 @@ export default {
             var base64String = reader.result.replace("data:image/jpg;base64,", "");
           }else if(reader.result == "data:image/jpeg;base64,"){
             var base64String = reader.result.replace("data:image/jpeg;base64,", "");
+          }else if(reader.result == "data:image/JPG;base64,"){
+            var base64String = reader.result.replace("data:image/JPG;base64,", "");
+          }else if(reader.result == "data:image/JPEG;base64,"){
+            var base64String = reader.result.replace("data:image/JPEG;base64,", "");
           }
           const typeProp = this.selectedFile.type
           const response = await axios.post(
-            "/.netlify/functions/uploadPhoto",
-            base64String,
+            "/.netlify/functions/uploadPhoto",{
+              base64String,
+              typeProp
+            },
             {
               headers: {
                 "Content-Type": "text/plain",

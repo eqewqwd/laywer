@@ -17,10 +17,14 @@ exports.handler = async function (event, context) {
     const collection = db.collection(collectionName);
 
     if (event.httpMethod === "POST") {
-      const base64String = event.body;
+      const {base64String,TypeProp} = JSON.parse(event.body);
       const binaryData = Buffer.from(base64String, "base64");
+      datafix = {
+        image: binaryData,
+        typeImg: TypeProp
+      }
 
-      const result = await collection.insertOne({ image: binaryData });
+      const result = await collection.insertOne(datafix);
       return {
         statusCode: 200,
         body: JSON.stringify({ message: "Photo uploaded successfully" }),
