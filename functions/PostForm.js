@@ -9,7 +9,19 @@ exports.handler = async function(event, context) {
   const db = client.db("lawyerWeb");
   const collection = db.collection("Forms");
 
-  const data = JSON.parse(event.body);
+  
+  const {imgForm,typeProp,name,title,subTitle,info,postDate} = JSON.parse(event.body);
+  const binaryData = Buffer.from(imgForm, "base64");
+
+  const data = {
+    binaryData,
+    typeProp,
+    name,
+    title,
+    subTitle,
+    info,
+    postDate
+  }
 
   try {
     const result = await collection.insertOne(data);

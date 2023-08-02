@@ -1,9 +1,8 @@
 <template>
 <NavBar/>
 
-<form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
+<form @submit.prevent="uploadPhoto()" class="FormDiv" id="my-form" v-if="!user">
   <label>תמונה:</label>
-  <input type="text" v-model="PostImg" required>
   <input type="file" ref="file" @change="handleFileChange" />
   <br>
   <label>שם URL :</label>
@@ -47,7 +46,6 @@ export default {
 },
   data(){
       return{
-        PostImg:'',
         PostName:'',
         PostTitle:'',
         PostSubTitle:'',
@@ -55,6 +53,7 @@ export default {
         user:null,
 
         selectedFile: null,
+        resImg:[],
         photos: [],
 
       }
@@ -71,8 +70,6 @@ export default {
       this.selectedFile = this.$refs.file.files[0];
     },
     async uploadPhoto() {
-      try {
-        console.log(typeof this.selectedFile.type)
         const reader = new FileReader();
         reader.readAsDataURL(this.selectedFile);
         reader.onload = async () => {
@@ -85,28 +82,11 @@ export default {
             var base64String = reader.result.replace("data:image/jpeg;base64,", "");
           }
           const typeProp = this.selectedFile.type
-          console.log(redear[0])
-          console.log(base64String)
-          console.log(typeProp)
-          const response = await axios.post(
-            "/.netlify/functions/uploadPhoto",{
-              base64String,
-              typeProp
-            },
-            {
-              headers: {
-                "Content-Type": "text/plain",
-              },
-            }
-          );
 
-          console.log(response.data);
+          this.PostForm(base64String,typeProp)
           this.selectedFile = null;
-          return JSON.stringify(response.data);
         };
-      } catch (error) {
-        console.error("Error:", error);
-      }
+      
     },
     async fetchPhotos() {
       try {
@@ -137,17 +117,14 @@ export default {
         console.error('Error fetching user data:', error);
       });
     },
-    async PostForm(){
-      console.log("start")
-      const imgProp = await this.uploadPhoto()
-      console.log("end")
+    async PostForm(imgProp,imgType){
+      
 
-      let dataImg = imgProp
 
       sessionStorage.clear()
       
-      let imgForm = dataImg[0]
-      let typeProp = dataImg[1]
+      let imgForm = imgProp
+      let typeProp = imgType
       let name = this.PostName
       let title = this.PostTitle
       let subTitle = this.PostSubTitle
