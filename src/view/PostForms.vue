@@ -20,9 +20,6 @@
   <button type="submit">הוספת מאמר</button>
 </form>
 
-<div v-for="photo in photos" :key="photo._id">
-    <img :src="photo.image" alt="Uploaded photo" style="max-width: 200px;" />
-  </div>
 
 
 <Footer/>
@@ -53,8 +50,7 @@ export default {
         user:null,
 
         selectedFile: null,
-        resImg:[],
-        photos: [],
+
 
       }
   },
@@ -63,7 +59,6 @@ export default {
   },
   async mounted(){
     await this.userData()
-    this.fetchPhotos();
   },
   methods: {
     handleFileChange() {
@@ -87,14 +82,6 @@ export default {
           this.selectedFile = null;
         };
       
-    },
-    async fetchPhotos() {
-      try {
-        const response = await axios.get("/.netlify/functions/uploadPhoto");
-        this.photos = response.data;
-      } catch (error) {
-        console.error("Error:", error);
-      }
     },
    
    
