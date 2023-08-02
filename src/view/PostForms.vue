@@ -102,7 +102,7 @@ export default {
 
           console.log(response.data);
           this.selectedFile = null;
-          return response.data;
+          return JSON.parse(response.data);
         };
       } catch (error) {
         console.error("Error:", error);
@@ -142,7 +142,7 @@ export default {
       const imgProp = await this.uploadPhoto()
       console.log("end")
 
-      dataImg = imgProp
+      const dataImg = JSON.stringify(imgProp)
 
       sessionStorage.clear()
       
