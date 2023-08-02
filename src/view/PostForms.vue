@@ -1,7 +1,7 @@
 <template>
 <NavBar/>
 
-<form @submit.prevent="uploadPhoto()" class="FormDiv" id="my-form" v-if="!user">
+<form @submit.prevent="uploadPhoto()" class="FormDiv" id="my-form" v-if="user">
   <label>תמונה:</label>
   <input type="file" ref="file" @change="handleFileChange" />
   <br>
@@ -119,8 +119,6 @@ export default {
     },
     async PostForm(imgProp,imgType){
       
-
-
       sessionStorage.clear()
       
       let imgForm = imgProp

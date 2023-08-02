@@ -91,8 +91,10 @@ export default {
         subTitlePost:'',
         infoPost:'',
         // post
+        typeProp:'',
+        imgForm:'',
 
-        postImg: `data:${this.post.typeProp};base64,${this.post.imgForm}`,
+        postImg: '',
 
         name:this.$route.params.name,
         id:null,
@@ -130,9 +132,17 @@ export default {
   },
   async mounted(){
    await this.userData()
+   this.imgForm = this.post.binaryData
+   this.typeProp = this.post.typeProp
+
+   this.postImg = `data:${this.typeProp};base64,${this.imgForm}`
   },
   beforeMount(){
     this.GetData()
+    this.imgForm = this.post.binaryData
+   this.typeProp = this.post.typeProp
+
+   this.postImg = `data:${this.typeProp};base64,${this.imgForm}`
     
   },
   beforeUnmount(){
