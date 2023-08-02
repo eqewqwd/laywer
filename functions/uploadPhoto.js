@@ -28,7 +28,7 @@ exports.handler = async function (event, context) {
       const result = await collection.insertOne(datafix);
       return {
         statusCode: 200,
-        body: JSON.parse(datafix),
+        body: datafix,
       };
     }
 
