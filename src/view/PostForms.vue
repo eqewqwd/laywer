@@ -1,7 +1,7 @@
 <template>
 <NavBar/>
 
-<form @submit.prevent="uploadPhoto()" class="FormDiv" id="my-form" v-if="user">
+<form @submit.prevent="uploadPhoto()" class="FormDiv" id="my-form" v-if="!user">
   <label>תמונה:</label>
   <input type="file" ref="file" @change="handleFileChange" />
   <br>
@@ -21,7 +21,6 @@
 </form>
 
 
-
 <Footer/>
 
   
@@ -30,6 +29,7 @@
 <script>
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+
 
 
 import axios from 'axios'
@@ -65,22 +65,18 @@ export default {
       this.selectedFile = this.$refs.file.files[0];
     },
     async uploadPhoto() {
-        const reader = new FileReader();
-        reader.readAsDataURL(this.selectedFile);
-        reader.onload = async () => {
-          const redear = reader.result.split(',');
-          if(redear[0] + ',' == "data:image/png;base64,"){
-            var base64String = reader.result.replace("data:image/png;base64,", "");
-          }else if(redear[0] + ',' == "data:image/jpg;base64,"){
-            var base64String = reader.result.replace("data:image/jpg;base64,", "");
-          }else if(redear[0] + ',' == "data:image/jpeg;base64,"){
-            var base64String = reader.result.replace("data:image/jpeg;base64,", "");
-          }
-          const typeProp = this.selectedFile.type
+        const formData = new FormData();
+        formData.append('file', this.file);
+        
+        
+        // Construct the Cloudinary upload URL
 
-          this.PostForm(base64String,typeProp)
+        const response = await axios.post('/.netlify/functions/postImg', formData);
+        console.log(response)
+
+        
+          await this.PostForm(base64String)
           this.selectedFile = null;
-        };
       
     },
    
@@ -104,12 +100,11 @@ export default {
         console.error('Error fetching user data:', error);
       });
     },
-    async PostForm(imgProp,imgType){
+    async PostForm(imgProp){
       
       sessionStorage.clear()
       
       let imgForm = imgProp
-      let typeProp = imgType
       let name = this.PostName
       let title = this.PostTitle
       let subTitle = this.PostSubTitle
@@ -123,7 +118,7 @@ export default {
       let postDate = day + "/" + month + "/" + year
 
 
-      await axios.post('/.netlify/functions/PostForm',{ imgForm,typeProp,name,title,subTitle,info,postDate }).then(response => {
+      await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate }).then(response => {
           console.log(name);
 
       }).catch(error => {

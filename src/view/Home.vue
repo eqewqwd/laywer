@@ -187,7 +187,11 @@ export default {
         console.log(this.Forms)
         console.log(this.FormsCards)
       }else{
-        await axios.get('/.netlify/functions/GetData').then(response => {
+        await axios.request({
+          timeout: 20000000000000,
+          method: "GET",
+          url: `/.netlify/functions/GetData`
+        }).then(response => {
           console.log(response.data);
           this.Forms = response.data
 

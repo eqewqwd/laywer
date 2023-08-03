@@ -7,9 +7,20 @@ exports.handler = async (event, context) => {
         await client.connect();
         const collection = client.db("lawyerWeb").collection("Forms");
         const result = await collection.find().toArray();
+        const test = result.map((data) => {
+            return {
+                binaryData:data.binaryData,
+                typeProp:data.typeProp,
+                name:data.name,
+                title:data.title,
+                subTitle:data.subTitle,
+                info:data.info,
+                postDate:data.postDate
+            };
+          });
         return {
             statusCode: 200,
-            body: JSON.stringify(result)
+            body: JSON.stringify(test)
         };
     } catch (err) {
         console.log(err);

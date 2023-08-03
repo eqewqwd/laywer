@@ -4,7 +4,7 @@
 
 <div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">
-    <img :src=this.postImg >
+    <img :src=post.binaryData >
   </div>
   <div class="TitleDivPoster">
     <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
@@ -91,10 +91,7 @@ export default {
         subTitlePost:'',
         infoPost:'',
         // post
-        typeProp:'',
-        imgForm:'',
 
-        postImg: '',
 
         name:this.$route.params.name,
         id:null,
@@ -128,10 +125,7 @@ export default {
       
   },
   created(){  
-    this.imgForm = this.post.binaryData
-   this.typeProp = this.post.typeProp
-
-   this.postImg = `data:${this.typeProp};base64,${this.imgForm}`
+    
   },
   async mounted(){
    await this.userData()
