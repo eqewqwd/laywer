@@ -2,9 +2,9 @@
 const axios = require('axios');
 
    // Set up the Shutterfly API endpoint and headers
-const shutterflyEndpoint = 'https://api.shutterfly.com';
-const apiKey = process.env.JWT_SECRET_KEY;
-const secretKey = process.env.SHUTTERFLY_SECRET_KEY;
+   const shutterflyEndpoint = 'https://api.shutterfly.com';
+   const apiKey = process.env.SHUTTERFLY_API_KEY;
+   const secretKey = process.env.SHUTTERFLY_SECRET_KEY;
 
 
 exports.handler = async function (event, context) {
@@ -16,22 +16,16 @@ exports.handler = async function (event, context) {
       'Content-Type': 'image/jpeg', // Adjust content type accordingly
       'Authorization': `Bearer ${apiKey}:${secretKey}`,
     };
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify(headers),
-    };
-    
-    
+        
 
     // Make the request to Shutterfly to upload the photo
     const response = await axios.post(`${shutterflyEndpoint}/upload/photo`, photoFile, { headers });
 
 
-    // return {
-    //   statusCode: 200,
-    //   body: JSON.stringify(response.data),
-    // };
+    return {
+      statusCode: 200,
+      body: JSON.stringify(response.data),
+    };
   } catch (error) {
     return {
       statusCode: 500,

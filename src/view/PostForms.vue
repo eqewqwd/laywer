@@ -66,7 +66,7 @@ export default {
     },
     async uploadPhoto() {
         const formData = new FormData();
-        formData.append('file', this.file);
+        formData.append('file', this.selectedFile);
           
         // Construct the Cloudinary upload URL
 
