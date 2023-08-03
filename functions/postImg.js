@@ -2,7 +2,7 @@
 const axios = require('axios');
 
    // Set up the Shutterfly API endpoint and headers
-   const shutterflyEndpoint = 'https://api.shutterfly.com';
+   const shutterflyEndpoint = 'https://api.cloudinary.com';
    const apiKey = process.env.SHUTTERFLY_API_KEY;
    const secretKey = process.env.SHUTTERFLY_SECRET_KEY;
 
