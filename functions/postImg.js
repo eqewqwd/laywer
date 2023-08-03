@@ -19,7 +19,7 @@ exports.handler = async function (event, context) {
         
 
     // Make the request to Shutterfly to upload the photo
-    const response = await axios.post(`${shutterflyEndpoint}/upload/photo`, photoFile, { headers });
+    const response = await axios.post(`${shutterflyEndpoint}/v1_1/'ds13xlamk'/upload/photo`, photoFile, { headers });
 
 
     return {
