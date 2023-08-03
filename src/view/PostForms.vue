@@ -67,11 +67,30 @@ export default {
     async uploadPhoto() {
         const formData = new FormData();
         formData.append('file', this.selectedFile);
-          
-        // Construct the Cloudinary upload URL
 
-        const response = await axios.post('/.netlify/functions/postImg', formData);
-        console.log(response)
+        console.log(this.selectedFile)
+
+        const signResponse = await axios.get('https://api.cloudinary.com/v1_1/"ds13xlamk"/image/upload');
+        const signData = await signResponse.json();
+
+        console.log(signData)
+
+          
+        // // Construct the Cloudinary upload URL
+    
+        // // Append parameters to the form data. The parameters that are signed using 
+        // // the signing function (signuploadform) need to match these.
+        //   let file = this.selectedFile;
+        //   formData.append("file", file);
+        //   formData.append("api_key", signData.apikey);
+        //   formData.append("timestamp", signData.timestamp);
+        //   formData.append("signature", signData.signature);
+        //   formData.append("eager", "c_pad,h_300,w_400|c_crop,h_200,w_260");
+        //   formData.append("folder", "signed_upload_demo_form");
+    
+
+        // const response = await axios.post('/.netlify/functions/postImg', formData);
+        // console.log(response)
 
         
           // await this.PostForm(base64String)
