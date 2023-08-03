@@ -2,7 +2,7 @@
 const axios = require('axios');
 
    // Set up the Shutterfly API endpoint and headers
-   const shutterflyEndpoint = 'https://api.cloudinary.com';
+   const cloudinaryEndpoint = 'https://api.cloudinary.com';
    const apiKey = process.env.SHUTTERFLY_API_KEY;
    const secretKey = process.env.SHUTTERFLY_SECRET_KEY;
 
@@ -19,7 +19,7 @@ exports.handler = async function (event, context) {
         
 
     // Make the request to Shutterfly to upload the photo
-    const response = await axios.post(`${shutterflyEndpoint}/v1_1/'ds13xlamk'/upload/photo`, photoFile, { headers });
+    const response = await axios.post(`${cloudinaryEndpoint}/upload/photo`, photoFile, { headers });
 
 
     return {
