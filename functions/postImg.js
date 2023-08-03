@@ -1,7 +1,11 @@
 // netlify/functions/uploadPhoto.js
 import axios from 'axios';
 
+
+
+
 exports.handler = async function (event, context) {
+    const axios = require('axios/dist/node/axios.cjs');
   try {
     // Get the photo file from the request
     const photoFile = event.body;
@@ -18,6 +22,7 @@ exports.handler = async function (event, context) {
 
     // Make the request to Shutterfly to upload the photo
     const response = await axios.post(`${shutterflyEndpoint}/upload/photo`, photoFile, { headers });
+
 
     return {
       statusCode: 200,

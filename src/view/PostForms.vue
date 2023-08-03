@@ -68,14 +68,21 @@ export default {
         const formData = new FormData();
         formData.append('file', this.file);
         
-        
-        // Construct the Cloudinary upload URL
+        const shutterflyEndpoint = 'https://api.shutterfly.com';
+        const apiKey = '316151265885439;'
+        const secretKey = 'MjbIR0Jje-q4FJyfzDCdky-WVHQ';
 
-        const response = await axios.post('/.netlify/functions/postImg', formData);
+        const headers = {
+          'Content-Type': 'image/jpeg', // Adjust content type accordingly
+          'Authorization': `Bearer ${apiKey}:${secretKey}`,
+        };
+        // const response = await axios.post('/.netlify/functions/postImg', formData);
+        const response = await axios.post(`${shutterflyEndpoint}/upload/photo`, formData, { headers });
+
         console.log(response)
 
         
-          await this.PostForm(base64String)
+          // await this.PostForm(base64String)
           this.selectedFile = null;
       
     },
