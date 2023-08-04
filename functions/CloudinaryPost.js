@@ -26,7 +26,7 @@ exports.handler = async function (event, context) {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to upload photo to Shutterfly.' }),
+      body: JSON.stringify({ error: 'Failed to upload photo to Cloudinary.' }),
     };
   }
 };
