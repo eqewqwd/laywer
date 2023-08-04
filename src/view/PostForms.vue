@@ -17,7 +17,7 @@
   <label>תיאור:</label>
   <textarea type="text" v-model="PostInfo" required></textarea>
   <br>
-  <button type="submit">הוספת מאמר</button>
+  <button type="submit" :disabled="this.selectedFileLength < 1">הוספת מאמר</button>
 </form>
 
 
@@ -29,7 +29,6 @@
 <script>
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
-
 
 
 import axios from 'axios'
@@ -50,6 +49,10 @@ export default {
         user:null,
 
         selectedFile: null,
+        selectedFileLength:null,
+        formData:null,
+        result:null,
+
 
 
       }
@@ -63,30 +66,60 @@ export default {
   methods: {
     handleFileChange() {
       this.selectedFile = this.$refs.file.files[0];
+      this.selectedFileLength = this.$refs.file.files.length;
     },
     async uploadPhoto() {
+        
+       let reader = new FileReader();
+       reader.readAsDataURL(this.selectedFile);
+       console.log("start !")
+
+       reader.onload = async () => {
+        const fileContents = reader.result;
+        const cloudName = 'ds13xlamk';
         const formData = new FormData();
-        formData.append('file', this.selectedFile);
+        formData.append("api_key", "316151265885439");
+        formData.append("api_secret", "MjbIR0Jje-q4FJyfzDCdky-WVHQ");
+        formData.append("file", fileContents);
+        formData.append("cloud_name", cloudName);
+        formData.append("upload_preset", "test");
 
-        console.log(this.selectedFile)
+        console.log(formData)
+        const cloudinaryUploadURL = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload/`
+        // let requestObj = {
+        //   url: cloudinaryUploadURL,
+        //   methods: "POST",
+        //   data: this.formData,
+        //   onUploadProgress: function(progressEvent){
+        //     console.log("progress",progressEvent);
+        //     this.progress = Math.round(
+        //       (progressEvent.loaded * 100.0) / progressEvent.total
+        //     );
+        //     console.log(this.progress)
 
-        const signResponse = await axios.get('https://api.cloudinary.com/v1_1/"ds13xlamk"/image/upload');
-        const signData = await signResponse.json();
+        //   }.bind(this)
+        // };
 
-        console.log(signData)
+        const headerPost = {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest",
+              "Allow-Control-Allow-Origin": "*" 
+          },
+        }
+        console.log("finish settings !")
+         await axios.post('/.netlify/functions/CloudinaryPost',cloudinaryUploadURL,formData,headerPost)
+         .then(res =>{
+          const result = res.data;
+          console.log(result)
+          console.log("public_id",result.public_id)
 
-          
-        // // Construct the Cloudinary upload URL
-    
-        // // Append parameters to the form data. The parameters that are signed using 
-        // // the signing function (signuploadform) need to match these.
-        //   let file = this.selectedFile;
-        //   formData.append("file", file);
-        //   formData.append("api_key", signData.apikey);
-        //   formData.append("timestamp", signData.timestamp);
-        //   formData.append("signature", signData.signature);
-        //   formData.append("eager", "c_pad,h_300,w_400|c_crop,h_200,w_260");
-        //   formData.append("folder", "signed_upload_demo_form");
+         })
+         .catch(err =>{
+          console.log(err)
+         })
+
+         console.log("finish post !")
+        };
     
 
         // const response = await axios.post('/.netlify/functions/postImg', formData);
@@ -97,7 +130,7 @@ export default {
           this.selectedFile = null;
       
     },
-   
+
    
     async userData(){
 

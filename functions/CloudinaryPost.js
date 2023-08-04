@@ -10,11 +10,13 @@ const axios = require('axios');
 exports.handler = async function (event, context) {
     try {
     // Get the photo file from the request
-    const photoFile = event.body;        
-    const cloudinaryUploadUrl = `https://api.cloudinary.com/v1_1/"ds13xlamk"/auto/upload`;
+    const {cloudinaryUploadURL,formData,headerPost} = JSON.parse(event.body);        
+    const cloudinaryUploadUrl = cloudinaryUploadURL;
+
+
 
     // Make the request to Shutterfly to upload the photo
-    const response = await axios.post(cloudinaryUploadUrl, photoFile);
+    const response = await axios.post(cloudinaryUploadUrl, formData,headerPost);
 
 
     return {
