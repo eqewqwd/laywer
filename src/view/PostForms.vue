@@ -85,7 +85,7 @@ export default {
         formData.append("upload_preset", "test");
 
         console.log(formData)
-        const cloudinaryUploadURL = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload/`
+        const cloudinaryUploadURL = `https://api.cloudinary.com/v1_1/${cloudName}/upload/`
         // let requestObj = {
         //   url: cloudinaryUploadURL,
         //   methods: "POST",
