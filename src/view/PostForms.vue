@@ -82,7 +82,7 @@ export default {
         formData.append("api_secret", "MjbIR0Jje-q4FJyfzDCdky-WVHQ");
         formData.append("file", fileContents);
         formData.append("cloud_name", cloudName);
-        formData.append("upload_preset", "test");
+        formData.append("upload_preset", "ml_default");
 
         console.log(formData)
         const cloudinaryUploadURL = `https://api.cloudinary.com/v1_1/${cloudName}/upload/`
