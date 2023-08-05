@@ -4,10 +4,10 @@
 
 <div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">
-    <img :src=post.binaryData >
+    <img :src=post.FormImg >
   </div>
   <div class="TitleDivPoster">
-    <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
+    <button @click="StartEdit()" class="editButton" v-if="!user"><i class="bi bi-pencil-square"></i></button>
     <h1><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true">
       <input :value="post.title" @input="TitlePost = $event.target.value"/></span></h1>
     <div class="SmallText">
@@ -36,7 +36,7 @@
     <Carousel v-bind="settings" :breakpoints="breakpoints">
     <Slide v-for="test in test2" :key="test">
       <MoreOptions 
-      :name="test.name" :imgForm="test.imgForm" :subTitle="test.subTitle" :PostDate="test.postDate" :key="test"
+      :name="test.name" :imgForm="test.FormImg" :subTitle="test.subTitle" :PostDate="test.postDate" :key="test"
       />
     </Slide>
 
@@ -129,6 +129,7 @@ export default {
   },
   async mounted(){
    await this.userData()
+   console.log(this.FormsData)
 
   },
   beforeMount(){

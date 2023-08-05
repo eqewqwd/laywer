@@ -9,8 +9,7 @@ exports.handler = async (event, context) => {
         const result = await collection.find().toArray();
         const test = result.map((data) => {
             return {
-                binaryData:data.binaryData,
-                typeProp:data.typeProp,
+                FormImg:data.FormImg,
                 name:data.name,
                 title:data.title,
                 subTitle:data.subTitle,

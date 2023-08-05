@@ -10,12 +10,10 @@ exports.handler = async function(event, context) {
   const collection = db.collection("Forms");
 
   
-  const {imgForm,typeProp,name,title,subTitle,info,postDate} = JSON.parse(event.body);
-  const binaryData = Buffer.from(imgForm, "base64");
+  const {FormImg,name,title,subTitle,info,postDate} = JSON.parse(event.body);
 
   const data = {
-    binaryData,
-    typeProp,
+    FormImg,
     name,
     title,
     subTitle,

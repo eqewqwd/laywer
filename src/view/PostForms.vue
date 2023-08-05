@@ -1,9 +1,9 @@
 <template>
 <NavBar/>
 
-<form @submit.prevent="uploadPhoto()" class="FormDiv" id="my-form" v-if="!user">
+<form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="!user">
   <label>תמונה:</label>
-  <input type="file" ref="file" @change="handleFileChange" />
+  <button @click="openWigit()">העלה תמונה</button>
   <br>
   <label>שם URL :</label>
   <input type="text" v-model="PostName" required>
@@ -17,7 +17,7 @@
   <label>תיאור:</label>
   <textarea type="text" v-model="PostInfo" required></textarea>
   <br>
-  <button type="submit" :disabled="this.selectedFileLength < 1">הוספת מאמר</button>
+  <button type="submit">הוספת מאמר</button>
 </form>
 
 
@@ -32,6 +32,18 @@ import Footer from '@/components/Footer.vue'
 
 
 import axios from 'axios'
+
+var PostImg = null;
+
+const widget = window.cloudinary.createUploadWidget(
+  {cloud_name:"ds13xlamk", upload_preset: "upload-demo"},
+  (error,result)=>{
+    if(!error && result && result.event == "success"){
+      console.log("Done uploading ....",result.info.url)
+      PostImg = result.info.url
+    }
+  }
+)
 
 
 export default {
@@ -48,13 +60,6 @@ export default {
         PostInfo:'',
         user:null,
 
-        selectedFile: null,
-        selectedFileLength:null,
-        formData:null,
-        result:null,
-
-
-
       }
   },
   created(){
@@ -64,74 +69,9 @@ export default {
     await this.userData()
   },
   methods: {
-    handleFileChange() {
-      this.selectedFile = this.$refs.file.files[0];
-      this.selectedFileLength = this.$refs.file.files.length;
+    openWigit(){
+      widget.open()
     },
-    async uploadPhoto() {
-        
-       let reader = new FileReader();
-       reader.readAsDataURL(this.selectedFile);
-       console.log("start !")
-
-       reader.onload = async () => {
-        const fileContents = reader.result;
-        const cloudName = 'ds13xlamk';
-        const formData = new FormData();
-        formData.append("api_key", "316151265885439");
-        formData.append("api_secret", "MjbIR0Jje-q4FJyfzDCdky-WVHQ");
-        formData.append("file", fileContents);
-        formData.append("cloud_name", cloudName);
-        formData.append("upload_preset", "ml_default");
-
-        console.log(formData)
-        const cloudinaryUploadURL = `https://api.cloudinary.com/v1_1/${cloudName}/upload/`
-        // let requestObj = {
-        //   url: cloudinaryUploadURL,
-        //   methods: "POST",
-        //   data: this.formData,
-        //   onUploadProgress: function(progressEvent){
-        //     console.log("progress",progressEvent);
-        //     this.progress = Math.round(
-        //       (progressEvent.loaded * 100.0) / progressEvent.total
-        //     );
-        //     console.log(this.progress)
-
-        //   }.bind(this)
-        // };
-
-        const headerPost = {
-          headers: {
-              "X-Requested-With": "XMLHttpRequest",
-              "Allow-Control-Allow-Origin": "*" 
-          },
-        }
-        console.log("finish settings !")
-         await axios.post('/.netlify/functions/CloudinaryPost',cloudinaryUploadURL,formData,headerPost)
-         .then(res =>{
-          const result = res.data;
-          console.log(result)
-          console.log("public_id",result.public_id)
-
-         })
-         .catch(err =>{
-          console.log(err)
-         })
-
-         console.log("finish post !")
-        };
-    
-
-        // const response = await axios.post('/.netlify/functions/postImg', formData);
-        // console.log(response)
-
-        
-          // await this.PostForm(base64String)
-          this.selectedFile = null;
-      
-    },
-
-   
     async userData(){
 
        
@@ -151,11 +91,11 @@ export default {
         console.error('Error fetching user data:', error);
       });
     },
-    async PostForm(imgProp){
-      
+    async PostForm(){
+      console.log(PostImg)
       sessionStorage.clear()
       
-      let imgForm = imgProp
+      let FormImg = PostImg
       let name = this.PostName
       let title = this.PostTitle
       let subTitle = this.PostSubTitle
@@ -169,7 +109,7 @@ export default {
       let postDate = day + "/" + month + "/" + year
 
 
-      await axios.post('/.netlify/functions/PostForm',{ imgForm,name,title,subTitle,info,postDate }).then(response => {
+      await axios.post('/.netlify/functions/PostForm',{ FormImg,name,title,subTitle,info,postDate }).then(response => {
           console.log(name);
 
       }).catch(error => {

@@ -42,7 +42,7 @@
   <h1>מאמרים</h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <div class="FormDivHome">
-      <FormsHome v-for="(form, index) in FormsCards" :name="form.name" :title="form.title" :info="form.info" :img="form.imgForm"  :key="index" />
+      <FormsHome v-for="(form, index) in FormsCards" :name="form.name" :title="form.title" :info="form.info" :img="form.FormImg"  :key="index" />
   </div>
 
 </div>
@@ -93,21 +93,7 @@ export default {
         FormsLength:null,
         user:null,
         OptionsWork:[],
-        downloadData:
-        [
-        {name:'טופס למתן טיפול רפואי ראשוני לעובד עצמאי שנפגע בתאונת עבודה',date:'22/7/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'283'},
-          {name:'טופס תביעה להכרה במחלת מקצוע או ליקוי רפואי כתוצאה מתנאי עבודה',date:'10/7/2020',ImgDownload:'https://www.cisme.it/scrl/wp-content/uploads/2020/06/coronavirus-3d-vettoriale-realistico-in-sfondo-blu-scuro-cellula-virus-corona-malattia-del-virus-wuhan_8306-489.jpg',numberFile:'202'},
-          {name:'טופס תביעה לתשלום דמי פגיעה והודעה על פגיעה בעבודה',date:'14/10/2022',ImgDownload:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg',numberFile:'211'},
-          {name:'כתב ויתור סודיות רפואית מי שנפגע בעבודה או במסגרת פעולת התנדבות',date:'4/5/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'7101'},
-          {name:'שאלון למעסיק על אירוע הדבקה בקורונה',date:'5/1/2022',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'257'},
-          {name:'שאלון לעובד שכיר על אירוע הדבקה בקורונה',date:'6/2/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'258'},
-          {name:'טופס למתן טיפול רפואי ראשוני לעובד עצמאי שנפגע בתאונת עבודה',date:'22/7/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'283'},
-          {name:'טופס תביעה להכרה במחלת מקצוע או ליקוי רפואי כתוצאה מתנאי עבודה',date:'10/7/2020',ImgDownload:'https://www.cisme.it/scrl/wp-content/uploads/2020/06/coronavirus-3d-vettoriale-realistico-in-sfondo-blu-scuro-cellula-virus-corona-malattia-del-virus-wuhan_8306-489.jpg',numberFile:'202'},
-          {name:'טופס תביעה לתשלום דמי פגיעה והודעה על פגיעה בעבודה',date:'14/10/2022',ImgDownload:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg',numberFile:'211'},
-          {name:'כתב ויתור סודיות רפואית מי שנפגע בעבודה או במסגרת פעולת התנדבות',date:'4/5/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'7101'},
-          {name:'שאלון למעסיק על אירוע הדבקה בקורונה',date:'5/1/2022',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'257'},
-          {name:'שאלון לעובד שכיר על אירוע הדבקה בקורונה',date:'6/2/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'258'},
-        ]
+
       }
       
   },
@@ -187,11 +173,7 @@ export default {
         console.log(this.Forms)
         console.log(this.FormsCards)
       }else{
-        await axios.request({
-          timeout: 20000000000000,
-          method: "GET",
-          url: `/.netlify/functions/GetData`
-        }).then(response => {
+        await axios.get(`/.netlify/functions/GetData`).then(response => {
           console.log(response.data);
           this.Forms = response.data
 

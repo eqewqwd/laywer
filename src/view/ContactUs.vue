@@ -19,7 +19,7 @@
     <div class="InfoDiv">
       <div class="flexContact">
         <span class="infoSpan"><i class="bi bi-geo-alt"></i><span>מיקום:</span></span>
-        <span class="InfoData">שדרות מוריה 80, חיפה</span>
+        <span class="InfoData">שדרות מוריה 81, חיפה</span>
       </div>
       <div class="flexContact">
         <span class="infoSpan"><i class="bi bi-telephone"></i><span>טלפון:</span></span>
