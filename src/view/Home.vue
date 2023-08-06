@@ -39,7 +39,7 @@
 </div>
 
 <div class="OurRecommend">
-  <h1>מאמרים</h1>
+  <h1><i class="bi bi-stars"></i>מאמרים</h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <div class="FormDivHome">
       <FormsHome v-for="(form, index) in FormsCards" :name="form.name" :title="form.title" :info="form.info" :img="form.FormImg"  :key="index" />
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
+import NavBar from '@/components/NavBarcopy.vue'
 import OptionsContainer from '@/components/OptionsContainer.vue'
 import FormsHome from '@/components/FormsHome.vue'
 import Footer from '@/components/Footer.vue'

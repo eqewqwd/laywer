@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
+import NavBar from '@/components/NavBarcopy.vue'
 import Footer from '@/components/Footer.vue'
 import DownloadBox from '@/components/DownloadBox.vue'
 

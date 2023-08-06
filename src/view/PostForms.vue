@@ -1,9 +1,12 @@
 <template>
 <NavBar/>
 
-<form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="!user">
-  <label>תמונה:</label>
-  <button @click="openWigit()">העלה תמונה</button>
+<form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
+  <label>העלאת תמונה :</label>
+  <div style="display: flex;" class="uploadImgDiv">
+    <button class="photoAdd" @click="openWigit()"><i class="bi bi-cloud-arrow-up"></i></button>
+    <img class="uploadedImg" v-if="this.PostImg != null" :src=this.PostImg>
+  </div>
   <br>
   <label>שם URL :</label>
   <input type="text" v-model="PostName" required>
@@ -17,7 +20,7 @@
   <label>תיאור:</label>
   <textarea type="text" v-model="PostInfo" required></textarea>
   <br>
-  <button type="submit">הוספת מאמר</button>
+  <button class="addButton" type="submit">הוספת מאמר</button>
 </form>
 
 
@@ -27,23 +30,11 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
+import NavBar from '@/components/NavBarcopy.vue'
 import Footer from '@/components/Footer.vue'
 
 
 import axios from 'axios'
-
-var PostImg = null;
-
-const widget = window.cloudinary.createUploadWidget(
-  {cloud_name:"ds13xlamk", upload_preset: "upload-demo"},
-  (error,result)=>{
-    if(!error && result && result.event == "success"){
-      console.log("Done uploading ....",result.info.url)
-      PostImg = result.info.url
-    }
-  }
-)
 
 
 export default {
@@ -58,6 +49,7 @@ export default {
         PostTitle:'',
         PostSubTitle:'',
         PostInfo:'',
+        PostImg:null,
         user:null,
 
       }
@@ -67,9 +59,20 @@ export default {
   },
   async mounted(){
     await this.userData()
+
   },
   methods: {
     openWigit(){
+
+      const widget = window.cloudinary.createUploadWidget(
+        {cloud_name:"ds13xlamk", upload_preset: "upload-demo"},
+        (error,result)=>{
+          if(!error && result && result.event == "success"){
+            console.log("Done uploading ....",result.info.url)
+            this.PostImg = result.info.url      
+          }
+        }
+      )
       widget.open()
     },
     async userData(){
@@ -92,10 +95,10 @@ export default {
       });
     },
     async PostForm(){
-      console.log(PostImg)
+      console.log(this.PostImg)
       sessionStorage.clear()
       
-      let FormImg = PostImg
+      let FormImg = this.PostImg
       let name = this.PostName
       let title = this.PostTitle
       let subTitle = this.PostSubTitle
@@ -157,7 +160,7 @@ export default {
   width: 100%;
 }
 
-.FormDiv button{
+.FormDiv button.addButton{
   border: none;
   border-radius: 25px;
   height: 50px;
@@ -166,9 +169,34 @@ export default {
   transition: ease 0.2s;
 }
 
-.FormDiv button:hover{
+.FormDiv button.addButton:hover{
   color: white;
   background-color: rgb(243, 213, 45);
+}
+
+button.photoAdd{
+  width: 100px;
+  border: none;
+  border-radius: 25px;
+  background-color: rgb(221, 197, 38);
+  transition: ease 0.2s;
+  height: fit-content;
+}
+
+button.photoAdd i{
+  font-size: 30px;
+}
+
+button.photoAdd:hover{
+  background-color: rgb(254, 223, 21);
+}
+
+img.uploadedImg{
+  position: relative;
+  border: 1px solid black;
+  right: 5%;
+  width: 250px;
+  height: 200px;
 }
 
 

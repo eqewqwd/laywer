@@ -7,7 +7,7 @@
     <img :src=post.FormImg >
   </div>
   <div class="TitleDivPoster">
-    <button @click="StartEdit()" class="editButton" v-if="!user"><i class="bi bi-pencil-square"></i></button>
+    <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
     <h1><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true">
       <input :value="post.title" @input="TitlePost = $event.target.value"/></span></h1>
     <div class="SmallText">
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
+import NavBar from '@/components/NavBarcopy.vue'
 import FormsContainerSkeleton from '@/components/FormsContainerSkeleton.vue'
 import EditTool from '@/components/EditTool.vue'
 import Footer from '@/components/Footer.vue'

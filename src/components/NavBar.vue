@@ -296,6 +296,24 @@ img{
     transition:  0.2s ease-out;
   }
 
+  .toggle-button.rotate #first{
+    background-color: transparent;
+  }
+
+  .toggle-button.rotate #two{
+    transform: rotate(45deg);
+    position: relative;
+    top: 4.5px;
+    transition:  0.2s ease-in;
+  }
+
+  .toggle-button.rotate #three{
+    transform: rotate(-45deg);
+    position: relative;
+    top: -4.5px;
+    transition:  0.2s ease-in;
+  }
+
   .imgAll{
     display: block;
     z-index: 2312321321321;
@@ -342,24 +360,6 @@ img{
 
   .navbar-links.active{
     display: flex;
-  }
-
-  .toggle-button.rotate #first{
-    background-color: transparent;
-  }
-
-  .toggle-button.rotate #two{
-    transform: rotate(45deg);
-    position: relative;
-    top: 4.5px;
-    transition:  0.2s ease-in;
-  }
-
-  .toggle-button.rotate #three{
-    transform: rotate(-45deg);
-    position: relative;
-    top: -4.5px;
-    transition:  0.2s ease-in;
   }
 
 }
