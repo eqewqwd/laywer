@@ -509,6 +509,7 @@ background-repeat: no-repeat;
   }
   .imgContainer img{
     bottom: 2%;
+    left: 0;
     max-width: 100%;
   }
 
