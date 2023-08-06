@@ -182,7 +182,7 @@ span.loginuser{
 span.loginuser h1{
   position: relative;
   right: 4%;
-  margin-top: 4.5%;
+  margin-top: 3%;
   font-size: 1.3vw;
 }
 span.loginuser i{

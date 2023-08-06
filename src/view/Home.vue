@@ -278,7 +278,7 @@ export default {
 
 .imgContainer img{
   position: absolute;
-  left: 0;
+  left: 10%;
   bottom: 0;
   height: auto;
   max-width: 250px;
