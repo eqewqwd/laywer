@@ -9,16 +9,16 @@
   </div>
   <br>
   <label>שם URL :</label>
-  <input type="text" v-model="PostName" required>
+  <input type="text" v-model="PostName">
   <br>
   <label>כותרת:</label>
-  <input type="text" v-model="PostTitle" required>
+  <input type="text" v-model="PostTitle">
   <br>
   <label>תת כותרת:</label>
-  <input type="text" v-model="PostSubTitle" required>
+  <input type="text" v-model="PostSubTitle">
   <br>
   <label>תיאור:</label>
-  <textarea type="text" v-model="PostInfo" required></textarea>
+  <textarea type="text" v-model="PostInfo"></textarea>
   <br>
   <button class="addButton" type="submit">הוספת מאמר</button>
 </form>
