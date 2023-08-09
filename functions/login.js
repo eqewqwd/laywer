@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // MongoDB connection setup\
-const uri = "mongodb+srv://aviadbenzohar5:ZNpcQIHRxUfTORmx@cluster0.frsyu1a.mongodb.net/administrator?retryWrites=true&w=majority";
+const uri = "mongodb+srv://sharonTamari:Yk32XkMYMJT4xVvN@cluster0.2uci30n.mongodb.net/administrator?retryWrites=true&w=majority";
 
 mongoose.connect(uri, {
   useNewUrlParser: true,

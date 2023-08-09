@@ -1,14 +1,14 @@
 <template>
   <div class="BoxDownload">
-    <div class="imgDiv"><img :src="ImgDownload"></div>
+    <div class="imgDiv"><img src="https://www.dropee.com/product-images/f14de0bc4ba35e1593c8225b6bc2708d42cf9e00.jpg"></div>
     <div class="TitleDiv">
       <h3>טופס מס'  {{ numberFile }}</h3>
-      <p>
+      <p class="nameDownload">
         {{ name }}
       </p>
       
     </div>
-    <div class="ButtonDiv"><a href="https://ggh-law.co.il/download/1462/?tmstv=1689323950"><i class="bi bi-download"></i></a></div>
+    <div class="ButtonDiv"><a :href="getFileUrl(fileName)" :download="fileName"><i class="bi bi-download"></i></a></div>
     <div class="DateDiv">עודכן בתאריך : {{ date }}</div>
   </div>
 </template>
@@ -18,7 +18,7 @@
 
 export default {
     name: "DownloadBox",
-    props:['name','date','ImgDownload','numberFile'],
+    props:['name','date','ImgDownload','numberFile','fileName'],
     data() {
         return {
         }
@@ -28,6 +28,9 @@ export default {
     mounted(){
     }, 
     methods:{
+      getFileUrl(fileName) {
+        return process.env.BASE_URL + 'files/' + fileName;
+    },
 
     }
 }
@@ -64,6 +67,9 @@ export default {
 
 .BoxDownload .TitleDiv{
   border: 1px solid none;
+  overflow: auto;
+  width: 100%;
+  height: 37%;
   position: absolute;
   padding: 15px;
   top: 55%;

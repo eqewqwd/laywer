@@ -1,9 +1,11 @@
 <template>
-<NavBar/>
+<NavBar @editStart="StartEdit('InfoOffice')"/>
+<AccessibilityToolbar
 
+/>
 <div class="PosterHome">
   <div class="TitleContainer">
-    <h1>עו"ד שרון נתח תמרי</h1>
+    <h1 class="titleHome">עו"ד שרון נתח תמרי</h1>
     <br>
     <h3>משרד עורכי דין וגישור</h3>
     <br>
@@ -20,7 +22,7 @@
 </div>
 
 <div class="aboutContainer">
-  <h1>אודות המשרד <button @click="StartEdit('InfoOffice')" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button></h1>
+  <h1 class="officeInfo">אודות המשרד</h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
     <span v-if="editModeHomeInfo == false">{{ this.InfoHome }}</span>
@@ -39,7 +41,7 @@
 </div>
 
 <div class="OurRecommend">
-  <h1><i class="bi bi-stars"></i>מאמרים</h1>
+  <h1 class="FormsHomeH1"><i class="bi bi-stars"></i>מאמרים</h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <div class="FormDivHome">
       <FormsHome v-for="(form, index) in FormsCards" :name="form.name" :title="form.title" :info="form.info" :img="form.FormImg"  :key="index" />
@@ -66,7 +68,9 @@ import EditTool from '@/components/EditTool.vue'
 
 
 
+
 import axios from 'axios'
+import { AccessibilityToolbar } from 'vue-accessibility-toolbar'
 import bcrypt from 'bcryptjs';
 
 
@@ -77,7 +81,8 @@ export default {
     OptionsContainer,
     Footer,
     EditTool,
-    FormsHome
+    FormsHome,
+    AccessibilityToolbar
 },
   data(){
       return{
@@ -259,10 +264,11 @@ export default {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  top: 20px;
+  top: 0;
   width: 100%;
-  height: 465px;
-  background-color: rgb(231,231,231);
+  height: 500px;
+  /* background-color: rgb(231,231,231); */
+  background-color: rgb(242, 239, 239);
   border:1px solid none;
   direction: ltr;
 }

@@ -9,6 +9,7 @@
     "dev": "netlify dev"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@vue/cli-plugin-eslint": "^5.0.8",
     "axios": "^1.2.6",
     "bcrypt": "^5.1.0",

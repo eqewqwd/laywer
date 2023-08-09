@@ -1,9 +1,9 @@
 <template>
-<NavBar/>
+<NavBar @editStart="StartEdit()"/>
 
 <div class="allContainer fadeInDown">
     <div class="FormContainer">
-    <h1>צור איתנו קשר</h1>
+    <h1 class="contactH1">צור איתנו קשר</h1>
     <div class="FormDiv">
       <form @submit.prevent="SendEmail()">
         <input type="text" v-model="NamePost" name="name" placeholder="שם מלא">
@@ -15,9 +15,9 @@
     </div>
   </div>
   <div class="InfoContainer">
-    <h1>יצירת קשר</h1>
+    <h1 class="contactH1">יצירת קשר</h1>
     <div class="InfoDiv">
-      <div class="flexContact">
+      <!-- <div class="flexContact">
         <span class="infoSpan"><i class="bi bi-geo-alt"></i><span>מיקום:</span></span>
         <span class="InfoData">שדרות מוריה 81, חיפה</span>
       </div>
@@ -28,7 +28,13 @@
       <div class="flexContact">
         <span class="infoSpan"><i class="bi bi-envelope"></i><span>אימייל:</span></span>
         <span class="InfoData">sharon@snt-law.co.il</span>
-      </div>
+      </div> -->
+
+      <ul class="ulContact">
+        <li><span class="infoSpan"><i class="bi bi-geo-alt"></i><span>מיקום:</span><span class="InfoData">שדרות מוריה 81, חיפה</span></span></li>
+        <li><span class="infoSpan"><i class="bi bi-telephone"></i><span>טלפון:</span><span class="InfoData">052-635-3423</span></span></li>
+        <li><span class="infoSpan"><i class="bi bi-envelope"></i><span>אימייל:</span><span class="InfoData">sharon@snt-law.co.il</span></span></li>
+      </ul>
     </div>
   </div>
 
@@ -71,14 +77,16 @@ export default {
   methods: {
     SendEmail(){
       const data = {
-        name: this.NamePost,
-        email: this.EmailPost,
+        from_name: this.NamePost,
+        email_id: this.EmailPost,
         subject: this.SubjectPost,
         message: this.MessagePost
       }
-      console.log(data)
-      alert('האימייל נשלח בהצלחה!')
-      window.location.reload()
+        let publicKey = "zfP0_Yde2Yv2hedao"
+
+        emailjs.send("service_erjo09j","template_zzix94a",data,publicKey).then(function(res){
+        alert("Success! " + res.status);
+        })
     },
 
   } 
@@ -119,6 +127,7 @@ export default {
   direction: rtl;
   width: 40%;
   border-radius: 0px 25px 25px 0px;
+  overflow: auto;
 }
 
 .InfoContainer h1{
@@ -164,12 +173,22 @@ export default {
   margin-right: 15px;
 }
 
+ul.ulContact{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+ul.ulContact li{
+  margin-top: 40px;
+}
+
 span.InfoData{
   position: relative;
-  right: 3%;
+  right: 2%;
   margin-top: 1%;
   border: 1px solid none;
-  font-size: 1vw;
+  font-size: 1.1vw;
 }
 
 /* ------------- FormContainer ------------------ */
@@ -180,6 +199,9 @@ span.InfoData{
   direction: rtl;
   width: 60%;
   border-radius: 25px 0px 0px 25px;
+  overflow: auto;
+  background-color: white;
+
 }
 
 .FormContainer h1{
@@ -195,7 +217,6 @@ span.InfoData{
   right: 50%;
   transform: translate(50%);
   width: 80%;
-
 }
 .FormDiv form{
   display: flex;
@@ -324,7 +345,11 @@ span.InfoData{
     position: relative;
     display: flex;
     flex-direction: row;
-  }y
+  }
+
+  .InfoContainer .InfoDiv span.infoSpan span{
+    margin-right: 5px;
+  }
 
 
 
@@ -347,20 +372,18 @@ span.InfoData{
     padding: 5px 10px 5px 10px;
   }
 
-  .InfoContainer .InfoDiv span.infoSpan span{
-    display: none;
-  }
-
-  span.InfoData{
-    position: relative;
-    right: 3%;
-    border: 1px solid none;
-    font-size: 2vw;
-  }
 
   .FormDiv form button[type="submit"]{
     width: 40%;
   }
+
+  ul.ulContact{
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  width: 90%;
+  justify-content: space-around;
+}
 
 
 }

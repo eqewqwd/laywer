@@ -1,13 +1,12 @@
 <template>
   <FormsContainerSkeleton v-if="this.LoadingCheck == true"/>
-<NavBar/>
+<NavBar @editStart="StartEdit()"/>
 
 <div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">
     <img :src=post.FormImg >
   </div>
   <div class="TitleDivPoster">
-    <button @click="StartEdit()" class="editButton" v-if="user"><i class="bi bi-pencil-square"></i></button>
     <h1><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true">
       <input :value="post.title" @input="TitlePost = $event.target.value"/></span></h1>
     <div class="SmallText">

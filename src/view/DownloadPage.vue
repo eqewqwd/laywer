@@ -14,7 +14,9 @@
 
 <div class="BoxContainerDownload">
   <DownloadBox v-for="download in filteredList" :key="download" :name="download.name" :date="download.date"
-  :ImgDownload="download.ImgDownload" :numberFile="download.numberFile"/>
+  :ImgDownload="download.ImgDownload" :numberFile="download.numberFile" :fileName="download.fileName"/>
+  
+
   <div class="notFound" v-show="this.allowNotFind == true">
     <h1> לא נמצא טופס בשם : "{{ this.search }}"</h1>
   </div>
@@ -52,18 +54,18 @@ export default {
         allowNotFind:false,
         downloadData:
         [
-        {name:'טופס למתן טיפול רפואי ראשוני לעובד עצמאי שנפגע בתאונת עבודה',date:'22/7/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'283'},
-          {name:'טופס תביעה להכרה במחלת מקצוע או ליקוי רפואי כתוצאה מתנאי עבודה',date:'10/7/2020',ImgDownload:'https://www.cisme.it/scrl/wp-content/uploads/2020/06/coronavirus-3d-vettoriale-realistico-in-sfondo-blu-scuro-cellula-virus-corona-malattia-del-virus-wuhan_8306-489.jpg',numberFile:'202'},
-          {name:'טופס תביעה לתשלום דמי פגיעה והודעה על פגיעה בעבודה',date:'14/10/2022',ImgDownload:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg',numberFile:'211'},
-          {name:'כתב ויתור סודיות רפואית מי שנפגע בעבודה או במסגרת פעולת התנדבות',date:'4/5/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'7101'},
-          {name:'שאלון למעסיק על אירוע הדבקה בקורונה',date:'5/1/2022',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'257'},
-          {name:'שאלון לעובד שכיר על אירוע הדבקה בקורונה',date:'6/2/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'258'},
-          {name:'טופס למתן טיפול רפואי ראשוני לעובד עצמאי שנפגע בתאונת עבודה',date:'22/7/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'283'},
-          {name:'טופס תביעה להכרה במחלת מקצוע או ליקוי רפואי כתוצאה מתנאי עבודה',date:'10/7/2020',ImgDownload:'https://www.cisme.it/scrl/wp-content/uploads/2020/06/coronavirus-3d-vettoriale-realistico-in-sfondo-blu-scuro-cellula-virus-corona-malattia-del-virus-wuhan_8306-489.jpg',numberFile:'202'},
-          {name:'טופס תביעה לתשלום דמי פגיעה והודעה על פגיעה בעבודה',date:'14/10/2022',ImgDownload:'https://images.globes.co.il/images/NewGlobes/big_image_800/2020/0023E745736A923EE069FF92F8C9E9B6_800x392.20200825T180616.jpg',numberFile:'211'},
-          {name:'כתב ויתור סודיות רפואית מי שנפגע בעבודה או במסגרת פעולת התנדבות',date:'4/5/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'7101'},
-          {name:'שאלון למעסיק על אירוע הדבקה בקורונה',date:'5/1/2022',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'257'},
-          {name:'שאלון לעובד שכיר על אירוע הדבקה בקורונה',date:'6/2/2023',ImgDownload:'https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/corona-virus-2019-1.jpg',numberFile:'258'},
+        {name:"טופס למתן טיפול רפואי ראשוני לאחר תאונת עבודה" ,date:"10.8.2023",numberFile:"283" ,fileName:"283.pdf"},
+        {name:"טופס תביעה להכרה במחלת מקצוע או ליקוי רפואי כתוצאה מתנאי עבודה" ,date:"10.8.2023",numberFile:"202" ,fileName:"202.pdf"},
+        {name:"טופס תביעה לתשלום דמי פגיעה והודעה על פגיעה בעבודה" ,date:"10.8.2023",numberFile:"211" ,fileName:"211.pdf"},
+        {name:"כתב ויתור סודיות רפואית מי שנפגע בעבודה או במסגרת פעולת התנדבות" ,date:"10.8.2023",numberFile:"7101" ,fileName:"7101.pdf"},
+        {name:"למתן טיפול רפואי ראשוני לעובד שכיר שנפגע בתאונת עבודה" ,date:"10.8.2023",numberFile:"250" ,fileName:"250.pdf"},
+        {name:"תביעה לדיון מחודש בדרגת נכות לנכה מעבודה עקב החמרת מצב" ,date:"10.8.2023",numberFile:"228" ,fileName:"228.pdf"},
+        {name:"תביעה לדמי מחיה של ילד המקבל קצבת תלויים" ,date:"10.8.2023",numberFile:"230" ,fileName:"230.pdf"},
+        {name:"תביעה לנכה עבודה שוועדה רפואית קבעה לו דרגת נכות זמנית" ,date:"10.8.2023",numberFile:"279" ,fileName:"279.pdf"},
+        {name:"תביעה לצירוף דרגות נכות עקב כמה פגיעות בעבודה" ,date:"10.8.2023",numberFile:"210" ,fileName:"210.pdf"},      
+        {name:"תביעה לקביעת דיון מחדש בדרגת נכות עקב ירידה בהכנסות" ,date:"10.8.2023",numberFile:"215" ,fileName:"215.pdf"},
+        {name:"תביעה לקביעת דרגת נכות מעבודה" ,date:"10.8.2023",numberFile:"200" ,fileName:"200.pdf"},
+        {name:"תביעה לתשלום גמלה לבני משפחה של מי שנפטר מפגיעה בעבודה" ,date:"10.8.2023",numberFile:"213" ,fileName:"213.pdf"},
         ]
       }
       

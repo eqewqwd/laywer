@@ -37,7 +37,7 @@
 
   <div class="footer-copyRight">
     <i class="bi bi-c-circle copyright"></i>
-    <span class="copyRightText"><a href="https://techlinx.co.il/">אתר זה עוצב ונבנה על ידי דוד דבח</a></span>
+    <span class="copyRightText"><a class="copyrightA" href="https://techlinx.co.il/">אתר זה עוצב ונבנה על ידי <span class="nameCopyRight">דוד דבח</span></a></span>
     <a href="/"><i class="bi bi-instagram icons-footer insta"></i></a>
     <a href="/"><i class="bi bi-facebook icons-footer"></i></a>
     <a href="/"><i class="bi bi-whatsapp icons-footer"></i></a>
@@ -237,6 +237,11 @@ footer{
 .copyRightText a{
   color: white;
   text-decoration: none;
+}
+
+.copyRightText a:hover .nameCopyRight{
+  text-decoration-line: underline;
+
 }
 
 .copyright{

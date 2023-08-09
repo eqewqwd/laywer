@@ -1,13 +1,13 @@
 <template>
   <div class="ContactContainer">
     <div class="TitleContainer">
-      <h1>לייעוץ ראשוני ללא התחייבות​</h1>
+      <h1 class="contactH1">לייעוץ ראשוני ללא התחייבות​</h1>
       <h5>לקבלת שיחת ייעוץ באפשרותך להשאיר פרטים בטופס המצורף, או לחייג אלינו למספר 03-7949755</h5>
     </div>
     <div class="formContainer">
-      <form action="">
-        <input type="text" name="" placeholder="שם">
-        <input type="text" name="" placeholder="אימייל">
+      <form @submit.prevent="SendEmail()" action="">
+        <input v-model="namePost" type="text" name="" placeholder="שם">
+        <input v-model="emailPost" type="text" name="" placeholder="אימייל">
         <button type="submit">אשמח לייעוץ איתך</button>
       </form>
     </div>
@@ -17,11 +17,18 @@
 
 <script>
 
+import axios from 'axios';
+import emailjs from '@emailjs/browser';
+
+
+
 
 export default {
     name: "ContactContainer",
     data() {
         return {
+          namePost:'',
+          emailPost:'',
         }
     },
     created () {
@@ -29,6 +36,20 @@ export default {
     mounted(){
     }, 
     methods:{
+      SendEmail(){
+        let from_name = this.namePost
+        let email_id = this.emailPost
+        let publicKey = "zfP0_Yde2Yv2hedao"
+
+        const data = {
+          from_name:from_name,
+          email_id:email_id,
+        }
+
+        emailjs.send("service_erjo09j","template_ixss9pw",data,publicKey).then(function(res){
+        alert("Success! " + res.status);
+    })
+      }
 
     }
 }

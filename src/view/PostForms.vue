@@ -1,5 +1,5 @@
 <template>
-<NavBar/>
+<NavBar />
 
 <form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
   <label>העלאת תמונה :</label>
@@ -65,7 +65,7 @@ export default {
     openWigit(){
 
       const widget = window.cloudinary.createUploadWidget(
-        {cloud_name:"ds13xlamk", upload_preset: "upload-demo"},
+        {cloud_name:"dqxeeegst", upload_preset: "Forms-img"},
         (error,result)=>{
           if(!error && result && result.event == "success"){
             console.log("Done uploading ....",result.info.url)
@@ -111,8 +111,17 @@ export default {
 
       let postDate = day + "/" + month + "/" + year
 
+      const data = { 
+        FormImg,
+        name,
+        title,
+        subTitle,
+        info,
+        postDate
+       }
 
-      await axios.post('/.netlify/functions/PostForm',{ FormImg,name,title,subTitle,info,postDate }).then(response => {
+
+      await axios.post('/.netlify/functions/PostForm',data).then(response => {
           console.log(name);
 
       }).catch(error => {

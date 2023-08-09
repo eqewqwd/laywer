@@ -113,8 +113,8 @@ export default {
       if(checkRoute == true & innerWidth <= 750){
         LogoResponsive.style.display = 'none'
       }else{
-      }
 
+      }
     },
     async userData(){
 
