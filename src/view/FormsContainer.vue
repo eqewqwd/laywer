@@ -1,6 +1,6 @@
 <template>
   <FormsContainerSkeleton v-if="this.LoadingCheck == true"/>
-<NavBar @editStart="StartEdit()"/>
+  <NavBar @editStart="StartEdit()"/>
 
 <div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">

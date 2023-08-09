@@ -7,11 +7,6 @@
         </div>
       </nav>
       <div class="navbar-expand-md">
-        <div class="navbar-dark text-center my-2">
-          <button class="navbar-toggler w-75" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span> <span class="align-middle">Menu</span>
-          </button>
-        </div>
         <div class="text-center mt-3 collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mx-auto ">
             <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li class="nav-item"><a class="nav-link">בית</a></li></router-link>
@@ -26,12 +21,14 @@
       </div>
     </div>
 
-    <div class="menuUser" v-if="user && this.menuUserOpen == true">
+    <div class="menuUser"  v-if="user && this.menuUserOpen == true">
       <i class="bi bi-arrow-up-short arrowUser"></i>
       <ul>
-        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;color:black;" to="/admin/PostForms"><li><a>הוספת מאמרים</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;color:black;" to="/admin/PostForms"><li><a><i class="bi bi-patch-plus"></i> מאמר</a></li></router-link>
         <hr>
-        <li @click="exitUser()"><a><i class="bi bi-box-arrow-right"></i> יציאה</a></li>
+        <li style="text-decoration: none;color:black;" @click="StartEdit()"><a><i class="bi bi-pencil-square"></i> עריכה</a></li>
+        <hr>
+        <li style="text-decoration: none;color:black;" @click="exitUser()"><a><i class="bi bi-box-arrow-right"></i> יציאה</a></li>
       </ul>
 
     </div>
@@ -74,7 +71,7 @@ export default {
   data(){
     return{
       test:'tzavahot',
-      user:null,
+      user:{name:'david'},
       menuUserOpen:false,
     }
   },
@@ -104,6 +101,9 @@ export default {
       toggleButton.classList.toggle('rotate')
 
 
+    },
+    StartEdit(){
+      this.$emit('editStart')
     },
     changeNavByRoute(){
       console.log(this.$route.fullPath == '/')
@@ -140,6 +140,9 @@ exitUser(){
       window.location.reload()
     },
     openMenuUser(){
+      const menuUser = document.getElementsByClassName('menuUser')[0]
+      console.log(menuUser)
+      
       if(this.menuUserOpen == false){
         this.menuUserOpen = true;
       }else{
@@ -168,6 +171,34 @@ exitUser(){
   color: rgb(233, 32, 32);
 }
 
+
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
 span.loginuser{
   border: 1px solid none;
   width: auto;
@@ -177,7 +208,7 @@ span.loginuser{
   right: 5%;
   display: flex;
   direction: ltr !important;
-
+  cursor: pointer;
 }
 span.loginuser h1{
   position: relative;
@@ -189,6 +220,10 @@ span.loginuser i{
   font-size: 2vw;
 }
 
+span.loginuser i:hover{
+  color: #415e7a;
+}
+
 .menuUser{
   position: absolute;
   top: 70px;
@@ -198,6 +233,12 @@ span.loginuser i{
   border: 1px solid none;
   display: flex;
   flex-direction: column;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
 .menuUser i.arrowUser{
@@ -220,12 +261,13 @@ span.loginuser i{
 .menuUser ul li{
   width: 100%;
   border: 1px solid none;
+  font-size: 19px;
 }
 
 .menuUser ul li:hover{
-  color: black;
+  color: blue !important;
   cursor: pointer;
-  font-size: 17px;
+  font-size: 21px;
 }
 
 

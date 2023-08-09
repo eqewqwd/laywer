@@ -13,7 +13,11 @@
     <br>
     <br>
     <br>
-    <h3 class="h1two" style="color: #2c3e50;-webkit-font-smoothing: antialiased;">" אל תתפללו לחיים קלים יותר, וודאו שאתם נעשים חזקים יותר "</h3>
+    <h3 class="h1two" style="color: #2c3e50;-webkit-font-smoothing: antialiased;">
+      <span v-if="editMode == false">{{ this.TitleFirst }}</span>
+      <span v-if="editMode == true">
+      <input class="TitleFirstInput" :value="this.TitleFirst" @input="TitleFirstPost = $event.target.value"/></span>
+    </h3>
   </div>
   <div class="imgContainer">
     <img src="@/assets/photo/laywerWomen2.png">
@@ -25,11 +29,11 @@
   <h1 class="officeInfo">אודות המשרד</h1>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
   <p>
-    <span v-if="editModeHomeInfo == false">{{ this.InfoHome }}</span>
-    <span v-if="editModeHomeInfo == true">
+    <span v-if="editMode == false">{{ this.InfoHome }}</span>
+    <span v-if="editMode == true">
      <textarea class="infoUpdate" :value="this.InfoHome" @input="InfoHomePost = $event.target.value" cols="30" rows="10"></textarea></span>
   </p>
-  <EditTool v-if="editModeHomeInfo == true" @PostMongo="updateItemInMongoDB()" @EditEnd="StartEdit('InfoOffice')"/>
+  <EditTool v-if="editMode == true" @PostMongo="updateItemInMongoDB()" @EditEnd="StartEdit('InfoOffice')"/>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
 
@@ -89,10 +93,14 @@ export default {
         //post
         Infoid:null,
         InfoHomePost:'',
+
+        TitleFirstId:null,
+        TitleFirstPost:'',
         //post
         HomeData:[],
         InfoHome:'',
-        editModeHomeInfo:false,
+        TitleFirst:'',
+        editMode:false,
         Forms:[],
         FormsCards:[],
         FormsLength:null,
@@ -113,35 +121,60 @@ export default {
   methods: {
     StartEdit(res){
       if(res == 'InfoOffice'){
-        if(this.editModeHomeInfo == false){
-          this.editModeHomeInfo = true
+        if(this.editMode == false){
+          this.editMode = true
         }else{
-          this.editModeHomeInfo = false
+          this.editMode = false
         }
       }
       
       
     },
     async updateItemInMongoDB() {
-      const id = this.Infoid; 
-      const updatedData = {
-        InfoHome: this.InfoHomePost,
-      };
-      console.log(updatedData)
 
-      try {
-        const response = await axios.post('/.netlify/functions/UpdateItem', {
-          id,
-          updatedData,
-        });
+      if(this.InfoHomePost != this.InfoHome){
 
-        // Handle the response, display success message, etc.
-        alert('תיאור אודות משרד עודכן')
-        window.location.reload()
-      } catch (error) {
-        console.error('Error:', error);
-        // Handle error
+        const id = this.Infoid; 
+        const updatedData = {
+          InfoHome: this.InfoHomePost,
+        };
+
+        try {
+          const response = await axios.post('/.netlify/functions/UpdateItem', {
+            id,
+            updatedData,
+          });
+
+          // Handle the response, display success message, etc.
+          alert('תיאור אודות משרד עודכן')
+        } catch (error) {
+          console.error('Error:', error);
+          // Handle error
+        }
       }
+
+      if(this.TitleFirstPost != this.TitleFirst){
+
+        const id = this.TitleFirstId; 
+        const updatedData = {
+          TitleFirst: this.TitleFirstPost,
+        };
+
+        try {
+          const response = await axios.post('/.netlify/functions/UpdateItem', {
+            id,
+            updatedData,
+          });
+
+          // Handle the response, display success message, etc.
+          alert('תיאור משפט פתיחה עודכן')
+        } catch (error) {
+          console.error('Error:', error);
+          // Handle error
+        }
+      }
+      window.location.reload()
+      
     },
     async GetDataHome(){
 
@@ -157,6 +190,11 @@ export default {
           }
           if(this.HomeData[i].name == 'OptionsWork'){
             this.OptionsWork = this.HomeData[i].OptionsWork
+          }
+          if(this.HomeData[i].name == 'TitleFirst'){
+            this.TitleFirstId = this.HomeData[i]._id
+            this.TitleFirst = this.HomeData[i].TitleFirst
+            this.TitleFirstPost = this.HomeData[i].TitleFirst
           }
         }
 
@@ -255,6 +293,11 @@ export default {
 /* -------------------- empty ------------------- */
 .empty{
   height: 500px;
+}
+
+input.TitleFirstInput{
+  width: 100%;
+  direction: rtl !important;
 }
 
 /* ---------------- PosterHome --------------- */

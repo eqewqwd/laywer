@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://sharonTamari:Yk32XkMYMJT4xVvN@cluster0.2uci30n.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://sharontamari8:HLOVOpNFKUPnF0F4@cluster0.sgz3zs4.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 exports.handler = async (event, context) => {

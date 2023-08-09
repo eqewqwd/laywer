@@ -1,9 +1,9 @@
 <template>
   <router-view :key="$route.fullPath"></router-view>
   <div class="AccessibilityDiv">
-    <button class="btn btn-primary buttonShowAccessibility" @click="openAccessibility()"><i style="font-size: 35px;" class="bi bi-universal-access-circle"></i></button>
-    <button v-if="this.accessibilityOptions == true" class="btn btn-primary" @click="changeFontSize()"><i class="bi bi-fonts"></i>גופן טקסט</button>
-    <button v-if="this.accessibilityOptions == true" class="btn btn-primary" @click="this.changeContrast()"><i class="bi bi-palette"></i> צבעים</button>
+    <button class="btn btn-primary buttonShowAccessibility space" @click="openAccessibility()"><i style="font-size: 35px;" class="bi bi-universal-access-circle"></i></button>
+    <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="changeFontSize()"><i class="bi bi-fonts"></i>גופן טקסט</button>
+    <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.changeContrast()"><i class="bi bi-palette"></i> צבעים</button>
   </div>
 </template>
 
@@ -144,7 +144,7 @@ export default {
         let style = window.getComputedStyle(atext[i], null).getPropertyValue('color');
           console.log(style)
 
-          if(atext[i].classList.value != "copyrightA"){
+          if(atext[i].classList.value != "copyrightA" && atext[i].classList.value != "contrasA"){
             if(this.changeContrastCheck == true){
               atext[i].style.color="white"
             }
@@ -218,11 +218,11 @@ export default {
   flex-direction: column;
   position: fixed;
   top: 40%;
-  right: 0;
+  right: 0.5%;
 }
 
-button.buttonAccessibility{
-  display: hidden;
+.AccessibilityDiv button.space{
+  margin-top: 3px;
 }
 
 button.buttonShowAccessibility{
