@@ -40,7 +40,12 @@
 <div class="WorkOptions">
   <h1>עיסוקי המשרד</h1>
   <div class="OptionsContainer">
-    <OptionsContainer v-for="Option in OptionsWork" :key="Option" :name='Option.name'/>
+    <OptionsContainer v-if="editMode == false" v-for="Option in OptionsWork" :key="Option" :name='Option.name'/>
+    <ul v-if="editMode == true">
+      <li v-for="(Option,index) in OptionsWork" :key="index">
+        <input :value="Option.name" @input="OptionsWorkPost[index].name = $event.target.value"/>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -93,6 +98,7 @@ export default {
         //post
         Infoid:null,
         InfoHomePost:'',
+        OptionsWorkPost:[],
 
         TitleFirstId:null,
         TitleFirstPost:'',
@@ -173,6 +179,27 @@ export default {
           // Handle error
         }
       }
+
+      if (this.OptionsWorkPost){
+
+        const id = this.OptionsWorkId; 
+        const updatedData = {
+          OptionsWork: this.OptionsWorkPost,
+        };
+
+        try {
+          const response = await axios.post('/.netlify/functions/UpdateItem', {
+            id,
+            updatedData,
+          });
+
+          // Handle the response, display success message, etc.
+          alert('תיאור עיסוקי המשרד עודכן')
+        } catch (error) {
+          console.error('Error:', error);
+          // Handle error
+        }
+      }
       window.location.reload()
       
     },
@@ -189,7 +216,9 @@ export default {
             this.InfoHomePost = this.HomeData[i].InfoHome
           }
           if(this.HomeData[i].name == 'OptionsWork'){
+            this.OptionsWorkId = this.HomeData[i]._id
             this.OptionsWork = this.HomeData[i].OptionsWork
+            this.OptionsWorkPost = this.HomeData[i].OptionsWork
           }
           if(this.HomeData[i].name == 'TitleFirst'){
             this.TitleFirstId = this.HomeData[i]._id
