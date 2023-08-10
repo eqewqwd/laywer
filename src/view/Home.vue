@@ -1,6 +1,5 @@
 <template>
 <NavBar @editStart="StartEdit('InfoOffice')"/>
-<AccessibilityToolbar
 
 />
 <div class="PosterHome">
@@ -79,7 +78,6 @@ import EditTool from '@/components/EditTool.vue'
 
 
 import axios from 'axios'
-import { AccessibilityToolbar } from 'vue-accessibility-toolbar'
 import bcrypt from 'bcryptjs';
 
 
@@ -92,7 +90,6 @@ export default {
     Footer,
     EditTool,
     FormsHome,
-    AccessibilityToolbar
 },
   data(){
       return{
