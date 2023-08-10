@@ -1,7 +1,6 @@
 <template>
 <NavBar @editStart="StartEdit('InfoOffice')"/>
 
-/>
 <div class="PosterHome">
   <div class="TitleContainer">
     <h1 class="titleHome">עו"ד שרון נתח תמרי</h1>
