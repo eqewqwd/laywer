@@ -65,7 +65,7 @@ export default {
     openWigit(){
 
       const widget = window.cloudinary.createUploadWidget(
-        {cloud_name:"dqxeeegst", upload_preset: "Forms-img"},
+        {cloud_name:"drb3a55va", upload_preset: "Forms-img"},
         (error,result)=>{
           if(!error && result && result.event == "success"){
             console.log("Done uploading ....",result.info.url)

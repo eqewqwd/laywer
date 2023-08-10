@@ -6,9 +6,9 @@
       <img :src=img>
     </div>
     <!-- <h1>{{ title }}</h1> -->
-    <h1>{{ title }}</h1>
+    <h1 class="titleHome">{{ title }}</h1>
     <hr>
-    <p>
+    <p class="nameDownload">
       {{ info }}
     </p>
   </div>

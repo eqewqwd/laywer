@@ -5,7 +5,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 exports.handler = async (event, context) => {
     try {
         await client.connect();
-        const collection = client.db("lawyerWeb").collection("HomePage");
+        const collection = client.db("lawyerWeb").collection("ContactUs");
         const result = await collection.find().toArray();
         return {
             statusCode: 200,

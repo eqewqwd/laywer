@@ -1,6 +1,6 @@
 <template>
   <router-view :key="$route.fullPath"></router-view>
-  <div class="AccessibilityDiv">
+  <div class="AccessibilityDiv" :key="$route.fullPath">
     <button class="btn btn-primary buttonShowAccessibility space" @click="openAccessibility()"><i style="font-size: 35px;" class="bi bi-universal-access-circle"></i></button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="changeFontSize()"><i class="bi bi-fonts"></i>גופן טקסט</button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.changeContrast()"><i class="bi bi-palette"></i> צבעים</button>
@@ -119,6 +119,7 @@ export default {
 
       let h1text = document.querySelectorAll('h1')
       let h3text = document.querySelectorAll('h3')
+      let h4text = document.querySelectorAll('h4')
       let atext = document.querySelectorAll('a')
       let ptext = document.querySelectorAll('p')
       let spantext = document.querySelectorAll('span')
@@ -128,21 +129,27 @@ export default {
 
       for (let i = 0; i < h1text.length; i++) {
         
-          if(h1text[i].classList.value != "titleHome" && h1text[i].classList.value != 'FormsHomeH1'
-          && h1text[i].classList.value != 'contactH1'){
-            if(this.changeContrastCheck == true){
-             h1text[i].style.color="white"
-            }
-            if(this.changeContrastCheck == false){
-              h1text[i].style.color="black"
-            }
+        if(h1text[i].classList.value != "titleHome" && h1text[i].classList.value != 'FormsHomeH1'
+        && h1text[i].classList.value != 'contactH1' && h1text[i].classList.value != 'FormH1'){
+          if(this.changeContrastCheck == true){
+           h1text[i].style.color="white"
           }
-          
+          if(this.changeContrastCheck == false){
+            h1text[i].style.color="black"
+          }
+        }      
       }
+
+    for (let i = 0; i < h3text.length; i++) {        
+        if(h3text[i].classList.value == "H3contras"){
+          h3text[i].style.color="black"
+        }
+        
+    }
 
       for (let i = 0; i < atext.length; i++) {
         let style = window.getComputedStyle(atext[i], null).getPropertyValue('color');
-          console.log(style)
+          // console.log(style)
 
           if(atext[i].classList.value != "copyrightA" && atext[i].classList.value != "contrasA"){
             if(this.changeContrastCheck == true){
@@ -167,6 +174,15 @@ export default {
           if(this.changeContrastCheck == false){
             ptext[i].style.color="black"
           }
+        }
+      }
+
+      for (let i = 0; i < spantext.length; i++) {
+        // let style = window.getComputedStyle(atext[i], null).getPropertyValue('color');
+        //   console.log(style)
+
+        if(spantext[i].classList.value == "SpanContras"){
+            spantext[i].style.color="black"
         }
       }
     },
@@ -211,6 +227,7 @@ export default {
   color: #2c3e50 !important;
   direction: rtl !important;
 }
+
 
 .AccessibilityDiv{
   border: 1px solid none;

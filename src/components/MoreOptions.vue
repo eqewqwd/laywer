@@ -1,12 +1,12 @@
 <template>
-  <router-link @click="scrollUp()" style="text-decoration: none;color: black;" :to="({ name: 'FormsContainer', params: { name: this.name } })">
+  <router-link @click="scrollUp()" style="text-decoration: none;color: black; !important" :to="({ name: 'FormsContainer', params: { name: this.name } })">
   <div class="BoxDownload">
     <div class="imgDiv"><img :src="imgForm"></div>
     <div class="TitleDiv">
-      <h3>{{ subTitle }}</h3>
+      <h3 class="H3contras">{{ subTitle }}</h3>
       
     </div>
-    <div class="DateDiv">עודכן בתאריך : {{ PostDate }}</div>
+    <div class="DateDiv"><span class="SpanContras">עודכן בתאריך : {{ PostDate }}</span></div>
   </div>
 </router-link>
 </template>

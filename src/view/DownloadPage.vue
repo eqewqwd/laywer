@@ -3,7 +3,7 @@
 
 <div class="PosterHome">
   <div class="TitleDivPoster">
-    <h1>טפסים להורדה</h1>
+    <h1 class="titleHome">טפסים להורדה</h1>
   </div>
 </div>
 

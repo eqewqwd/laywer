@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://sharontamari8:HLOVOpNFKUPnF0F4@cluster0.sgz3zs4.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.Mongo_Env + "?retryWrites=true&w=majority";
 
 
 exports.handler = async function(event, context) {

@@ -13,7 +13,7 @@ exports.handler = async (event) => {
     await client.connect();
 
     const db = client.db('lawyerWeb');
-    const collection = db.collection('Forms');
+    const collection = db.collection('ContactUs');
 
     // Update the item in MongoDB
     const result = await collection.updateOne({ _id: newId  }, { $set: updatedData });

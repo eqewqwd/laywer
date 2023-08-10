@@ -38,12 +38,12 @@
 </div>
 
 <div class="WorkOptions">
-  <h1>עיסוקי המשרד</h1>
+  <h1 class="titleHome">עיסוקי המשרד</h1>
   <div class="OptionsContainer">
     <OptionsContainer v-if="editMode == false" v-for="Option in OptionsWork" :key="Option" :name='Option.name'/>
     <ul v-if="editMode == true">
       <li v-for="(Option,index) in OptionsWork" :key="index">
-        <input :value="Option.name" @input="OptionsWorkPost[index].name = $event.target.value"/>
+        <input :value="Option.name" @beforeinput="this.optionsCheck()" @input="OptionsWorkPost[index].name = $event.target.value"/>
       </li>
     </ul>
   </div>
@@ -83,6 +83,7 @@ import { AccessibilityToolbar } from 'vue-accessibility-toolbar'
 import bcrypt from 'bcryptjs';
 
 
+
 export default {
   name: 'Home',
   components: {
@@ -97,32 +98,33 @@ export default {
       return{
         //post
         Infoid:null,
+        InfoHome:'',
         InfoHomePost:'',
         OptionsWorkPost:[],
+        optionsCheckBollean:false,
 
         TitleFirstId:null,
+        TitleFirst:'',
         TitleFirstPost:'',
+
         //post
         HomeData:[],
-        InfoHome:'',
-        TitleFirst:'',
         editMode:false,
         Forms:[],
         FormsCards:[],
         FormsLength:null,
         user:null,
         OptionsWork:[],
-
       }
       
   },
   created(){
-
   },
   async mounted(){
     this.GetDataHome()
     this.GetForms()
     this.userData()
+
   },
   methods: {
     StartEdit(res){
@@ -136,6 +138,7 @@ export default {
       
       
     },
+
     async updateItemInMongoDB() {
 
       if(this.InfoHomePost != this.InfoHome){
@@ -180,7 +183,7 @@ export default {
         }
       }
 
-      if (this.OptionsWorkPost){
+      if (this.optionsCheckBollean == true){
 
         const id = this.OptionsWorkId; 
         const updatedData = {
@@ -203,6 +206,11 @@ export default {
       window.location.reload()
       
     },
+    optionsCheck(){
+
+      this.optionsCheckBollean = true
+
+    },
     async GetDataHome(){
 
       await axios.get('/.netlify/functions/GetDataHome').then(response => {
@@ -219,6 +227,7 @@ export default {
             this.OptionsWorkId = this.HomeData[i]._id
             this.OptionsWork = this.HomeData[i].OptionsWork
             this.OptionsWorkPost = this.HomeData[i].OptionsWork
+            
           }
           if(this.HomeData[i].name == 'TitleFirst'){
             this.TitleFirstId = this.HomeData[i]._id

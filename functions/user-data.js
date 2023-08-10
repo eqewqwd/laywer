@@ -4,10 +4,9 @@ var ObjectId = require('mongodb').ObjectId;
 
 
 
-const uri = "mongodb+srv://sharontamari8:HLOVOpNFKUPnF0F4@cluster0.sgz3zs4.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.Mongo_Env + "?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const JWT_SECRET =  process.env.JWT_SECRET_KEY; // Replace this with your JWT secret key
-
 exports.handler = async (event, context) => {
   if (!event.headers.authorization) {
     return {

@@ -8,7 +8,7 @@ exports.handler = async (event) => {
     const { id, updatedData } = JSON.parse(event.body);
     var newId = new ObjectId(id)
 
-    const uri = "mongodb+srv://sharontamari8:HLOVOpNFKUPnF0F4@cluster0.sgz3zs4.mongodb.net/?retryWrites=true&w=majority";
+    const uri = process.env.Mongo_Env + "?retryWrites=true&w=majority";
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
 

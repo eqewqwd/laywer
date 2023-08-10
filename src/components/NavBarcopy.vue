@@ -81,7 +81,6 @@ export default {
     // window.addEventListener('scroll', this.handleScroll);
     // window.addEventListener('click', this.toggleButton);
     // console.log(document.getElementById("itemNum").ariaValueText)
-    
   
   },
   destroyed () {

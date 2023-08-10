@@ -39,16 +39,17 @@ export default {
       SendEmail(){
         let from_name = this.namePost
         let email_id = this.emailPost
-        let publicKey = "zfP0_Yde2Yv2hedao"
 
         const data = {
           from_name:from_name,
           email_id:email_id,
         }
 
-        emailjs.send("service_erjo09j","template_ixss9pw",data,publicKey).then(function(res){
-        alert("Success! " + res.status);
-    })
+        let publicKey = "DBLmVAnW9rZgH7ggb"
+
+        emailjs.send("service_trj97gf","template_gufs4gg",data,publicKey).then(function(res){
+        alert("מייל נשלח בהצלחה");
+        })
       }
 
     }

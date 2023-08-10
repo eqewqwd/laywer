@@ -4,10 +4,12 @@
 
 <div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">
-    <img :src=post.FormImg >
+    <img v-if="editMode == false" :src=post.FormImg >
+    <img v-if="editMode == true" :src=this.imgPost >
+    <i @click="this.openWigit()" v-if="editMode == true" class="bi bi-cloud-upload"></i>
   </div>
   <div class="TitleDivPoster">
-    <h1><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true">
+    <h1 class="FormH1"><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true">
       <input :value="post.title" @input="TitlePost = $event.target.value"/></span></h1>
     <div class="SmallText">
       <h4>מאת : שרון נתח תמרי</h4>
@@ -30,7 +32,7 @@
 </div>
 
 <div class="CaruselCardsDiv" v-if="this.LoadingCheck == false">
-  <h1>עוד מאמרים</h1>
+  <h1 class="FormH1">עוד מאמרים</h1>
   <div class="CaruselContainer">
     <Carousel v-bind="settings" :breakpoints="breakpoints">
     <Slide v-for="test in test2" :key="test">
@@ -86,6 +88,12 @@ export default {
       return{
 
         // post
+        Title:'',
+        subTitle:'',
+        info:'',
+        img:'',
+
+        imgPost:'',
         TitlePost:'',
         subTitlePost:'',
         infoPost:'',
@@ -149,6 +157,19 @@ export default {
     }
   },
   methods: {
+    openWigit(){
+
+    const widget = window.cloudinary.createUploadWidget(
+      {cloud_name:"drb3a55va", upload_preset: "Forms-img"},
+      (error,result)=>{
+        if(!error && result && result.event == "success"){
+          console.log("Done uploading ....",result.info.url)
+          this.imgPost = result.info.url      
+        }
+      }
+    )
+    widget.open()
+    },
     StartEdit(){
       if(this.editMode == false){
         this.editMode = true
@@ -157,29 +178,37 @@ export default {
       }
     },
     async updateItemInMongoDB() {
-      const id = this.id; 
-      const updatedData = {
-        title : this.TitlePost,
-        subTitle : this.subTitlePost,
-        info : this.infoPost
-      };
-      console.log(updatedData)
 
-      try {
-        const response = await axios.post('/.netlify/functions/UpdateItemForms', {
-          id,
-          updatedData,
-        });
+      if(this.Title != this.TitlePost || this.subTitle != this.subTitlePost 
+      || this.info != this.info || this.img != this.imgPost){
+        const id = this.id; 
+        const updatedData = {
+          title : this.TitlePost,
+          subTitle : this.subTitlePost,
+          info : this.infoPost,
+          FormImg : this.imgPost
+        };
+        console.log(updatedData)
 
-        // Handle the response, display success message, etc.
-        sessionStorage.clear()
-        this.GetData()
+        try {
+          const response = await axios.post('/.netlify/functions/UpdateItemForms', {
+            id,
+            updatedData,
+          });
+
+          // Handle the response, display success message, etc.
+          sessionStorage.clear()
+          this.GetData()
+          this.editMode = false
+          alert(this.name + " עודכנה בהצלחה")
+        } catch (error) {
+          console.error('Error:', error);
+          // Handle error
+        }
+      }else{
         this.editMode = false
-        alert(this.name + " עודכנה בהצלחה")
-      } catch (error) {
-        console.error('Error:', error);
-        // Handle error
       }
+      
     },
     async userData(){
 
@@ -235,9 +264,15 @@ await axios
       for (let i = 0; i<Object.keys(FormItems).length; i++){
         this.FormsData.push(FormItems[i])
         if(FormItems[i].name == this.name){
+          this.Title = FormItems[i].title
+          this.subTitle = FormItems[i].subTitle
+          this.info = FormItems[i].info
+          this.img = FormItems[i].FormImg
+
           this.TitlePost = FormItems[i].title
           this.subTitlePost = FormItems[i].subTitle
           this.infoPost = FormItems[i].info
+          this.imgPost = FormItems[i].FormImg
           this.id = FormItems[i]._id
         }
       }
@@ -334,6 +369,20 @@ await axios
   position: relative;
   width: 40%;
   height: 100%;
+}
+
+.PosterHome .ImgDivPoster i{
+  position: absolute;
+  top: 0;
+  right: 3%;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+  transition: ease 0.2s;
+}
+
+.PosterHome .ImgDivPoster i:hover{
+  color: rgb(135, 119, 30);
 }
 
 .PosterHome .ImgDivPoster img{

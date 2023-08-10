@@ -31,9 +31,22 @@
       </div> -->
 
       <ul class="ulContact">
-        <li><span class="infoSpan"><i class="bi bi-geo-alt"></i><span>מיקום:</span><span class="InfoData">שדרות מוריה 81, חיפה</span></span></li>
-        <li><span class="infoSpan"><i class="bi bi-telephone"></i><span>טלפון:</span><span class="InfoData">052-635-3423</span></span></li>
-        <li><span class="infoSpan"><i class="bi bi-envelope"></i><span>אימייל:</span><span class="InfoData">sharon@snt-law.co.il</span></span></li>
+        <li><span class="infoSpan"><i class="bi bi-geo-alt"></i><span>מיקום:</span>
+          <span v-if="editMode == false" class="InfoData">{{ this.location }}</span>
+          <span v-if="editMode == true">
+          <input class="TitleFirstInput" :value="this.location" @input="this.locationPost = $event.target.value"/></span>
+        </span></li>
+        <li><span class="infoSpan"><i class="bi bi-telephone"></i><span>טלפון:</span>
+          <span v-if="editMode == false" class="InfoData">{{ this.phoneNumber }}</span>
+          <span v-if="editMode == true">
+          <input class="TitleFirstInput" :value="this.phoneNumber" @input="this.phoneNumberPost = $event.target.value"/></span>
+        </span></li>
+        <li><span class="infoSpan"><i class="bi bi-envelope"></i><span>אימייל:</span>
+          <span v-if="editMode == false" class="InfoData">{{ this.email }}</span></span> 
+          <span v-if="editMode == true">
+          <input class="TitleFirstInput" :value="this.email" @input="this.emailPost = $event.target.value"/></span>
+        </li>
+        <span> <EditTool v-if="editMode == true" @PostMongo="updateItemInMongoDB()" @EditEnd="StartEdit('InfoOffice')"/></span>
       </ul>
     </div>
   </div>
@@ -48,16 +61,24 @@
 <script>
 import NavBar from '@/components/NavBarcopy.vue'
 import Footer from '@/components/Footer.vue'
+import EditTool from '@/components/EditTool.vue'
+import emailjs from '@emailjs/browser';
+
+
+import axios from 'axios'
 
 
 export default {
   name: 'ContactUs',
   components: {
     NavBar,
-    Footer
+    Footer,
+    EditTool
 },
   data(){
       return{
+
+        contact:[],
         // email post data 
 
         NamePost:'',
@@ -66,11 +87,32 @@ export default {
         MessagePost:'',
 
         // ---------- end -------------
+
+
+        // post data mongodb
+
+        IdPost:null,
+
+        email:'',
+        emailPost:'',
+
+        phoneNumber:'',
+        phoneNumberPost:'',
+
+        location:'',
+        locationPost:'',
+
+        // ---------- end -------------
+
+        // action
+
+        editMode:false,
+
       }
       
   },
   created(){
-
+    this.GetDataContact()
   },
   mounted(){
   },
@@ -82,12 +124,73 @@ export default {
         subject: this.SubjectPost,
         message: this.MessagePost
       }
-        let publicKey = "zfP0_Yde2Yv2hedao"
+        let publicKey = "DBLmVAnW9rZgH7ggb"
 
-        emailjs.send("service_erjo09j","template_zzix94a",data,publicKey).then(function(res){
-        alert("Success! " + res.status);
-        })
+        emailjs.send("service_trj97gf","template_u6nhy8ta",data,publicKey).then(function(res){
+        alert("מייל נשלח בהצלחה");        
+      })
     },
+    async GetDataContact(){
+
+      await axios.get('/.netlify/functions/GetDataContact').then(response => {
+        console.log(response.data);
+        this.contact = response.data
+
+        this.IdPost = this.contact[0]._id
+
+        this.location = this.contact[0].location
+        this.locationPost = this.contact[0].location
+
+
+        this.phoneNumber = this.contact[0].phoneNumber
+        this.phoneNumberPost = this.contact[0].phoneNumber
+        
+        this.email = this.contact[0].email
+        this.emailPost = this.contact[0].email
+            
+
+      }).catch(error => {
+          console.log(error);
+      }); 
+
+    },
+    StartEdit(){
+        if(this.editMode == false){
+          this.editMode = true
+        }else{
+          this.editMode = false
+        }      
+    },
+  async updateItemInMongoDB() {
+
+    if(this.location != this.locationPost || this.phoneNumber != this.phoneNumberPost
+    || this.email != this.emailPost){
+      const id = this.IdPost; 
+      const updatedData = {
+        location:this.locationPost,
+        phoneNumber:this.phoneNumberPost,
+        email:this.emailPost,
+      };
+
+      try {
+        const response = await axios.post('/.netlify/functions/UpdateItemContact', {
+          id,
+          updatedData,
+        });
+
+        // Handle the response, display success message, etc.
+        alert('תיאור יצירת קשר עודכן')
+        window.location.reload()
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle error
+      }
+    }else{
+      alert('לא בוצע שינוי')
+      this.StartEdit()
+    }
+      
+  }  
 
   } 
 }
