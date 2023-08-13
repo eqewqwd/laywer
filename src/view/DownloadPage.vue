@@ -1,28 +1,7 @@
 <template>
 <NavBar @editStart="StartEdit()"/>
 
-<div class="PosterHome">
-  <div class="TitleDivPoster">
-    <h1 class="titleHome">טפסים להורדה</h1>
-    <i @click="this.openWigit()" class="bi bi-cloud-upload"></i>
-  </div>
-</div>
 
-<div class="searchDiv">
-  <label>חיפוש : </label>
-    <input type="text" @input="this.checkIfNot()" v-model="search" placeholder="חיפוש על ידי שם.."/>
-  </div>
-
-<div class="BoxContainerDownload">
-  <DownloadBox v-for="download in filteredList" :key="download" :name="download.name" :date="download.date"
-  :ImgDownload="download.ImgDownload" :numberFile="download.numberFile" :fileName="download.fileName" 
-  :downloadImg="this.downloadImg"/>
-  
-
-  <div class="notFound" v-show="this.allowNotFind == true">
-    <h1> לא נמצא טופס בשם : "{{ this.search }}"</h1>
-  </div>
-</div>
 
 
 
