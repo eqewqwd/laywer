@@ -1,5 +1,5 @@
 <template>
-<NavBar @editStart="openWigit()"/>
+<NavBar @editStart="StartEdit()"/>
 
 <div class="PosterHome">
   <div class="TitleDivPoster">
@@ -94,6 +94,9 @@ export default {
         this.allowNotFind = false
 
       }
+    },
+    async StartEdit(){
+      await this.openWigit()
     },
     openWigit(){
 
