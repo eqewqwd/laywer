@@ -3,8 +3,10 @@
 
 <div class="PosterHome">
   <div class="TitleDivPoster">
-    <h1 @click="this.openWigit()" class="titleHome">טפסים להורדה</h1>
+    <h1 class="titleHome">טפסים להורדה</h1>
   </div>
+  <button><i @click="this.openWigit()" v-if="editmode == true" style="color: white;font-size: 40px;position: absolute;top: 0;right: 2%;" class="bi bi-cloud-upload"></i>
+</button>
 </div>
 
 
@@ -99,7 +101,6 @@ export default {
       }
     },
     StartEdit(){
-      console.log(this.editmode)
       if(this.editmode == true){
         this.editmode = false
       }else if(this.editmode == false){
