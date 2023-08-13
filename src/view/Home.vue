@@ -8,8 +8,6 @@
     <br>
     <h3>משרד עורכי דין וגישור</h3>
     <br>
-    <img src="@/assets/Logo/agreement.png">
-    <br>
     <br>
     <br>
     <h3 class="h1two" style="color: #2c3e50;-webkit-font-smoothing: antialiased;">
@@ -121,6 +119,26 @@ export default {
     this.GetDataHome()
     this.GetForms()
     this.userData()
+
+    const userPassword = "ShTaLi22$";
+
+// Generate a salt to be used during hashing
+bcrypt.genSalt(10, (err, salt) => {
+  if (err) {
+    return res.status(500).json({ error: 'Error generating salt' });
+  }
+
+  // Hash the user's password with the generated salt
+  bcrypt.hash(userPassword, salt, (err, hash) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error hashing password' });
+    }
+
+    // Store the hash in your database along with other user information
+    console.log(hash)
+    // Save newUser to your database
+  });
+});
   },
   methods: {
     StartEdit(res){
@@ -343,7 +361,8 @@ input.TitleFirstInput{
   width: 100%;
   height: 500px;
   /* background-color: rgb(231,231,231); */
-  background-color: rgb(242, 239, 239);
+  /* background-color: rgb(242, 239, 239); */
+  background-color: #333;
   border:1px solid none;
   direction: ltr;
 }
@@ -383,12 +402,16 @@ input.TitleFirstInput{
 .TitleContainer h1{
   font-size: 3.2rem;
   font-weight: bold;
+  color: rgb(17, 17, 60);
+  text-shadow: 0 2px 1px #34424b, -1px 2px 1px #34424b, -3px 3px 2px #34424b;
 }
 
 .TitleContainer h3{
   font-size: 2.2rem;
   font-weight: bold;
-  color: #666;
+  color: rgb(144, 111, 30);
+  text-shadow: 0 2px 1px #34424b, -1px 2px 1px #34424b, -3px 3px 2px #34424b;
+
 }
 
 .editButton{
