@@ -3,10 +3,11 @@
   <div class="BoxDownload">
     <div class="imgDiv"><img :src="imgForm"></div>
     <div class="TitleDiv">
-      <h3 class="H3contras">{{ subTitle }}</h3>
+      <h3 class="H3contras">{{ Title }}</h3>
+      <hr>
+      <h6 class="H3contras">{{ subTitle }}</h6>
       
     </div>
-    <div class="DateDiv"><span class="SpanContras">עודכן בתאריך : {{ PostDate }}</span></div>
   </div>
 </router-link>
 </template>
@@ -16,7 +17,7 @@
 
 export default {
     name: "MoreOptions",
-    props:['name','imgForm','subTitle','PostDate'],
+    props:['name','imgForm','subTitle','Title'],
     data() {
         return {
         }

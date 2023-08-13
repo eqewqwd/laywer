@@ -34,6 +34,7 @@
     <Slide v-for="test in test2" :key="test">
       <MoreOptions 
       :name="test.name" :imgForm="test.FormImg" :subTitle="test.subTitle" :key="test"
+      :Title="test.title"
       />
     </Slide>
 

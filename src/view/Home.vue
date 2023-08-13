@@ -10,7 +10,7 @@
     <br>
     <br>
     <br>
-    <h3 class="h1two" style="color: #2c3e50;-webkit-font-smoothing: antialiased;">
+    <h3 class="h1two" style="color: #DFB951;-webkit-font-smoothing: antialiased;">
       <span v-if="editMode == false">{{ this.TitleFirst }}</span>
       <span v-if="editMode == true">
       <input class="TitleFirstInput" :value="this.TitleFirst" @input="TitleFirstPost = $event.target.value"/></span>
@@ -342,8 +342,9 @@ input.TitleFirstInput{
   /* background-color: rgb(231,231,231); */
   /* background-color: rgb(242, 239, 239); */
   /* background-color: #333; */
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(94,149,190,1) 60%, rgba(49,60,181,1) 100%);  
+  background-color: #2b4162;
+background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
+ 
   border:1px solid none;
   direction: ltr;
 }
@@ -383,14 +384,14 @@ input.TitleFirstInput{
 .TitleContainer h1{
   font-size: 3.2rem;
   font-weight: bold;
-  color: rgb(17, 17, 60);
-  text-shadow: 0 2px 1px #34424b, -1px 2px 1px #34424b, -3px 3px 2px #34424b;
+  color: rgb(22, 22, 107);
+  text-shadow: 0 3px 1px #34424b, -1px 2px 1px #34424b, -3px 4px 3px #34424b;
 }
 
 .TitleContainer h3{
   font-size: 2.2rem;
   font-weight: bold;
-  color: rgb(144, 111, 30);
+  color: #DFB951;
   text-shadow: 0 2px 1px #34424b, -1px 2px 1px #34424b, -3px 3px 2px #34424b;
 
 }

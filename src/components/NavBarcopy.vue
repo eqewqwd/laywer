@@ -272,7 +272,9 @@ span.loginuser i:hover{
 
 #mainNavigation a {
       /* font-family: 'Cabin', sans-serif; */
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+      font-family: 'miriamLibre', sans-serif !important;
+      font-weight: none;
       font-size:20px;
       text-transform:uppercase;
       letter-spacing:2px;

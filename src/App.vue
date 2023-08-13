@@ -221,11 +221,16 @@ export default {
 #app {
   /* margin-top: 100px; */
   /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
-  font-family: system-ui;
+  font-family: 'miriamLibre', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50 !important;
   direction: rtl !important;
+}
+
+@font-face {
+  font-family: "miriamLibre";
+  src: url('./assets/Fonts/MiriamLibre-Bold.ttf');
 }
 
 
