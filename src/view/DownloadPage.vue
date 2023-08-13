@@ -101,6 +101,7 @@ export default {
       }
     },
     StartEdit(){
+      console.log(this.editmode)
       if(this.editmode == true){
         this.editmode = false
       }else if(this.editmode == false){
