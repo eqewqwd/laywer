@@ -1,7 +1,7 @@
 <template>
   <div class="BoxDownload">
     <div class="imgDiv">
-      <img v-if="this.editMode == false" :src=this.downloadImg >
+      <img :src=this.downloadImg >
     </div>
     <div class="TitleDiv">
       <h3>טופס מס'  {{ numberFile }}</h3>

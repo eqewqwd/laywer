@@ -5,7 +5,7 @@
   <div class="TitleDivPoster">
     <h1 class="titleHome">טפסים להורדה</h1>
   </div>
-  <i @click="this.openWigit()" style="position: absolute;right: 2%;top: 0;background-color: red;" v-if="this.editMode == true" class="bi bi-cloud-upload"></i>
+  <i @click="this.openWigit()" style="position: absolute;right: 2%;top: 0;background-color: red;" class="bi bi-cloud-upload"></i>
 </div>
 
 <div class="searchDiv">
@@ -55,7 +55,6 @@ export default {
         search:'',
         allowNotFind:false,
         id:null,
-        editmode:false,
         downloadImg:'',
         downloadData:
         [
@@ -98,7 +97,6 @@ export default {
       }
     },
     StartEdit(){
-      this.editmode = true
       console.log("work")
     },
     openWigit(){
