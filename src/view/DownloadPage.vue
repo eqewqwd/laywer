@@ -5,9 +5,10 @@
   <div class="TitleDivPoster">
     <h1 class="titleHome">טפסים להורדה</h1>
   </div>
-</div>
-<button><i @click="this.openWigit()" style="color: black;font-size: 25px;" class="bi bi-cloud-upload"></i>
+  <button><i @click="this.openWigit()" v-if="editmode == true" style="color: white;font-size: 40px;position: absolute;top: 0;right: 2%;" class="bi bi-cloud-upload"></i>
 </button>
+</div>
+
 
 <div class="searchDiv">
   <label>חיפוש : </label>
@@ -41,7 +42,7 @@ import Footer from '@/components/Footer.vue'
 import DownloadBox from '@/components/DownloadBox.vue'
 
 
-// import axios from 'axios'
+import axios from 'axios'
 
 
 export default {
@@ -57,6 +58,8 @@ export default {
         allowNotFind:false,
         id:null,
         downloadImg:'',
+        downloadImgbackend:'',
+        editmode:false,
         downloadData:
         [
         {name:"טופס למתן טיפול רפואי ראשוני לאחר תאונת עבודה" ,date:"10.8.2023",numberFile:"283" ,fileName:"283.pdf"},
@@ -98,7 +101,11 @@ export default {
       }
     },
     StartEdit(){
-      console.log("work")
+      if(this.editmode == true){
+        this.editmode = false
+      }else if(this.editmode == false){
+        this.editmode = true
+      }
     },
     openWigit(){
 
@@ -107,8 +114,8 @@ export default {
         (error,result)=>{
           if(!error && result && result.event == "success"){
             console.log("Done uploading ....",result.info.url)
-            this.downloadImg = result.info.url      
-            this.updateItemInMongoDB()
+            this.downloadImg = result.info.url  
+            this.updateItemInMongoDB()    
           }
         }
       )
@@ -121,6 +128,7 @@ GetData(){
           for (let i = 0; i<resres.length; i++){
             this.id = resres[i]._id
             this.downloadImg = resres[i].downloadImg
+            this.downloadImgbackend = resres[i].downloadImg
           }
 
         }).catch(error => {
@@ -129,7 +137,6 @@ GetData(){
     },
     async updateItemInMongoDB() {
 
-if(this.downloadImg != this.downloadImg){
   const id = this.id; 
   const updatedData = {
     downloadImg : this.downloadImg
@@ -148,7 +155,6 @@ if(this.downloadImg != this.downloadImg){
     console.error('Error:', error);
     // Handle error
   }
-}
 
 },
 

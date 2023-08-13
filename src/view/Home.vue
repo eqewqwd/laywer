@@ -121,7 +121,6 @@ export default {
     this.GetDataHome()
     this.GetForms()
     this.userData()
-
   },
   methods: {
     StartEdit(res){
@@ -131,9 +130,7 @@ export default {
         }else{
           this.editMode = false
         }
-      }
-      
-      
+      }  
     },
 
     async updateItemInMongoDB() {
