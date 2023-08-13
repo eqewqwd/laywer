@@ -2,8 +2,6 @@
   <div class="BoxDownload">
     <div class="imgDiv">
       <img v-if="this.editMode == false" :src=this.downloadImg >
-      <img v-if="this.editMode == true" :src=this.imgPost >
-      <i @click="this.openWigit()" v-if="this.editMode == true" class="bi bi-cloud-upload"></i>
     </div>
     <div class="TitleDiv">
       <h3>טופס מס'  {{ numberFile }}</h3>
@@ -22,74 +20,19 @@
 
 export default {
     name: "DownloadBox",
-    props:['name','date','ImgDownload','numberFile','fileName','editMode'],
+    props:['name','date','ImgDownload','numberFile','fileName','downloadImg'],
     data() {
         return {
-          downloadImg:'',
         }
     },
     created () {
   },
     mounted(){
-      this.GetData()
     }, 
     methods:{
       getFileUrl(fileName) {
         return process.env.BASE_URL + 'files/' + fileName;
     },
-    openWigit(){
-
-const widget = window.cloudinary.createUploadWidget(
-  {cloud_name:"drb3a55va", upload_preset: "download-img"},
-  (error,result)=>{
-    if(!error && result && result.event == "success"){
-      console.log("Done uploading ....",result.info.url)
-      this.downloadImg = result.info.url      
-    }
-  }
-)
-widget.open()
-},
-GetData(){
-        axios.get('/.netlify/functions/GetDataDownload').then(response => {
-          console.log(response.data);
-          let resres = response.data
-          for (let i = 0; i<resres.length; i++){
-            this.id = resres[i]._id
-            this.downloadImg = resres[i].downloadImg
-          }
-
-        }).catch(error => {
-            console.log(error);
-        }); 
-    },
-    async updateItemInMongoDB() {
-
-if(this.downloadImg != this.downloadImg){
-  const id = this.id; 
-  const updatedData = {
-    downloadImg : this.downloadImg
-  };
-
-  try {
-    const response = await axios.post('/.netlify/functions/UpdateItemDownload', {
-      id,
-      updatedData,
-    });
-
-    // Handle the response, display success message, etc.
-    this.GetData()
-    this.editMode = false
-    alert(" !תמונה עודכנה בהצלחה")
-  } catch (error) {
-    console.error('Error:', error);
-    // Handle error
-  }
-}else{
-  this.editMode = false
-}
-
-},
     }
 }
 </script>

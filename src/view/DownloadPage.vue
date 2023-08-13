@@ -1,5 +1,5 @@
 <template>
-<NavBar @editStart="StartEdit()"/>
+<NavBar @editStart="openWigit()"/>
 
 <div class="PosterHome">
   <div class="TitleDivPoster">
@@ -15,7 +15,7 @@
 <div class="BoxContainerDownload">
   <DownloadBox v-for="download in filteredList" :key="download" :name="download.name" :date="download.date"
   :ImgDownload="download.ImgDownload" :numberFile="download.numberFile" :fileName="download.fileName" 
-  :editMode="this.editMode"/>
+  :downloadImg="this.downloadImg"/>
   
 
   <div class="notFound" v-show="this.allowNotFind == true">
@@ -53,7 +53,8 @@ export default {
       return{
         search:'',
         allowNotFind:false,
-        editMode:false,
+        id:null,
+        downloadImg:'',
         downloadData:
         [
         {name:"טופס למתן טיפול רפואי ראשוני לאחר תאונת עבודה" ,date:"10.8.2023",numberFile:"283" ,fileName:"283.pdf"},
@@ -73,7 +74,7 @@ export default {
       
   },
   created(){
-
+    this.GetData()
   },
   mounted(){
   },
@@ -94,13 +95,57 @@ export default {
 
       }
     },
-    StartEdit(){
-        if(this.editMode == false){
-          this.editMode = true
-        }else{
-          this.editMode = false
-        }      
+    openWigit(){
+
+      const widget = window.cloudinary.createUploadWidget(
+        {cloud_name:"drb3a55va", upload_preset: "download-img"},
+        (error,result)=>{
+          if(!error && result && result.event == "success"){
+            console.log("Done uploading ....",result.info.url)
+            this.downloadImg = result.info.url      
+            this.updateItemInMongoDB()
+          }
+        }
+      )
+      widget.open()
     },
+GetData(){
+        axios.get('/.netlify/functions/GetDataDownload').then(response => {
+          console.log(response.data);
+          let resres = response.data
+          for (let i = 0; i<resres.length; i++){
+            this.id = resres[i]._id
+            this.downloadImg = resres[i].downloadImg
+          }
+
+        }).catch(error => {
+            console.log(error);
+        }); 
+    },
+    async updateItemInMongoDB() {
+
+if(this.downloadImg != this.downloadImg){
+  const id = this.id; 
+  const updatedData = {
+    downloadImg : this.downloadImg
+  };
+
+  try {
+    const response = await axios.post('/.netlify/functions/UpdateItemDownload', {
+      id,
+      updatedData,
+    });
+
+    // Handle the response, display success message, etc.
+    this.GetData()
+    alert(" !תמונה עודכנה בהצלחה")
+  } catch (error) {
+    console.error('Error:', error);
+    // Handle error
+  }
+}
+
+},
 
   } 
 }
