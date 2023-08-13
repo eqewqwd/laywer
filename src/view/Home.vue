@@ -76,7 +76,6 @@ import EditTool from '@/components/EditTool.vue'
 
 
 import axios from 'axios'
-import bcrypt from 'bcryptjs';
 
 
 
@@ -119,26 +118,6 @@ export default {
     this.GetDataHome()
     this.GetForms()
     this.userData()
-
-    const userPassword = "ShTaLi22$";
-
-// Generate a salt to be used during hashing
-bcrypt.genSalt(10, (err, salt) => {
-  if (err) {
-    return res.status(500).json({ error: 'Error generating salt' });
-  }
-
-  // Hash the user's password with the generated salt
-  bcrypt.hash(userPassword, salt, (err, hash) => {
-    if (err) {
-      return res.status(500).json({ error: 'Error hashing password' });
-    }
-
-    // Store the hash in your database along with other user information
-    console.log(hash)
-    // Save newUser to your database
-  });
-});
   },
   methods: {
     StartEdit(res){
@@ -362,7 +341,9 @@ input.TitleFirstInput{
   height: 500px;
   /* background-color: rgb(231,231,231); */
   /* background-color: rgb(242, 239, 239); */
-  background-color: #333;
+  /* background-color: #333; */
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(94,149,190,1) 60%, rgba(49,60,181,1) 100%);  
   border:1px solid none;
   direction: ltr;
 }
