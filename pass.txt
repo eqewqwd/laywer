@@ -1,0 +1,5 @@
+pass : ShTaLi23$
+crypt : $2a$10$XabwcmoF9leAREUPCwSNEu6z5rXxh6gokm05Qc/zjnRf9Stbx0gK6
+netlify : $2a$10$XabwcmoF9leAREUPCwSNEu
+
+https://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@github.com/eqewqwd/laywer.git
