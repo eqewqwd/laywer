@@ -4,8 +4,8 @@
 <div class="PosterHome">
   <div class="TitleDivPoster">
     <h1 class="titleHome">טפסים להורדה</h1>
+    <i @click="this.openWigit()" class="bi bi-cloud-upload"></i>
   </div>
-  <i @click="this.openWigit()" style="position: absolute;right: 2%;top: 0;background-color: red;" class="bi bi-cloud-upload"></i>
 </div>
 
 <div class="searchDiv">
