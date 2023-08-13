@@ -175,8 +175,8 @@ export default {
     },
     async updateItemInMongoDB() {
 
-      if(this.Title != this.TitlePost || this.subTitle != this.subTitlePost 
-      || this.info != this.infoPost || this.img != this.imgPost){
+      // if(this.Title != this.TitlePost || this.subTitle != this.subTitlePost 
+      // || this.info != this.infoPost || this.img != this.imgPost){
         const id = this.id; 
         const updatedData = {
           title : this.TitlePost,
@@ -201,9 +201,9 @@ export default {
           console.error('Error:', error);
           // Handle error
         }
-      }else{
-        this.editMode = false
-      }
+      // }else{
+      //   this.editMode = false
+      // }
       
     },
     async userData(){
