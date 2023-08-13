@@ -97,8 +97,9 @@ export default {
 
       }
     },
-    async StartEdit(){
+    StartEdit(){
       this.editmode = true
+      console.log("work")
     },
     openWigit(){
 
