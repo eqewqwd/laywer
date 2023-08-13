@@ -3,10 +3,8 @@
 
 <div class="PosterHome">
   <div class="TitleDivPoster">
-    <h1 class="titleHome">טפסים להורדה</h1>
+    <h1 @click="this.openWigit()" class="titleHome">טפסים להורדה</h1>
   </div>
-  <button><i @click="this.openWigit()" style="color: white;font-size: 40px;position: absolute;top: 0;right: 2%;" class="bi bi-cloud-upload"></i>
-</button>
 </div>
 
 
