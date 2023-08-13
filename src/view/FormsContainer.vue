@@ -11,10 +11,6 @@
   <div class="TitleDivPoster">
     <h1 class="FormH1"><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true">
       <input :value="post.title" @input="TitlePost = $event.target.value"/></span></h1>
-    <div class="SmallText">
-      <h4>מאת : שרון נתח תמרי</h4>
-      <h4>פורסם : {{ post.postDate }}</h4>
-    </div>
   </div>
 </div>
 
@@ -37,7 +33,7 @@
     <Carousel v-bind="settings" :breakpoints="breakpoints">
     <Slide v-for="test in test2" :key="test">
       <MoreOptions 
-      :name="test.name" :imgForm="test.FormImg" :subTitle="test.subTitle" :PostDate="test.postDate" :key="test"
+      :name="test.name" :imgForm="test.FormImg" :subTitle="test.subTitle" :key="test"
       />
     </Slide>
 

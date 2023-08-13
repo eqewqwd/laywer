@@ -24,6 +24,7 @@
 </form>
 
 
+
 <Footer/>
 
   
@@ -104,20 +105,12 @@ export default {
       let subTitle = this.PostSubTitle
       let info = this.PostInfo
       
-      const d = new Date();
-      let day = d.getDate()
-      let month = d.getMonth() + 1
-      let year = d.getFullYear()
-
-      let postDate = day + "/" + month + "/" + year
-
       const data = { 
         FormImg,
         name,
         title,
         subTitle,
         info,
-        postDate
        }
 
 
