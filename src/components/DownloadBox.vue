@@ -1,9 +1,9 @@
 <template>
   <div class="BoxDownload">
     <div class="imgDiv">
-      <img v-if="editMode == false" :src=this.downloadImg >
-      <img v-if="editMode == true" :src=this.imgPost >
-      <i @click="this.openWigit()" v-if="editMode == true && user" class="bi bi-cloud-upload"></i>
+      <img v-if="this.editMode == false" :src=this.downloadImg >
+      <img v-if="this.editMode == true" :src=this.imgPost >
+      <i @click="this.openWigit()" v-if="this.editMode == true" class="bi bi-cloud-upload"></i>
     </div>
     <div class="TitleDiv">
       <h3>טופס מס'  {{ numberFile }}</h3>
@@ -22,12 +22,10 @@
 
 export default {
     name: "DownloadBox",
-    props:['name','date','ImgDownload','numberFile','fileName'],
+    props:['name','date','ImgDownload','numberFile','fileName','editMode'],
     data() {
         return {
-          editMode:false,
           downloadImg:'',
-          user:null,
         }
     },
     created () {
@@ -92,27 +90,6 @@ if(this.downloadImg != this.downloadImg){
 }
 
 },
-async userData(){
-
- 
-var token = localStorage.getItem("token"); // Replace this with the actual token
-
-await axios
-.get('/.netlify/functions/user-data', {
-headers: {
-Authorization: `Bearer ${token}`
-}
-})
-.then(response => {
-console.log(response.data)
-this.user = response.data
-this.editMode = true
-})
-.catch(error => {
-console.error('Error fetching user data:', error);
-});
-},
-
     }
 }
 </script>

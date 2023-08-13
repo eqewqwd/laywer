@@ -1,5 +1,5 @@
 <template>
-<NavBar/>
+<NavBar @editStart="StartEdit()"/>
 
 <div class="PosterHome">
   <div class="TitleDivPoster">
@@ -14,7 +14,8 @@
 
 <div class="BoxContainerDownload">
   <DownloadBox v-for="download in filteredList" :key="download" :name="download.name" :date="download.date"
-  :ImgDownload="download.ImgDownload" :numberFile="download.numberFile" :fileName="download.fileName"/>
+  :ImgDownload="download.ImgDownload" :numberFile="download.numberFile" :fileName="download.fileName" 
+  :editMode="this.editMode"/>
   
 
   <div class="notFound" v-show="this.allowNotFind == true">
@@ -52,6 +53,7 @@ export default {
       return{
         search:'',
         allowNotFind:false,
+        editMode:false,
         downloadData:
         [
         {name:"טופס למתן טיפול רפואי ראשוני לאחר תאונת עבודה" ,date:"10.8.2023",numberFile:"283" ,fileName:"283.pdf"},
@@ -91,7 +93,14 @@ export default {
         this.allowNotFind = false
 
       }
-    }
+    },
+    StartEdit(){
+        if(this.editMode == false){
+          this.editMode = true
+        }else{
+          this.editMode = false
+        }      
+    },
 
   } 
 }
