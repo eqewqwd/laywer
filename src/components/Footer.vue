@@ -85,7 +85,7 @@ export default {
 }
 
 .empty{
-  height: 100px;
+  height: 200px;
 }
 
 .AllContainer{
