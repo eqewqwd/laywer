@@ -121,7 +121,6 @@ export default {
   height: 500px;
   text-align: center;
   background-color: goldenrod;
-  padding: 10px;
   border-radius: 5px 5px 12px 12px;
   cursor: pointer;
 }
