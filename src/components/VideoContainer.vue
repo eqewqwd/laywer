@@ -51,7 +51,7 @@ export default {
           };
 
           try {
-            const response = await axios.delete('/.netlify/functions/UpdateItembBlogs', {
+            const response = await axios.post('/.netlify/functions/UpdateItembBlogs', {
               id,
               updatedData,
             });

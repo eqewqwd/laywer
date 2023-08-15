@@ -8,6 +8,7 @@
     <VideoContainer v-for="(video,index) in videos" :key="index"
     :SrcVid="video.videoUrl" :paragrafh="video.paragrafh"
     :BlogId="video._id"/>
+    <h1 v-if="this.videos.length == 0">לא קימיים בלוגים</h1>
 
   </div>
 </div>
