@@ -8,7 +8,7 @@
     <VideoContainer v-for="(video,index) in videos" :key="index"
     :SrcVid="video.videoUrl" :paragrafh="video.paragrafh"
     :BlogId="video._id"/>
-    <h1 v-if="this.videos.length == 0">לא קימיים בלוגים</h1>
+    <h1 v-if="this.videos.length == 0">לא קיימים בלוגים</h1>
 
     
   </div>
@@ -89,8 +89,17 @@ export default {
   width: 100%;
   height: auto;
   text-align: center;
-  background-color: rgb(215, 186, 26);
-  font-size: 2vw;
+  background: #D4AF37;
+background: linear-gradient(to bottom, #D4AF37 0%, #C5A028 100%);
+background: -webkit-linear-gradient(top, #D4AF37 0%, #C5A028 100%);
+background: -moz-linear-gradient(top, #D4AF37 0%, #C5A028 100%);
+background: -o-linear-gradient(top, #D4AF37 0%, #C5A028 100%);
+background: -ms-linear-gradient(top, #D4AF37 0%, #C5A028 100%);
+border: 1px solid #B69119;
+box-shadow: inset 0 1px 0 #E3BE46;
+-webkit-box-shadow: inset 0 1px 0 #E3BE46;
+-moz-box-shadow: inset 0 1px 0 #E3BE46;
+  font-size: 2.2vw;
 }
 
 .VideoContainer{
