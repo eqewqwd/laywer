@@ -561,7 +561,6 @@ input{
   transform: translate(-50%);
   font-size: 20px;
   font-weight: bold;
-  color: #2c3e50 ;
 }
 .PosterHome .TitleDivPoster .SmallText h4{
   font-size: 12px;
