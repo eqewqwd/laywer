@@ -1,10 +1,11 @@
 <template>
 <NavBar />
-
-<form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
+<div class="FormContainer">
   <label>העלאת תמונה :</label>
+  <button class="photoAdd" @click="openWigit()"><i class="bi bi-cloud-arrow-up"></i></button>
+  <form @submit.prevent="PostForm()" class="FormDiv" id="my-form" v-if="user">
   <div style="display: flex;" class="uploadImgDiv">
-    <button class="photoAdd" @click="openWigit()"><i class="bi bi-cloud-arrow-up"></i></button>
+    
     <img class="uploadedImg" v-if="this.PostImg != null" :src=this.PostImg>
   </div>
   <br>
@@ -22,6 +23,8 @@
   <br>
   <button class="addButton" type="submit">הוספת מאמר</button>
 </form>
+</div>
+
 
 
 
@@ -51,7 +54,7 @@ export default {
         PostSubTitle:'',
         PostInfo:'',
         PostImg:null,
-        user:null,
+        user:{name:'david'},
 
       }
   },
@@ -115,7 +118,7 @@ export default {
 
 
       await axios.post('/.netlify/functions/PostForm',data).then(response => {
-          console.log(name);
+        alert("מאמר פורסם")
 
       }).catch(error => {
           console.log(error);
@@ -140,7 +143,7 @@ export default {
 
 /* ------------- FormDiv ------------- */
 
-.FormDiv{
+.FormContainer{
   position: relative;
   border: 1px solid none;
   display: flex;
@@ -150,6 +153,11 @@ export default {
   right: 50%;
   transform: translate(50%);
   margin-top: 3%;
+}
+.FormContainer .FormDiv{
+  border: 1px solid none;
+  width: 100%;
+  height: 100%;
 }
 
 .FormDiv input{
@@ -178,6 +186,9 @@ export default {
 
 button.photoAdd{
   width: 100px;
+  position: relative;
+  right: 30%;
+  transform: translate(50%);
   border: none;
   border-radius: 25px;
   background-color: rgb(221, 197, 38);

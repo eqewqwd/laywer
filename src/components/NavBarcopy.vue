@@ -12,8 +12,8 @@
             <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li class="nav-item"><a class="nav-link">בית</a></li></router-link>
             <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'mekarkein' } })"><li class="nav-item"><a class="nav-link">מקרקעין</a></li></router-link>
             <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'nezikin' } })"><li class="nav-item"><a class="nav-link">נזיקין</a></li></router-link>
-            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot-yipuy-Koach' } })"><li class="nav-item"><a class="nav-link">צוואות</a></li></router-link>
-            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot-yipuy-Koach' } })"><li class="nav-item"><a class="nav-link">ייפוי כוח מתמשך</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot-yipuy-Koach' } })"><li class="nav-item"><a class="nav-link">צוואות/יפויי כוח מתמשך</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/blog"><li class="nav-item"><a class="nav-link">בלוג</a></li></router-link>
             <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li class="nav-item"><a class="nav-link">צור קשר</a></li></router-link>
             <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li class="nav-item"><a class="nav-link">טפסים להורדה</a></li></router-link>
           </ul>
@@ -25,6 +25,8 @@
       <i class="bi bi-arrow-up-short arrowUser"></i>
       <ul>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;color:black;" to="/admin/PostForms"><li><a><i class="bi bi-patch-plus"></i> מאמר</a></li></router-link>
+        <hr>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;color:black;" to="/admin/PostBlogs"><li><a><i class="bi bi-patch-plus"></i> בלוג</a></li></router-link>
         <hr>
         <li style="text-decoration: none;color:black;" @click="StartEdit()"><a><i class="bi bi-pencil-square"></i> עריכה</a></li>
         <hr>

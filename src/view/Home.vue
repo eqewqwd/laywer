@@ -147,6 +147,7 @@ export default {
 
           // Handle the response, display success message, etc.
           alert('תיאור אודות משרד עודכן')
+          window.location.reload()
         } catch (error) {
           console.error('Error:', error);
           // Handle error
@@ -168,6 +169,7 @@ export default {
 
           // Handle the response, display success message, etc.
           alert('תיאור משפט פתיחה עודכן')
+          window.location.reload()
         } catch (error) {
           console.error('Error:', error);
           // Handle error
@@ -189,6 +191,7 @@ export default {
 
           // Handle the response, display success message, etc.
           alert('תיאור עיסוקי המשרד עודכן')
+          window.location.reload()
         } catch (error) {
           console.error('Error:', error);
           // Handle error
@@ -261,7 +264,7 @@ export default {
         }); 
       }
     },
-    async userData(){
+   async userData(){
 
        
     var token = localStorage.getItem("token"); // Replace this with the actual token
