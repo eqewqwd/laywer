@@ -384,8 +384,8 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
 .TitleContainer h1{
   font-size: 3.2rem;
   font-weight: bold;
-  color: rgb(22, 22, 107);
-  text-shadow: 0 3px 1px #34424b, -1px 2px 1px #34424b, -3px 4px 3px #34424b;
+  color: rgb(28, 28, 129);
+  text-shadow: 0 3px 1px #465964, -1px 2px 1px #465964, -3px 4px 3px #34424b;
 }
 
 .TitleContainer h3{

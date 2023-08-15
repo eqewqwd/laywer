@@ -20,8 +20,8 @@
             <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li><a class="contrasA">בית</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'mekarkein' } })"><li><a class="contrasA">מקרקעין</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'nezikin' } })"><li><a class="contrasA">נזיקין</a></li></router-link>
-        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a class="contrasA">צוואות</a></li></router-link>
-        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li><a class="contrasA">ייפוי כוח מתמשך</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot-yipuy-Koach' } })"><li><a class="contrasA">צוואות</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot-yipuy-Koach' } })"><li><a class="contrasA">ייפוי כוח מתמשך</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li><a class="contrasA">צור קשר</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li><a class="contrasA">טפסים להורדה</a></li></router-link>
           </ul>
