@@ -250,7 +250,7 @@ export default {
   transform: translate(50%);
   color: #f1f1f1;
   text-align: right;
-  width: 70%;
+  width: 80%;
   border: 1px solid none;
 }
 

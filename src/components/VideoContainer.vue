@@ -35,6 +35,7 @@ export default {
         }
     },
     created () {
+      this.userData()
       this.paragrafhCheck = this.paragrafh;
       this.paragrafhPost = this.paragrafh;
 
