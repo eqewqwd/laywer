@@ -10,6 +10,7 @@
     :BlogId="video._id"/>
     <h1 v-if="this.videos.length == 0">לא קימיים בלוגים</h1>
 
+    
   </div>
 </div>
 
