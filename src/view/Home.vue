@@ -334,6 +334,8 @@ input.TitleFirstInput{
 
 /* ---------------- PosterHome --------------- */
 
+
+
 .PosterHome{
   position: relative;
   display: flex;
@@ -420,6 +422,7 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   width: 100%;
   height: 100%;
 }
+
 /* ---------------- aboutContainer --------------- */
 
 .aboutContainer{

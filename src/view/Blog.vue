@@ -1,7 +1,11 @@
 <template>
 <NavBar @editStart="StartEdit()"/>
 
-<div class="TitleDiv">הבלוג של תמר <i class="bi bi-stars"></i></div>
+<div class="TitleDiv">
+
+  <h1 >הבלוג של תמר <i class="bi bi-stars"></i></h1>
+
+</div>
 
 <div class="backgroundBlog">
   <div class="VideoContainer">
@@ -100,6 +104,12 @@ box-shadow: inset 0 1px 0 #E3BE46;
 -webkit-box-shadow: inset 0 1px 0 #E3BE46;
 -moz-box-shadow: inset 0 1px 0 #E3BE46;
   font-size: 2.2vw;
+  padding: 15px;
+}
+
+.TitleDiv h1{
+  text-align: center;
+  color: #053c67;
 }
 
 .VideoContainer{
