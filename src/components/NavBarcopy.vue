@@ -291,7 +291,7 @@ span.loginuser i:hover{
       color:#03727d !important
     }
     .nav-item a{
-      color:black;
+      color:rgb(28, 28, 129);
     }
     .nav-item a:hover {
       color:rgb(207, 161, 45)
