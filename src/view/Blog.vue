@@ -3,7 +3,7 @@
 
 <div class="TitleDiv">
 
-  <h1 >הבלוג של תמר <i class="bi bi-stars"></i></h1>
+  <h1>הבלוג של שרון <i class="bi bi-stars"></i></h1>
 
 </div>
 
