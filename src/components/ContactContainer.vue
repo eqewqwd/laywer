@@ -7,7 +7,7 @@
     <div class="formContainer">
       <form @submit.prevent="SendEmail()" action="">
         <input v-model="namePost" type="text" name="" placeholder="שם">
-        <input v-model="emailPost" type="text" name="" placeholder="אימייל">
+        <input v-model="phonePost" type="text" name="" placeholder="טלפון">
         <button type="submit">אשמח לייעוץ איתך</button>
       </form>
     </div>
@@ -28,7 +28,7 @@ export default {
     data() {
         return {
           namePost:'',
-          emailPost:'',
+          phonePost:'',
         }
     },
     created () {
@@ -38,11 +38,11 @@ export default {
     methods:{
       SendEmail(){
         let from_name = this.namePost
-        let email_id = this.emailPost
+        let phoneNumber = this.phonePost
 
         const data = {
           from_name:from_name,
-          email_id:email_id,
+          PhoneNumber:phoneNumber,
         }
 
         let publicKey = "DBLmVAnW9rZgH7ggb"

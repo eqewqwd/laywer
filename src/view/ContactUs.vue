@@ -7,7 +7,7 @@
     <div class="FormDiv">
       <form @submit.prevent="SendEmail()">
         <input type="text" v-model="NamePost" name="name" placeholder="שם מלא">
-        <input type="email" v-model="EmailPost" name="email" placeholder="אימייל">
+        <input type="email" v-model="phonePost" name="email" placeholder="טלפון">
         <input type="text" v-model="SubjectPost" name="subject" placeholder="נושא">
         <textarea type="text" v-model="MessagePost" name="message" placeholder="הודעה" cols="30" rows="10"></textarea>
         <button type="submit">שליחה <i style="margin-right: 5px;" class="bi bi-send"></i></button>
@@ -82,7 +82,7 @@ export default {
         // email post data 
 
         NamePost:'',
-        EmailPost:'',
+        phonePost:'',
         SubjectPost:'',
         MessagePost:'',
 
@@ -120,7 +120,7 @@ export default {
     SendEmail(){
       const data = {
         from_name: this.NamePost,
-        email_id: this.EmailPost,
+        PhoneNumber: this.phonePost,
         subject: this.SubjectPost,
         message: this.MessagePost
       }
