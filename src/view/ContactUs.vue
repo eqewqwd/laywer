@@ -7,7 +7,7 @@
     <div class="FormDiv">
       <form @submit.prevent="SendEmail()">
         <input type="text" v-model="NamePost" name="name" placeholder="שם מלא">
-        <input type="email" v-model="phonePost" name="email" placeholder="טלפון">
+        <input type="text" v-model="phonePost" name="name" placeholder="טלפון">
         <input type="text" v-model="SubjectPost" name="subject" placeholder="נושא">
         <textarea type="text" v-model="MessagePost" name="message" placeholder="הודעה" cols="30" rows="10"></textarea>
         <button type="submit">שליחה <i style="margin-right: 5px;" class="bi bi-send"></i></button>
