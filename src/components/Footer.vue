@@ -37,11 +37,10 @@
   <div class="footer-copyRight">
     <i class="bi bi-c-circle copyright"></i>
     <span class="copyRightText"><a class="copyrightA" href="https://techlinx.co.il/">אתר זה עוצב ונבנה על ידי <span class="nameCopyRight">דוד דבח</span></a></span>
-    <a href="/"><i class="bi bi-instagram icons-footer insta"></i></a>
-    <a href="/"><i class="bi bi-facebook icons-footer"></i></a>
-    <a href="/"><i class="bi bi-whatsapp icons-footer"></i></a>
-    <a href="/"><i class="bi bi-twitter icons-footer"></i></a>
-    <a href="/"><i class="bi bi-snapchat icons-footer"></i></a>
+    <a href="https://www.instagram.com/sharonnetachtamari/"><i class="bi bi-instagram icons-footer insta"></i></a>
+    <a href="https://www.facebook.com/sharon.n.tamari"><i class="bi bi-facebook icons-footer"></i></a>
+    <a href="https://wa.link/9n69e1"><i class="bi bi-whatsapp icons-footer"></i></a>
+    <!-- <a href="/"><i class="bi bi-twitter icons-footer"></i></a> -->
 
   </div>
   <footer>
