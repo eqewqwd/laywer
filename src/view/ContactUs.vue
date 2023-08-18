@@ -31,17 +31,17 @@
       </div> -->
 
       <ul class="ulContact">
-        <li><span class="infoSpan"><i class="bi bi-geo-alt"></i><span>מיקום:</span>
+        <li><span class="infoSpan"><i class="bi bi-geo-alt"></i><span class="optionContact">מיקום:</span>
           <span v-if="editMode == false" class="InfoData">{{ this.location }}</span>
           <span v-if="editMode == true">
           <input class="TitleFirstInput" :value="this.location" @input="this.locationPost = $event.target.value"/></span>
         </span></li>
-        <li><span class="infoSpan"><i class="bi bi-telephone"></i><span>טלפון:</span>
+        <li><span class="infoSpan"><i class="bi bi-telephone"></i><span class="optionContact">טלפון:</span>
           <span v-if="editMode == false" class="InfoData">{{ this.phoneNumber }}</span>
           <span v-if="editMode == true">
           <input class="TitleFirstInput" :value="this.phoneNumber" @input="this.phoneNumberPost = $event.target.value"/></span>
         </span></li>
-        <li><span class="infoSpan"><i class="bi bi-envelope"></i><span>אימייל:</span>
+        <li><span class="infoSpan"><i class="bi bi-envelope"></i><span class="optionContact">אימייל:</span>
           <span v-if="editMode == false" class="InfoData">{{ this.email }}</span></span> 
           <span v-if="editMode == true">
           <input class="TitleFirstInput" :value="this.email" @input="this.emailPost = $event.target.value"/></span>
@@ -218,7 +218,7 @@ export default {
   margin-left: auto;
   top: 70px;
   width: 70%;
-  height: 68vh;
+  height: 640px;
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
@@ -481,11 +481,24 @@ span.InfoData{
   }
 
   ul.ulContact{
+    border: 1px solid none;
   display: flex;
   flex-direction: row;
   list-style: none;
-  width: 90%;
+  width: 98%;
   justify-content: space-around;
+}
+
+.optionContact{
+  display: none;
+}
+
+span.InfoData{
+  position: relative;
+  right: 0.2%;
+  /* margin-top: 1%; */
+  border: 1px solid none;
+  font-size: 2.2vw;
 }
 
 
