@@ -463,7 +463,8 @@ background-repeat: no-repeat;
   top: 80px;
   border: 1px solid none;
   width: 100%;
-  height: 50vh;
+  /* height: 50vh; */
+  height: 480px;
 }
 
 .WorkOptions h1{
@@ -482,7 +483,7 @@ background-repeat: no-repeat;
   justify-content: center;
   border: 1px solid none;
   width: 70%;
-  height: 32vh;
+  height: 300px;
   left: 50%;
   transform: translate(-50%);
 }
