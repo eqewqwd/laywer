@@ -36,21 +36,35 @@ export default {
     mounted(){
     }, 
     methods:{
-      SendEmail(){
-        let from_name = this.namePost
-        let phoneNumber = this.phonePost
+      async SendEmail(){
+        const res = await this.checkLengthPost()
+        if(res == true){
+          let from_name = this.namePost
+          let phoneNumber = this.phonePost
 
-        const data = {
-          from_name:from_name,
-          PhoneNumber:phoneNumber,
+          const data = {
+            from_name:from_name,
+            PhoneNumber:phoneNumber,
+          }
+
+          let publicKey = "DBLmVAnW9rZgH7ggb"
+
+          emailjs.send("service_trj97gf","template_gufs4gg",data,publicKey).then(function(res){
+          alert("מייל נשלח בהצלחה");
+          window.location.reload()
+          })
+        }else if(res == false){
+          alert("נא למלא את כל התיבות")
         }
-
-        let publicKey = "DBLmVAnW9rZgH7ggb"
-
-        emailjs.send("service_trj97gf","template_gufs4gg",data,publicKey).then(function(res){
-        alert("מייל נשלח בהצלחה");
-        })
+      },
+      checkLengthPost(){
+      if(this.namePost.length == 0 || this.phonePost.length == 0){
+        return false
+      }else{
+        return true
       }
+
+    },
 
     }
 }

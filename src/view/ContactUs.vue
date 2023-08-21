@@ -10,7 +10,7 @@
         <input type="text" v-model="phonePost" name="name" placeholder="טלפון">
         <input type="text" v-model="SubjectPost" name="subject" placeholder="נושא">
         <textarea type="text" v-model="MessagePost" name="message" placeholder="הודעה" cols="30" rows="10"></textarea>
-        <button type="submit">שליחה <i style="margin-right: 5px;" class="bi bi-send"></i></button>
+        <button  type="submit">שליחה <i style="margin-right: 5px;" class="bi bi-send"></i></button>
       </form>
     </div>
   </div>
@@ -117,18 +117,35 @@ export default {
   mounted(){
   },
   methods: {
-    SendEmail(){
-      const data = {
-        from_name: this.NamePost,
-        PhoneNumber: this.phonePost,
-        subject: this.SubjectPost,
-        message: this.MessagePost
-      }
-        let publicKey = "DBLmVAnW9rZgH7ggb"
+    async SendEmail(){
 
-        emailjs.send("service_trj97gf","template_u6nhy8ta",data,publicKey).then(function(res){
-        alert("מייל נשלח בהצלחה");        
-      })
+      const res = await this.checkLengthPost()
+      if(res == true){
+          const data = {
+          from_name: this.NamePost,
+          PhoneNumber: this.phonePost,
+          subject: this.SubjectPost,
+          message: this.MessagePost
+        }
+          let publicKey = "DBLmVAnW9rZgH7ggb"
+
+          emailjs.send("service_trj97gf","template_u6nhy8ta",data,publicKey).then(function(res){
+          alert("מייל נשלח בהצלחה");     
+          window.location.reload()   
+        })
+      }else if(res == false){
+        alert("נא למלא את כל התיבות")
+      }
+
+      
+    },
+    checkLengthPost(){
+      if(this.NamePost.length == 0 || this.phonePost.length == 0 || this.SubjectPost.length == 0 || this.MessagePost.length == 0 ){
+        return false
+      }else{
+        return true
+      }
+
     },
     async GetDataContact(){
 
