@@ -36,7 +36,7 @@
           <span v-if="editMode == true">
           <input class="TitleFirstInput" :value="this.location" @input="this.locationPost = $event.target.value"/></span>
         </span></li>
-        <li><span class="infoSpan"><i class="bi bi-telephone"></i><span class="optionContact">טלפון:</span>
+        <li><span class="infoSpan"><a href="tel:053-430-9113"><i style="color: white;" class="bi bi-telephone"></i></a><span class="optionContact">טלפון:</span>
           <span v-if="editMode == false" class="InfoData">{{ this.phoneNumber }}</span>
           <span v-if="editMode == true">
           <input class="TitleFirstInput" :value="this.phoneNumber" @input="this.phoneNumberPost = $event.target.value"/></span>
