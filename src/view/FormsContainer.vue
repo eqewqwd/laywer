@@ -4,7 +4,7 @@
 
 <div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">
-    <img v-if="editMode == false" :src=post.FormImg >
+    <img v-if="editMode == false" :src=post.FormImg :alt="post.title">
     <img v-if="editMode == true" :src=this.imgPost >
     <i @click="this.openWigit()" v-if="editMode == true" class="bi bi-cloud-upload"></i>
   </div>
