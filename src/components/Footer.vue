@@ -1,9 +1,9 @@
 <template>
-    <div class="mapsGoogle" v-if="this.$route.path != '/Files-Download'">
+    <!-- <div class="mapsGoogle" v-if="this.$route.path != '/Files-Download'">
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3353.958007994288!2d34.98337947617228!3d32.793372683149066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dbb0505030a15%3A0x37022d3ae3fc188c!2sMoriah%20Ave%2081%2C%20Haifa!5e0!3m2!1sen!2sil!4v1691942052115!5m2!1sen!2sil" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        
-    </div>
-
-    <div class="empty" v-if="this.$route.path == '/Files-Download'">
+    </div> -->
+<!-- v-if="this.$route.path == '/Files-Download'" -->
+    <div class="empty">
 
     </div>
     <div class="AllContainer">
@@ -11,7 +11,8 @@
         <div class="LogoDiv">
           <img class="LogoImg" src="@/assets/Logo/logo.png" alt="">
         </div>
-        <div class="ContactUs">
+        <div class="MapsDiv">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3353.958007994288!2d34.98337947617228!3d32.793372683149066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dbb0505030a15%3A0x37022d3ae3fc188c!2sMoriah%20Ave%2081%2C%20Haifa!5e0!3m2!1sen!2sil!4v1691942052115!5m2!1sen!2sil" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        
         </div>
         <div class="LocationDiv">
           <h5><i style="color: orangered;" class="bi bi-geo-alt-fill"></i>  שדרות מוריה 81, חיפה</h5>
@@ -87,7 +88,7 @@ export default {
   box-sizing: border-box;
 }
 
-.mapsGoogle{
+/* .mapsGoogle{
   z-index: 33213123123123;
   height: 500px;
 }
@@ -95,13 +96,15 @@ export default {
 .mapsGoogle iframe{
   width: 100%;
   height: 100%;
-}
+} */
 .empty{
   height: 200px;
 }
 
 .AllContainer{
-  height: 60vh;
+  position: relative;
+  border: 1px solid none;
+  height: 500px;
   background-color: #2b4162;
 background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
    display: flex;
@@ -130,17 +133,23 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
 .AllContainer .MapAndLogoDiv .LogoDiv img{
   position: absolute;
   bottom: 0;
+  margin-bottom: 15px;
   widows: 100%;
-  height: 85%;
+  height: 80%;
 }
 
-.AllContainer .MapAndLogoDiv .ContactUs{
+.AllContainer .MapAndLogoDiv .MapsDiv{
   position: relative;
   border: 1px solid none;
   display: flex;
   justify-content: center;
   width: 100%;
   height: 50%;
+}
+
+.AllContainer .MapAndLogoDiv .MapsDiv iframe{
+  width: 60%;
+  height: 95%;
 }
 .AllContainer .MapAndLogoDiv .LocationDiv{
   border: 1px solid none;
