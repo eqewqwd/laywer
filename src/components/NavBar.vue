@@ -172,6 +172,7 @@ exitUser(){
   font-size: 2vw;
 }
 
+
 .threebarnav{
     display: hidden;
   }
@@ -194,6 +195,7 @@ exitUser(){
 .brand-title img{
   width: 100%
 }
+
 
 .sticky{
   background-color: transparent;

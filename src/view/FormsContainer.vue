@@ -369,7 +369,8 @@ await axios
 
 /* -------------------- empty ------------------- */
 .empty{
-  height: 150px;
+  height: 20px;
+  background-color: rgb(231,231,231);
 }
 
 /* ---------------- PosterHome --------------- */
@@ -489,6 +490,7 @@ input{
 }
 .aboutContainer h1{
   font-size: 45px;
+  text-align: center;
 }
 
 .aboutContainer .lineGold{
@@ -512,15 +514,15 @@ input{
   position: relative;
   width: 100%;
   border: 1px solid none;
-  height: 400px;
+  height: 420px;
   background-color: rgb(231,231,231);
 }
 
 .CaruselCardsDiv h1{
   border: 1px solid none;
-  width: fit-content;
+  width: 100%;
   position: absolute;
-  right: 5%;
+  text-align: center;
   top: 10%;
 }
 
@@ -528,7 +530,7 @@ input{
   border: 1px solid none;
   position: absolute;
   width: 100%;
-  bottom: 0;
+  bottom: 2%;
 }
 
 

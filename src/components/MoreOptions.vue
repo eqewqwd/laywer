@@ -48,19 +48,30 @@ export default {
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 15px 15px 25px 25px;
   background-color: #F3F3F1;
+  overflow: hidden;
+  transition: ease 0.2s;
 }
+
 .BoxDownload .imgDiv{
   border: 1px solid none;
   position: absolute;
   height: 60%;
   width: 100%;
   border-radius: 15px 15px 0px 0px;
+  overflow: hidden;
+  transition: ease 0.2s;
 }
 
 .BoxDownload .imgDiv img{
   border-radius: 15px 15px 0px 0px;
   width: 100%;
   height: 100%;
+  transition: ease 0.2s;
+}
+
+.BoxDownload:hover img{
+  /* border: 1px solid red; */
+  transform: scale(1.2);
 }
 
 .BoxDownload .TitleDiv{
@@ -74,6 +85,10 @@ export default {
 }
 .BoxDownload .TitleDiv h3{
   font-size: 22px;
+}
+
+.BoxDownload:hover{
+  box-shadow: rgba(246, 218, 36, 0.4) 0px 5px, rgba(240, 229, 20, 0.508) 0px 10px, rgba(209, 199, 18, 0.508) 0px 15px
 }
 
 .BoxDownload .ButtonDiv{

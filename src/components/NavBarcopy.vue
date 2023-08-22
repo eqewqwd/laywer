@@ -2,7 +2,7 @@
  <div class="divNav" id="mainNavigation">
       <nav role="navigation">
         <div class="py-3 text-center border-bottom">
-          <img style="width: 250px;" class="imgAll" src="@/assets/Logo/logo.png" alt="">
+          <img style="width: 200px;" class="imgAll" src="@/assets/Logo/logo.png" alt="">
           <span class="loginuser" v-if="user"><h1>ברוכה הבאה <b>{{ user.name }}</b></h1><i @click="openMenuUser()" class="bi bi-person-circle"></i></span>
         </div>
       </nav>
@@ -302,7 +302,7 @@ span.loginuser i:hover{
       min-width:12vw;
     }
     .nav-item:hover{
-      background-color: rgb(173, 148, 7);
+      background-color: rgb(222, 193, 25);
       transition: 0.2s ease-in;
     }
     .nav-item a:hover{

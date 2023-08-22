@@ -18,6 +18,10 @@
   </div>
 </div>
 
+<div class="empty">
+
+</div>
+
 
 <Footer/>
 
@@ -77,7 +81,7 @@ export default {
 
 /* -------------------- empty ------------------- */
 .empty{
-  height: 500px;
+  height: 100px;
 }
 
 .backgroundBlog{

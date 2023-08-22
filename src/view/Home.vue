@@ -55,10 +55,6 @@
 
 </div>
 
-
-<div class="empty">
-</div>
-
 <Footer/>
 
   
@@ -323,9 +319,6 @@ export default {
 }
 
 /* -------------------- empty ------------------- */
-.empty{
-  height: 500px;
-}
 
 input.TitleFirstInput{
   width: 100%;
@@ -377,7 +370,7 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   width: 65%;
   position: relative;
   left: 0;
-  padding: 3% 0% 0% 17%;
+  padding: 6% 0% 0% 17%;
   height: 100%;
 }
 
@@ -437,6 +430,7 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
 }
 .aboutContainer h1{
   font-size: 45px;
+  text-align: center;
 }
 
 .aboutContainer .lineGold{

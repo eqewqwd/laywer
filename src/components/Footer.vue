@@ -1,5 +1,9 @@
 <template>
-    <div class="empty">
+    <div class="mapsGoogle" v-if="this.$route.path != '/Files-Download'">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3353.958007994288!2d34.98337947617228!3d32.793372683149066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dbb0505030a15%3A0x37022d3ae3fc188c!2sMoriah%20Ave%2081%2C%20Haifa!5e0!3m2!1sen!2sil!4v1691942052115!5m2!1sen!2sil" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        
+    </div>
+
+    <div class="empty" v-if="this.$route.path == '/Files-Download'">
 
     </div>
     <div class="AllContainer">
@@ -7,8 +11,8 @@
         <div class="LogoDiv">
           <img class="LogoImg" src="@/assets/Logo/logo.png" alt="">
         </div>
-        <div class="MapDiv">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3353.958007994288!2d34.98337947617228!3d32.793372683149066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dbb0505030a15%3A0x37022d3ae3fc188c!2sMoriah%20Ave%2081%2C%20Haifa!5e0!3m2!1sen!2sil!4v1691942052115!5m2!1sen!2sil" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        </div>
+        <div class="ContactUs">
+        </div>
         <div class="LocationDiv">
           <h5><i style="color: orangered;" class="bi bi-geo-alt-fill"></i>  שדרות מוריה 81, חיפה</h5>
         </div>
@@ -43,9 +47,9 @@
     <!-- <a href="/"><i class="bi bi-twitter icons-footer"></i></a> -->
 
   </div>
-  <footer>
+  <!-- <footer>
     
-  </footer>
+  </footer> -->
 </template>
 
 <script>
@@ -83,14 +87,24 @@ export default {
   box-sizing: border-box;
 }
 
+.mapsGoogle{
+  z-index: 33213123123123;
+  height: 500px;
+}
+
+.mapsGoogle iframe{
+  width: 100%;
+  height: 100%;
+}
 .empty{
   height: 200px;
 }
 
 .AllContainer{
   height: 60vh;
-  background-color: rgb(231,231,231);
-  display: flex;
+  background-color: #2b4162;
+background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
+   display: flex;
   width: 100%;
   flex-direction: row;
 }
@@ -120,7 +134,7 @@ export default {
   height: 85%;
 }
 
-.AllContainer .MapAndLogoDiv .MapDiv{
+.AllContainer .MapAndLogoDiv .ContactUs{
   position: relative;
   border: 1px solid none;
   display: flex;
@@ -128,17 +142,15 @@ export default {
   width: 100%;
   height: 50%;
 }
-.AllContainer .MapAndLogoDiv .MapDiv iframe{
-  position: absolute;
-  bottom: 5%;
-  width: 60%;
-  height: 90%;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;}
-
 .AllContainer .MapAndLogoDiv .LocationDiv{
+  border: 1px solid none;
   text-align: center;
   width: 100%;
   height: 15%;
+}
+
+.AllContainer .MapAndLogoDiv .LocationDiv h5{
+  color: white;
 }
 
 /* ------------------- end MapAndLogoDiv -------------------- */
@@ -154,7 +166,8 @@ export default {
 .NavBottomDiv h2{
   position: relative;
   top: 20%;
-  text-align: center;
+  color: white;
+  right: 25%;
 }
 
 .NavListDiv{
@@ -168,12 +181,14 @@ export default {
 }
 
 .NavListDiv ul li a.contrasA{
-  color: black;
+  color: white;
   text-decoration-line: none;
 }
 
 .NavListDiv ul li:hover{
   font-weight: bold;
+  text-decoration-line: underline;
+  text-decoration-color: white;
 }
 
 /* ------------------- end NavBottomDiv -------------------- */
@@ -212,11 +227,11 @@ export default {
   color: yellow;
 }
 
-footer{
+/* footer{
   width: 100%;
   height: 2vh;
   background-image: linear-gradient(139deg, rgb(194, 171, 43), gray);
-}
+} */
 
 .footer-copyRight{
   direction: ltr;
