@@ -7,6 +7,7 @@
 
     </div>
     <div class="AllContainer">
+      <h6 class="copySharon">שרון נתח תמרי משרד עורכי דין <span><i class="bi bi-c-circle"></i></span>כל הזכויות שמורות</h6>
       <div class="MapAndLogoDiv">
         <div class="LogoDiv">
           <img class="LogoImg" src="@/assets/Logo/logo.png" alt="">
@@ -112,6 +113,16 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   flex-direction: row;
 }
 
+.copySharon{
+  position: absolute;
+  right: 50%;
+  bottom: 1%;
+  transform: translate(50%);
+  text-align: center;
+  direction: rtl;
+  color: white;
+}
+
 /* ----------------- MapAndLogoDiv --------------- */
 
 .AllContainer .MapAndLogoDiv{
@@ -168,7 +179,7 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
 
 
 .NavBottomDiv{
-  border: 1px solid none;
+  position: relative;
   width: 20%;
   height: 100%;
 }
@@ -186,7 +197,6 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   right: 50%;
   transform: translate(50%);
   top: 30%;
-  border: 1px solid none;
 }
 
 .NavListDiv ul li a.contrasA{

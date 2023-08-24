@@ -219,7 +219,7 @@ export default {
 
 <style>
 #app {
-  /* margin-top: 100px; */
+  margin-top: 275px;
   /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
   font-family: 'miriamLibre', sans-serif !important;
   -webkit-font-smoothing: antialiased;
