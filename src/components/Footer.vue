@@ -30,6 +30,7 @@
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/blog"><li><a class="contrasA">בלוג</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li><a class="contrasA">צור קשר</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li><a class="contrasA">טפסים להורדה</a></li></router-link>
+        <li style="color: rgb(86, 86, 255);cursor: pointer;"><a @click="displayDocu()" class="contrasA">הצהרת נגישות</a></li>
           </ul>
         </div>
       </div>
@@ -65,6 +66,10 @@ export default {
     ContactComponent
   },
   methods:{
+    displayDocu(){
+      const AccessibilityDialog = document.getElementById("AccessibilityDialog");
+      AccessibilityDialog.showModal()
+    },
     changeNavByRoute(){
       console.log(this.$route.fullPath == '/')
       let checkRoute = this.$route.fullPath == '/'

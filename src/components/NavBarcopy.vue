@@ -345,6 +345,7 @@ span.loginuser i:hover{
       width:100%;
       z-index:123;
       padding-bottom:70px;
+      background-color: transparent;
     }
     #navbarNavDropdown.collapsing .navbar-nav,
     #navbarNavDropdown.show .navbar-nav{

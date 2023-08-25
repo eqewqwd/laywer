@@ -4,7 +4,16 @@
     <button class="btn btn-primary buttonShowAccessibility space" @click="openAccessibility()"><i style="font-size: 35px;" class="bi bi-universal-access-circle"></i></button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="changeFontSize()"><i class="bi bi-fonts"></i>גופן טקסט</button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.changeContrast()"><i class="bi bi-palette"></i> צבעים</button>
+    <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.displayDocu()"><i class="bi bi-file-earmark-text"></i> הצהרת נגישות</button>
   </div>
+
+  <dialog id="AccessibilityDialog" class="AccessibilityDialogClass">
+    <div class="headerDialog">
+      <button class="closeButton"><i class="bi bi-x" @click="this.dialogClose()"></i></button>
+      <h1 class="dialogHeader">הצהרת נגישות</h1>
+
+    </div>
+  </dialog>
 </template>
 
 <script>
@@ -24,6 +33,14 @@ export default {
     }
   },
   methods:{
+    dialogClose(){
+      const AccessibilityDialog = document.getElementById("AccessibilityDialog");
+      AccessibilityDialog.close()
+    },
+    displayDocu(){
+      const AccessibilityDialog = document.getElementById("AccessibilityDialog");
+      AccessibilityDialog.showModal()
+    },
     biggerText(){
 
       let h1text = document.querySelectorAll('h1')
@@ -200,10 +217,13 @@ export default {
         this.changeContrastCheck = true
         this.changeColor()
         document.querySelector('#app').style.backgroundColor = "black";
+        document.querySelector('#mainNavigation').style.backgroundColor = "black";
       }else if(this.changeContrastCheck == true){
         this.changeContrastCheck = false
         this.changeColor()
         document.querySelector('#app').style.backgroundColor = "white";
+        document.querySelector('#mainNavigation').style.backgroundColor = "white";
+
       }
     },
     openAccessibility(){
@@ -219,7 +239,7 @@ export default {
 
 <style>
 #app {
-  margin-top: 275px;
+  margin-top: 270px;
   /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
   font-family: 'miriamLibre', sans-serif !important;
   -webkit-font-smoothing: antialiased;
@@ -232,6 +252,53 @@ export default {
   font-family: "miriamLibre";
   src: url('./assets/Fonts/MiriamLibre-Bold.ttf');
 }
+
+/* ------------- dialog -------------- */
+
+.AccessibilityDialogClass{
+  position: fixed;
+  border: 1px solid black;
+  width: 50%;
+  height: 70%;
+  padding: none;
+  border-radius: 20px;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.AccessibilityDialogClass .headerDialog{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 25%;
+  background-color: #2b4162;
+background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
+}
+
+.AccessibilityDialogClass button.closeButton{
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 1%;
+  left: 0;
+  background: transparent;
+}
+
+.AccessibilityDialogClass button.closeButton i{
+  font-size: 40px;
+  color: #DFB951;
+}
+
+.AccessibilityDialogClass .dialogHeader{
+  position: absolute;
+  right: 50%;
+  transform: translate(50%);
+  top: 30%;
+  color: #DFB951;
+}
+
+
+/* ------------- dialog end -------------- */
 
 
 .AccessibilityDiv{
