@@ -351,6 +351,7 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   right: 50%;
   transform: translate(50%);
   top: 30%;
+  width: fit-content;
   color: #DFB951;
 }
 
@@ -374,7 +375,7 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
 
 .AccessibilityDialogClass .bottomDialog ul{
   position: absolute;
-  bottom: 2%;
+  /* bottom: 2%; */
   right: 50%;
   width: 80%;
   transform: translate(50%);
@@ -388,7 +389,7 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   padding: 40px;
   position: relative;
   border: 1px solid none;
-  overflow: auto;
+  overflow: scroll;
   height: 60%;
   width: 100%;
 }
@@ -467,27 +468,71 @@ button.buttonShowAccessibility i{
 }
 
 @media (max-width: 1200px) {
+
+  .AccessibilityDialogClass .dialogHeader{
+    width: 100%;
+    text-align: center;
+  }
   .AccessibilityDialogClass{
     width: 95%;
-    height: 90%;
+    height: 95%;
     padding: 0px;
     border-radius: 20px;
     box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   }
 
+  .AccessibilityDialogClass .bottomDialog h4{
+    font-size: 15px;
+    font-weight: bold
+    ;
+  }
+
+  .AccessibilityDialogClass .bottomDialog p{
+    font-size: 11px;
+  }
+
   .AccessibilityDialogClass .bottomDialog ul{
-    font-size: 2.2vw;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
     width: 100%;
+    list-style-type: none;
+    border: 1px solid none;
   }
 
   .OptionInfoAccess{
     display: none;
   }
+
+  .AccessibilityDialogClass .headerDialog{
+    height: 12%;
+  }
+
+  .AccessibilityDialogClass .bottomDialog{
+  height: 28%;
+  width: 100%;
+  text-align: center;
+  padding-top: 3%;
+}
+
+.AccessibilityDialogClass .AccessibilityInfo h1{
+  color: navy;
+}
+
+.AccessibilityDialogClass .AccessibilityInfo p{
+  font-size: 16px;
+}
+
+.AccessibilityDialogClass .AccessibilityInfo ul{
+  font-size: 15px;
+  list-style-type: decimal;
+}
 }
 
 @media (max-width: 700px) {
   .AccessibilityDialogClass .bottomDialog ul{
-    font-size: 2.7vw;
     width: 100%;
   }
 }
