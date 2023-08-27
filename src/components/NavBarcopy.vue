@@ -334,9 +334,9 @@ span.loginuser i:hover{
       background-color: rgb(222, 193, 25);
       transition: 0.2s ease-in;
     }
-    .nav-item a:hover{
-      color: white;
-    }
+      .nav-item a:hover{
+        color: white;
+      }
     #mainNavigation {
       border: 1px solid none;
       position:fixed;

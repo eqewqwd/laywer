@@ -4,6 +4,7 @@
     <button class="btn btn-primary buttonShowAccessibility space" @click="openAccessibility()"><i style="font-size: 35px;" class="bi bi-universal-access-circle"></i></button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="changeFontSize()"><i class="bi bi-fonts"></i>גופן טקסט</button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.changeContrast()"><i class="bi bi-palette"></i> צבעים</button>
+    <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.backHistory()"><i class="bi bi-clock-history"></i> חזרה לאחור</button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.displayDocu()"><i class="bi bi-file-earmark-text"></i> הצהרת נגישות</button>
   </div>
 
@@ -11,7 +12,52 @@
     <div class="headerDialog">
       <button class="closeButton"><i class="bi bi-x" @click="this.dialogClose()"></i></button>
       <h1 class="dialogHeader">הצהרת נגישות</h1>
+    </div>
+    <div class="AccessibilityInfo">
 
+      <h1>נגישות האתר</h1>
+      <p>
+        אתר זה הינו נגיש בהתאם להמלצת התקן הישראלי ולנגישות תכנים ברמת AA.
+        <br>
+        חלק מהנגישות שהאתר מציע : 
+      </p>
+      <ul>
+        <li>הגדלת גופן הטקסט שנמצא באתר</li>
+        <li>הקטנת גופן הטקסט שנמצא באתר</li>
+        <li>הפעלה של עיצוב כהה והיפוך צבעים</li>
+        <li>כפתור חזרה היסטוריה</li>
+        <li>שורת ניווט שעוקב אחרי הגלילה</li>
+        <li>שורת ניווט מהירה שנמצאת בחלק התחתון של האתר</li>
+      </ul>
+
+      <br>
+      <br>
+
+      <h1>חווית גלישה</h1>
+      <p>
+        על מנת לספק לצרכן חווית גלישה נעימה , אנו עיצבנו את האתר כך שיתאים לכל דפדף קיים
+        <br>
+        חלק מחווית הגלישה שהאתר מציע : 
+      </p>
+      <ul>
+        <li>התאמת האתר לשימוש בכל מכשיר: טלפון נייד , מחשב ועוד..</li>
+        <li>האתר הותאם למגוון רחב של דפדפנים שקיימים כיום בשוק</li>
+        <li>באתר הונגש כפתור נגישות שכוללת מגוון אפשרויות נגישות לציבור הרחב.</li>
+        <li>שורת ניווט שעוקב אחרי הגלילה</li>
+        <li>שורת ניווט מהירה שנמצאת בחלק התחתון של האתר</li>
+      </ul>
+
+
+    </div>
+    <div class="bottomDialog">
+      <h4>פנייה בנושא נגישות האתר</h4>
+      <p>אם ברשותך בקשה מיוחדת שתסייע לך בעת גלישה באתרנו , הינכם מוזמנים לפנות אלינו באמצעות הפרטים הבאים:</p>
+      <ul>
+        <li><span class="OptionInfoAccess">שם מלא: </span>דוד דבח </li>
+        <li><span class="OptionInfoAccess">טלפון : </span>053-430-9113</li>
+        <li><span class="OptionInfoAccess">אימייל : </span>daviddabah3@gmail.com</li>
+
+      </ul>
     </div>
   </dialog>
 </template>
@@ -33,6 +79,9 @@ export default {
     }
   },
   methods:{
+    backHistory(){
+      history.back()
+    },
     dialogClose(){
       const AccessibilityDialog = document.getElementById("AccessibilityDialog");
       AccessibilityDialog.close()
@@ -255,22 +304,24 @@ export default {
 
 /* ------------- dialog -------------- */
 
+#AccessibilityDialog{
+  padding: 0px;
+}
+
 .AccessibilityDialogClass{
   position: fixed;
   border: 1px solid black;
-  width: 50%;
-  height: 70%;
-  padding: none;
+  width: 60%;
+  height: 90%;
+  padding: 0px;
   border-radius: 20px;
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 .AccessibilityDialogClass .headerDialog{
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: relative;
   width: 100%;
-  height: 25%;
+  height: 20%;
   background-color: #2b4162;
 background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
 }
@@ -279,14 +330,20 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   border: none;
   outline: none;
   position: absolute;
-  top: 1%;
-  left: 0;
+  top: 3%;
+  left: 1%;
   background: transparent;
 }
 
 .AccessibilityDialogClass button.closeButton i{
-  font-size: 40px;
+  font-size: 45px;
   color: #DFB951;
+  transition: ease 0.2s;
+}
+
+.AccessibilityDialogClass button.closeButton i:hover{
+  color: #a0812b;
+
 }
 
 .AccessibilityDialogClass .dialogHeader{
@@ -296,6 +353,59 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   top: 30%;
   color: #DFB951;
 }
+
+.AccessibilityDialogClass .bottomDialog{
+  position: relative;
+  border: 1px solid none;
+  background-color: rgb(230, 230, 230);
+  height: 20%;
+  width: 100%;
+  text-align: center;
+  padding-top: 3%;
+}
+
+.AccessibilityDialogClass .bottomDialog p{
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid none;
+}
+
+
+.AccessibilityDialogClass .bottomDialog ul{
+  position: absolute;
+  bottom: 2%;
+  right: 50%;
+  width: 80%;
+  transform: translate(50%);
+  display: flex;
+  justify-content: space-evenly;
+  border: 1px solid none;
+  font-size: 1vw;
+}
+
+.AccessibilityDialogClass .AccessibilityInfo{
+  padding: 40px;
+  position: relative;
+  border: 1px solid none;
+  overflow: auto;
+  height: 60%;
+  width: 100%;
+}
+
+.AccessibilityDialogClass .AccessibilityInfo h1{
+  color: navy;
+}
+
+.AccessibilityDialogClass .AccessibilityInfo p{
+  font-size: 20px;
+}
+
+.AccessibilityDialogClass .AccessibilityInfo ul{
+  font-size: 19px;
+  list-style-type: decimal;
+}
+
 
 
 /* ------------- dialog end -------------- */
@@ -354,6 +464,32 @@ button.buttonShowAccessibility i{
   background-color: #2e2c2c;
   border: 1px solid none;
   border-radius: 25px;
+}
+
+@media (max-width: 1200px) {
+  .AccessibilityDialogClass{
+    width: 95%;
+    height: 90%;
+    padding: 0px;
+    border-radius: 20px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  }
+
+  .AccessibilityDialogClass .bottomDialog ul{
+    font-size: 2.2vw;
+    width: 100%;
+  }
+
+  .OptionInfoAccess{
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .AccessibilityDialogClass .bottomDialog ul{
+    font-size: 2.7vw;
+    width: 100%;
+  }
 }
 
 body{
