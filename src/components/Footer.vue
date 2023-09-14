@@ -31,6 +31,8 @@
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li><a class="contrasA">צור קשר</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li><a class="contrasA">טפסים להורדה</a></li></router-link>
         <li style="color: rgb(86, 86, 255);cursor: pointer;"><a @click="displayDocu()" class="contrasA">הצהרת נגישות</a></li>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Terms"><li><a class="contrasA">תקנון לאתר</a></li></router-link>
+
           </ul>
         </div>
       </div>
