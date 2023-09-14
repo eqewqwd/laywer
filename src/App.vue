@@ -1,7 +1,7 @@
 <template>
   <router-view :key="$route.fullPath"></router-view>
-  <div class="AccessibilityDiv" :key="$route.fullPath">
-    <button class="btn btn-primary buttonShowAccessibility space" @click="openAccessibility()"><i style="font-size: 35px;" class="bi bi-universal-access-circle"></i></button>
+  <div ref="draggableContainer" @mousedown="dragMouseDown($event)"  class="AccessibilityDiv" :key="$route.fullPath">
+    <button class="btn buttonShowAccessibility space" @click="openAccessibility()"><i style="font-size: 35px;" class="bi bi-universal-access-circle"></i></button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="changeFontSize()"><i class="bi bi-fonts"></i>גופן טקסט</button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.changeContrast()"><i class="bi bi-palette"></i> צבעים</button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.backHistory()"><i class="bi bi-clock-history"></i> חזרה לאחור</button>
@@ -76,9 +76,33 @@ export default {
       sizeNum: 7,
       changeFont:"regular",
       changeContrastCheck:false,
+      positions: {
+        clientX: undefined,
+        clientY: undefined,
+        movementX: 0,
+        movementY: 0
+      }
     }
   },
+  mounted(){
+  },
   methods:{
+    test(){
+      alert("ds")
+    },
+    dragMouseDown(e) {
+      console.log(e)
+      this.positions.movementX = this.positions.clientX - e.clientX
+      this.positions.movementY = this.positions.clientY - e.clientY
+      this.positions.clientX = e.clientX
+      this.positions.clientY = e.clientY
+      console.log(this.positions)
+
+      // set the element's new position:
+      this.$refs.draggableContainer.style.position = "absolute"
+      this.$refs.draggableContainer.style.top = (this.$refs.draggableContainer.offsetTop - this.positions.movementY) + 'px'
+      this.$refs.draggableContainer.style.left = (this.$refs.draggableContainer.offsetLeft - this.positions.movementX) + 'px'
+    },
     backHistory(){
       history.back()
     },
@@ -414,11 +438,20 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
 
 .AccessibilityDiv{
   border: 1px solid none;
+  padding: 10px;
+  width: 65px;
+  height: 65px;
   display: flex;
   flex-direction: column;
+  cursor: move;
   position: fixed;
   top: 40%;
   right: 0.5%;
+  z-index: auto;
+  background-color: rgb(12, 76, 171);
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }
 
 .AccessibilityDiv button.space{
@@ -426,15 +459,14 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
 }
 
 button.buttonShowAccessibility{
-  position: relative;
-  padding: 5px 12px 5px 12px;
+  position: absolute;
   text-align: center;
-  border-radius: 50%;
 }
 
 button.buttonShowAccessibility i{
   width: fit-content;
   height: fit-content;
+  color: white;
 }
 
 /* width */

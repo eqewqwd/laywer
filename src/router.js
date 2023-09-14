@@ -7,6 +7,7 @@ import login from '@/view/login.vue';
 import FormsContainer from '@/view/FormsContainer.vue';
 import ContactUs from '@/view/ContactUs.vue'
 import Blog from '@/view/Blog.vue'
+import Terms from '@/view/Terms.vue'
 
 const routes = [
 	{
@@ -63,6 +64,14 @@ const routes = [
 		component: Blog,
 		meta:{
 			title:"בלוג",
+		},
+	},	
+	{
+		path: '/Terms',
+		name: 'Terms',
+		component: Terms,
+		meta:{
+			title:"תקנון",
 		},
 	},	
 	{

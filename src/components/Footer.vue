@@ -110,7 +110,7 @@ export default {
 .AllContainer{
   position: relative;
   border: 1px solid none;
-  height: 500px;
+  height: 540px;
   background-color: #2b4162;
 background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
    display: flex;
