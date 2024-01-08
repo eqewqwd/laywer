@@ -1,11 +1,12 @@
 <template>
   <router-view :key="$route.fullPath"></router-view>
-  <div ref="draggableContainer" @mousedown="dragMouseDown($event)"  class="AccessibilityDiv" :key="$route.fullPath">
-    <button class="btn buttonShowAccessibility space" @click="openAccessibility()"><i style="font-size: 35px;" class="bi bi-universal-access-circle"></i></button>
+  <div ref="draggableContainer" class="AccessibilityDiv" :key="$route.fullPath">
+    <button v-if="this.accessibilityOptions == false" class="btn buttonShowAccessibility space" @click="openAccessibility()"><i style="font-size: 35px;" class="bi bi-universal-access-circle"></i></button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="changeFontSize()"><i class="bi bi-fonts"></i>גופן טקסט</button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.changeContrast()"><i class="bi bi-palette"></i> צבעים</button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.backHistory()"><i class="bi bi-clock-history"></i> חזרה לאחור</button>
     <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="this.displayDocu()"><i class="bi bi-file-earmark-text"></i> הצהרת נגישות</button>
+    <button v-if="this.accessibilityOptions == true" class="btn btn-primary space" @click="openAccessibility()"><i class="bi bi-arrow-right"></i></button>
   </div>
 
   <dialog id="AccessibilityDialog" class="AccessibilityDialogClass">
@@ -89,19 +90,6 @@ export default {
   methods:{
     test(){
       alert("ds")
-    },
-    dragMouseDown(e) {
-      console.log(e)
-      this.positions.movementX = this.positions.clientX - e.clientX
-      this.positions.movementY = this.positions.clientY - e.clientY
-      this.positions.clientX = e.clientX
-      this.positions.clientY = e.clientY
-      console.log(this.positions)
-
-      // set the element's new position:
-      this.$refs.draggableContainer.style.position = "absolute"
-      this.$refs.draggableContainer.style.top = (this.$refs.draggableContainer.offsetTop - this.positions.movementY) + 'px'
-      this.$refs.draggableContainer.style.left = (this.$refs.draggableContainer.offsetLeft - this.positions.movementX) + 'px'
     },
     backHistory(){
       history.back()
@@ -300,9 +288,18 @@ export default {
       }
     },
     openAccessibility(){
+      if(this.$refs.draggableContainer.classList[1] != undefined){
+        if(this.$refs.draggableContainer.classList[1] == 'OpenAnimation'){
+          this.$refs.draggableContainer.classList.remove('OpenAnimation');
+        }else if(this.$refs.draggableContainer.classList[1] == 'CloseAnimation'){
+          this.$refs.draggableContainer.classList.remove('CloseAnimation');
+        }
+      }
       if(this.accessibilityOptions == true){
+        this.$refs.draggableContainer.classList.value = this.$refs.draggableContainer.classList.value + ' CloseAnimation'
         this.accessibilityOptions = false
       }else{
+        this.$refs.draggableContainer.classList.value = this.$refs.draggableContainer.classList.value + ' OpenAnimation'
         this.accessibilityOptions = true
       }
     }
@@ -443,25 +440,41 @@ background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   height: 65px;
   display: flex;
   flex-direction: column;
-  cursor: move;
   position: fixed;
-  top: 40%;
+  top: 43%;
   right: 0.5%;
-  z-index: auto;
+  z-index: 40280982109381203918039218;
   background-color: rgb(12, 76, 171);
   justify-content: center;
-  align-items: center;
+  align-items: center; 
   border-radius: 50%;
+}
+
+.OpenAnimation{
+  animation: OpenAnimationKey 1s ;
+
+}
+
+.CloseAnimation{
+  animation: CloseAnimationKey 1s ;
+
+}
+
+@keyframes OpenAnimationKey {
+  0%   {transform: translateX(100px);}
+  100% {transform: translateX(0px);}
+}
+
+
+@keyframes CloseAnimationKey {
+  0%   {transform: translateX(-100px);}
+  100% {transform: translateX(0px);}
 }
 
 .AccessibilityDiv button.space{
   margin-top: 3px;
 }
 
-button.buttonShowAccessibility{
-  position: absolute;
-  text-align: center;
-}
 
 button.buttonShowAccessibility i{
   width: fit-content;

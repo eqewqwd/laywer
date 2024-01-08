@@ -2,7 +2,7 @@
  <div class="divNav" id="mainNavigation" ref="nav-ref">
       <nav role="navigation">
         <div class="py-3 text-center border-bottom">
-          <img style="width: 200px;" class="imgAll" src="@/assets/Logo/logo.png" alt="">
+          <img style="width: 200px;" v-if="this.checkScroll == false" class="imgAll" src="@/assets/Logo/logo.png" alt="">
           <span class="loginuser" v-if="user"><h1>ברוכה הבאה <b>{{ user.name }}</b></h1><i @click="openMenuUser()" class="bi bi-person-circle"></i></span>
         </div>
       </nav>
@@ -75,6 +75,7 @@ export default {
       test:'tzavahot',
       user:null,
       menuUserOpen:false,
+      checkScroll:false,
     }
   },
   props:{
@@ -101,6 +102,12 @@ export default {
       const linkA = document.querySelectorAll('.nav-link')
       var alpha = window.scrollY;
         var final  = alpha
+        console.log(final)
+        if(final > 0){
+          this.checkScroll = true
+        }else{
+          this.checkScroll = false
+        }
         if(final<0){
           final = 0
         }
