@@ -316,11 +316,6 @@ img{
     transition:  0.2s ease-in;
   }
 
-  .imgAll{
-    display: block;
-    z-index: 2312321321321;
-  }
-
   .navbar-links {
     background-color: rgb(209, 212, 215);
     position: absolute;
@@ -340,11 +335,6 @@ img{
     display: none;
   }
 
-  .threebarnav.addHeight{
-    display: block;
-    width: 100%;
-    height: 180px;
-  }
   .navbar-links ul{
     position: absolute;
     bottom: 0;

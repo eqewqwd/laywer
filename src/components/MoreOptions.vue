@@ -1,5 +1,5 @@
 <template>
-  <router-link @click="scrollUp()" style="text-decoration: none;color: black; !important" :to="({ name: 'FormsContainer', params: { name: this.name } })">
+  <router-link @click="scrollUp()" style="text-decoration: none;color: black !important;" :to="({ name: 'FormsContainer', params: { name: this.name } })">
   <div class="BoxDownload">
     <div class="imgDiv"><img :src="imgForm"></div>
     <div class="TitleDiv">
