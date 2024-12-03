@@ -7,10 +7,10 @@
     <div class="FormDiv">
       <form @submit.prevent="SendEmail()">
         <input type="text" v-model="NamePost" name="name" placeholder="שם מלא">
-        <input type="email" v-model="EmailPost" name="email" placeholder="אימייל">
+        <input type="text" v-model="phonePost" name="name" placeholder="טלפון">
         <input type="text" v-model="SubjectPost" name="subject" placeholder="נושא">
         <textarea type="text" v-model="MessagePost" name="message" placeholder="הודעה" cols="30" rows="10"></textarea>
-        <button type="submit">שליחה <i style="margin-right: 5px;" class="bi bi-send"></i></button>
+        <button  type="submit">שליחה <i style="margin-right: 5px;" class="bi bi-send"></i></button>
       </form>
     </div>
   </div>
@@ -31,17 +31,17 @@
       </div> -->
 
       <ul class="ulContact">
-        <li><span class="infoSpan"><i class="bi bi-geo-alt"></i><span>מיקום:</span>
+        <li><span class="infoSpan"><i class="bi bi-geo-alt"></i><span class="optionContact">מיקום:</span>
           <span v-if="editMode == false" class="InfoData">{{ this.location }}</span>
           <span v-if="editMode == true">
           <input class="TitleFirstInput" :value="this.location" @input="this.locationPost = $event.target.value"/></span>
         </span></li>
-        <li><span class="infoSpan"><i class="bi bi-telephone"></i><span>טלפון:</span>
+        <li><span class="infoSpan"><a href="tel:052-635-3423"><i style="color: white;" class="bi bi-telephone"></i></a><span class="optionContact">טלפון:</span>
           <span v-if="editMode == false" class="InfoData">{{ this.phoneNumber }}</span>
           <span v-if="editMode == true">
           <input class="TitleFirstInput" :value="this.phoneNumber" @input="this.phoneNumberPost = $event.target.value"/></span>
         </span></li>
-        <li><span class="infoSpan"><i class="bi bi-envelope"></i><span>אימייל:</span>
+        <li><span class="infoSpan"><i class="bi bi-envelope"></i><span class="optionContact">אימייל:</span>
           <span v-if="editMode == false" class="InfoData">{{ this.email }}</span></span> 
           <span v-if="editMode == true">
           <input class="TitleFirstInput" :value="this.email" @input="this.emailPost = $event.target.value"/></span>
@@ -50,6 +50,10 @@
       </ul>
     </div>
   </div>
+
+</div>
+
+<div class="empty">
 
 </div>
 
@@ -82,7 +86,7 @@ export default {
         // email post data 
 
         NamePost:'',
-        EmailPost:'',
+        phonePost:'',
         SubjectPost:'',
         MessagePost:'',
 
@@ -117,18 +121,35 @@ export default {
   mounted(){
   },
   methods: {
-    SendEmail(){
-      const data = {
-        from_name: this.NamePost,
-        email_id: this.EmailPost,
-        subject: this.SubjectPost,
-        message: this.MessagePost
-      }
-        let publicKey = "DBLmVAnW9rZgH7ggb"
+    async SendEmail(){
 
-        emailjs.send("service_trj97gf","template_u6nhy8ta",data,publicKey).then(function(res){
-        alert("מייל נשלח בהצלחה");        
-      })
+      const res = await this.checkLengthPost()
+      if(res == true){
+          const data = {
+          from_name: this.NamePost,
+          PhoneNumber: this.phonePost,
+          subject: this.SubjectPost,
+          message: this.MessagePost
+        }
+          let publicKey = "DBLmVAnW9rZgH7ggb"
+
+          emailjs.send("service_trj97gf","template_u6nhy8ta",data,publicKey).then(function(res){
+          alert("מייל נשלח בהצלחה");     
+          window.location.reload()   
+        })
+      }else if(res == false){
+        alert("נא למלא את כל התיבות")
+      }
+
+      
+    },
+    checkLengthPost(){
+      if(this.NamePost.length == 0 || this.phonePost.length == 0 || this.SubjectPost.length == 0 || this.MessagePost.length == 0 ){
+        return false
+      }else{
+        return true
+      }
+
     },
     async GetDataContact(){
 
@@ -205,7 +226,7 @@ export default {
 
 /* -------------------- empty ------------------- */
 .empty{
-  height: 500px;
+  height: 150px;
 }
 
 .allContainer{
@@ -218,7 +239,7 @@ export default {
   margin-left: auto;
   top: 70px;
   width: 70%;
-  height: 68vh;
+  height: 640px;
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
@@ -250,7 +271,7 @@ export default {
   transform: translate(50%);
   color: #f1f1f1;
   text-align: right;
-  width: 70%;
+  width: 80%;
   border: 1px solid none;
 }
 
@@ -481,11 +502,24 @@ span.InfoData{
   }
 
   ul.ulContact{
+    border: 1px solid none;
   display: flex;
   flex-direction: row;
   list-style: none;
-  width: 90%;
+  width: 98%;
   justify-content: space-around;
+}
+
+.optionContact{
+  display: none;
+}
+
+span.InfoData{
+  position: relative;
+  right: 0.2%;
+  /* margin-top: 1%; */
+  border: 1px solid none;
+  font-size: 2.2vw;
 }
 
 

@@ -1,14 +1,19 @@
 <template>
+    <!-- <div class="mapsGoogle" v-if="this.$route.path != '/Files-Download'">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3353.958007994288!2d34.98337947617228!3d32.793372683149066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dbb0505030a15%3A0x37022d3ae3fc188c!2sMoriah%20Ave%2081%2C%20Haifa!5e0!3m2!1sen!2sil!4v1691942052115!5m2!1sen!2sil" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        
+    </div> -->
+<!-- v-if="this.$route.path == '/Files-Download'" -->
     <div class="empty">
 
     </div>
     <div class="AllContainer">
+      <h6 class="copySharon">שרון נתח תמרי משרד עורכי דין <span><i class="bi bi-c-circle"></i></span>כל הזכויות שמורות</h6>
       <div class="MapAndLogoDiv">
         <div class="LogoDiv">
           <img class="LogoImg" src="@/assets/Logo/logo.png" alt="">
         </div>
-        <div class="MapDiv">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53659.51697219341!2d34.975576465502016!3d32.79968780330382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba4c750de845%3A0xc35d23982a81529a!2sHaifa!5e0!3m2!1sen!2sil!4v1690692363562!5m2!1sen!2sil" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="MapsDiv">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3353.958007994288!2d34.98337947617228!3d32.793372683149066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dbb0505030a15%3A0x37022d3ae3fc188c!2sMoriah%20Ave%2081%2C%20Haifa!5e0!3m2!1sen!2sil!4v1691942052115!5m2!1sen!2sil" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        
         </div>
         <div class="LocationDiv">
           <h5><i style="color: orangered;" class="bi bi-geo-alt-fill"></i>  שדרות מוריה 81, חיפה</h5>
@@ -21,10 +26,13 @@
             <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li><a class="contrasA">בית</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'mekarkein' } })"><li><a class="contrasA">מקרקעין</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'nezikin' } })"><li><a class="contrasA">נזיקין</a></li></router-link>
-        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a class="contrasA">צוואות</a></li></router-link>
-        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li><a class="contrasA">ייפוי כוח מתמשך</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot-yipuy-Koach' } })"><li><a class="contrasA">צוואות/יפויי כוח מתמשך</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/blog"><li><a class="contrasA">בלוג</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li><a class="contrasA">צור קשר</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li><a class="contrasA">טפסים להורדה</a></li></router-link>
+        <li style="color: rgb(86, 86, 255);cursor: pointer;"><a @click="displayDocu()" class="contrasA">הצהרת נגישות</a></li>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Terms"><li><a class="contrasA">תקנון לאתר</a></li></router-link>
+
           </ul>
         </div>
       </div>
@@ -38,16 +46,15 @@
   <div class="footer-copyRight">
     <i class="bi bi-c-circle copyright"></i>
     <span class="copyRightText"><a class="copyrightA" href="https://techlinx.co.il/">אתר זה עוצב ונבנה על ידי <span class="nameCopyRight">דוד דבח</span></a></span>
-    <a href="/"><i class="bi bi-instagram icons-footer insta"></i></a>
-    <a href="/"><i class="bi bi-facebook icons-footer"></i></a>
-    <a href="/"><i class="bi bi-whatsapp icons-footer"></i></a>
-    <a href="/"><i class="bi bi-twitter icons-footer"></i></a>
-    <a href="/"><i class="bi bi-snapchat icons-footer"></i></a>
+    <a href="https://www.instagram.com/sharonnetachtamari/"><i class="bi bi-instagram icons-footer insta"></i></a>
+    <a href="https://www.facebook.com/sharon.n.tamari"><i class="bi bi-facebook icons-footer"></i></a>
+    <a href="https://wa.link/9n69e1"><i class="bi bi-whatsapp icons-footer"></i></a>
+    <!-- <a href="/"><i class="bi bi-twitter icons-footer"></i></a> -->
 
   </div>
-  <footer>
+  <!-- <footer>
     
-  </footer>
+  </footer> -->
 </template>
 
 <script>
@@ -61,6 +68,10 @@ export default {
     ContactComponent
   },
   methods:{
+    displayDocu(){
+      const AccessibilityDialog = document.getElementById("AccessibilityDialog");
+      AccessibilityDialog.showModal()
+    },
     changeNavByRoute(){
       console.log(this.$route.fullPath == '/')
       let checkRoute = this.$route.fullPath == '/'
@@ -85,16 +96,38 @@ export default {
   box-sizing: border-box;
 }
 
+/* .mapsGoogle{
+  z-index: 33213123123123;
+  height: 500px;
+}
+
+.mapsGoogle iframe{
+  width: 100%;
+  height: 100%;
+} */
 .empty{
-  height: 300px;
+  height: 200px;
 }
 
 .AllContainer{
-  height: 60vh;
-  background-color: rgb(231,231,231);
-  display: flex;
+  position: relative;
+  border: 1px solid none;
+  height: 540px;
+  background-color: #2b4162;
+background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
+   display: flex;
   width: 100%;
   flex-direction: row;
+}
+
+.copySharon{
+  position: absolute;
+  right: 50%;
+  bottom: 1%;
+  transform: translate(50%);
+  text-align: center;
+  direction: rtl;
+  color: white;
 }
 
 /* ----------------- MapAndLogoDiv --------------- */
@@ -118,11 +151,12 @@ export default {
 .AllContainer .MapAndLogoDiv .LogoDiv img{
   position: absolute;
   bottom: 0;
+  margin-bottom: 15px;
   widows: 100%;
-  height: 85%;
+  height: 80%;
 }
 
-.AllContainer .MapAndLogoDiv .MapDiv{
+.AllContainer .MapAndLogoDiv .MapsDiv{
   position: relative;
   border: 1px solid none;
   display: flex;
@@ -130,17 +164,20 @@ export default {
   width: 100%;
   height: 50%;
 }
-.AllContainer .MapAndLogoDiv .MapDiv iframe{
-  position: absolute;
-  bottom: 5%;
-  width: 60%;
-  height: 90%;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;}
 
+.AllContainer .MapAndLogoDiv .MapsDiv iframe{
+  width: 60%;
+  height: 95%;
+}
 .AllContainer .MapAndLogoDiv .LocationDiv{
+  border: 1px solid none;
   text-align: center;
   width: 100%;
   height: 15%;
+}
+
+.AllContainer .MapAndLogoDiv .LocationDiv h5{
+  color: white;
 }
 
 /* ------------------- end MapAndLogoDiv -------------------- */
@@ -149,14 +186,15 @@ export default {
 
 
 .NavBottomDiv{
-  border: 1px solid none;
+  position: relative;
   width: 20%;
   height: 100%;
 }
 .NavBottomDiv h2{
   position: relative;
   top: 20%;
-  text-align: center;
+  color: white;
+  right: 25%;
 }
 
 .NavListDiv{
@@ -166,16 +204,17 @@ export default {
   right: 50%;
   transform: translate(50%);
   top: 30%;
-  border: 1px solid none;
 }
 
 .NavListDiv ul li a.contrasA{
-  color: black;
+  color: white;
   text-decoration-line: none;
 }
 
 .NavListDiv ul li:hover{
   font-weight: bold;
+  text-decoration-line: underline;
+  text-decoration-color: white;
 }
 
 /* ------------------- end NavBottomDiv -------------------- */
@@ -214,11 +253,11 @@ export default {
   color: yellow;
 }
 
-footer{
+/* footer{
   width: 100%;
   height: 2vh;
   background-image: linear-gradient(139deg, rgb(194, 171, 43), gray);
-}
+} */
 
 .footer-copyRight{
   direction: ltr;

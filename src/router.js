@@ -1,10 +1,13 @@
-import { createWebHashHistory, createRouter } from 'vue-router';
+import { createWebHistory, createRouter } from 'vue-router';
 import Home from '@/view/Home.vue';
 import DownloadPage from '@/view/DownloadPage.vue';
 import PostForms from '@/view/PostForms.vue';
+import PostBlogs from '@/view/PostBlogs.vue';
 import login from '@/view/login.vue';
 import FormsContainer from '@/view/FormsContainer.vue';
 import ContactUs from '@/view/ContactUs.vue'
+import Blog from '@/view/Blog.vue'
+import Terms from '@/view/Terms.vue'
 
 const routes = [
 	{
@@ -32,6 +35,14 @@ const routes = [
 		},
 	},
 	{
+		path: '/Admin/PostBlogs',
+		name: 'PostBlogs',
+		component: PostBlogs,
+		meta:{
+			title:"הוספת בלוגים",
+		},
+	},
+	{
 		path: '/Forms/:name',
 		name: 'FormsContainer',
 		component: FormsContainer,
@@ -48,6 +59,22 @@ const routes = [
 		},
 	},	
 	{
+		path: '/Blog',
+		name: 'Blog',
+		component: Blog,
+		meta:{
+			title:"בלוג",
+		},
+	},	
+	{
+		path: '/Terms',
+		name: 'Terms',
+		component: Terms,
+		meta:{
+			title:"תקנון",
+		},
+	},	
+	{
 		path: '/auth/login',
 		name: 'login',
 		component: login,
@@ -58,7 +85,8 @@ const routes = [
 ];
 
 const router = createRouter({
-	history: createWebHashHistory(),
+	history: createWebHistory(),
+	// history: createWebHashHistory(),
 	routes,
 	
 });

@@ -56,7 +56,7 @@ exports.handler = async function (event, context) {
 
     // If the credentials are valid, generate a JWT
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: '1h', // Token expiration time
+      expiresIn: '3h', // Token expiration time
     });
 
     return {

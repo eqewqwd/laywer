@@ -2,12 +2,12 @@
   <div class="ContactContainer">
     <div class="TitleContainer">
       <h1 class="contactH1">לייעוץ ראשוני ללא התחייבות​</h1>
-      <h5>לקבלת שיחת ייעוץ באפשרותך להשאיר פרטים בטופס המצורף, או לחייג אלינו למספר 03-7949755</h5>
+      <h5>לקבלת שיחת ייעוץ באפשרותך להשאיר פרטים בטופס המצורף, או לחייג אלינו למספר 052-635-3423</h5>
     </div>
     <div class="formContainer">
       <form @submit.prevent="SendEmail()" action="">
         <input v-model="namePost" type="text" name="" placeholder="שם">
-        <input v-model="emailPost" type="text" name="" placeholder="אימייל">
+        <input v-model="phonePost" type="text" name="" placeholder="טלפון">
         <button type="submit">אשמח לייעוץ איתך</button>
       </form>
     </div>
@@ -28,7 +28,7 @@ export default {
     data() {
         return {
           namePost:'',
-          emailPost:'',
+          phonePost:'',
         }
     },
     created () {
@@ -36,21 +36,35 @@ export default {
     mounted(){
     }, 
     methods:{
-      SendEmail(){
-        let from_name = this.namePost
-        let email_id = this.emailPost
+      async SendEmail(){
+        const res = await this.checkLengthPost()
+        if(res == true){
+          let from_name = this.namePost
+          let phoneNumber = this.phonePost
 
-        const data = {
-          from_name:from_name,
-          email_id:email_id,
+          const data = {
+            from_name:from_name,
+            PhoneNumber:phoneNumber,
+          }
+
+          let publicKey = "DBLmVAnW9rZgH7ggb"
+
+          emailjs.send("service_trj97gf","template_gufs4gg",data,publicKey).then(function(res){
+          alert("מייל נשלח בהצלחה");
+          window.location.reload()
+          })
+        }else if(res == false){
+          alert("נא למלא את כל התיבות")
         }
-
-        let publicKey = "DBLmVAnW9rZgH7ggb"
-
-        emailjs.send("service_trj97gf","template_gufs4gg",data,publicKey).then(function(res){
-        alert("מייל נשלח בהצלחה");
-        })
+      },
+      checkLengthPost(){
+      if(this.namePost.length == 0 || this.phonePost.length == 0){
+        return false
+      }else{
+        return true
       }
+
+    },
 
     }
 }

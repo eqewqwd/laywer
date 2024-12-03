@@ -4,17 +4,13 @@
 
 <div class="PosterHome" v-if="this.LoadingCheck == false">
   <div class="ImgDivPoster">
-    <img v-if="editMode == false" :src=post.FormImg >
+    <img v-if="editMode == false" :src=post.FormImg :alt="post.title">
     <img v-if="editMode == true" :src=this.imgPost >
     <i @click="this.openWigit()" v-if="editMode == true" class="bi bi-cloud-upload"></i>
   </div>
   <div class="TitleDivPoster">
     <h1 class="FormH1"><span v-if="editMode == false">{{ post.title }}</span><span v-if="editMode == true">
       <input :value="post.title" @input="TitlePost = $event.target.value"/></span></h1>
-    <div class="SmallText">
-      <h4>מאת : שרון נתח תמרי</h4>
-      <h4>פורסם : {{ post.postDate }}</h4>
-    </div>
   </div>
 </div>
 
@@ -27,7 +23,20 @@
   <span v-if="editMode == true">
   <textarea class="infoUpdate" :value="post.info" @input="infoPost = $event.target.value" cols="30" rows="10"></textarea></span>
   </p>
-  <EditTool v-if="editMode == true" @PostMongo="updateItemInMongoDB()" @EditEnd="StartEdit()"/>
+  <EditTool v-if="editMode == true && this.name != 'tzavahot-yipuy-Koach' " @PostMongo="updateItemInMongoDB()" @EditEnd="StartEdit()"/>
+  <img class="lineGold" src="@/assets/photo/line-gold.png">
+</div>
+
+<div class="aboutContainer" v-if="this.LoadingCheck == false && this.name == 'tzavahot-yipuy-Koach'">
+  <h1><span v-if="editMode == false">{{ post.subTitleTwo }}</span><span v-if="editMode == true">
+  <input :value="post.subTitleTwo" @input="subTitleTwoPost = $event.target.value"/></span></h1>
+  <img class="lineGold" src="@/assets/photo/line-gold.png">
+  <p>
+    <span v-if="editMode == false">{{ post.infoTwo }}</span>
+  <span v-if="editMode == true">
+  <textarea class="infoUpdate" :value="post.infoTwo" @input="infoTwoPost = $event.target.value" cols="30" rows="10"></textarea></span>
+  </p>
+  <EditTool v-if="editMode == true" @PostMongo="updateItemInMongoDB('tzavahot-yipuy-Koach')" @EditEnd="StartEdit()"/>
   <img class="lineGold" src="@/assets/photo/line-gold.png">
 </div>
 
@@ -37,7 +46,8 @@
     <Carousel v-bind="settings" :breakpoints="breakpoints">
     <Slide v-for="test in test2" :key="test">
       <MoreOptions 
-      :name="test.name" :imgForm="test.FormImg" :subTitle="test.subTitle" :PostDate="test.postDate" :key="test"
+      :name="test.name" :imgForm="test.FormImg" :subTitle="test.subTitle" :key="test"
+      :Title="test.title"
       />
     </Slide>
 
@@ -91,12 +101,16 @@ export default {
         Title:'',
         subTitle:'',
         info:'',
+        subTitleTwo:'',
+        infoTwo:'',
         img:'',
 
         imgPost:'',
         TitlePost:'',
         subTitlePost:'',
         infoPost:'',
+        subTitleTwoPost:'',
+        infoTwoPost:'',
         // post
 
 
@@ -177,36 +191,72 @@ export default {
         this.editMode = false
       }
     },
-    async updateItemInMongoDB() {
+    async updateItemInMongoDB(res) {
+      console.log(res)
+      if(res == 'tzavahot-yipuy-Koach'){
+          if(this.Title != this.TitlePost || this.subTitle != this.subTitlePost 
+          || this.subTitleTwo != this.subTitleTwoPost || this.info != this.infoPost 
+          || this.infoTwo != this.infoTwoPost || this.img != this.imgPost){
+          const id = this.id; 
+          const updatedData = {
+            title : this.TitlePost,
+            subTitle : this.subTitlePost,
+            subTitleTwo : this.subTitleTwoPost,
+            info : this.infoPost,
+            infoTwo : this.infoTwoPost,
+            FormImg : this.imgPost
+          };
+          console.log(updatedData)
 
-      if(this.Title != this.TitlePost || this.subTitle != this.subTitlePost 
-      || this.info != this.info || this.img != this.imgPost){
-        const id = this.id; 
-        const updatedData = {
-          title : this.TitlePost,
-          subTitle : this.subTitlePost,
-          info : this.infoPost,
-          FormImg : this.imgPost
-        };
-        console.log(updatedData)
+          try {
+            const response = await axios.post('/.netlify/functions/UpdateItemForms', {
+              id,
+              updatedData,
+            });
 
-        try {
-          const response = await axios.post('/.netlify/functions/UpdateItemForms', {
-            id,
-            updatedData,
-          });
-
-          // Handle the response, display success message, etc.
-          sessionStorage.clear()
-          this.GetData()
+            // Handle the response, display success message, etc.
+            sessionStorage.clear()
+            this.GetData()
+            this.editMode = false
+            alert(this.name + " עודכנה בהצלחה")
+          } catch (error) {
+            console.error('Error:', error);
+            // Handle error
+          }
+        }else{
           this.editMode = false
-          alert(this.name + " עודכנה בהצלחה")
-        } catch (error) {
-          console.error('Error:', error);
-          // Handle error
         }
+
       }else{
-        this.editMode = false
+          if(this.Title != this.TitlePost || this.subTitle != this.subTitlePost 
+        || this.info != this.infoPost || this.img != this.imgPost){
+          const id = this.id; 
+          const updatedData = {
+            title : this.TitlePost,
+            subTitle : this.subTitlePost,
+            info : this.infoPost,
+            FormImg : this.imgPost
+          };
+          console.log(updatedData)
+
+          try {
+            const response = await axios.post('/.netlify/functions/UpdateItemForms', {
+              id,
+              updatedData,
+            });
+
+            // Handle the response, display success message, etc.
+            sessionStorage.clear()
+            this.GetData()
+            this.editMode = false
+            alert(this.name + " עודכנה בהצלחה")
+          } catch (error) {
+            console.error('Error:', error);
+            // Handle error
+          }
+        }else{
+          this.editMode = false
+        }
       }
       
     },
@@ -274,6 +324,13 @@ await axios
           this.infoPost = FormItems[i].info
           this.imgPost = FormItems[i].FormImg
           this.id = FormItems[i]._id
+
+          if(FormItems[i].name == this.name && FormItems[i].name == 'tzavahot-yipuy-Koach'){
+            this.subTitleTwo = FormItems[i].subTitleTwo
+            this.infoTwo = FormItems[i].infoTwo
+            this.subTitleTwoPost = FormItems[i].subTitleTwo
+            this.infoTwoPost = FormItems[i].infoTwo
+          }
         }
       }
       this.AddToCarusel()
@@ -312,7 +369,8 @@ await axios
 
 /* -------------------- empty ------------------- */
 .empty{
-  height: 150px;
+  height: 20px;
+  background-color: rgb(231,231,231);
 }
 
 /* ---------------- PosterHome --------------- */
@@ -332,7 +390,9 @@ await axios
 
 .PosterHome .TitleDivPoster{
   border: 1px solid none;
-  background-color: rgb(231,231,231);
+  /* background-color: rgb(231,231,231); */
+    background-color: #2b4162;
+background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   position: relative;
   width: 60%;
   height: 100%;
@@ -347,7 +407,7 @@ await axios
   transform: translate(-50%);
   font-size: 2.5vw;
   font-weight: bold;
-  color: #2c3e50 ;
+  color: #DFB951;
 }
 
 .PosterHome .TitleDivPoster .SmallText{
@@ -430,6 +490,7 @@ input{
 }
 .aboutContainer h1{
   font-size: 45px;
+  text-align: center;
 }
 
 .aboutContainer .lineGold{
@@ -453,15 +514,15 @@ input{
   position: relative;
   width: 100%;
   border: 1px solid none;
-  height: 400px;
+  height: 420px;
   background-color: rgb(231,231,231);
 }
 
 .CaruselCardsDiv h1{
   border: 1px solid none;
-  width: fit-content;
+  width: 100%;
   position: absolute;
-  right: 5%;
+  text-align: center;
   top: 10%;
 }
 
@@ -469,7 +530,7 @@ input{
   border: 1px solid none;
   position: absolute;
   width: 100%;
-  bottom: 0;
+  bottom: 2%;
 }
 
 
@@ -502,7 +563,6 @@ input{
   transform: translate(-50%);
   font-size: 20px;
   font-weight: bold;
-  color: #2c3e50 ;
 }
 .PosterHome .TitleDivPoster .SmallText h4{
   font-size: 12px;

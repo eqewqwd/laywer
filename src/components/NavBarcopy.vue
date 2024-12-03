@@ -1,21 +1,21 @@
 <template>
- <div class="divNav" id="mainNavigation">
+ <div class="divNav" id="mainNavigation" ref="nav-ref">
       <nav role="navigation">
         <div class="py-3 text-center border-bottom">
-          <img style="width: 250px;" class="imgAll" src="@/assets/Logo/logo.png" alt="">
+          <img style="width: 200px;" v-if="this.checkScroll == false" class="imgAll" src="@/assets/Logo/logo.png" alt="">
           <span class="loginuser" v-if="user"><h1>ברוכה הבאה <b>{{ user.name }}</b></h1><i @click="openMenuUser()" class="bi bi-person-circle"></i></span>
         </div>
       </nav>
       <div class="navbar-expand-md">
         <div class="text-center mt-3 collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mx-auto ">
-            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li class="nav-item"><a class="nav-link">בית</a></li></router-link>
-            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'mekarkein' } })"><li class="nav-item"><a class="nav-link">מקרקעין</a></li></router-link>
-            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'nezikin' } })"><li class="nav-item"><a class="nav-link">נזיקין</a></li></router-link>
-            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li class="nav-item"><a class="nav-link">צוואות</a></li></router-link>
-            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li class="nav-item"><a class="nav-link">ייפוי כוח מתמשך</a></li></router-link>
-            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li class="nav-item"><a class="nav-link">צור קשר</a></li></router-link>
-            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li class="nav-item"><a class="nav-link">טפסים להורדה</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li class="nav-item"><a class="nav-link" >בית</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'mekarkein' } })"><li class="nav-item"><a class="nav-link" >מקרקעין</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'nezikin' } })"><li class="nav-item"><a class="nav-link" >נזיקין</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot-yipuy-Koach' } })"><li class="nav-item"><a class="nav-link" >צוואות/יפויי כוח מתמשך</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/blog"><li class="nav-item"><a class="nav-link" >בלוג</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li class="nav-item"><a class="nav-link" >צור קשר</a></li></router-link>
+            <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li class="nav-item"><a class="nav-link" >טפסים להורדה</a></li></router-link>
           </ul>
         </div>
       </div>
@@ -25,6 +25,8 @@
       <i class="bi bi-arrow-up-short arrowUser"></i>
       <ul>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;color:black;" to="/admin/PostForms"><li><a><i class="bi bi-patch-plus"></i> מאמר</a></li></router-link>
+        <hr>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;color:black;" to="/admin/PostBlogs"><li><a><i class="bi bi-patch-plus"></i> בלוג</a></li></router-link>
         <hr>
         <li style="text-decoration: none;color:black;" @click="StartEdit()"><a><i class="bi bi-pencil-square"></i> עריכה</a></li>
         <hr>
@@ -45,8 +47,8 @@
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/"><li><a>בית</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'mekarkein' } })"><li><a>מקרקעין</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'nezikin' } })"><li><a>נזיקין</a></li></router-link>
-        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot' } })"><li><a>צוואות</a></li></router-link>
-        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'yipuy-Koach' } })"><li><a>ייפוי כוח מתמשך</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" :to="({ name: 'FormsContainer', params: { name: 'tzavahot-yipuy-Koach' } })"><li><a>צוואות/יפויי כוח מתמשך</a></li></router-link>
+        <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/blog"><li><a>בלוג</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/ContactUs"><li><a>צור קשר</a></li></router-link>
         <router-link @click="this.changeNavByRoute()" style="text-decoration: none;" to="/Files-Download"><li><a>טפסים להורדה</a></li></router-link>
         </ul>
@@ -73,6 +75,7 @@ export default {
       test:'tzavahot',
       user:null,
       menuUserOpen:false,
+      checkScroll:false,
     }
   },
   props:{
@@ -81,10 +84,12 @@ export default {
     // window.addEventListener('scroll', this.handleScroll);
     // window.addEventListener('click', this.toggleButton);
     // console.log(document.getElementById("itemNum").ariaValueText)
+    window.addEventListener('scroll', this.handleScroll);
+
   
   },
   destroyed () {
-    // window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
     // window.removeEventListener('click', this.OpenMenu);
   },
   methods: {
@@ -92,6 +97,33 @@ export default {
     //   var navbar = document.getElementsByClassName('navbar')[0]
     //   navbar.classList.toggle("sticky",window.scrollY > 0)
     // },
+    handleScroll (event) {
+      // var navbar = document.getElementsByClassName('divNav')[0]
+      const linkA = document.querySelectorAll('.nav-link')
+      var alpha = window.scrollY;
+        var final  = alpha
+        console.log(final)
+        if(final > 0){
+          this.checkScroll = true
+        }else{
+          this.checkScroll = false
+        }
+        if(final<0){
+          final = 0
+        }
+        if(final >= '98'){
+          for (let i = 0; i < linkA.length; i++) {
+            linkA[i].style.setProperty('color',`white`)
+          }
+        }else if(final < '98'){
+          for (let j = 0; j < linkA.length; j++) {
+            linkA[j].style.setProperty('color',`rgb(28, 28, 129)`)
+          }
+        }
+      this.$refs["nav-ref"].style.setProperty('background-color',`rgba(0,0,0,${alpha/1000})`)
+
+      // navbar.classList.toggle("sticky",window.scrollY > 0)
+    },
     OpenMenu(event) {
     const toggleButton = document.getElementsByClassName('toggle-button')[0]
     const navbarLinks = document.getElementsByClassName('navbar-links')[0]
@@ -223,6 +255,12 @@ span.loginuser i:hover{
   color: #415e7a;
 }
 
+/* .sticky{
+  background-color: transparent;
+  background-image: linear-gradient(#1c1d1e 1%, transparent);
+  transition: 0.4s ease-in;
+} */
+
 .menuUser{
   position: absolute;
   top: 70px;
@@ -272,7 +310,9 @@ span.loginuser i:hover{
 
 #mainNavigation a {
       /* font-family: 'Cabin', sans-serif; */
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+      font-family: 'miriamLibre', sans-serif !important;
+      font-weight: none;
       font-size:20px;
       text-transform:uppercase;
       letter-spacing:2px;
@@ -289,7 +329,7 @@ span.loginuser i:hover{
       color:#03727d !important
     }
     .nav-item a{
-      color:black;
+      color:rgb(28, 28, 129);
     }
     .nav-item a:hover {
       color:rgb(207, 161, 45)
@@ -298,20 +338,21 @@ span.loginuser i:hover{
       min-width:12vw;
     }
     .nav-item:hover{
-      background-color: rgb(173, 148, 7);
+      background-color: rgb(222, 193, 25);
       transition: 0.2s ease-in;
     }
-    .nav-item a:hover{
-      color: white;
-    }
+      .nav-item a:hover{
+        color: white;
+      }
     #mainNavigation {
       border: 1px solid none;
-      position:relative;
+      position:fixed;
       top:0;
       left:0;
       width:100%;
       z-index:123;
       padding-bottom:70px;
+      background-color: transparent;
     }
     #navbarNavDropdown.collapsing .navbar-nav,
     #navbarNavDropdown.show .navbar-nav{
@@ -342,7 +383,7 @@ span.loginuser i:hover{
 
 
 .toggle-button{
-  position: absolute;
+  position: fixed;
   top: 1.4rem;
   right: 1rem;
   display: none;
@@ -358,6 +399,7 @@ span.loginuser i:hover{
   height: 3px;
   width: 100%;
   background-color: black;
+  border: 1px solid white;
   border-radius: 10px;
   transition:  0.2s ease-out;
 }
@@ -425,12 +467,15 @@ span.loginuser i:hover{
 
 @media (max-width: 750px) {
   .navbar-links {
-    background-color: rgb(209, 212, 215);
-    position: absolute;
+    /* background-color: rgb(209, 212, 215); */
+    background-color: #2b4162;
+background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
+    position: fixed;
     top: 0;
     height: 500px;
     display: none;
     width: 100%;
+    color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-bottom: none;
     border: 1px solid none;
@@ -461,6 +506,7 @@ span.loginuser i:hover{
 
   .navbar-links li a{
     padding: .7rem 1rem;
+    color: white;
   }
 
   .navbar-links.active{
@@ -474,6 +520,7 @@ span.loginuser i:hover{
   }
   .toggle-button.rotate #first{
     background-color: transparent;
+    border-color: transparent;
   }
 
   .toggle-button.rotate #two{

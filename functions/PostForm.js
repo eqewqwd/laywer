@@ -10,7 +10,7 @@ exports.handler = async function(event, context) {
   const collection = db.collection("Forms");
 
   
-  const {FormImg,name,title,subTitle,info,postDate} = JSON.parse(event.body);
+  const {FormImg,name,title,subTitle,info} = JSON.parse(event.body);
 
   const data = {
     FormImg,
@@ -18,7 +18,6 @@ exports.handler = async function(event, context) {
     title,
     subTitle,
     info,
-    postDate
   }
 
   try {

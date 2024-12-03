@@ -1,11 +1,14 @@
 <template>
-<NavBar/>
+<NavBar @editStart="StartEdit()"/>
 
 <div class="PosterHome">
   <div class="TitleDivPoster">
     <h1 class="titleHome">טפסים להורדה</h1>
   </div>
+  <button><i @click="this.openWigit()" v-if="editmode == true" style="color: white;font-size: 40px;position: absolute;top: 0;right: 2%;" class="bi bi-cloud-upload"></i>
+</button>
 </div>
+
 
 <div class="searchDiv">
   <label>חיפוש : </label>
@@ -14,7 +17,8 @@
 
 <div class="BoxContainerDownload">
   <DownloadBox v-for="download in filteredList" :key="download" :name="download.name" :date="download.date"
-  :ImgDownload="download.ImgDownload" :numberFile="download.numberFile" :fileName="download.fileName"/>
+  :ImgDownload="download.ImgDownload" :numberFile="download.numberFile" :fileName="download.fileName" 
+  :downloadImg="this.downloadImg"/>
   
 
   <div class="notFound" v-show="this.allowNotFind == true">
@@ -38,7 +42,7 @@ import Footer from '@/components/Footer.vue'
 import DownloadBox from '@/components/DownloadBox.vue'
 
 
-// import axios from 'axios'
+import axios from 'axios'
 
 
 export default {
@@ -52,6 +56,10 @@ export default {
       return{
         search:'',
         allowNotFind:false,
+        id:null,
+        downloadImg:'',
+        downloadImgbackend:'',
+        editmode:false,
         downloadData:
         [
         {name:"טופס למתן טיפול רפואי ראשוני לאחר תאונת עבודה" ,date:"10.8.2023",numberFile:"283" ,fileName:"283.pdf"},
@@ -71,7 +79,7 @@ export default {
       
   },
   created(){
-
+    this.GetData()
   },
   mounted(){
   },
@@ -91,7 +99,64 @@ export default {
         this.allowNotFind = false
 
       }
-    }
+    },
+    StartEdit(){
+      if(this.editmode == true){
+        this.editmode = false
+      }else if(this.editmode == false){
+        this.editmode = true
+      }
+    },
+    openWigit(){
+
+      const widget = window.cloudinary.createUploadWidget(
+        {cloud_name:"drb3a55va", upload_preset: "download-img"},
+        (error,result)=>{
+          if(!error && result && result.event == "success"){
+            console.log("Done uploading ....",result.info.url)
+            this.downloadImg = result.info.url  
+            this.updateItemInMongoDB()    
+          }
+        }
+      )
+      widget.open()
+    },
+GetData(){
+        axios.get('/.netlify/functions/GetDataDownload').then(response => {
+          console.log(response.data);
+          let resres = response.data
+          for (let i = 0; i<resres.length; i++){
+            this.id = resres[i]._id
+            this.downloadImg = resres[i].downloadImg
+            this.downloadImgbackend = resres[i].downloadImg
+          }
+
+        }).catch(error => {
+            console.log(error);
+        }); 
+    },
+    async updateItemInMongoDB() {
+
+  const id = this.id; 
+  const updatedData = {
+    downloadImg : this.downloadImg
+  };
+
+  try {
+    const response = await axios.post('/.netlify/functions/UpdateItemDownload', {
+      id,
+      updatedData,
+    });
+
+    // Handle the response, display success message, etc.
+    this.GetData()
+    alert(" !תמונה עודכנה בהצלחה")
+  } catch (error) {
+    console.error('Error:', error);
+    // Handle error
+  }
+
+},
 
   } 
 }

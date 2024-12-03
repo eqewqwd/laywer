@@ -1,18 +1,16 @@
 <template>
 <NavBar @editStart="StartEdit('InfoOffice')"/>
 
-/>
+
 <div class="PosterHome">
   <div class="TitleContainer">
     <h1 class="titleHome">עו"ד שרון נתח תמרי</h1>
     <br>
     <h3>משרד עורכי דין וגישור</h3>
     <br>
-    <img src="@/assets/Logo/agreement.png">
     <br>
     <br>
-    <br>
-    <h3 class="h1two" style="color: #2c3e50;-webkit-font-smoothing: antialiased;">
+    <h3 class="h1two" style="color: #DFB951;-webkit-font-smoothing: antialiased;">
       <span v-if="editMode == false">{{ this.TitleFirst }}</span>
       <span v-if="editMode == true">
       <input class="TitleFirstInput" :value="this.TitleFirst" @input="TitleFirstPost = $event.target.value"/></span>
@@ -57,10 +55,6 @@
 
 </div>
 
-
-<div class="empty">
-</div>
-
 <Footer/>
 
   
@@ -78,7 +72,6 @@ import EditTool from '@/components/EditTool.vue'
 
 
 import axios from 'axios'
-import bcrypt from 'bcryptjs';
 
 
 
@@ -121,7 +114,6 @@ export default {
     this.GetDataHome()
     this.GetForms()
     this.userData()
-
   },
   methods: {
     StartEdit(res){
@@ -131,9 +123,7 @@ export default {
         }else{
           this.editMode = false
         }
-      }
-      
-      
+      }  
     },
 
     async updateItemInMongoDB() {
@@ -153,6 +143,7 @@ export default {
 
           // Handle the response, display success message, etc.
           alert('תיאור אודות משרד עודכן')
+          window.location.reload()
         } catch (error) {
           console.error('Error:', error);
           // Handle error
@@ -174,6 +165,7 @@ export default {
 
           // Handle the response, display success message, etc.
           alert('תיאור משפט פתיחה עודכן')
+          window.location.reload()
         } catch (error) {
           console.error('Error:', error);
           // Handle error
@@ -195,6 +187,7 @@ export default {
 
           // Handle the response, display success message, etc.
           alert('תיאור עיסוקי המשרד עודכן')
+          window.location.reload()
         } catch (error) {
           console.error('Error:', error);
           // Handle error
@@ -267,7 +260,7 @@ export default {
         }); 
       }
     },
-    async userData(){
+   async userData(){
 
        
     var token = localStorage.getItem("token"); // Replace this with the actual token
@@ -326,9 +319,6 @@ export default {
 }
 
 /* -------------------- empty ------------------- */
-.empty{
-  height: 500px;
-}
 
 input.TitleFirstInput{
   width: 100%;
@@ -336,6 +326,8 @@ input.TitleFirstInput{
 }
 
 /* ---------------- PosterHome --------------- */
+
+
 
 .PosterHome{
   position: relative;
@@ -346,7 +338,11 @@ input.TitleFirstInput{
   width: 100%;
   height: 500px;
   /* background-color: rgb(231,231,231); */
-  background-color: rgb(242, 239, 239);
+  /* background-color: rgb(242, 239, 239); */
+  /* background-color: #333; */
+  background-color: #2b4162;
+background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
+ 
   border:1px solid none;
   direction: ltr;
 }
@@ -357,15 +353,16 @@ input.TitleFirstInput{
   height: 100%;
   width: 35%;
   padding-right: 200px;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .imgContainer img{
+  border: 1px solid none;
   position: absolute;
   left: 10%;
-  bottom: 0;
+  bottom: -180px;
   height: auto;
-  max-width: 250px;
+  max-width: 180px;
 }
 
 .TitleContainer{
@@ -374,7 +371,7 @@ input.TitleFirstInput{
   width: 65%;
   position: relative;
   left: 0;
-  padding: 3% 0% 0% 17%;
+  padding: 6% 0% 0% 17%;
   height: 100%;
 }
 
@@ -386,12 +383,16 @@ input.TitleFirstInput{
 .TitleContainer h1{
   font-size: 3.2rem;
   font-weight: bold;
+  color: #DFB951;
+  text-shadow: 0 3px 1px #465964, -1px 2px 1px #465964, -3px 4px 3px #34424b;
 }
 
 .TitleContainer h3{
   font-size: 2.2rem;
   font-weight: bold;
-  color: #666;
+  color: #DFB951;
+  text-shadow: 0 2px 1px #34424b, -1px 2px 1px #34424b, -3px 3px 2px #34424b;
+
 }
 
 .editButton{
@@ -415,6 +416,7 @@ input.TitleFirstInput{
   width: 100%;
   height: 100%;
 }
+
 /* ---------------- aboutContainer --------------- */
 
 .aboutContainer{
@@ -429,6 +431,7 @@ input.TitleFirstInput{
 }
 .aboutContainer h1{
   font-size: 45px;
+  text-align: center;
 }
 
 .aboutContainer .lineGold{
@@ -455,7 +458,8 @@ background-repeat: no-repeat;
   top: 80px;
   border: 1px solid none;
   width: 100%;
-  height: 50vh;
+  /* height: 50vh; */
+  height: 480px;
 }
 
 .WorkOptions h1{
@@ -474,7 +478,7 @@ background-repeat: no-repeat;
   justify-content: center;
   border: 1px solid none;
   width: 70%;
-  height: 32vh;
+  height: 300px;
   left: 50%;
   transform: translate(-50%);
 }
@@ -560,6 +564,8 @@ background-repeat: no-repeat;
     position: relative;
     top: 0;
     height: 940px;
+    margin-top: -275px;
+
   }
   .TitleContainer{
     border: 1px solid none;
@@ -576,7 +582,6 @@ background-repeat: no-repeat;
   .TitleContainer h3{
     font-size: 7vw;
     font-weight: bold;
-    color: #666;
   }
   .TitleContainer img{
     padding-top: 2%;
@@ -584,17 +589,19 @@ background-repeat: no-repeat;
   }
 
   .imgContainer{
-    position: relative;
-    left: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 60%;
     transform: translate(-50%);
     border: 1px solid none;
-    height: 68.35%;
+    height: 75%;
     width: 310px;
   }
   .imgContainer img{
     bottom: 2%;
     left: 0;
-    max-width: 100%;
+    max-width: 60%;
+
   }
 
 }
@@ -608,7 +615,14 @@ background-repeat: no-repeat;
     transform: translate(50%);
   }
   .imgContainer{
+
     width: 335px;
+  }
+  .imgContainer img{
+    bottom: 2%;
+    left: 0;
+    max-width: 55%;
+
   }
 }
 

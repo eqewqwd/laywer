@@ -1,6 +1,8 @@
 <template>
   <div class="BoxDownload">
-    <div class="imgDiv"><img src="https://www.dropee.com/product-images/f14de0bc4ba35e1593c8225b6bc2708d42cf9e00.jpg"></div>
+    <div class="imgDiv">
+      <img :src=this.downloadImg >
+    </div>
     <div class="TitleDiv">
       <h3>טופס מס'  {{ numberFile }}</h3>
       <p class="nameDownload">
@@ -18,7 +20,7 @@
 
 export default {
     name: "DownloadBox",
-    props:['name','date','ImgDownload','numberFile','fileName'],
+    props:['name','date','ImgDownload','numberFile','fileName','downloadImg'],
     data() {
         return {
         }
@@ -31,7 +33,6 @@ export default {
       getFileUrl(fileName) {
         return process.env.BASE_URL + 'files/' + fileName;
     },
-
     }
 }
 </script>
